@@ -56,6 +56,10 @@ class RVSPOfferListViewController: UIViewController {
         // go to the new offer page
     }
     
+    @IBAction func creatNewOfferButtonTapped(sender: AnyObject) {
+        createNewOfferTextField.becomeFirstResponder()
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -86,6 +90,11 @@ extension RVSPOfferListViewController: UITextFieldDelegate {
             self.createNewOfferGoButton.alpha = 0
             self.view.layoutIfNeeded()
         }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        createNewOfferTextField.resignFirstResponder()
+        return true
     }
 }
 
