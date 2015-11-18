@@ -12,6 +12,6 @@ public class FieldLabel extends TextView {
     public FieldLabel(Context context, AttributeSet attributes) {
         super(context, attributes);
         this.setTypeface(Typeface.createFromAsset(context.getAssets(),
-                "fonts/Nimbus Sans L CY Bold.ttf"));
+                "fonts/Roboto-Bold.ttf"));
     }
 }

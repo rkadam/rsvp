@@ -13,6 +13,6 @@ public class SectionHeader extends TextView {
     public SectionHeader(Context context, AttributeSet attributes) {
         super(context, attributes);
         this.setTypeface(Typeface.createFromAsset(context.getAssets(),
-                "fonts/Nimbus Sans L CY Regular.ttf"));
+                "fonts/Roboto-Regular.ttf"));
     }
 }
