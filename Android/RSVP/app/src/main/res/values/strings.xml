@@ -5,4 +5,7 @@
     <string name="submit">Log In</string>
     <string name="password_hint">Password</string>
     <string name="email">Email</string>
+    <string name="RVSP">RSVP</string>
+    <string name="at">\@</string>
+    <string name="pandora">PANDORA</string>
 </resources>

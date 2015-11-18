@@ -8,14 +8,31 @@
     android:orientation="vertical"
     android:padding="30dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.LoginActivity"
-    tools:showIn="@layout/activity_login">
+    tools:context=".ui.LoginActivity">
 
     <TextView
+        android:gravity="center_horizontal"
+        android:text="@string/RVSP"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="35sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ImageView
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/at"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal"
+        android:text="@string/pandora"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40sp"
+        android:textStyle="bold"
         android:id="@+id/pandora_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,6 +67,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:layout_marginTop="16dp"
         android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
