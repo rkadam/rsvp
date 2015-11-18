@@ -10,12 +10,12 @@ global.app_name = 'server';
 
 var express = require('express');
 var config = require('./config');
-//var model = require('./model');
+var model = require('./model');
 
 // Setup server
 var app = express();
 app.config = config;
-//app.model = model;
+app.model = model;
 
 var server = require('http').createServer(app);
 require('./express_config')(app);
