@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		98D433E31BFD01840074D9F6 /* RSVPNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D433E21BFD01840074D9F6 /* RSVPNetworkManager.swift */; };
 		9CD4CE201BFCFB9800DF41E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */; };
 		9CD4CE221BFCFB9800DF41E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */; };
 		9CD4CE251BFCFB9800DF41E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4CE231BFCFB9800DF41E7 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 		3134445A5C6DD502D9F501E9 /* Pods-RSVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSVP.release.xcconfig"; path = "Pods/Target Support Files/Pods-RSVP/Pods-RSVP.release.xcconfig"; sourceTree = "<group>"; };
 		78C7A327372915C7582372E0 /* Pods_RSVP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RSVP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D412A9A27746F284522E87E /* Pods-RSVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSVP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RSVP/Pods-RSVP.debug.xcconfig"; sourceTree = "<group>"; };
+		98D433E21BFD01840074D9F6 /* RSVPNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPNetworkManager.swift; sourceTree = "<group>"; };
 		9CD4CE1C1BFCFB9800DF41E7 /* RSVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +51,28 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		98D433DF1BFD01570074D9F6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		98D433E01BFD01610074D9F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		98D433E11BFD01690074D9F6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				98D433E21BFD01840074D9F6 /* RSVPNetworkManager.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		9CD4CE131BFCFB9800DF41E7 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +94,9 @@
 		9CD4CE1E1BFCFB9800DF41E7 /* RSVP */ = {
 			isa = PBXGroup;
 			children = (
+				98D433E11BFD01690074D9F6 /* Model */,
+				98D433E01BFD01610074D9F6 /* Views */,
+				98D433DF1BFD01570074D9F6 /* Controllers */,
 				9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */,
 				9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */,
 				9CD4CE231BFCFB9800DF41E7 /* Main.storyboard */,
@@ -211,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CD4CE221BFCFB9800DF41E7 /* ViewController.swift in Sources */,
+				98D433E31BFD01840074D9F6 /* RSVPNetworkManager.swift in Sources */,
 				9CD4CE201BFCFB9800DF41E7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
