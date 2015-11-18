@@ -16,10 +16,16 @@ module.exports = function(app) {
 
   // Insert routes below
   app.route('/api/*').get(controllers.apiSetup);
-  //app.route('/api/history/:vm?').get(controllers.history);
   app.route('/api/test/').get(controllers.test);
+  app.route('/api/auth/login').post(controllers.login);
+  app.route('/api/auth/logout').get(controllers.logout);
 
-  app.route('/api/*').get(controllers.sendResponse);
+  app.route('/api/user/:uid/invitations').get(controllers.fetchInvitationList);
+  app.route('/api/user/:uid/invitations').post(controllers.createInvitation);
+  app.route('/api/user/:uid/invitations/:iid').get(controllers.fetchInvitation);
+  app.route('/api/user/:uid/invitations/:iid').put(controllers.updateInvitation);
+
+  app.route('/api/*').all(controllers.sendResponse);
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')

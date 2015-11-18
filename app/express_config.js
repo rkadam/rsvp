@@ -11,6 +11,7 @@ var morgan = require('morgan');
 var compression = require('compression');
 var errorHandler = require('errorhandler');
 var path = require('path');
+var bodyParser = require('body-parser');
 
 function jsonFormat(tokens, req, res) {
   return JSON.stringify({
@@ -28,12 +29,13 @@ function jsonFormat(tokens, req, res) {
 
 var handleErrors = function(err, str, req) {
   var msg = 'Error in ' + req.method + ' ' + req.url+': '+str;
-  console.err(msg, err);
+  console.log(msg, err);
 };
 
 module.exports = function(app) {
   var env = app.get('env');
   var config = app.config;
+  app.use(bodyParser.json());
 
   app.set('views', config.root + '/server/views');
   // app.engine('html', require('html').__express);
@@ -51,6 +53,6 @@ module.exports = function(app) {
     app.set('appPath', 'static');
   }
 
-  app.use(morgan());
+  app.use(morgan('combined'));
   app.use(errorHandler({log: handleErrors})); // Error handler - has to be last
 };
