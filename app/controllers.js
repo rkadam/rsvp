@@ -68,15 +68,14 @@ module.exports = function(model) {
       next();
     },
     fetchInvitation: function(req, res, next) {
-      res.result = model.getSampleInvitation(req.body.uid, req.body.idd, null, 3);
+      res.result = model.getSampleInvitation(req.params.uid, req.params.iid, null, 3);
       next();
     },
     fetchInvitationList: function(req, res, next) {
-      console.log('hi');
       var x = 6;
       var invitations = [];
       while (x--) {
-        invitations.push(model.getSampleInvitation(req.body.uid, null, x, 3));
+        invitations.push(model.getSampleInvitation(req.params.uid, null, x, 3));
       }
       res.result = invitations;
       next();
