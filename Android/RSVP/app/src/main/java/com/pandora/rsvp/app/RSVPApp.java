@@ -2,6 +2,7 @@ package com.pandora.rsvp.app;
 
 import com.pandora.rsvp.app.dagger.DaggerRSVPComponent;
 import com.pandora.rsvp.app.dagger.RSVPComponent;
+import com.pandora.rsvp.app.dagger.RSVPModule;
 
 import android.app.Application;
 
@@ -29,8 +30,8 @@ public class RSVPApp extends Application {
     }
 
     private void buildComponent() {
-        mRSVPComponent = DaggerRSVPComponent
-                .builder()
+        mRSVPComponent = DaggerRSVPComponent.builder()
+                .rSVPModule(new RSVPModule(this))
                 .build();
     }
 
