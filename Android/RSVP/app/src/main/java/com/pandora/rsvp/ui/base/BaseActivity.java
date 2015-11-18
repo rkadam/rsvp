@@ -20,13 +20,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_base);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getLayoutInflater().inflate(getActivityLayoutRes(), (ViewGroup) findViewById(R.id.baseContainer));
         ButterKnife.bind(this);
     }
-
 
     @Override
     protected void onResume() {
@@ -39,5 +38,4 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract int getActivityLayoutRes();
-
 }

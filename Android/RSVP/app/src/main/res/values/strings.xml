@@ -8,4 +8,5 @@
     <string name="RVSP">RSVP</string>
     <string name="at">\@</string>
     <string name="pandora">PANDORA</string>
+    <string name="title_invitation_list">Invitations</string>
 </resources>
