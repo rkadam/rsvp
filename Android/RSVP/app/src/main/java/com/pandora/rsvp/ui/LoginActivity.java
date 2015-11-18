@@ -8,6 +8,7 @@ import com.pandora.rsvp.ui.base.BaseActivity;
 import com.pandora.rsvp.utils.ValidationUtils;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -52,7 +53,8 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<Boolean> 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submit();
+                //submit();
+                startActivity(new Intent(LoginActivity.this, InvitationResponsesActivity.class));
             }
         });
     }

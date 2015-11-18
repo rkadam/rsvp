@@ -1,7 +1,7 @@
 package com.pandora.rsvp.ui;
 
 import com.pandora.rsvp.R;
-import com.pandora.rsvp.adapter.InvitationListAdapter;
+import com.pandora.rsvp.ui.adapter.InvitationListAdapter;
 import com.pandora.rsvp.ui.base.BaseActivity;
 
 import android.os.Bundle;

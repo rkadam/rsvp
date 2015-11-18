@@ -1,4 +1,4 @@
-package com.pandora.rsvp.adapter;
+package com.pandora.rsvp.ui.adapter;
 
 import com.pandora.rsvp.R;
 
@@ -15,8 +15,7 @@ public class InvitationListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         final View view = inflater.inflate(R.layout.item_invitation, parent, false);
-        final InvitationItemViewHolder invitationItemViewHolder = new InvitationItemViewHolder(view);
-        return invitationItemViewHolder;
+        return new InvitationItemViewHolder(view);
     }
 
     @Override

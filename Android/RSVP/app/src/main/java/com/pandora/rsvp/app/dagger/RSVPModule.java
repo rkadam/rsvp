@@ -3,6 +3,7 @@ package com.pandora.rsvp.app.dagger;
 import com.pandora.rsvp.app.RSVPApp;
 import com.pandora.rsvp.service.IRSVPApi;
 import com.pandora.rsvp.service.impl.RSVPApi;
+import com.squareup.picasso.Picasso;
 
 import android.content.Context;
 
@@ -32,5 +33,11 @@ public class RSVPModule {
     @Provides
     IRSVPApi provideRSVPApi() {
         return new RSVPApi();
+    }
+
+    @Singleton
+    @Provides
+    Picasso providePicasso(Context context) {
+        return Picasso.with(context);
     }
 }
