@@ -1,8 +1,11 @@
 package com.pandora.rsvp.ui.base;
 
 import com.pandora.rsvp.R;
+import com.pandora.rsvp.app.RSVPApp;
+import com.pandora.rsvp.app.dagger.RSVPComponent;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,15 +19,21 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private View activityContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        performInjection(RSVPApp.getComponent());
         setContentView(R.layout.activity_login);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getLayoutInflater().inflate(getActivityLayoutRes(), (ViewGroup) findViewById(R.id.baseContainer));
+        activityContainer = getLayoutInflater().inflate(getActivityLayoutRes(), (ViewGroup) findViewById(R.id.baseContainer));
         ButterKnife.bind(this);
+    }
+
+    protected void performInjection(RSVPComponent component) {
+
     }
 
 
@@ -37,6 +46,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected boolean usesToolbar() {
         return true;
     }
+
+    protected void snackMessage(String message) {
+        Snackbar.make(activityContainer, message, Snackbar.LENGTH_LONG).show();
+    }
+
+    protected void snackMessage(int message) {
+        Snackbar.make(activityContainer, message, Snackbar.LENGTH_LONG).show();
+    }
+
 
     protected abstract int getActivityLayoutRes();
 
