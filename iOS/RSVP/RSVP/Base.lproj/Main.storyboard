@@ -10,10 +10,12 @@
             <string>AvenirNext-Medium</string>
             <string>AvenirNext-Medium</string>
             <string>AvenirNext-Medium</string>
+            <string>AvenirNext-Medium</string>
+            <string>AvenirNext-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
-  	<!--Login View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="eZg-vG-L7F">
             <objects>
                 <viewController id="bLj-H9-rBP" customClass="RSVPLoginViewController" customModule="RSVP" customModuleProvider="target" sceneMemberID="viewController">
@@ -95,7 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Um8-I2-skl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-88" y="442"/>
+            <point key="canvasLocation" x="523" y="1036"/>
         </scene>
         <!--Offers-->
         <scene sceneID="tne-QT-ifu">
@@ -272,7 +274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1259" y="361"/>
+            <point key="canvasLocation" x="1215" y="361"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2jV-q1-Vl0">
