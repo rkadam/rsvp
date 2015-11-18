@@ -18,6 +18,42 @@ module.exports = function(model) {
       };
       res.send(response);
     },
+    apiInfo: function(req, res, next) {
+      res.result = [
+        {
+          url: 'http://'+req.header('host')+'/api/login',
+          method: 'POST',
+          description: "authenticate user with {uid: 'uid', password: 'password'}",
+          returns: 'success/failure object'
+        }, {
+          url: 'http://'+req.header('host')+'/api/logout',
+          method: 'GET',
+          description: "logout current user",
+          returns: 'success/failure object'
+        }, {
+          url: 'http://'+req.header('host')+'/api/users/:uid/invitations',
+          method: 'GET',
+          description: "return a list of invitation objects belonging to :uid",
+          returns: 'list or invitation objects'
+        }, {
+          url: 'http://'+req.header('host')+'/api/users/:uid/invitations',
+          method: 'POST',
+          description: "create a new invitation owned by :uid",
+          returns: 'invitation object'
+        }, {
+          url: 'http://'+req.header('host')+'/api/users/:uid/invitations/:iid',
+          method: 'GET',
+          description: "return an invitation object",
+          returns: 'invitation object'
+        }, {
+          url: 'http://'+req.header('host')+'/api/users/:uid/invitations/:iid',
+          method: 'PUT',
+          description: "update an invitation object",
+          returns: 'invitation object'
+        },
+      ];
+      next();
+    },
     login: function(req, res, next) {
       if (! req.body || ! req.body.uid) {
         res.error = 'Missing user id';

@@ -16,13 +16,24 @@ module.exports = function(app) {
 
   // Insert routes below
   app.route('/api/*').get(controllers.apiSetup);
-  app.route('/api/test/').get(controllers.test);
+  app.route('/api').get(controllers.apiInfo);
+
+  //login with {uid: 'uid', password: 'password'}
   app.route('/api/auth/login').post(controllers.login);
+
+  //logout or app
   app.route('/api/auth/logout').get(controllers.logout);
 
+  //return a list of invitation objects belonging to :uid
   app.route('/api/user/:uid/invitations').get(controllers.fetchInvitationList);
+
+  //create a new invitation object belonging to :uid
   app.route('/api/user/:uid/invitations').post(controllers.createInvitation);
+
+  //create a new invitation object belonging to :uid
   app.route('/api/user/:uid/invitations/:iid').get(controllers.fetchInvitation);
+
+  //update an invitation object belonging to :uid
   app.route('/api/user/:uid/invitations/:iid').put(controllers.updateInvitation);
 
   app.route('/api/*').all(controllers.sendResponse);
