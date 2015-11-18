@@ -10,4 +10,20 @@
     <string name="pandora">PANDORA</string>
     <string name="title_invitation_list">Invitations</string>
     <string name="auth_failure">Login failed. Check your credentials.</string>
+
+    <string name="create_invitation_activity_invitation_details_header">INVITATION DETAILS</string>
+    <string name="create_invitation_activity_invitation_description">Invitation Description</string>
+    <string name="create_invitation_activity_num_invitations_available">Number of Invitations Available</string>
+    <string name="create_invitation_activity_rsvp_by">RSVP By</string>
+    <string name="create_invitation_activity_email_dist_list">Email Distribution List</string>
+    <string name="create_invitation_activity_choosing_winners_header">CHOOSING WINNER(S)</string>
+    <string name="create_invitation_activity_method_of_choice">Method of Choice</string>
+    <string name="create_invitation_activity_first_come_first_served">First Come First Served</string>
+    <string name="create_invitation_activity_random_order">Random Order</string>
+    <string name="create_invitation_activity_manual_choice">Manual Choice</string>
+    <string name="create_invitation_activity_see_sample_email">SEE SAMPLE EMAIL </string>
+    <string name="create_invitation_activity_manual">Random Order</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_create_invitation">CreateInvitationActivity</string>
 </resources>

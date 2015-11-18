@@ -18,4 +18,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="SectionHeader" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/section_header_text_size</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+    
+    <style name="FieldLabel" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/field_label_text_size</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
 </resources>
