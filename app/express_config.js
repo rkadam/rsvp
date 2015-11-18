@@ -44,13 +44,13 @@ module.exports = function(app) {
 
   if ('production' === env) {
     //app.use(favicon(path.join(config.root, 'public/assets/favicon.ico')));
-    app.use(express.static(path.join(config.root, '../web/dist/')));
-    app.set('appPath', config.root + '../../web/dist/');
+    app.use(express.static(path.join(config.root, '../web/public/')));
+    app.set('appPath', config.root + '../web/public/');
   } else {
-    app.use(require('connect-livereload')());
+    // app.use(require('connect-livereload')());
     app.use(express.static(path.join(config.root, '.tmp')));
-    app.use(express.static(path.join(config.root, '../web')));
-    app.set('appPath', 'static');
+    app.use(express.static(path.join(config.root, '../web/public')));
+    app.set('appPath', '../web/public');
   }
 
   app.use(morgan('combined'));
