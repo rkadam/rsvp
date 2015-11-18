@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">RSVP</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="pandora_logo">Pandora Logo Desc</string>
+    <string name="submit">Submit</string>
+    <string name="password_hint">Password</string>
+    <string name="email">Email</string>
 </resources>
