@@ -2,9 +2,71 @@
 'use strict';
 
 var config = require('./config');
-// var redis = require('redis');
+var redis = require('redis');
+var Q = require('q');
+
+var redisClient = redis.createClient();
+redisClient.on("error", function (e) {
+  console.log("Redis error",e);
+});
+
+var namespace = 'rsvp';
+
+var redisCommand = function(command, args) {
+  args = setRedisKey(command, args);
+  return Q.npost(redisClient, command, args)
+    .then(function(data) {
+      if ((command == 'hgetall' || command == 'hmget') && data) {
+        var parsed = {};
+        Object.keys(data).forEach(function(key, index) {
+          var outIndex = command == 'hgetall' ? key : args[index+1];
+          parsed[outIndex] = parseValue(data[key]);
+        });
+        data = parsed;
+      }
+      return data;
+    }, function(e) {
+      console.error("REDIS ERROR", command, args, e);
+      return Q.reject(e);
+    });
+};
+
+var setRedisKey = function(command, args) {
+  if (args) {
+    if(typeof args[0] === 'object') {
+      args[0] = args[0].join(':');
+    }
+    if (['flush', 'select', 'quit'].indexOf(command) == -1) {
+      args[0] = namespace+':'+args[0];
+    }
+  }
+  return args;
+};
+
+var parseValue = function(value) {
+  var parsed = value;
+  if (parsed !== null) {
+    try {
+      parsed = JSON.parse(value);
+    } catch (e) {
+    }
+  }
+  return parsed;
+};
 
 var model = {
+  createInvitation: function(uid, title, response_accept_limit, rsvp_by_time, email_to, method, invitation_body) {
+    return true;
+  },
+  fetchInvitation: function(uid, invitation_id) {
+    return {};
+  },
+  updateInvitation: function(invitation) {
+    return true;
+  },
+  createResponse: function(email_address, invitation_id, response_time, response_body) {
+    return true;
+  },
   getSampleInvitation: function(uid, id, title_append, response_count) {
     uid = uid || 'raju';
     var time = Date.now();
@@ -40,11 +102,12 @@ var model = {
       name: 'Tester '+uid,
       years: 3,
       department: 'Technical Operations',
-      reponded: time,
+      response_time: time,
       response_body: 'Pleeease let me come to lunch with you',
       selected: false,
     };
     return response;
   }
 };
+
 module.exports = model;
