@@ -11,7 +11,11 @@ import UIKit
 class RVSPOfferListViewController: UIViewController {
     private let offerListCellIdentifier = "RSVPOfferListTableViewCell"
 
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        }
+    }
     @IBOutlet weak var createNewOfferButton: UIButton! {
         didSet {
             createNewOfferButton.layer.cornerRadius = 12.5
@@ -33,8 +37,6 @@ class RVSPOfferListViewController: UIViewController {
     }
     @IBOutlet weak var createNewOfferTextField: UITextField! {
         didSet {
-            let color = UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 1)
-            createNewOfferTextField.attributedPlaceholder = NSAttributedString(string: "Create new Offer", attributes: [NSForegroundColorAttributeName : color])
             createNewOfferTextField.delegate = self
         }
     }
@@ -107,6 +109,10 @@ extension RVSPOfferListViewController: UITableViewDelegate {
         return 0
     }
     
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         createNewOfferTextField.resignFirstResponder()
@@ -119,12 +125,25 @@ extension RVSPOfferListViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView(frame: CGRectZero)
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(offerListCellIdentifier) as! RSVPOfferListTableViewCell
-        cell.offerModel = RSVPOfferModel()
+        
+        if indexPath.row == 0 {
+            let offerModel = RSVPOfferModel()
+            offerModel.responsesCount = 20
+            cell.offerModel = offerModel
+        } else {
+            let offerModel = RSVPOfferModel()
+            offerModel.endDate = NSDate()
+            cell.offerModel = offerModel
+        }
         return cell
     }
 }

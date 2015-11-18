@@ -17,6 +17,7 @@ enum RSVPOfferChoiceMethod: Int {
 class RSVPOfferModel {
     var title: String = "Offer Title"
     var createDate: NSDate = NSDate()
+    var endDate: NSDate = NSDate().dateByAddingTimeInterval(60*60*3)
     var responsesCount: Int = 0
     var chosenCount: Int = 0
     var numberOfInvitationAvaiable: Int = 0

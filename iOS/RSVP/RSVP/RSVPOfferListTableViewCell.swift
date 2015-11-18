@@ -12,6 +12,13 @@ class RSVPOfferListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var offerTitleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var fullUpLabel: UILabel! {
+        didSet {
+            fullUpLabel.alpha = 0
+            fullUpLabel.layer.cornerRadius = 2
+            fullUpLabel.layer.masksToBounds = true
+        }
+    }
     @IBOutlet weak var responsesCountLabel: UILabel! {
         didSet {
             responsesCountLabel.layer.masksToBounds = true
@@ -24,6 +31,8 @@ class RSVPOfferListTableViewCell: UITableViewCell {
             chosenCountLabel.layer.cornerRadius = 17.5
         }
     }
+    @IBOutlet weak var chosenLabel: UILabel!
+    @IBOutlet weak var seperatorView: UIView!
     
     var offerModel: RSVPOfferModel? = nil {
         didSet {
@@ -34,7 +43,17 @@ class RSVPOfferListTableViewCell: UITableViewCell {
             formatter.dateFormat = "MMM dd, yyyy"
             dateLabel.text = formatter.stringFromDate(_offerModel.createDate)
             responsesCountLabel.text = "\(_offerModel.responsesCount)"
-            chosenCountLabel.text = "\(_offerModel.chosenCount)"
+            
+            if _offerModel.endDate.compare(NSDate()) == NSComparisonResult.OrderedDescending {
+                fullUpLabel.alpha = 1
+                chosenCountLabel.alpha = 0
+                chosenLabel.alpha = 0
+            } else {
+                fullUpLabel.alpha = 0
+                chosenLabel.alpha = 1
+                chosenCountLabel.alpha = 1
+                chosenCountLabel.text = "\(_offerModel.chosenCount)"
+            }
         }
     }
     
@@ -43,26 +62,34 @@ class RSVPOfferListTableViewCell: UITableViewCell {
         
         let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(red: 173/255, green: 216/255, blue: 230/255, alpha: 0.2)
-        selectedBackgroundView = bgColorView
+        selectedBackgroundView = bgColorView        
     }
 
     override func setHighlighted(highlighted: Bool, animated: Bool) {
-        let color = responsesCountLabel.backgroundColor
+        let pandoraBlueColor = responsesCountLabel.backgroundColor
+        let lightBlueColor = fullUpLabel.backgroundColor
+        let grayColor = seperatorView.backgroundColor
         super.setHighlighted(highlighted, animated: animated)
         
         if(highlighted) {
-            responsesCountLabel.backgroundColor = color
-            chosenCountLabel.backgroundColor = color
+            seperatorView.backgroundColor = grayColor
+            fullUpLabel.backgroundColor = lightBlueColor
+            responsesCountLabel.backgroundColor = pandoraBlueColor
+            chosenCountLabel.backgroundColor = pandoraBlueColor
         }
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
-        let color = responsesCountLabel.backgroundColor
+        let pandoraBlueColor = responsesCountLabel.backgroundColor
+        let lightBlueColor = fullUpLabel.backgroundColor
+        let grayColor = seperatorView.backgroundColor
         super.setSelected(selected, animated: animated)
         
         if selected {
-            responsesCountLabel.backgroundColor = color
-            chosenCountLabel.backgroundColor = color
+            seperatorView.backgroundColor = grayColor
+            fullUpLabel.backgroundColor = lightBlueColor
+            responsesCountLabel.backgroundColor = pandoraBlueColor
+            chosenCountLabel.backgroundColor = pandoraBlueColor
         }
     }
 }
