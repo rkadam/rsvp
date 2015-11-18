@@ -10,5 +10,10 @@ import Foundation
 import AFNetworking
 
 class RSVPNetworkManager {
-    
+    static let instance = RSVPNetworkManager()
+    private let manager = AFHTTPRequestOperationManager(baseURL: NSURL(string: "asdada.com"))
+
+    func loginUser(🎅🏽: String, 🔑: String) -> Bool {
+
+    }
 }
