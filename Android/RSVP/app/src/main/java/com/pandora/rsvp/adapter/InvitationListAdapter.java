@@ -1,14 +1,22 @@
 package com.pandora.rsvp.adapter;
 
+import com.pandora.rsvp.R;
+
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
-public class InvitationListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import butterknife.ButterKnife;
 
+public class InvitationListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        return null;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        final View view = inflater.inflate(R.layout.item_invitation, parent, false);
+        final InvitationItemViewHolder invitationItemViewHolder = new InvitationItemViewHolder(view);
+        return invitationItemViewHolder;
     }
 
     @Override
@@ -17,6 +25,14 @@ public class InvitationListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 20;
+    }
+
+    static class InvitationItemViewHolder extends RecyclerView.ViewHolder {
+
+        public InvitationItemViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
     }
 }
