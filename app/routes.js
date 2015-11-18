@@ -25,16 +25,16 @@ module.exports = function(app) {
   app.route('/api/auth/logout').get(controllers.logout);
 
   //return a list of invitation objects belonging to :uid
-  app.route('/api/user/:uid/invitations').get(controllers.fetchInvitationList);
+  app.route('/api/users/:uid/invitations').get(controllers.fetchInvitationList);
 
   //create a new invitation object belonging to :uid
-  app.route('/api/user/:uid/invitations').post(controllers.createInvitation);
+  app.route('/api/users/:uid/invitations').post(controllers.createInvitation);
 
   //create a new invitation object belonging to :uid
-  app.route('/api/user/:uid/invitations/:iid').get(controllers.fetchInvitation);
+  app.route('/api/users/:uid/invitations/:iid').get(controllers.fetchInvitation);
 
   //update an invitation object belonging to :uid
-  app.route('/api/user/:uid/invitations/:iid').put(controllers.updateInvitation);
+  app.route('/api/users/:uid/invitations/:iid').put(controllers.updateInvitation);
 
   app.route('/api/*').all(controllers.sendResponse);
 
