@@ -28,7 +28,7 @@ function jsonFormat(tokens, req, res) {
 
 var handleErrors = function(err, str, req) {
   var msg = 'Error in ' + req.method + ' ' + req.url+': '+str;
-  log.error(msg, err);
+  console.err(msg, err);
 };
 
 module.exports = function(app) {
@@ -42,12 +42,12 @@ module.exports = function(app) {
 
   if ('production' === env) {
     //app.use(favicon(path.join(config.root, 'public/assets/favicon.ico')));
-    app.use(express.static(path.join(config.root, 'public')));
-    app.set('appPath', config.root + '/public');
+    app.use(express.static(path.join(config.root, '../web/dist/')));
+    app.set('appPath', config.root + '../../web/dist/');
   } else {
     app.use(require('connect-livereload')());
     app.use(express.static(path.join(config.root, '.tmp')));
-    app.use(express.static(path.join(config.root, 'client')));
+    app.use(express.static(path.join(config.root, '../web')));
     app.set('appPath', 'static');
   }
 
