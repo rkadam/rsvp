@@ -6,5 +6,5 @@
     
     <color name="white_50">#50FFFFFF</color>
     <color name="light_gray">#FFF1F2F2</color>
-    <color name="dark_gray">#FF777777</color>
+    <color name="section_underline_color">#FF777777</color>
 </resources>
