@@ -9,11 +9,19 @@
 import UIKit
 
 class RSVPLoginViewController: UIViewController {
-
     
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton! {
+        didSet {
+            loginButton.layer.cornerRadius = 2;
+        }
+    }
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
+        didSet {
+//            activityIndicator.hidden = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +29,9 @@ class RSVPLoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(sender: UIButton) {
-        
+        loginButton.alpha = 0.5
+        loginButton.enabled = false
+        activityIndicator.startAnimating()
     }
-    
-    
 }
 
