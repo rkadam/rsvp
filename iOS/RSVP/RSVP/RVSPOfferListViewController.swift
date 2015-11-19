@@ -45,13 +45,44 @@ class RVSPOfferListViewController: UIViewController {
             createNewOfferGoButton.alpha = 0
         }
     }
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView! {
+        didSet {
+            indicatorView.startAnimating()
+        }
+    }
+    
+    var offerList: [RSVPOfferModel] = []
     
     @IBOutlet weak var createNewOfferTextFieldLeadingConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        navigationController?.navigationBar.translucent = false
+        navigationController?.navigationBar.barTintColor = UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 1)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AvenirNext-DemiBold", size: 16)!]
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
+        fetchOrderList()
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
+    
+    private func fetchOrderList() {
+        offerList.removeAll()
+        RSVPNetworkManager.instance.getOfferList("whateverID") { (response, error) -> Void in
+            if let _response = response as? NSDictionary {
+                for offerData in _response["data"] as? Array<NSDictionary> ?? [] {
+                    self.offerList.append(RSVPOfferModel(networkData: offerData))
+                }
+                
+                self.tableView.reloadData()
+            } else {
+                // show the error message
+            }
+        }
     }
     
     @IBAction func goButtonTapped(sender: AnyObject) {
@@ -102,7 +133,7 @@ extension RVSPOfferListViewController: UITextFieldDelegate {
 
 extension RVSPOfferListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 150
+        return 140
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -125,7 +156,7 @@ extension RVSPOfferListViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return offerList.count
     }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -134,16 +165,7 @@ extension RVSPOfferListViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(offerListCellIdentifier) as! RSVPOfferListTableViewCell
-        
-        if indexPath.row == 0 {
-            let offerModel = RSVPOfferModel()
-            offerModel.responsesCount = 20
-            cell.offerModel = offerModel
-        } else {
-            let offerModel = RSVPOfferModel()
-            offerModel.endDate = NSDate()
-            cell.offerModel = offerModel
-        }
+        cell.offerModel = offerList[indexPath.row]
         return cell
     }
 }
