@@ -1,12 +1,12 @@
-angular.module('rsvp').directive('rsvpUser', function() {
+angular.module('rsvp').directive('rsvpResponse', function() {
 	'use strict';
 
 	return {
 		restrict: 'E',
 		scope: {
-			user: '=',
+			response: '=',
 		},
-		templateUrl: 'components/rsvpUser/rsvpUser.html',
+		templateUrl: 'components/rsvpResponse/rsvpResponse.html',
 		controllerAs: 'ctrl',
 		bindToController: true,
 		controller: function() {},

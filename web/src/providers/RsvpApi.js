@@ -1,55 +1,28 @@
 angular.module('rsvp').service('RsvpApi', function(
 	$http,
-	$q
+	$q,
+	_
 ) {
 	'use strict';
 
 	var RsvpApi = this;
-	var _userId = 'mpetrovich';
 
-	RsvpApi.getUserId = function() {
-		return _userId;
-	};
+	RsvpApi.get = _.partial(makeRequest, 'GET');
+	RsvpApi.post = _.partial(makeRequest, 'POST');
+	RsvpApi.put = _.partial(makeRequest, 'PUT');
+	RsvpApi.patch = _.partial(makeRequest, 'PATCH');
+	RsvpApi.delete = _.partial(makeRequest, 'DELETE');
 
-	RsvpApi.login = function(userId, password) {
-		return makeRequest('post', '/api/login', { uid: userId, password: password })
-			.then(function(data) {
-				_userId = userId;
-				return data;
-			});
-	};
-
-	RsvpApi.logout = function() {
-		return makeRequest('get', '/api/logout');
-	};
-
-	RsvpApi.getInvites = function(userId) {
-		userId = userId || _userId;
-		return makeRequest('get', '/api/users/' + userId + '/invitations');
-	};
-
-	RsvpApi.postInvite = function(invite, userId) {
-		userId = userId || _userId;
-		return makeRequest('post', '/api/users/' + userId + '/invitations', invite);
-	};
-
-	RsvpApi.getInvite = function(inviteId, userId) {
-		userId = userId || _userId;
-		return makeRequest('get', '/api/users/' + userId + '/invitations/' + inviteId);
-	};
-
-	RsvpApi.updateInvite = function(invite, userId) {
-		userId = userId || _userId;
-		return makeRequest('put', '/api/users/' + userId + '/invitations/' + invite.id, invite);
-	};
-
-	function makeRequest(method, url, data) {
+	function makeRequest(method, path, options) {
 		var defer = $q.defer();
+		var url = '/api' + path;
 
 		$http({
 			method: method,
 			url: url,
-			data: data,
+			params: options.params,
+			data: options.data,
+			cache: options.cache,
 		})
 		.then(function(response) {
 			if (response.data && response.data.success) {

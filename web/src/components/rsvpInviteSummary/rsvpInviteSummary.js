@@ -1,4 +1,7 @@
-angular.module('rsvp').directive('rsvpInviteSummary', function() {
+angular.module('rsvp').directive('rsvpInviteSummary', function(
+	_,
+	RsvpInviteApi
+) {
 	'use strict';
 
 	return {
@@ -12,9 +15,19 @@ angular.module('rsvp').directive('rsvpInviteSummary', function() {
 		controller: function($scope) {
 			var ctrl = this;
 
-			$scope.$watchCollection('ctrl.invite.responses', function(responses) {
-				ctrl.numChosen = _.filter(responses, 'selected').length;
+			$scope.$watch('ctrl.invite.responses', function() {
+				ctrl.numChosen = getNumChosen(ctrl.invite);
+			}, true);
+
+			RsvpInviteApi.onUpdateInvite(function(invite) {
+				if (invite.id === ctrl.invite.id) {
+					ctrl.numChosen = getNumChosen(invite);
+				}
 			});
 		},
 	};
+
+	function getNumChosen(invite) {
+		return _.filter(invite.responses, 'selected').length;
+	}
 });
