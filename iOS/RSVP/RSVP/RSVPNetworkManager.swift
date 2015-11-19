@@ -15,8 +15,17 @@ class RSVPNetworkManager {
     static let instance = RSVPNetworkManager()
     private let manager = AFHTTPRequestOperationManager(baseURL: NSURL(string: "http://aai.savagebeast.com:9000/api/"))
 
-    func loginUser(🎅🏽: String, 🔑: String) -> Bool {
-        return true
+    func loginUser(🎅🏽: String, 🔑: String, 😊: NetworkCompletionBlock, 😞: NetworkCompletionBlock) -> Bool {
+        var 🎉 = false
+        manager.POST("login", parameters: ["uid":🎅🏽, "password":🔑], success: {(📡, 🍕) -> Void in
+            🎉 = true
+            😊(🍕, nil)
+        }){(📡, 💣) -> Void in
+            🎉 = false
+            😞(nil, 💣)
+        }
+        
+        return 🎉
     }
     
     func getOfferList(🎫: String, 🉐: NetworkCompletionBlock) {
