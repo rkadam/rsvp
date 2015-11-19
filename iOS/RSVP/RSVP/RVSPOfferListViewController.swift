@@ -10,6 +10,7 @@ import UIKit
 
 class RVSPOfferListViewController: UIViewController {
     private let offerListCellIdentifier = "RSVPOfferListTableViewCell"
+    private let offerDetailSegueIdentifier = "OfferDetailViewSegue"
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -52,6 +53,7 @@ class RVSPOfferListViewController: UIViewController {
     }
     
     var offerList: [RSVPOfferModel] = []
+    private var targetOfferIndex: Int? = 0
     
     @IBOutlet weak var createNewOfferTextFieldLeadingConstraint: NSLayoutConstraint!
     
@@ -81,6 +83,9 @@ class RVSPOfferListViewController: UIViewController {
                 self.tableView.reloadData()
             } else {
                 // show the error message
+                let alertController = UIAlertController(title: "Error", message: "Can't load the offer list.", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
     }
@@ -93,15 +98,15 @@ class RVSPOfferListViewController: UIViewController {
         createNewOfferTextField.becomeFirstResponder()
     }
     
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == offerDetailSegueIdentifier {
+            guard let _targetOfferIndex = targetOfferIndex else { return }
+            if let offerDetailVieController = segue.destinationViewController as? RSVPOfferDetailViewController {
+                offerDetailVieController.offerModel = offerList[_targetOfferIndex]
+            }
+        }
     }
-    */
 }
 
 extension RVSPOfferListViewController: UITextFieldDelegate {
@@ -147,6 +152,8 @@ extension RVSPOfferListViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         createNewOfferTextField.resignFirstResponder()
+        targetOfferIndex = indexPath.row
+        performSegueWithIdentifier(offerDetailSegueIdentifier, sender: nil)
     }
 }
 

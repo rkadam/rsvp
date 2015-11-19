@@ -322,7 +322,7 @@
                         <outlet property="createNewOfferTextFieldLeadingConstraint" destination="WTg-dP-p1Z" id="of5-Wo-cSO"/>
                         <outlet property="indicatorView" destination="7Jn-Zt-BpR" id="M62-OY-4Ro"/>
                         <outlet property="tableView" destination="Sbf-0W-zaH" id="PvK-6f-0ay"/>
-                        <segue destination="ddK-ET-KcK" kind="show" id="qg7-Fy-IND"/>
+                        <segue destination="ddK-ET-KcK" kind="show" identifier="OfferDetailViewSegue" id="qg7-Fy-IND"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

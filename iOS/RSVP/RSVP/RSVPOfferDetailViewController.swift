@@ -10,6 +10,12 @@ import UIKit
 
 class RSVPOfferDetailViewController: UIViewController {
 
+    var offerModel: RSVPOfferModel? = nil {
+        didSet {
+            // initial the views here
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
