@@ -7,8 +7,8 @@ angular.module('rsvp').config(function(
 	'use strict';
 
 	$stateProvider
-		.state('newInvite', {
-			url: '/invites/new',
+		.state('createInvite', {
+			url: '/invites/create',
 			template: '<rsvp-invite-form></rsvp-invite-form>',
 		})
 		.state('invites', {
