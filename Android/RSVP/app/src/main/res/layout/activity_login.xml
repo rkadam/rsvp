@@ -76,21 +76,23 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <Button
-            android:id="@+id/submit"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/submit"
-            android:textColor="@android:color/white" />
+            android:layout_marginTop="16dp">
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:textColor="@android:color/white" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_centerInParent="true"
+                android:visibility="invisible" />
+        </RelativeLayout>
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:visibility="invisible" />
-
-
 </FrameLayout>
