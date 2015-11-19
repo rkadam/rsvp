@@ -2,9 +2,39 @@ rsvp-invite-summary {
 	display: block;
 
 	&.-selected {
-		background: @rsvpColor__selectedFill;
+		background: @rsvpColor__fill--selected;
 	}
 }
 
 .rsvpInviteSummary {
+	padding: 20px 40px;
+
+	&__title {
+		margin: 0;
+		font-size: @rsvpFont__size--L;
+		font-weight: @rsvpFont__weight--bold;
+		color: @rsvpColor__text--accent;
+	}
+
+	&__date {
+		display: block;
+		margin-bottom: 20px;
+		font-size: @rsvpFont__size--S;
+		font-weight: @rsvpFont__weight--bold;
+		color: @rsvpColor__text--accent;
+	}
+
+	&__counter {
+		font-size: @rsvpFont__size--S;
+		font-weight: @rsvpFont__weight--bold;
+		color: @rsvpColor__text--accent;
+
+		& ~ & {
+			margin-left: 15px;
+		}
+
+		rsvp-badge {
+			margin-right: 5px;
+		}
+	}
 }
