@@ -1,4 +1,6 @@
-angular.module('rsvp').directive('rsvpInviteSummary', function() {
+angular.module('rsvp').directive('rsvpInviteSummary', function(
+	_
+) {
 	'use strict';
 
 	return {
@@ -12,9 +14,9 @@ angular.module('rsvp').directive('rsvpInviteSummary', function() {
 		controller: function($scope) {
 			var ctrl = this;
 
-			$scope.$watchCollection('ctrl.invite.responses', function(responses) {
+			$scope.$watch('ctrl.invite.responses', function(responses) {
 				ctrl.numChosen = _.filter(responses, 'selected').length;
-			});
+			}, true);
 		},
 	};
 });
