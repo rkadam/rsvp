@@ -70,7 +70,7 @@ EmailReader.prototype.getNewMessages = function(){
             }
 
             var fetchOp = this._imap.fetch(results, {
-                markSeen: false, //TODO: set to true after testing
+                markSeen: true,
                 bodies: ''
             });
             fetchOp.on('message', function (msg, seqno) {
