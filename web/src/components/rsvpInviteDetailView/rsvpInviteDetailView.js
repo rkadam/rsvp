@@ -13,8 +13,8 @@ angular.module('rsvp').directive('rsvpInviteDetailView', function(
 		controller: function() {
 			var ctrl = this;
 
-			ctrl.toggleUser = function(user) {
-				user.selected = !user.selected;
+			ctrl.toggleResponse = function(response) {
+				response.selected = !response.selected;
 				RsvpApi.updateInvite(ctrl.invite);
 			};
 
