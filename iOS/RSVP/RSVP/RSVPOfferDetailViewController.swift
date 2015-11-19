@@ -18,6 +18,11 @@ class RSVPOfferDetailViewController: UIViewController {
             title = offerModel?.title
         }
     }
+    @IBOutlet weak var segmentedControl: UISegmentedControl! {
+        didSet {
+            segmentedControl.tintColor = UIColor(red: 41/255, green: 235/255, blue: 227/255, alpha: 1)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

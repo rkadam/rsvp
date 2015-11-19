@@ -51,6 +51,11 @@ class RVSPOfferListViewController: UIViewController {
             indicatorView.startAnimating()
         }
     }
+    @IBOutlet weak var emptyListView: UIView! {
+        didSet {
+            emptyListView.alpha = 0
+        }
+    }
     
     var offerList: [RSVPOfferModel] = []
     private var targetOfferIndex: Int? = 0
@@ -74,19 +79,27 @@ class RVSPOfferListViewController: UIViewController {
     
     private func fetchOrderList() {
         offerList.removeAll()
-        RSVPNetworkManager.instance.getOfferList("raju") { (response, error) -> Void in
+        RSVPNetworkManager.instance.getOfferList("asd") { (response, error) -> Void in
             if let _response = response as? NSDictionary {
                 for offerData in _response["data"] as? Array<NSDictionary> ?? [] {
                     self.offerList.append(RSVPOfferModel(networkData: offerData))
                 }
                 
                 self.tableView.reloadData()
+                
+                if self.offerList.count == 0 {
+                    self.tableView.scrollEnabled = false
+                    self.emptyListView.alpha = 1
+                    self.view.bringSubviewToFront(self.emptyListView)
+                }
             } else {
                 // show the error message
                 let alertController = UIAlertController(title: "Error", message: "Can't load the offer list.", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
+            
+            self.indicatorView.stopAnimating()
         }
     }
     
