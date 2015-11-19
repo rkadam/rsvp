@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		028BF1091BFD0ED500E9ACF3 /* RSVPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028BF1081BFD0ED500E9ACF3 /* RSVPLoginViewController.swift */; };
+		982DC9ED1BFD48540014BED5 /* RSVPResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC9EC1BFD48540014BED5 /* RSVPResponder.swift */; };
+		982DC9EF1BFE48970014BED5 /* RSVPOfferDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC9EE1BFE48970014BED5 /* RSVPOfferDetailViewController.swift */; };
 		98D433E31BFD01840074D9F6 /* RSVPNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D433E21BFD01840074D9F6 /* RSVPNetworkManager.swift */; };
+		98D433E51BFD04FF0074D9F6 /* RVSPOfferListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D433E41BFD04FF0074D9F6 /* RVSPOfferListViewController.swift */; };
+		98D433E71BFD201A0074D9F6 /* RSVPOfferModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D433E61BFD201A0074D9F6 /* RSVPOfferModel.swift */; };
+		98D433E91BFD23BC0074D9F6 /* RSVPOfferListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D433E81BFD23BC0074D9F6 /* RSVPOfferListTableViewCell.swift */; };
 		9C449FB51BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C449FB41BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift */; };
 		9CD4CE201BFCFB9800DF41E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */; };
-		9CD4CE221BFCFB9800DF41E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */; };
 		9CD4CE251BFCFB9800DF41E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4CE231BFCFB9800DF41E7 /* Main.storyboard */; };
 		9CD4CE271BFCFB9800DF41E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4CE261BFCFB9800DF41E7 /* Assets.xcassets */; };
 		9CD4CE2A1BFCFB9800DF41E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4CE281BFCFB9800DF41E7 /* LaunchScreen.storyboard */; };
@@ -19,14 +24,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		028BF1081BFD0ED500E9ACF3 /* RSVPLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPLoginViewController.swift; sourceTree = "<group>"; };
 		3134445A5C6DD502D9F501E9 /* Pods-RSVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSVP.release.xcconfig"; path = "Pods/Target Support Files/Pods-RSVP/Pods-RSVP.release.xcconfig"; sourceTree = "<group>"; };
 		78C7A327372915C7582372E0 /* Pods_RSVP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RSVP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D412A9A27746F284522E87E /* Pods-RSVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSVP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RSVP/Pods-RSVP.debug.xcconfig"; sourceTree = "<group>"; };
+		982DC9EC1BFD48540014BED5 /* RSVPResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPResponder.swift; sourceTree = "<group>"; };
+		982DC9EE1BFE48970014BED5 /* RSVPOfferDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPOfferDetailViewController.swift; sourceTree = "<group>"; };
 		98D433E21BFD01840074D9F6 /* RSVPNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPNetworkManager.swift; sourceTree = "<group>"; };
+		98D433E41BFD04FF0074D9F6 /* RVSPOfferListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVSPOfferListViewController.swift; sourceTree = "<group>"; };
+		98D433E61BFD201A0074D9F6 /* RSVPOfferModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPOfferModel.swift; sourceTree = "<group>"; };
+		98D433E81BFD23BC0074D9F6 /* RSVPOfferListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPOfferListTableViewCell.swift; sourceTree = "<group>"; };
 		9C449FB41BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPCreateOfferViewController.swift; sourceTree = "<group>"; };
 		9CD4CE1C1BFCFB9800DF41E7 /* RSVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9CD4CE241BFCFB9800DF41E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9CD4CE261BFCFB9800DF41E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CD4CE291BFCFB9800DF41E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,6 +68,10 @@
 		98D433DF1BFD01570074D9F6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				98D433E41BFD04FF0074D9F6 /* RVSPOfferListViewController.swift */,
+				028BF1081BFD0ED500E9ACF3 /* RSVPLoginViewController.swift */,
+				982DC9EE1BFE48970014BED5 /* RSVPOfferDetailViewController.swift */,
+				9C449FB41BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -65,6 +79,7 @@
 		98D433E01BFD01610074D9F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				98D433E81BFD23BC0074D9F6 /* RSVPOfferListTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -73,6 +88,8 @@
 			isa = PBXGroup;
 			children = (
 				98D433E21BFD01840074D9F6 /* RSVPNetworkManager.swift */,
+				98D433E61BFD201A0074D9F6 /* RSVPOfferModel.swift */,
+				982DC9EC1BFD48540014BED5 /* RSVPResponder.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -102,9 +119,7 @@
 				98D433E01BFD01610074D9F6 /* Views */,
 				98D433DF1BFD01570074D9F6 /* Controllers */,
 				9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */,
-				9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */,
 				9CD4CE311BFD29AE00DF41E7 /* RSVPCreateOfferViewController.storyboard */,
-				9C449FB41BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift */,
 				9CD4CE231BFCFB9800DF41E7 /* Main.storyboard */,
 				9CD4CE261BFCFB9800DF41E7 /* Assets.xcassets */,
 				9CD4CE281BFCFB9800DF41E7 /* LaunchScreen.storyboard */,
@@ -244,10 +259,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CD4CE221BFCFB9800DF41E7 /* ViewController.swift in Sources */,
+				982DC9ED1BFD48540014BED5 /* RSVPResponder.swift in Sources */,
+				98D433E51BFD04FF0074D9F6 /* RVSPOfferListViewController.swift in Sources */,
+				98D433E91BFD23BC0074D9F6 /* RSVPOfferListTableViewCell.swift in Sources */,
 				98D433E31BFD01840074D9F6 /* RSVPNetworkManager.swift in Sources */,
 				9C449FB51BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift in Sources */,
+				98D433E71BFD201A0074D9F6 /* RSVPOfferModel.swift in Sources */,
+				982DC9EF1BFE48970014BED5 /* RSVPOfferDetailViewController.swift in Sources */,
 				9CD4CE201BFCFB9800DF41E7 /* AppDelegate.swift in Sources */,
+				028BF1091BFD0ED500E9ACF3 /* RSVPLoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

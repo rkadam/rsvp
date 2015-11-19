@@ -31,6 +31,15 @@ class RSVPCreateOfferViewController: UIViewController {
         
         self.setupShowKeyboard()
         self.setupHideKeyboard()
+        
+        let backButton = UIBarButtonItem(image: UIImage(named: "ic_back"), style: .Plain, target: self, action: Selector("goBack"))
+        backButton.tintColor = UIColor.whiteColor()
+        self.navigationItem.leftBarButtonItem = backButton
+        
+        let sendButton = UIBarButtonItem(title: "Send", style: .Plain, target: self, action: Selector("sendInvitation"))
+        sendButton.tintColor = UIColor.whiteColor()
+        sendButton.setTitleTextAttributes([NSFontAttributeName : UIFont(name: "AvenirNext-Regular", size: 15.0)!], forState: .Normal)
+        self.navigationItem.rightBarButtonItem = sendButton
     }
     
     func setupShowKeyboard() {
@@ -73,12 +82,27 @@ class RSVPCreateOfferViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboardOnTap"))
         self.view.addGestureRecognizer(tapGesture)
+        
+        if self.navigationController != nil {
+            self.navigationController!.navigationBar.titleTextAttributes = [
+                NSFontAttributeName : UIFont(name: "AvenirNextCondensed-Regular", size: 24.0)!,
+                NSForegroundColorAttributeName : UIColor.whiteColor()
+            ]
+        }
     }
     
     func dismissKeyboardOnTap() {
         if let field = self.activeField {
             field.resignFirstResponder()
         }
+    }
+    
+    func goBack() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func sendInvitation() {
+        
     }
 }
 
@@ -124,9 +148,9 @@ extension RSVPCreateOfferViewController: UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch row {
         case 0:
-            return "Random Order"
-        case 1:
             return "First Come First Served"
+        case 1:
+            return "Random Order"
         case 2:
             return "Manual Choice"
         default:
