@@ -25,7 +25,7 @@ class RSVPOfferModel {
     var rejectedBody: String = "Empty Body."
     var methodOfChoice: RSVPOfferChoiceMethod = .FirstComeFirstServed
     
-    var responses: [Responder] = []
+    var responses: [RSVPResponder] = []
     
     var responsesCount: Int {
         return responses.count
@@ -55,7 +55,7 @@ class RSVPOfferModel {
         
         responses.removeAll()
         for response in networkData["responses"] as? Array<NSDictionary> ?? [] {
-            responses.append(Responder(networkData: response))
+            responses.append(RSVPResponder(networkData: response))
         }
     }
     

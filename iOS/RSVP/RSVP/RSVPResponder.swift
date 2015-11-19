@@ -1,5 +1,5 @@
 //
-//  Responder.swift
+//  RSVPResponder.swift
 //  RSVP
 //
 //  Created by Jianghua Kuai on 11/18/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Responder {
+class RSVPResponder {
     var department = "Engineering"
     var invitationId = "invalid_invitation_id"
     var name = "Oliver"
