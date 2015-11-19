@@ -15,7 +15,7 @@ angular.module('rsvp').directive('rsvpInviteDetailView', function(
 
 			ctrl.toggleResponse = function(response) {
 				response.selected = !response.selected;
-				RsvpApi.updateInvite(ctrl.invite);
+				RsvpInviteApi.updateInvite(ctrl.invite);
 			};
 
 			RsvpInviteApi.fetchInvite($stateParams.inviteId).then(function(invite) {

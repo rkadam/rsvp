@@ -8,6 +8,7 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 
 	var RsvpInviteApi = this;
 	var _invites = null;
+	var _listeners = {};
 
 	RsvpInviteApi.fetchInvites = function() {
 		if (_invites) {
@@ -39,6 +40,24 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 
 	RsvpInviteApi.updateInvite = function(invite) {
 		var path = '/users/' + RsvpAuthApi.getUserId() + '/invitations/' + invite.id;
-		return RsvpApi.put(path, { data: invite });
+		return RsvpApi.put(path, { data: invite })
+			.then(function(updatedInvite) {  // @todo Rename to 'invite' once API is fixed
+				notifyListeners('onUpdateInvite', invite);
+			});
 	};
+
+	RsvpInviteApi.onUpdateInvite = function(listener) {
+		addListener('onUpdateInvite', listener);
+	};
+
+	function addListener(methodName, listener) {
+		_listeners[methodName] = _listeners[methodName] || [];
+		_listeners[methodName].push(listener);
+	}
+
+	function notifyListeners(methodName, data) {
+		_.each(_listeners[methodName], function(listener) {
+			listener(data);
+		});
+	}
 });
