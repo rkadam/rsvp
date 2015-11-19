@@ -1,5 +1,13 @@
 <div class="rsvpInvitesView rsvpGrid">
 
+	<button
+		class="rsvpBumperButton rsvpGrid"
+	>
+		<rsvp-icon icon="ss-navigateup" size="0.8em"></rsvp-icon>
+		Create new offer
+		<rsvp-icon icon="ss-navigateup" size="0.8em"></rsvp-icon>
+	</button>
+
 	<nav class="rsvpGrid--1/4">
 		<rsvp-invite-summary
 			ng-repeat="invite in ctrl.invites | orderBy:['active','rsvp_by_time']"
