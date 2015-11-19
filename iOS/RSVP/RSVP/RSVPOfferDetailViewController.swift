@@ -28,7 +28,13 @@ class RSVPOfferDetailViewController: UIViewController {
             }
         }
     }
-    var shouldDisplayChosen: Bool = false
+    var shouldDisplayChosen: Bool = false {
+        didSet {
+            let collectionIsEmpty = shouldDisplayChosen ? (chosenResponders.count == 0) : (allResponders.count == 0)
+            collectionView.hidden = collectionIsEmpty
+        }
+    }
+    
     @IBOutlet weak var segmentedControl: UISegmentedControl! {
         didSet {
             segmentedControl.tintColor = UIColor(red: 41/255, green: 235/255, blue: 227/255, alpha: 1)
