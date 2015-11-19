@@ -1,4 +1,4 @@
-package com.pandora.rsvp.adapter;
+package com.pandora.rsvp.ui.adapter;
 
 import com.pandora.rsvp.R;
 
@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 
+/**
+ * Copyright (c) 2015 Pandora 2015, Inc
+ */
 public class InvitationListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     
     @Override

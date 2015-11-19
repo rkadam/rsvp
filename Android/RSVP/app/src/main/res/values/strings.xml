@@ -26,4 +26,6 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_create_invitation">CreateInvitationActivity</string>
+    <string name="chosen">Chosen</string>
+    <string name="responses">Responses</string>
 </resources>

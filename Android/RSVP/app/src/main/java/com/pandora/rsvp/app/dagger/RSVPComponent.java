@@ -1,7 +1,6 @@
 package com.pandora.rsvp.app.dagger;
 
 import com.pandora.rsvp.ui.LoginActivity;
-import com.pandora.rsvp.ui.adapter.InvitationListAdapter;
 import com.pandora.rsvp.ui.adapter.InvitationResponsesListAdapter;
 
 import javax.inject.Singleton;
@@ -15,8 +14,6 @@ import dagger.Component;
 @Component(modules = {RSVPModule.class})
 public interface RSVPComponent {
     void inject(LoginActivity loginActivity);
-
-    void inject(InvitationListAdapter invitationListAdapter);
 
     void inject(InvitationResponsesListAdapter invitationResponsesListAdapter);
 }
