@@ -49,11 +49,12 @@ EmailSender.prototype.connect = function(){
  * Send invitation message to recipients.
  *
  * @param {String} from
+ * @param {String} subject
  * @param {String} message
  * @param {String} invitation_id
  * @param {String} recipient
  */
-EmailSender.prototype.sendMessage = function(from, message, invitation_id, recipient){
+EmailSender.prototype.sendMessage = function(from, subject, message, invitation_id, recipient){
     return new Promise(function(resolve, reject){
         if(!this._connection){
             reject("Connection NOT open");
@@ -64,7 +65,7 @@ EmailSender.prototype.sendMessage = function(from, message, invitation_id, recip
             from: from
         };
         message = [
-            "Subject: Invitation to Lunch\r\n",
+            "Subject: ", subject, "\r\n",
             EmailSender.INVITATION_HEADER, ": ", invitation_id, "\r\n",
             "On-Behalf-Of: ", from, "\r\n",
             "Sender: rsvp@pandora.com\r\n",
