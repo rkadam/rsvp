@@ -26,12 +26,14 @@ class RSVPOfferDetailViewController: UIViewController {
     @IBOutlet weak var chartScrollView: UIScrollView!
     @IBOutlet weak var yearsAtPandoraChartView: BarChartView! {
         didSet {
-            yearsAtPandoraChartView.drawBarShadowEnabled = false;
-            yearsAtPandoraChartView.drawValueAboveBarEnabled = true;
+            yearsAtPandoraChartView.userInteractionEnabled = false
+            yearsAtPandoraChartView.descriptionText = ""
+            yearsAtPandoraChartView.drawBarShadowEnabled = false
+            yearsAtPandoraChartView.drawValueAboveBarEnabled = true
             
-            yearsAtPandoraChartView.maxVisibleValueCount = 16;
-            yearsAtPandoraChartView.pinchZoomEnabled = false;
-            yearsAtPandoraChartView.drawGridBackgroundEnabled = false;
+            yearsAtPandoraChartView.maxVisibleValueCount = 16
+            yearsAtPandoraChartView.pinchZoomEnabled = false
+            yearsAtPandoraChartView.drawGridBackgroundEnabled = false
             
             yearsAtPandoraChartView.xAxis.labelPosition = .Bottom
             //yearsAtPandoraChartView.xAxis.labelFont = UIFont()
@@ -41,6 +43,8 @@ class RSVPOfferDetailViewController: UIViewController {
             yearsAtPandoraChartView.leftAxis.labelCount = 3
             yearsAtPandoraChartView.leftAxis.labelPosition = .OutsideChart
             yearsAtPandoraChartView.leftAxis.spaceTop = 0.15
+            
+            yearsAtPandoraChartView.rightAxis.labelCount = 0
             
             yearsAtPandoraChartView.legend.position = .BelowChartLeft
             yearsAtPandoraChartView.legend.form = .Square
@@ -52,6 +56,7 @@ class RSVPOfferDetailViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         setUpChart()
     }
     
@@ -67,11 +72,13 @@ class RSVPOfferDetailViewController: UIViewController {
         
         var yVals = [BarChartDataEntry]()
         
-        for (key, value) in yearDictionary {
-            yVals.append(BarChartDataEntry(value: Double(value), xIndex: 0))
+        var index = 0
+        for (_, value) in yearDictionary {
+            yVals.append(BarChartDataEntry(value: Double(value), xIndex: index))
+            index++
         }
         
-        let chartDataSet = BarChartDataSet(yVals: yVals)
+        let chartDataSet = BarChartDataSet(yVals: yVals, label: "YEARS AT PANDORA")
         chartDataSet.barSpace = 0.35
         
         let dataSets = [chartDataSet]
