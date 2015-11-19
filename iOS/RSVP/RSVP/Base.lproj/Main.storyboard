@@ -350,7 +350,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8tR-rh-dHy">
-                                <rect key="frame" x="0.0" y="64" width="600" height="57"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="57"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="s8y-Ui-k9F"/>
                                 </constraints>
@@ -360,13 +360,13 @@
                                 </segments>
                             </segmentedControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Muy-M3-zHp">
-                                <rect key="frame" x="0.0" y="120" width="600" height="183"/>
+                                <rect key="frame" x="0.0" y="76" width="600" height="183"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="183" id="5ks-YO-ALY"/>
                                 </constraints>
                             </scrollView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fn6-Kj-cxK">
-                                <rect key="frame" x="0.0" y="302" width="600" height="298"/>
+                                <rect key="frame" x="0.0" y="258" width="600" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="e1w-EU-JbQ">
                                     <size key="itemSize" width="100" height="120"/>
@@ -437,7 +437,7 @@
                             <constraint firstItem="Fn6-Kj-cxK" firstAttribute="top" secondItem="Muy-M3-zHp" secondAttribute="bottom" constant="-1" id="X2X-aA-CqE"/>
                             <constraint firstItem="8tR-rh-dHy" firstAttribute="leading" secondItem="Nu7-ha-A6w" secondAttribute="leading" id="Zb3-xu-vLm"/>
                             <constraint firstItem="Muy-M3-zHp" firstAttribute="top" secondItem="8tR-rh-dHy" secondAttribute="bottom" id="kHC-Jh-vMp"/>
-                            <constraint firstItem="8tR-rh-dHy" firstAttribute="top" secondItem="dw0-Ya-XDT" secondAttribute="bottom" constant="44" id="mPJ-gn-xFa"/>
+                            <constraint firstItem="8tR-rh-dHy" firstAttribute="top" secondItem="dw0-Ya-XDT" secondAttribute="bottom" id="mPJ-gn-xFa"/>
                             <constraint firstAttribute="trailing" secondItem="Muy-M3-zHp" secondAttribute="trailing" id="yHP-P5-eVS"/>
                         </constraints>
                     </view>
