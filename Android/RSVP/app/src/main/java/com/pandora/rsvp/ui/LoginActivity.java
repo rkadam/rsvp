@@ -88,6 +88,7 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<AuthRespo
         String pass = password.getText().toString();
         boolean valid = ValidationUtils.isValidEmail(email.getText()) && !pass.isEmpty();
         submit.setEnabled(valid);
+        submit.setAlpha(submit.isEnabled() ? 1f : 0.5f);
     }
 
     @Override
@@ -113,7 +114,13 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<AuthRespo
     }
 
     public void toggleProgress(boolean loading) {
-        fieldsContainer.setVisibility(loading ? View.INVISIBLE : View.VISIBLE);
+        submit.setText(loading ? "" : getResources().getString(R.string.submit));
         progressBar.setVisibility(loading ? View.VISIBLE : View.INVISIBLE);
+        submit.setEnabled(!loading);
+        submit.setAlpha(submit.isEnabled() ? 1f : 0.5f);
+        email.setEnabled(!loading);
+        email.setAlpha(email.isEnabled() ? 1f : 0.5f);
+        password.setEnabled(!loading);
+        password.setAlpha(password.isEnabled() ? 1f : 0.5f);
     }
 }
