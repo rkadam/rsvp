@@ -36,6 +36,7 @@
                 android:id="@+id/create_invitation_activity_invitation_description_label"
                 android:layout_below="@+id/create_invitation_activity_invitation_details_underline"
                 android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_invitation_description"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
@@ -63,6 +64,7 @@
                 android:id="@+id/create_invitation_activity_num_invites_label"
                 android:layout_below="@+id/create_invitation_activity_invitation_description_edit_text"
                 android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_num_invitations_available"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
@@ -90,6 +92,7 @@
                 android:id="@+id/create_invitation_activity_rsvp_by"
                 android:layout_below="@+id/create_invitation_activity_num_invites_edit_text"
                 android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_rsvp_by"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
@@ -101,11 +104,11 @@
                 android:layout_below="@+id/create_invitation_activity_rsvp_by"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="date"
                 android:text="11/20/2015"
                 android:maxLines="1"
                 android:background="@drawable/edit_text_style"
-                android:padding="5dp"
+                android:padding="@dimen/text_border_padding"
                 />
 
         <EditText
@@ -115,11 +118,11 @@
                 android:layout_marginLeft="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="time"
                 android:text="1:00 pm"
                 android:maxLines="1"
                 android:background="@drawable/edit_text_style"
-                android:padding="5dp"
+                android:padding="@dimen/text_border_padding"
                 />
 
         <!-- Email Distribution List -->
@@ -128,6 +131,7 @@
                 android:id="@+id/create_invitation_activity_email_label"
                 android:layout_below="@+id/create_invitation_activity_rsvp_date"
                 android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_email_dist_list"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
@@ -142,9 +146,9 @@
                 android:inputType="text"
                 android:maxLines="1"
                 android:background="@drawable/edit_text_style"
-                android:padding="5dp"
+                android:padding="@dimen/text_border_padding"
                 />
-        
+
         <!-- +++++ Choosing Winner(s), section Header +++++ -->
 
         <com.pandora.rsvp.ui.components.SectionHeader
@@ -162,6 +166,69 @@
               android:layout_width="fill_parent"
               android:layout_height="@dimen/header_underline_width"/>
 
+        <!-- Method of Choice -->
+
+        <com.pandora.rsvp.ui.components.FieldLabel
+                android:id="@+id/create_invitation_activity_method_of_choice"
+                android:layout_below="@+id/create_invitation_activity_choosing_winners_underline"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:text="@string/create_invitation_activity_method_of_choice"
+                style="@style/FieldLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <TextView
+                android:id="@+id/create_invitation_activity_first_come_first_served"
+                android:layout_below="@+id/create_invitation_activity_method_of_choice"
+                android:text="@string/create_invitation_activity_first_come_first_served"
+                android:gravity="center"
+                android:layout_width="@dimen/choice_button_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_style"
+                android:padding="@dimen/text_border_padding"
+                />
+
+        <TextView
+                android:id="@+id/create_invitation_activity_first_come_random_order"
+                android:layout_below="@+id/create_invitation_activity_method_of_choice"
+                android:layout_alignBaseline="@+id/create_invitation_activity_first_come_first_served"
+                android:layout_toRightOf="@+id/create_invitation_activity_first_come_first_served"
+                android:layout_marginLeft="@dimen/space_between_choice_buttons"
+                android:layout_marginStart="@dimen/space_between_choice_buttons"
+                android:gravity="center"
+                android:text="@string/create_invitation_activity_random_order"
+                android:layout_width="@dimen/choice_button_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_style"
+                android:padding="@dimen/text_border_padding"
+                />
+
+        <TextView
+                android:id="@+id/create_invitation_activity_first_come_manual_choice"
+                android:layout_below="@+id/create_invitation_activity_method_of_choice"
+                android:layout_alignBaseline="@+id/create_invitation_activity_first_come_first_served"
+                android:layout_toRightOf="@+id/create_invitation_activity_first_come_random_order"
+                android:layout_marginLeft="@dimen/space_between_choice_buttons"
+                android:layout_marginStart="@dimen/space_between_choice_buttons"
+                android:gravity="center"
+                android:text="@string/create_invitation_activity_manual_choice"
+                android:layout_width="@dimen/choice_button_width"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_style"
+                android:padding="@dimen/text_border_padding"
+                />
         
+        <Button
+                android:id="@+id/create_invitation_activity_preview_email_button"
+                android:layout_below="@+id/create_invitation_activity_first_come_first_served"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/create_invitation_activity_see_sample_email"
+                android:background="@color/light_blue"
+                android:padding="@dimen/text_border_padding"
+                />
     </RelativeLayout>
 </ScrollView>
