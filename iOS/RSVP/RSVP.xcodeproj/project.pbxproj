@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		026DAEEE1BFE403000F5158D /* RSVP🎅🏽Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026DAEED1BFE403000F5158D /* RSVP🎅🏽Model.swift */; };
 		028BF1091BFD0ED500E9ACF3 /* RSVPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028BF1081BFD0ED500E9ACF3 /* RSVPLoginViewController.swift */; };
+		02F313311BFE4E5100B9CE9F /* RSVPResponderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F313301BFE4E5100B9CE9F /* RSVPResponderCollectionViewCell.swift */; };
 		982DC9ED1BFD48540014BED5 /* RSVPResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC9EC1BFD48540014BED5 /* RSVPResponder.swift */; };
 		982DC9EF1BFE48970014BED5 /* RSVPOfferDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 982DC9EE1BFE48970014BED5 /* RSVPOfferDetailViewController.swift */; };
 		98D433E31BFD01840074D9F6 /* RSVPNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D433E21BFD01840074D9F6 /* RSVPNetworkManager.swift */; };
@@ -24,7 +26,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		026DAEED1BFE403000F5158D /* RSVP🎅🏽Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RSVP🎅🏽Model.swift"; sourceTree = "<group>"; };
 		028BF1081BFD0ED500E9ACF3 /* RSVPLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPLoginViewController.swift; sourceTree = "<group>"; };
+		02F313301BFE4E5100B9CE9F /* RSVPResponderCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPResponderCollectionViewCell.swift; sourceTree = "<group>"; };
 		3134445A5C6DD502D9F501E9 /* Pods-RSVP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSVP.release.xcconfig"; path = "Pods/Target Support Files/Pods-RSVP/Pods-RSVP.release.xcconfig"; sourceTree = "<group>"; };
 		78C7A327372915C7582372E0 /* Pods_RSVP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RSVP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D412A9A27746F284522E87E /* Pods-RSVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSVP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RSVP/Pods-RSVP.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				98D433E81BFD23BC0074D9F6 /* RSVPOfferListTableViewCell.swift */,
+				02F313301BFE4E5100B9CE9F /* RSVPResponderCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -88,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				98D433E21BFD01840074D9F6 /* RSVPNetworkManager.swift */,
+				026DAEED1BFE403000F5158D /* RSVP🎅🏽Model.swift */,
 				98D433E61BFD201A0074D9F6 /* RSVPOfferModel.swift */,
 				982DC9EC1BFD48540014BED5 /* RSVPResponder.swift */,
 			);
@@ -260,6 +266,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				982DC9ED1BFD48540014BED5 /* RSVPResponder.swift in Sources */,
+				9CD4CE221BFCFB9800DF41E7 /* ViewController.swift in Sources */,
+				02F313311BFE4E5100B9CE9F /* RSVPResponderCollectionViewCell.swift in Sources */,
+				026DAEEE1BFE403000F5158D /* RSVP🎅🏽Model.swift in Sources */,
 				98D433E51BFD04FF0074D9F6 /* RVSPOfferListViewController.swift in Sources */,
 				98D433E91BFD23BC0074D9F6 /* RSVPOfferListTableViewCell.swift in Sources */,
 				98D433E31BFD01840074D9F6 /* RSVPNetworkManager.swift in Sources */,

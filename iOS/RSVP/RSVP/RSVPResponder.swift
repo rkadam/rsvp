@@ -17,6 +17,7 @@ class RSVPResponder {
     var selected = false
     var uid = "invalid_id"
     var years = 0
+    var imageURL = "https://ray.savagebeast.com/sbldap/image.cgi?uid=odormody"
     
     init(networkData: NSDictionary) {
         department = networkData["department"] as? String ?? department
