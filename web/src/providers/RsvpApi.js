@@ -38,9 +38,9 @@ angular.module('rsvp').service('RsvpApi', function(
 		return makeRequest('get', '/api/users/' + userId + '/invitations/' + inviteId);
 	};
 
-	RsvpApi.updateInvite = function(inviteId, invite, userId) {
+	RsvpApi.updateInvite = function(invite, userId) {
 		userId = userId || _userId;
-		return makeRequest('put', '/api/users/' + userId + '/invitations/' + inviteId, invite);
+		return makeRequest('put', '/api/users/' + userId + '/invitations/' + invite.id, invite);
 	};
 
 	function makeRequest(method, url, data) {

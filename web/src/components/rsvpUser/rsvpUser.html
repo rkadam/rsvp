@@ -2,4 +2,5 @@
 	<img ng-src="https://ray.savagebeast.com/sbldap/image.cgi?uid={{ ctrl.user.uid }}">
 	<span class="rsvpUser__name">{{ ctrl.user.name }}</span>
 	<span class="rsvpUser__dept">{{ ctrl.user.department }}</span>
+	<span ng-show="ctrl.user.selected">Selected</span>
 </div>

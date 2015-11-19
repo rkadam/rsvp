@@ -1,6 +1,7 @@
 Responses ({{ ctrl.invite.responses.length }})
 
 <rsvp-user
-	ng-repeat="response in ctrl.invite.responses"
-	user="response"
+	ng-repeat="user in ctrl.invite.responses"
+	ng-click="ctrl.toggleUser(user)"
+	user="user"
 ></rsvp-user>
