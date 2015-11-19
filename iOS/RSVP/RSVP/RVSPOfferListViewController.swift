@@ -11,6 +11,7 @@ import UIKit
 class RVSPOfferListViewController: UIViewController {
     private let offerListCellIdentifier = "RSVPOfferListTableViewCell"
     private let offerDetailSegueIdentifier = "OfferDetailViewSegue"
+    private let createOfferSegueIdentifier = "CreateOfferViewSegue"
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -64,13 +65,16 @@ class RVSPOfferListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchOrderList()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         navigationController?.navigationBar.translucent = false
         navigationController?.navigationBar.barTintColor = UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AvenirNext-DemiBold", size: 16)!]
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
-        
-        fetchOrderList()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -104,11 +108,7 @@ class RVSPOfferListViewController: UIViewController {
     }
     
     @IBAction func goButtonTapped(sender: AnyObject) {
-        // go to the new offer page
-        let storyboard = UIStoryboard(name: "RSVPCreateOfferViewController", bundle: nil)
-        if let viewController: UIViewController = storyboard.instantiateInitialViewController() {
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }
+        performSegueWithIdentifier(createOfferSegueIdentifier, sender: self)
     }
     
     @IBAction func creatNewOfferButtonTapped(sender: AnyObject) {
@@ -149,6 +149,7 @@ extension RVSPOfferListViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         createNewOfferTextField.resignFirstResponder()
+        performSegueWithIdentifier(createOfferSegueIdentifier, sender: self)
         return true
     }
 }
