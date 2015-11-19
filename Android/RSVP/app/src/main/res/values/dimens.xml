@@ -5,8 +5,12 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="section_header_text_size">22sp</dimen>
-    <dimen name="field_label_text_size">16sp</dimen>
     <dimen name="header_underline_width">4dp</dimen>
-
-
+    <dimen name="field_label_text_size">16sp</dimen>
+    <dimen name="field_label_margin_top">15dp</dimen>
+    <dimen name="space_between_choice_buttons">10dp</dimen>
+    <dimen name="text_border_padding">5dp</dimen>
+    <dimen name="margin_between_label_and_edit_text">5dp</dimen>
+    <dimen name="choice_button_width">100dp</dimen>
+    
 </resources>
