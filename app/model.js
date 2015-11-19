@@ -13,6 +13,7 @@ redisClient.on("error", function (e) {
 
 var namespace = 'rsvp';
 
+
 var redisCommand = function(command, args) {
   args = setRedisKey(command, args);
   return Q.npost(redisClient, command, args)
@@ -78,6 +79,12 @@ var parseValue = function(value) {
     }
   }
   return parsed;
+};
+
+var sendResponses = function(invitation) {
+  var deferred = new Q.defer();
+  deferred.resolve('yay');
+  return deferred.promise;
 };
 
 var model = {
@@ -173,7 +180,18 @@ var model = {
       });
   },
   closeInvitation: function(invitation_id, data) {
-    model.fetchInvitation(invitation_id);
+    var invitation;
+    return model.fetchInvitation(invitation_id)
+      .then(function(res) {
+        invitation = res;
+        invitation.active = false;
+        invitation.sent_time = Date.now();
+        invitation.accepted_body = data.accepted_body;
+        invitation.rejected_body = data.rejected_body;
+        return sendResponses(invitation);
+      }).then(function() {
+        return model.updateInvitation(invitation);
+      });
   },
   createResponse: function(response_data) {
     var time = Date.now();
