@@ -9,7 +9,7 @@ angular.module('rsvp').config(function(
 	$stateProvider
 		.state('home', {
 			url: '/',
-			template: 'Coming soon!',
+			template: '<rsvp-invite-summary></rsvp-invite-summary>',
 		});
 
 	$urlRouterProvider.otherwise('/');

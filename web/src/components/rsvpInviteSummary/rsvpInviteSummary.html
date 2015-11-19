@@ -1,0 +1,5 @@
+<div class="nbsInviteSummary">
+	<h3 class="nbsInviteSummary__name">{{ ctrl.title }}</h3>
+	<h3 class="nbsInviteSummary__expiration">{{ ctrl.expiration | date:'longDate' }}</h3>
+	<rsvp-counter count="{{ ctrl.responses.length }}">Responses</rsvp-counter>
+</div>

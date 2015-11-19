@@ -8,20 +8,21 @@ var less = require('gulp-less');
 var minifycss = require('gulp-minify-css');
 var paths = require('./paths.json');
 var rimraf = require('rimraf');
+var templateCache = require('gulp-angular-templatecache');
 
 gulp.task('clean', function(callback) {
-	rimraf(paths.dist.root, callback);
+	rimraf(paths.dist, callback);
 });
+
+/**
+ * Build
+ */
 
 gulp.task('build', [
 	'build:js',
 	'build:less',
-	// 'build:html',
+	'build:html',
 ]);
-
-/**
- * build:js
- */
 
 gulp.task('build:js', [
 	'build:js:vendor',
@@ -29,29 +30,21 @@ gulp.task('build:js', [
 ]);
 
 gulp.task('build:js:vendor', function() {
-	buildJs(paths.src.js.vendor, paths.dist.js.vendor);
+	buildJs(paths.js.vendor, 'vendor.js');
 });
 
 gulp.task('build:js:app', function() {
-	buildJs(paths.src.js.app, paths.dist.js.app);
+	buildJs(paths.js.app, 'app.js');
 });
 
-function buildJs(srcPaths, distPath) {
+function buildJs(srcPaths, distFilename) {
 	return gulp.src(srcPaths)
-		.pipe(concat(distPath))
-		.pipe(gulp.dest('.'));
+		.pipe(concat(distFilename))
+		.pipe(gulp.dest(paths.dist));
 }
 
-/**
- * build:less
- */
-
 gulp.task('build:less', function() {
-	buildLess(paths.src.less.all, paths.dist.less.all);
-});
-
-function buildLess(srcPaths, distPath) {
-	return gulp.src(srcPaths)
+	return gulp.src(paths.less)
 		.pipe(less())
 		.pipe(autoprefixer({
 			browsers: [
@@ -63,7 +56,36 @@ function buildLess(srcPaths, distPath) {
 			cascade: false,
 			remove: true,
 		}))
-		.pipe(concat(distPath))
+		.pipe(concat('all.min.css'))
 		.pipe(minifycss())
-		.pipe(gulp.dest('.'));
-}
+		.pipe(gulp.dest(paths.dist));
+});
+
+gulp.task('build:html', function() {
+	return gulp.src(paths.html)
+		.pipe(templateCache('templates.js', { module: 'rsvp' }))
+		.pipe(gulp.dest(paths.dist));
+});
+
+/**
+ * Watch
+ */
+
+gulp.task('watch', [
+	'watch:js',
+	'watch:less',
+	'watch:html',
+]);
+
+gulp.task('watch:js', ['build:js'], function() {
+	var allJs = [].concat(paths.js.vendor, paths.js.app)
+	return gulp.watch(allJs, ['build:js']);
+});
+
+gulp.task('watch:less', ['build:less'], function() {
+	return gulp.watch(paths.less, ['build:less']);
+});
+
+gulp.task('watch:html', ['build:html'], function() {
+	return gulp.watch(paths.html, ['build:html']);
+});
