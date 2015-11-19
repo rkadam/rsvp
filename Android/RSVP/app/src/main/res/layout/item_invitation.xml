@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" 
-    android:layout_height="match_parent"
-    android:clickable="true"
-    android:background="?android:attr/selectableItemBackground">
-    
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardUseCompatPadding="true"
+    android:clickable="true">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp">
-        
+        android:layout_margin="8dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="BREAKFAST IN THE CITY"
             android:textSize="24sp"
             android:fontFamily="sans-serif-light"
-            android:textColor="@color/colorPrimaryDark"/>
-        
+            android:textColor="@color/colorPrimaryDark" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textColor="@color/colorPrimaryDark"
             android:text="November 13, 2015" />
     </LinearLayout>
-</FrameLayout>
+</android.support.v7.widget.CardView>

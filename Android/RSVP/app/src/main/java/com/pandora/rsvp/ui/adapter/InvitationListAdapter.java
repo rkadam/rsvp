@@ -16,6 +16,13 @@ public class InvitationListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         final View view = inflater.inflate(R.layout.item_invitation, parent, false);
         final InvitationItemViewHolder invitationItemViewHolder = new InvitationItemViewHolder(view);
+        
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: Navigate to InvitationDetailsActivity
+            }
+        });
         return invitationItemViewHolder;
     }
 

@@ -44,7 +44,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected boolean usesToolbar() {
-        return false;
+        return true;
     }
 
     protected void snackMessage(String message) {
