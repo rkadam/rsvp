@@ -1,3 +1,4 @@
+
 var model = require('./model');
 model.flush().then(function() {
   model.createInvitation('raju', 'test', 9, 0, 'gregm@pandora,com', 'random', 'hellooo')
@@ -14,10 +15,7 @@ model.flush().then(function() {
       return model.fetchInvitationList('raju');
     }).then(function(res) {
       console.log(res);
-
       model.close();
     });
-
-
 });
 

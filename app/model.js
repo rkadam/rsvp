@@ -3,6 +3,7 @@
 
 var config = require('./config');
 var redis = require('redis');
+var ldap = require('./ldap');
 var Q = require('q');
 
 var redisClient = redis.createClient();
@@ -145,20 +146,26 @@ var model = {
   createResponse: function(invitation_id, email_address, response_time, response_body) {
     var time = Date.now();
     var uid = email_address.split('@')[0];
-    var response = {
-      uid: uid,
-      invitation_id: invitation_id,
-      name: 'FAKE FOR NOW',
-      years: 0,
-      department: 'FAKE',
-      response_time: response_time,
-      response_body: response_body,
-      selected: false
-    };
-    return redisCommand('sadd', [invitation_id+':responses', JSON.stringify(response)])
-      .then(function(res) {
-        return response;
-      });
+    var response = {};
+    return ldap.userSearch(uid)
+      .then(function(userObject) {
+        if (! userObject || ! userObject.uid) {
+          return Q.reject("Invalid uid: "+uid);
+        }
+        response = {
+          uid: userObject.uid,
+          invitation_id: invitation_id,
+          name: userObject.name,
+          years: userObject.years,
+          department: userObject.department,
+          response_time: response_time,
+          response_body: response_body,
+          selected: false
+        };
+      return redisCommand('sadd', [invitation_id+':responses', JSON.stringify(response)]);
+    }).then(function(res) {
+      return response;
+    });
   },
   getSampleInvitation: function(uid, id, title_append, response_count) {
     uid = uid || 'raju';
@@ -202,6 +209,7 @@ var model = {
     return response;
   },
   close: function() {
+    ldap.close();
     return redisCommand('quit');
   },
   flush: function() {
