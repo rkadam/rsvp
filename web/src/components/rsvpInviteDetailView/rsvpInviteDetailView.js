@@ -1,6 +1,6 @@
 angular.module('rsvp').directive('rsvpInviteDetailView', function(
 	$stateParams,
-	RsvpApi
+	RsvpInviteApi
 ) {
 	'use strict';
 
@@ -18,7 +18,7 @@ angular.module('rsvp').directive('rsvpInviteDetailView', function(
 				RsvpApi.updateInvite(ctrl.invite);
 			};
 
-			RsvpApi.getInvite($stateParams.inviteId).then(function(invite) {
+			RsvpInviteApi.fetchInvite($stateParams.inviteId).then(function(invite) {
 				ctrl.invite = invite;
 			});
 		},

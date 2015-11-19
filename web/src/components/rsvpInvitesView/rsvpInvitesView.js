@@ -1,5 +1,5 @@
 angular.module('rsvp').directive('rsvpInvitesView', function(
-	RsvpApi
+	RsvpInviteApi
 ) {
 	'use strict';
 
@@ -14,7 +14,7 @@ angular.module('rsvp').directive('rsvpInvitesView', function(
 		controller: function() {
 			var ctrl = this;
 
-			RsvpApi.getInvites(ctrl.userId).then(function(invites) {
+			RsvpInviteApi.fetchInvites().then(function(invites) {
 				ctrl.invites = invites;
 			});
 		},
