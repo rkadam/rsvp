@@ -3,37 +3,50 @@
 var ldap = require('ldapjs');
 var Q = require('q');
 
-var client = ldap.createClient({
-  url: 'ldaps://ldap.savagebeast.com:636'
-});
-
-client.bind('', '', function(err) {
-  if (err) {
-    console.error('ldap error', err);
-  }
-});
-
-var ldapsearch = Q.nbind(client.search, client);
-
 var depts = {};
 
 var search = function(base, opts) {
-  return ldapsearch(base, opts)
+  var client = ldap.createClient({
+    url: 'ldaps://guess.savagebeast.com:636',
+    // url: 'ldaps://ldap.savagebeast.com:636',
+    // timeout : 10000,
+    timeout : 2000,
+    maxConnections : 100,
+    reconnect: true,
+  });
+  client.on('error', function(err) {
+    console.log('LDAP client error', err);
+  });
+  var ldapBind = Q.nbind(client.bind, client);
+  var ldapSearch = Q.nbind(client.search, client);
+
+  return ldapBind('', '')
     .then(function(res) {
+      return ldapSearch(base, opts);
+    }).then(function(res) {
       var data = null;
       var deferred = Q.defer();
       res.on('searchEntry', function(res) {
-        data = res.object;
+        if(res && res.object) {
+          data = res.object;
+        }
       });
       res.on('error', function(err) {
         deferred.reject(err);
       });
       res.on('end', function(result) {
-        deferred.resolve(data);
+        client.unbind(function(err) {
+          if (err) {
+            deferred.reject(err);
+          } else {
+            deferred.resolve(data);
+          }
+          client.destroy();
+        });
       });
       return deferred.promise;
     }).fail(function(err) {
-      console.log('error!', err);
+      console.log('LDAP search error', err);
     });
 };
 
@@ -45,12 +58,19 @@ var userSearch = function(uid) {
   };
   var base = 'dc=savagebeast,dc=com';
   return search(base, opts).then(function(res) {
-    return {
-      uid: res.uid,
-      name: res.displayName,
-      years: ((Date.now() - Date.parse(res.pandoraStartDate)) / (1000 * 60 * 60 * 24 * 365)).toPrecision(3),
-      department: res.ou,
-    };
+    if (res) {
+      return {
+        uid: res.uid,
+        name: res.displayName,
+        years: ((Date.now() - Date.parse(res.pandoraStartDate)) / (1000 * 60 * 60 * 24 * 365)).toPrecision(3),
+        department: res.ou,
+      };
+    } else {
+      return Q.reject("uid "+uid+" not found")
+    }
+
+  }).fail(function(err) {
+    console.log('error!', err);
   });
 };
 
@@ -59,6 +79,7 @@ var updateDepartments = function() {
 
   };
 };
+
 // userSearch('gmichalec')
 //   .then(function(res) {
 //     console.log(res);
@@ -68,6 +89,12 @@ var updateDepartments = function() {
 //     .then(function(res) {
 //       console.log(res);
 //     }).done();
+//     userSearch('gmichalec')
+//       .then(function(res) {
+//         console.log(res);
+//       }).done();
+
+
 
 // search('dc=savagebeast,dc=com', opts);
 // var opts = {
@@ -80,7 +107,4 @@ var updateDepartments = function() {
 
 module.exports = {
   userSearch: userSearch,
-  close: function() {
-    client.destroy();
-  }
 };

@@ -7,7 +7,8 @@ var titles = ['Join me for lunch!', 'Cousin! Let\'s go bowling!', 'BASE jump fro
 var randomBetween = function(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
-
+var total = users.length * titles.length * users.length;
+var completed = 0;
 model.flush().then(function() {
   Q.all(users.map(function(uid) {
     return Q.all(titles.map(function(title, index) {
@@ -22,14 +23,20 @@ model.flush().then(function() {
                 var response_time = Date.now() + (index * 60 * 60 *1000);
                 return model.createResponse(invite.id, uid+'@pandora.com', response_time, 'This is response body. Let me join!')
                   .then(function(response) {
-                    console.log('\tcreated response to invite '+invite.id+ ' from '+uid);
+                    completed++;
+                    console.log('\tcreated response to invite '+invite.id+ ' from '+uid + ' ('+completed+' / '+total+')');
+                  }).fail(function(err) {
+                    console.log('unable to create response', err)
                   });
               }));
             });
         });
     }));
   })).then(function() {
+    console.log('finished!')
     model.close();
   });
+}).fail(function(err) {
+  console.log('Heres an error', err);
 }).done();
 

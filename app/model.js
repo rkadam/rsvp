@@ -209,7 +209,7 @@ var model = {
     return response;
   },
   close: function() {
-    ldap.close();
+    // ldap.close();
     return redisCommand('quit');
   },
   flush: function() {
