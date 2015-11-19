@@ -88,6 +88,7 @@ EmailSender.prototype.sendMessage = function(from, message, invitation_id, recip
 EmailSender.prototype.disconnect = function(){
     this._connection.quit();
     this._connection.removeAllListeners();
+    this._connection = null;
 };
 
 EmailSender.INVITATION_HEADER = "X-Invitation-Id";

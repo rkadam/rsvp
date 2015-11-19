@@ -65,6 +65,7 @@ EmailReader.prototype.getNewMessages = function(){
         this._imap.search(['UNSEEN'], function(err, results) {
             logMessage("got unseen messages");
             if(err){
+                this._gettingNewMessages = null;
                 reject(err);
                 return;
             }
@@ -99,11 +100,13 @@ EmailReader.prototype.getNewMessages = function(){
             }.bind(this));
 
             fetchOp.on('error', function (err) {
+                this._gettingNewMessages = null;
                 reject(err);
-            });
+            }.bind(this));
 
             fetchOp.on('end', function(){
                 fetchOp.removeAllListeners();
+                this._gettingNewMessages = null;
                 resolve(this.messages);
             }.bind(this));
         }.bind(this));
