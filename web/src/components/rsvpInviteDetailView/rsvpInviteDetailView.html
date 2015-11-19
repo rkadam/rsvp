@@ -1,7 +1,29 @@
 Responses ({{ ctrl.invite.responses.length }})
 
+<label>
+	<input
+		type="radio"
+		radiogroup="filter"
+		ng-model="ctrl.userFilter.selected"
+		value="true"
+	>
+	Chosen
+</label>
+
+<label>
+	<input
+		type="radio"
+		radiogroup="filter"
+		ng-model="ctrl.userFilter.selected"
+		value=""
+	>
+	Responses
+</label>
+
 <rsvp-user
-	ng-repeat="user in ctrl.invite.responses"
+	ng-repeat="user in ctrl.invite.responses | filter:ctrl.userFilter"
 	ng-click="ctrl.toggleUser(user)"
 	user="user"
 ></rsvp-user>
+
+<button>Email all responders</button>
