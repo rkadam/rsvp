@@ -370,13 +370,21 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="183"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9aI-Sf-47O">
+                                        <rect key="frame" x="600" y="0.0" width="600" height="183"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="183" id="5ks-YO-ALY"/>
                                     <constraint firstAttribute="bottom" secondItem="PUU-XT-lYp" secondAttribute="bottom" id="6b9-nj-nTB"/>
                                     <constraint firstItem="PUU-XT-lYp" firstAttribute="width" secondItem="Muy-M3-zHp" secondAttribute="width" id="9Yg-oL-vVn"/>
                                     <constraint firstItem="PUU-XT-lYp" firstAttribute="top" secondItem="Muy-M3-zHp" secondAttribute="top" id="JnJ-5B-O4S"/>
+                                    <constraint firstItem="9aI-Sf-47O" firstAttribute="top" secondItem="PUU-XT-lYp" secondAttribute="top" id="NFK-iG-gKO"/>
+                                    <constraint firstItem="9aI-Sf-47O" firstAttribute="leading" secondItem="PUU-XT-lYp" secondAttribute="trailing" id="P10-a1-42h"/>
+                                    <constraint firstItem="9aI-Sf-47O" firstAttribute="height" secondItem="PUU-XT-lYp" secondAttribute="height" id="Pnm-Up-dZb"/>
                                     <constraint firstAttribute="trailing" secondItem="PUU-XT-lYp" secondAttribute="trailing" id="ShG-47-Z1s"/>
+                                    <constraint firstItem="9aI-Sf-47O" firstAttribute="width" secondItem="PUU-XT-lYp" secondAttribute="width" id="c5W-tg-btf"/>
                                     <constraint firstItem="PUU-XT-lYp" firstAttribute="leading" secondItem="Muy-M3-zHp" secondAttribute="leading" id="hbF-cC-hoT"/>
                                     <constraint firstItem="PUU-XT-lYp" firstAttribute="height" secondItem="Muy-M3-zHp" secondAttribute="height" id="zGu-En-lcJ"/>
                                 </constraints>
