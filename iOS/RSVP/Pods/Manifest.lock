@@ -20,11 +20,14 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Charts (2.1.6)
 
 DEPENDENCIES:
   - AFNetworking
+  - Charts
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  Charts: 5e1e5ac23898e5b09d226a2fc3e9d86bc281937e
 
 COCOAPODS: 0.39.0
