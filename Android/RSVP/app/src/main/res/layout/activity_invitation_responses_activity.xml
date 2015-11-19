@@ -9,8 +9,10 @@
         android:id="@+id/rsvp_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="late lunch today"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp" />
@@ -20,15 +22,16 @@
         android:id="@+id/rsvp_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="December 13th, 2015"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:textColor="@color/colorPrimaryDark" />
 
     <Button
+        android:id="@+id/responders_action_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Email All Responders"
+        android:text="@string/email_chosen_responders"
         android:textColor="@android:color/white" />
 
     <android.support.v4.view.ViewPager

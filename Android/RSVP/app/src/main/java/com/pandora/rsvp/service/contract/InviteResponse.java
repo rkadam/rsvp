@@ -10,7 +10,7 @@ public class InviteResponse implements Parcelable {
     public String uid;
     public String inviation_id;
     public String name;
-    public int years;
+    public double years;
     public String department;
     public long reponded;
     public String response_body;
@@ -26,7 +26,7 @@ public class InviteResponse implements Parcelable {
         dest.writeString(this.uid);
         dest.writeString(this.inviation_id);
         dest.writeString(this.name);
-        dest.writeInt(this.years);
+        dest.writeDouble(this.years);
         dest.writeString(this.department);
         dest.writeLong(this.reponded);
         dest.writeString(this.response_body);
@@ -40,7 +40,7 @@ public class InviteResponse implements Parcelable {
         this.uid = in.readString();
         this.inviation_id = in.readString();
         this.name = in.readString();
-        this.years = in.readInt();
+        this.years = in.readDouble();
         this.department = in.readString();
         this.reponded = in.readLong();
         this.response_body = in.readString();

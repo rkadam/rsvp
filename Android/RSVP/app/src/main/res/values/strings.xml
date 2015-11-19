@@ -30,4 +30,7 @@
     <string name="chosen">Chosen</string>
     <string name="responses">Responses</string>
     <string name="invite_failure">Failed to load invites :(</string>
+    <string name="invitation_details">Invitation Details</string>
+    <string name="email_chosen_responders">Email Chosen Responders</string>
+    <string name="add_selected_responders">Add Selected Responders</string>
 </resources>

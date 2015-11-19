@@ -66,7 +66,7 @@ public class RSVPApi implements IRSVPApi {
 
     @Override
     public void getInvitations(ApiCallBack<UserInvitationsResponse> invitationCallBack) {
-        executeApiCall(api.getInvitations("fakeId"), invitationCallBack);
+        executeApiCall(api.getInvitations("gmichalec"), invitationCallBack);
     }
 
     private <T> void executeApiCall(Call<T> retrofitCall, final ApiCallBack<T> clientCallBack) {

@@ -7,7 +7,8 @@
     android:gravity="center"
     android:padding="30dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.LoginActivity">
+    tools:context=".ui.LoginActivity"
+    android:animateLayoutChanges="true">
 
     <LinearLayout
         android:id="@+id/fields_container"
@@ -15,6 +16,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_width="match_parent"
+        android:focusable="true" 
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
 
         <TextView
