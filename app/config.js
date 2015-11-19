@@ -1,5 +1,7 @@
 /* jshint node: true*/
 "use strict";
+var extend = require('util-extend');
+var fs = require('fs');
 
 var rootDir = __dirname;
 
@@ -13,6 +15,11 @@ var config = {
 
 if (config.env !== 'production') {
 
+}
+
+if (fs.existsSync('./config.local.json')) {
+  var local_config = JSON.parse(fs.readFileSync('config.local.json', 'utf8'));
+  config = extend(config, local_config);
 }
 
 module.exports = config;
