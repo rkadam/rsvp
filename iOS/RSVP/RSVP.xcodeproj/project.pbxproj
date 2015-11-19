@@ -16,6 +16,7 @@
 		98D433E51BFD04FF0074D9F6 /* RVSPOfferListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D433E41BFD04FF0074D9F6 /* RVSPOfferListViewController.swift */; };
 		98D433E71BFD201A0074D9F6 /* RSVPOfferModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D433E61BFD201A0074D9F6 /* RSVPOfferModel.swift */; };
 		98D433E91BFD23BC0074D9F6 /* RSVPOfferListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D433E81BFD23BC0074D9F6 /* RSVPOfferListTableViewCell.swift */; };
+		9C3309B81BFE90D200A78626 /* RSVPCreateOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3309B71BFE90D200A78626 /* RSVPCreateOfferViewController.swift */; };
 		9CD4CE201BFCFB9800DF41E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */; };
 		9CD4CE221BFCFB9800DF41E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */; };
 		9CD4CE251BFCFB9800DF41E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4CE231BFCFB9800DF41E7 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 		98D433E41BFD04FF0074D9F6 /* RVSPOfferListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RVSPOfferListViewController.swift; sourceTree = "<group>"; };
 		98D433E61BFD201A0074D9F6 /* RSVPOfferModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPOfferModel.swift; sourceTree = "<group>"; };
 		98D433E81BFD23BC0074D9F6 /* RSVPOfferListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPOfferListTableViewCell.swift; sourceTree = "<group>"; };
+		9C3309B71BFE90D200A78626 /* RSVPCreateOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPCreateOfferViewController.swift; sourceTree = "<group>"; };
 		9CD4CE1C1BFCFB9800DF41E7 /* RSVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				98D433E41BFD04FF0074D9F6 /* RVSPOfferListViewController.swift */,
 				028BF1081BFD0ED500E9ACF3 /* RSVPLoginViewController.swift */,
 				982DC9EE1BFE48970014BED5 /* RSVPOfferDetailViewController.swift */,
+				9C3309B71BFE90D200A78626 /* RSVPCreateOfferViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C3309B81BFE90D200A78626 /* RSVPCreateOfferViewController.swift in Sources */,
 				982DC9ED1BFD48540014BED5 /* RSVPResponder.swift in Sources */,
 				9CD4CE221BFCFB9800DF41E7 /* ViewController.swift in Sources */,
 				02F313311BFE4E5100B9CE9F /* RSVPResponderCollectionViewCell.swift in Sources */,

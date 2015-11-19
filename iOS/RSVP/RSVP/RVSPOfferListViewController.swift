@@ -65,6 +65,11 @@ class RVSPOfferListViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AvenirNext-DemiBold", size: 16)!]
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
         fetchOrderList()
     }
     
@@ -74,6 +79,7 @@ class RVSPOfferListViewController: UIViewController {
     
     private func fetchOrderList() {
         offerList.removeAll()
+        tableView.reloadData()
         RSVPNetworkManager.instance.getOfferList("raju") { (response, error) -> Void in
             if let _response = response as? NSDictionary {
                 for offerData in _response["data"] as? Array<NSDictionary> ?? [] {
@@ -132,6 +138,7 @@ extension RVSPOfferListViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         createNewOfferTextField.resignFirstResponder()
+        
         return true
     }
 }
