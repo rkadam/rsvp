@@ -5,7 +5,7 @@ angular.module('rsvp').service('RsvpApi', function(
 	'use strict';
 
 	var RsvpApi = this;
-	var _userId = null;
+	var _userId = 'mpetrovich';
 
 	RsvpApi.getUserId = function() {
 		return _userId;
@@ -24,6 +24,7 @@ angular.module('rsvp').service('RsvpApi', function(
 	};
 
 	RsvpApi.getInvites = function(userId) {
+		userId = userId || _userId;
 		return makeRequest('get', '/api/users/' + userId + '/invitations');
 	};
 
