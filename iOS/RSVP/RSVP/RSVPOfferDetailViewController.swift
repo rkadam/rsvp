@@ -9,6 +9,8 @@
 import UIKit
 
 class RSVPOfferDetailViewController: UIViewController {
+    
+    var responders = [RSVPResponder](count: 3, repeatedValue:RSVPResponder(networkData: [:]))
 
     var offerModel: RSVPOfferModel? = nil {
         didSet {
@@ -29,13 +31,11 @@ class RSVPOfferDetailViewController: UIViewController {
 
 }
 
-extension RSVPOfferDetailViewController: UICollectionViewDelegate {
-    
-}
+extension RSVPOfferDetailViewController: UICollectionViewDelegate {}
 
 extension RSVPOfferDetailViewController: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return responders.count
         // FIXME: get count from info
     }
     
