@@ -1,0 +1,5 @@
+# NPM plugins
+node_modules/
+
+# Build artifacts
+dist/

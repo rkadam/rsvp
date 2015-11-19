@@ -15,20 +15,26 @@ class RSVPOfferDetailViewController: UIViewController {
     var offerModel: RSVPOfferModel? = nil {
         didSet {
             // initial the views here
+            title = offerModel?.title
+            setUpChart()
         }
     }
+    @IBOutlet weak var segmentedControl: UISegmentedControl! {
+        didSet {
+            segmentedControl.tintColor = UIColor(red: 41/255, green: 235/255, blue: 227/255, alpha: 1)
+        }
+    }
+    @IBOutlet weak var chartScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    private func setUpChart() {
+        
     }
-
 }
 
 extension RSVPOfferDetailViewController: UICollectionViewDelegate {}
