@@ -14,6 +14,7 @@ npm install;
 ```
 cd rsvp/app;
 npm install;
+npm run populate;
 ./node_modules/.bin/gulp;
 ```
 Things should be up and running at [http://localhost:9000](http://localhost:9000)

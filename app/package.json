@@ -4,7 +4,8 @@
   "description": "App to manage email resposnes to events",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "populate": "node populate_test_data.js"
   },
   "repository": {
     "type": "git",
