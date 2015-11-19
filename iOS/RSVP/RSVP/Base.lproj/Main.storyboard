@@ -389,8 +389,20 @@
                             </segmentedControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Muy-M3-zHp">
                                 <rect key="frame" x="0.0" y="124" width="600" height="183"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PUU-XT-lYp" customClass="BarChartView" customModule="Charts">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="183"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="183" id="5ks-YO-ALY"/>
+                                    <constraint firstAttribute="bottom" secondItem="PUU-XT-lYp" secondAttribute="bottom" id="6b9-nj-nTB"/>
+                                    <constraint firstItem="PUU-XT-lYp" firstAttribute="width" secondItem="Muy-M3-zHp" secondAttribute="width" id="9Yg-oL-vVn"/>
+                                    <constraint firstItem="PUU-XT-lYp" firstAttribute="top" secondItem="Muy-M3-zHp" secondAttribute="top" id="JnJ-5B-O4S"/>
+                                    <constraint firstAttribute="trailing" secondItem="PUU-XT-lYp" secondAttribute="trailing" id="ShG-47-Z1s"/>
+                                    <constraint firstItem="PUU-XT-lYp" firstAttribute="leading" secondItem="Muy-M3-zHp" secondAttribute="leading" id="hbF-cC-hoT"/>
+                                    <constraint firstItem="PUU-XT-lYp" firstAttribute="height" secondItem="Muy-M3-zHp" secondAttribute="height" id="zGu-En-lcJ"/>
                                 </constraints>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="StO-dH-PEv">
@@ -473,12 +485,11 @@
                             <constraint firstAttribute="trailing" secondItem="Muy-M3-zHp" secondAttribute="trailing" id="yHP-P5-eVS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="As5-Uy-nMN">
-                        <barButtonItem key="rightBarButtonItem" title="Choose" id="Cmp-WN-J1l"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="As5-Uy-nMN"/>
                     <connections>
                         <outlet property="chartScrollView" destination="Muy-M3-zHp" id="7RK-mB-Rod"/>
                         <outlet property="segmentedControl" destination="8tR-rh-dHy" id="EsD-Wp-3DR"/>
+                        <outlet property="yearsAtPandoraChartView" destination="PUU-XT-lYp" id="iKw-jb-JL5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6hi-CA-u05" userLabel="First Responder" sceneMemberID="firstResponder"/>

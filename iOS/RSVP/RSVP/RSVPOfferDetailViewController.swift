@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Charts
 
 class RSVPOfferDetailViewController: UIViewController {
     
@@ -16,7 +17,6 @@ class RSVPOfferDetailViewController: UIViewController {
         didSet {
             // initial the views here
             title = offerModel?.title
-            setUpChart()
         }
     }
     @IBOutlet weak var segmentedControl: UISegmentedControl! {
@@ -25,6 +25,30 @@ class RSVPOfferDetailViewController: UIViewController {
         }
     }
     @IBOutlet weak var chartScrollView: UIScrollView!
+    @IBOutlet weak var yearsAtPandoraChartView: BarChartView! {
+        didSet {
+            yearsAtPandoraChartView.drawBarShadowEnabled = false;
+            yearsAtPandoraChartView.drawValueAboveBarEnabled = true;
+            
+            yearsAtPandoraChartView.maxVisibleValueCount = 16;
+            yearsAtPandoraChartView.pinchZoomEnabled = false;
+            yearsAtPandoraChartView.drawGridBackgroundEnabled = false;
+            
+            yearsAtPandoraChartView.xAxis.labelPosition = .Bottom
+            //yearsAtPandoraChartView.xAxis.labelFont = UIFont()
+            yearsAtPandoraChartView.xAxis.drawAxisLineEnabled = false
+            yearsAtPandoraChartView.xAxis.spaceBetweenLabels = 2
+            
+            yearsAtPandoraChartView.leftAxis.labelCount = 3
+            yearsAtPandoraChartView.leftAxis.labelPosition = .OutsideChart
+            yearsAtPandoraChartView.leftAxis.spaceTop = 0.15
+            
+            yearsAtPandoraChartView.legend.position = .BelowChartLeft
+            yearsAtPandoraChartView.legend.form = .Square
+            yearsAtPandoraChartView.legend.formSize = 9
+            yearsAtPandoraChartView.legend.xEntrySpace = 4
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +56,35 @@ class RSVPOfferDetailViewController: UIViewController {
         navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
     
-    private func setUpChart() {
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
+        setUpChart()
+    }
+    
+    private func setUpChart() {
+        var yearDictionary = Dictionary<String, Int>()
+        for responser in offerModel?.responses ?? [] {
+            if yearDictionary[String(responser.years)] != nil {
+                yearDictionary[String(responser.years)]!++
+            } else {
+                yearDictionary[String(responser.years)] = 1
+            }
+        }
+        
+        var yVals = [BarChartDataEntry]()
+        
+        for (key, value) in yearDictionary {
+            yVals.append(BarChartDataEntry(value: Double(value), xIndex: 0))
+        }
+        
+        let chartDataSet = BarChartDataSet(yVals: yVals)
+        chartDataSet.barSpace = 0.35
+        
+        let dataSets = [chartDataSet]
+        let keys = Array(yearDictionary.keys)
+        let data = BarChartData(xVals: keys, dataSets: dataSets)
+        yearsAtPandoraChartView.data = data
     }
 }
 
