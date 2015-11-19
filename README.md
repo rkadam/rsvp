@@ -1,8 +1,9 @@
 # RSVP
 
-## Getting things runnning
-* Install nodejs and redis via your favorite method
-`git clone https://github.com/rkadam/rsvp.git`
+## Getting things running
+1. Install nodejs and redis via your favorite method
+2. Clone the code from git: `git clone https://github.com/rkadam/rsvp.git`
+
 ### Build the web frontend
 ```
 cd rsvp/web;
@@ -15,7 +16,7 @@ cd rsvp/app;
 npm install;
 ./node_modules/.bin/gulp;
 ```
-Things should be up and running @ (http://localhost:9000)
+Things should be up and running at [http://localhost:9000](http://localhost:9000)
 
 ## Team behind magic
 
