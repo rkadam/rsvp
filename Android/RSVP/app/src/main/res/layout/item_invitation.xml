@@ -17,7 +17,6 @@
             android:id="@+id/invitation_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BREAKFAST IN THE CITY"
             android:textSize="24sp"
             android:fontFamily="sans-serif-light"
             android:textColor="@color/colorPrimaryDark" />
@@ -28,8 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:textSize="15sp"
-            android:textColor="@color/dark_gray"
-            android:text="November 13, 2015" />
+            android:textColor="@android:color/darker_gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,17 +40,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:gravity="left|center_vertical">
+                android:gravity="start|center_vertical">
 
                 <TextView
                     android:id="@+id/num_responses"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginRight="12dp"
+                    android:layout_marginEnd="12dp"
                     android:gravity="center"
                     android:background="@drawable/circular_primary_bg"
-                    android:textColor="@color/light_gray"
-                    android:text="38"/>
+                    android:textColor="@color/light_gray" />
                 
                 <TextView
                     android:layout_width="wrap_content"
@@ -67,17 +65,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:gravity="left|center_vertical">
+                android:gravity="start|center_vertical">
 
                 <TextView
                     android:id="@+id/num_chosen"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginRight="12dp"
+                    android:layout_marginEnd="12dp"
                     android:gravity="center"
                     android:background="@drawable/circular_primary_bg"
-                    android:textColor="@color/light_gray"
-                    android:text="6"/>
+                    android:textColor="@color/light_gray" />
                 
                 <TextView
                     android:layout_width="wrap_content"

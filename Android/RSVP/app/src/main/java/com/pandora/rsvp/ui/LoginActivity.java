@@ -4,15 +4,14 @@ import com.pandora.rsvp.R;
 import com.pandora.rsvp.app.dagger.RSVPComponent;
 import com.pandora.rsvp.service.ApiCallBack;
 import com.pandora.rsvp.service.IRSVPApi;
+import com.pandora.rsvp.service.contract.AuthResponse;
 import com.pandora.rsvp.ui.base.BaseActivity;
 import com.pandora.rsvp.utils.ValidationUtils;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +22,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 
-public class LoginActivity extends BaseActivity implements ApiCallBack<Boolean> {
+public class LoginActivity extends BaseActivity implements ApiCallBack<AuthResponse> {
 
     @Bind(R.id.email)
     EditText email;
@@ -53,8 +52,7 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<Boolean> 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //submit();
-                startActivity(new Intent(LoginActivity.this, InvitationResponsesActivity.class));
+                submit();
             }
         });
     }
@@ -98,8 +96,13 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<Boolean> 
     }
 
     @Override
-    public void onSuccess(Boolean successResponse) {
+    public void onSuccess(AuthResponse successResponse) {
         toggleProgress(false);
+        if (successResponse != null && successResponse.success) {
+            startActivity(new Intent(LoginActivity.this, InvitationListActivity.class));
+        } else {
+            onFailure(null);
+        }
     }
 
     @Override

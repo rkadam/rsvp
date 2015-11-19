@@ -2,6 +2,7 @@ package com.pandora.rsvp.ui.adapter;
 
 import com.pandora.rsvp.R;
 import com.pandora.rsvp.app.RSVPApp;
+import com.pandora.rsvp.service.contract.InviteResponse;
 import com.squareup.picasso.Picasso;
 
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -21,12 +24,11 @@ public class InvitationResponsesListAdapter extends RecyclerView.Adapter<Invitat
 
     @Inject
     Picasso mPicasso;
+    List<InviteResponse> mInviteResponses;
 
-    private int count;
-
-    public InvitationResponsesListAdapter(int count) {
-        this.count = count;
+    public InvitationResponsesListAdapter(List<InviteResponse> inviteResponses) {
         RSVPApp.getComponent().inject(this);
+        this.mInviteResponses = inviteResponses;
     }
 
     @Override
@@ -36,14 +38,16 @@ public class InvitationResponsesListAdapter extends RecyclerView.Adapter<Invitat
 
     @Override
     public void onBindViewHolder(InvitationResponseItemViewHolder holder, int position) {
-        holder.name.setText("Random name no" + (position + 1));
-        holder.title.setText("Software Engineer");
-        mPicasso.load(R.drawable.ic_people).into(holder.profilePic);
+        InviteResponse response = mInviteResponses.get(position);
+        holder.name.setText(response.name);
+        holder.title.setText(response.department);
+        String imageUrl = String.format("https://ray.savagebeast.com/sbldap/image.cgi?uid=%s", response.uid);//Todo: Extract this for reuse.
+        mPicasso.load(imageUrl).into(holder.profilePic);
     }
 
     @Override
     public int getItemCount() {
-        return count;
+        return mInviteResponses.size();
     }
 
     static class InvitationResponseItemViewHolder extends RecyclerView.ViewHolder {
