@@ -68,25 +68,31 @@ module.exports = function(model) {
       next();
     },
     fetchInvitation: function(req, res, next) {
-      res.result = model.getSampleInvitation(req.params.uid, req.params.iid, null, 3);
-      next();
+      //FIXME - check req.params.uid
+      model.fetchInvitation(req.params.iid).then(function(invitation) {
+        res.result = invitation;
+        next();
+      });
     },
     fetchInvitationList: function(req, res, next) {
-      var x = 6;
-      var invitations = [];
-      while (x--) {
-        invitations.push(model.getSampleInvitation(req.params.uid, null, x, 3));
-      }
-      res.result = invitations;
-      next();
+      model.fetchInvitationList(req.params.uid).then(function(invitations) {
+        res.result = invitations;
+        next();
+      });
     },
     createInvitation: function(req, res, next) {
-      res.result = {this: 'is a new invitation'};
-      next();
+      //FIXME - check req.params.uid
+      var invite = res.body;
+      model.createInvitation(req.params.uid, invite.title, invite.response_accept_limit, invite.rsvp_by_time, invite.email_to, invite.method, invite.invitation_body).then(function(r) {
+        res.result = r;
+        next();
+      });
     },
     updateInvitation: function(req, res, next) {
-      res.result = {this: 'is an updated invitation'};
-      next();
+      model.updateInvitation(req.body).then(function(r) {
+        res.result = r;
+        next();
+      });
     },
     test: function(req, res, next) {
       res.result = {this: 'is some sample JSON'};
