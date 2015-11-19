@@ -13,13 +13,14 @@ class RSVPOfferDetailViewController: UIViewController {
     var offerModel: RSVPOfferModel? = nil {
         didSet {
             // initial the views here
+            title = offerModel?.title
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,7 +28,6 @@ class RSVPOfferDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
