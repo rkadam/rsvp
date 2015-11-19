@@ -27,4 +27,13 @@ class RSVPNetworkManager {
         
         return 🎉
     }
+    
+    func getOfferList(🎫: String, 🉐: NetworkCompletionBlock) {
+        manager.GET("users/\(🎫)/invitations", parameters: nil, success: {
+            (operation, response) -> Void in
+            🉐(response, nil)
+            }) { (operation, error) -> Void in
+            🉐(nil, error)
+        }
+    }
 }
