@@ -31,5 +31,5 @@
 * Arvinder Singh
 * Rachna Agarwal
 
-### Story, Direction, Helper
+### Idea, Story board, Direction, Help
 * Raju Kadam
