@@ -16,13 +16,23 @@ model.flush().then(function() {
         .then(function() {
           var limit = randomBetween(5, 10);
           var rsvp_time = Date.now() + (randomBetween(0, 10) * 60 * 60 * 1000);
-          return model.createInvitation(uid, title, limit, rsvp_time, 'dist-rsvp-test@pandora.com', 'random', 'This is the invitation body. Participate in this offer!')
-            .then(function(invite) {
+          return model.createInvitation(uid, {
+              title: title,
+              response_accept_limit: limit,
+              rsvp_by_time: rsvp_time,
+              email_to: 'dist-rsvp-test@pandora.com',
+              method: 'random',
+              invitation_body: 'This is the invitation body. Participate in this offer!'
+            }).then(function(invite) {
               console.log('created invite '+invite.id);
               return Q.all(users.map(function(uid, index) {
                 var response_time = Date.now() + (index * 60 * 60 *1000);
-                return model.createResponse(invite.id, uid+'@pandora.com', response_time, 'This is response body. Let me join!')
-                  .then(function(response) {
+                return model.createResponse({
+                    invitation_id: invite.id,
+                    email_address: uid+'@pandora.com',
+                    response_time: response_time,
+                    response_body: 'This is response body. Let me join!'
+                  }).then(function(response) {
                     completed++;
                     console.log('\tcreated response to invite '+invite.id+ ' from '+uid + ' ('+completed+' / '+total+')');
                   }).fail(function(err) {

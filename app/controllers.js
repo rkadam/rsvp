@@ -94,25 +94,37 @@ module.exports = function(model) {
       model.fetchInvitation(req.params.invitation_id).then(function(invitation) {
         res.result = invitation;
         next();
+      }).fail(function(err) {
+        res.error = err;
+        next();
       });
     },
     fetchInvitationList: function(req, res, next) {
       model.fetchInvitationList(req.params.uid).then(function(invitations) {
         res.result = invitations;
         next();
+      }).fail(function(err) {
+        res.error = err;
+        next();
       });
     },
     createInvitation: function(req, res, next) {
       //FIXME - check req.params.uid
       var invite = res.body;
-      model.createInvitation(req.params.uid, invite.title, invite.response_accept_limit, invite.rsvp_by_time, invite.email_to, invite.method, invite.invitation_body).then(function(r) {
+      model.createInvitation(req.params.uid, req.body).then(function(r) {
         res.result = r;
+        next();
+      }).fail(function(err) {
+        res.error = err;
         next();
       });
     },
     updateInvitation: function(req, res, next) {
       model.updateInvitation(req.body).then(function(r) {
         res.result = r;
+        next();
+      }).fail(function(err) {
+        res.error = err;
         next();
       });
     },
@@ -121,12 +133,18 @@ module.exports = function(model) {
       model.selectWinners(req.params.invitation_id).then(function(r) {
         res.result = r;
         next();
+      }).fail(function(err) {
+        res.error = err;
+        next();
       });
     },
     closeInvitation: function(req, res, next) {
       //FIXME - check req.params.uid
       model.closeInvitation(req.params.invitation_id, req.body).then(function(r) {
         res.result = r;
+        next();
+      }).fail(function(err) {
+        res.error = err;
         next();
       });
     },
