@@ -74,11 +74,7 @@ class RVSPOfferListViewController: UIViewController {
     
     private func fetchOrderList() {
         offerList.removeAll()
-<<<<<<< HEAD
         RSVPNetworkManager.instance.getOfferList("raju") { (response, error) -> Void in
-=======
-        RSVPNetworkManager.instance.getOfferList("whateverID") { (response, error) -> Void in
->>>>>>> d3852041cf808e1e1e7e5c563c2ed14e659cdbcf
             if let _response = response as? NSDictionary {
                 for offerData in _response["data"] as? Array<NSDictionary> ?? [] {
                     self.offerList.append(RSVPOfferModel(networkData: offerData))
