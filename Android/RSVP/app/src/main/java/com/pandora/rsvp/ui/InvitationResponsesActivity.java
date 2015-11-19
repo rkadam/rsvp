@@ -1,6 +1,7 @@
 package com.pandora.rsvp.ui;
 
 import com.pandora.rsvp.R;
+import com.pandora.rsvp.service.contract.Invitation;
 import com.pandora.rsvp.ui.adapter.InvitationResponsesPagerAdapter;
 import com.pandora.rsvp.ui.base.BaseActivity;
 
@@ -15,6 +16,7 @@ import butterknife.Bind;
  */
 public class InvitationResponsesActivity extends BaseActivity {
 
+    public static final String INVITATION_KEY = "InvitationKey";
     @Bind(R.id.view_pager)
     ViewPager pager;
     @Bind(R.id.pager_tab_strip)
@@ -28,6 +30,12 @@ public class InvitationResponsesActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pager.setAdapter(new InvitationResponsesPagerAdapter());
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            Invitation invitation = bundle.getParcelable(INVITATION_KEY);
+            pager.setAdapter(new InvitationResponsesPagerAdapter(invitation));
+        } else {
+            finish();
+        }
     }
 }

@@ -27,4 +27,5 @@
     <string name="title_activity_create_invitation">CreateInvitationActivity</string>
     <string name="chosen">Chosen</string>
     <string name="responses">Responses</string>
+    <string name="invite_failure">Failed to load invites :(</string>
 </resources>
