@@ -31,6 +31,31 @@ var redisCommand = function(command, args) {
     });
 };
 
+var redisMulti = function(commands) {
+  var multiCommands = commands.map(function(command) {
+    command[1] = setRedisKey(command[0], command[1]);
+    return [command[0]].concat(command[1]);
+  });
+  var multi = redisClient.multi(multiCommands);
+  return Q.ninvoke(multi, 'exec')
+    .then(function(data) {
+      data.forEach(function(item, index) {
+        if (commands[index][0] === 'hgetall' && item) {
+          var parsed = {};
+          Object.keys(item).forEach(function(key) {
+            parsed[key] = parseValue(item[key]);
+          });
+          data[index] = parsed;
+        }
+      });
+      // console.log('Multi results: ', data)
+      return data;
+    }, function(e) {
+      console.error("REDIS MULTI ERROR", commands, e);
+      return Q.reject(e);
+    });
+};
+
 var setRedisKey = function(command, args) {
   if (args) {
     if(typeof args[0] === 'object') {
@@ -56,16 +81,84 @@ var parseValue = function(value) {
 
 var model = {
   createInvitation: function(uid, title, response_accept_limit, rsvp_by_time, email_to, method, invitation_body) {
-    return true;
+    var time = Date.now();
+    var id = uid + '-' + time;
+    var invitation = {
+      id: id,
+      uid: uid,
+      title: title,
+      response_accept_limit: response_accept_limit,
+      create_time: time,
+      rsvp_by_time: rsvp_by_time,
+      sent_time: null,
+      email_to: email_to,
+      method: method,
+      invitation_body: invitation_body,
+      accepted_body: null,
+      rejected_body: null,
+      active: true,
+      responses: [],
+    };
+    return redisMulti([
+      ['sadd', [uid, id]],
+      ['set', [id, JSON.stringify(invitation)]],
+    ]).then(function() {
+      return invitation;
+    });
   },
-  fetchInvitation: function(uid, invitation_id) {
-    return {};
+  fetchInvitation: function(invitation_id) {
+    var invitation = {};
+    return redisMulti([
+      ['get', [invitation_id]],
+      ['smembers', [invitation_id+':responses']]
+    ]).then(function(res) {
+      var invitation = JSON.parse(res[0]);
+      invitation.selected_count = 0;
+      if (res[1] && res[1].length) {
+        invitation.responses = res[1].map(function(r) {
+          var response = JSON.parse(r);
+          if (response && response.selected) {
+            invitation.selected_count++;
+          }
+          return response;
+        });
+      }
+      return invitation;
+    });
   },
   updateInvitation: function(invitation) {
-    return true;
+    return redisCommand('set', [invitation.id, JSON.stringify(invitation)]).then(function(res) {
+      return model.fetchInvitation(invitation.id);
+    });
   },
-  createResponse: function(email_address, invitation_id, response_time, response_body) {
-    return true;
+  fetchInvitationList: function(uid) {
+    return redisCommand('smembers', [uid])
+      .then(function(res) {
+        var promises = res.map(function(id) {
+          return model.fetchInvitation(id);
+        });
+        return Q.all(promises);
+      }).then(function(res) {
+        return res;
+      });
+  },
+  createResponse: function(invitation_id, email_address, response_time, response_body) {
+    var time = Date.now();
+    var uid = email_address.split('@')[0];
+    var response = {
+      uid: uid,
+      invitation_id: invitation_id,
+      name: 'FAKE FOR NOW',
+      years: 0,
+      department: 'FAKE',
+      response_time: response_time,
+      response_body: response_body,
+      selected: false
+    };
+    return redisCommand('sadd', [invitation_id+':responses', JSON.stringify(response)])
+      .then(function(res) {
+        return response;
+      });
   },
   getSampleInvitation: function(uid, id, title_append, response_count) {
     uid = uid || 'raju';
@@ -107,6 +200,12 @@ var model = {
       selected: false,
     };
     return response;
+  },
+  close: function() {
+    return redisCommand('quit');
+  },
+  flush: function() {
+    return redisCommand('flushdb');
   }
 };
 
