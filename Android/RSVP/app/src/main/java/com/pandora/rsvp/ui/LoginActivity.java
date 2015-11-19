@@ -40,7 +40,7 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<AuthRespo
 
     @Override
     protected int getActivityLayoutRes() {
-        return R.layout.content_login;
+        return R.layout.activity_login;
     }
 
     @Override

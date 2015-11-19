@@ -28,4 +28,5 @@
     <string name="chosen">Chosen</string>
     <string name="responses">Responses</string>
     <string name="invite_failure">Failed to load invites :(</string>
+    <string name="invitation_details">Invitation Details</string>
 </resources>
