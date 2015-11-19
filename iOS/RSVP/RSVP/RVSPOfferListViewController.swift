@@ -11,7 +11,6 @@ import UIKit
 class RVSPOfferListViewController: UIViewController {
     private let offerListCellIdentifier = "RSVPOfferListTableViewCell"
     private let offerDetailSegueIdentifier = "OfferDetailViewSegue"
-    private let createOfferSegueIdentifier = "CreateOfferViewSegue"
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -52,11 +51,6 @@ class RVSPOfferListViewController: UIViewController {
             indicatorView.startAnimating()
         }
     }
-    @IBOutlet weak var emptyListView: UIView! {
-        didSet {
-            emptyListView.alpha = 0
-        }
-    }
     
     var offerList: [RSVPOfferModel] = []
     private var targetOfferIndex: Int? = 0
@@ -65,16 +59,13 @@ class RVSPOfferListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchOrderList()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         
         navigationController?.navigationBar.translucent = false
         navigationController?.navigationBar.barTintColor = UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor(), NSFontAttributeName: UIFont(name: "AvenirNext-DemiBold", size: 16)!]
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
+        fetchOrderList()
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -83,32 +74,24 @@ class RVSPOfferListViewController: UIViewController {
     
     private func fetchOrderList() {
         offerList.removeAll()
-        RSVPNetworkManager.instance.getOfferList("asd") { (response, error) -> Void in
+        RSVPNetworkManager.instance.getOfferList("whateverID") { (response, error) -> Void in
             if let _response = response as? NSDictionary {
                 for offerData in _response["data"] as? Array<NSDictionary> ?? [] {
                     self.offerList.append(RSVPOfferModel(networkData: offerData))
                 }
                 
                 self.tableView.reloadData()
-                
-                if self.offerList.count == 0 {
-                    self.tableView.scrollEnabled = false
-                    self.emptyListView.alpha = 1
-                    self.view.bringSubviewToFront(self.emptyListView)
-                }
             } else {
                 // show the error message
                 let alertController = UIAlertController(title: "Error", message: "Can't load the offer list.", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
-            
-            self.indicatorView.stopAnimating()
         }
     }
     
     @IBAction func goButtonTapped(sender: AnyObject) {
-        performSegueWithIdentifier(createOfferSegueIdentifier, sender: self)
+        // go to the new offer page
     }
     
     @IBAction func creatNewOfferButtonTapped(sender: AnyObject) {
@@ -149,7 +132,6 @@ extension RVSPOfferListViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         createNewOfferTextField.resignFirstResponder()
-        performSegueWithIdentifier(createOfferSegueIdentifier, sender: self)
         return true
     }
 }

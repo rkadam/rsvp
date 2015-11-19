@@ -3,5 +3,4 @@ use_frameworks!
 
 target 'RSVP' do
   pod 'AFNetworking'
-  pod 'Charts'
 end
