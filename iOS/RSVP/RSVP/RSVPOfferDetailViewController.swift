@@ -10,7 +10,7 @@ import UIKit
 
 class RSVPOfferDetailViewController: UIViewController {
     
-    var responders = [RSVPResponder](count: 6, repeatedValue:RSVPResponder(networkData: [:]))
+    var responders = [RSVPResponder](count: 10, repeatedValue:RSVPResponder(networkData: [:]))
 
     var offerModel: RSVPOfferModel? = nil {
         didSet {
