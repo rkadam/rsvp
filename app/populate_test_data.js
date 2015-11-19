@@ -14,7 +14,8 @@ model.flush().then(function() {
     return Q.all(titles.map(function(title, index) {
       return Q.delay(100 * index)
         .then(function() {
-          var limit = randomBetween(5, 10);
+          // var limit = randomBetween(5, 10);
+          var limit = 3;
           var rsvp_time = Date.now() + (randomBetween(0, 10) * 60 * 60 * 1000);
           return model.createInvitation(uid, {
               title: title,
