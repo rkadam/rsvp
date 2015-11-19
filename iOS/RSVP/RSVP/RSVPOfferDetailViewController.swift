@@ -49,7 +49,7 @@ class RSVPOfferDetailViewController: UIViewController {
             yearsAtPandoraChartView.legend.position = .BelowChartLeft
             yearsAtPandoraChartView.legend.form = .Square
             yearsAtPandoraChartView.legend.formSize = 9
-            yearsAtPandoraChartView.legend.xEntrySpace = 4
+            yearsAtPandoraChartView.legend.xEntrySpace = 0
         }
     }
 
