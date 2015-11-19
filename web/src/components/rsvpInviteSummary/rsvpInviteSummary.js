@@ -16,18 +16,12 @@ angular.module('rsvp').directive('rsvpInviteSummary', function(
 			var ctrl = this;
 
 			$scope.$watch('ctrl.invite.responses', function() {
-				ctrl.numChosen = getNumChosen(ctrl.invite);
+				ctrl.numChosen = RsvpInviteApi.getNumChosenForInvite(ctrl.invite.id);
 			}, true);
 
 			RsvpInviteApi.onUpdateInvite(function(invite) {
-				if (invite.id === ctrl.invite.id) {
-					ctrl.numChosen = getNumChosen(invite);
-				}
+				ctrl.numChosen = RsvpInviteApi.getNumChosenForInvite(ctrl.invite.id);
 			});
 		},
 	};
-
-	function getNumChosen(invite) {
-		return _.filter(invite.responses, 'selected').length;
-	}
 });

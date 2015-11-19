@@ -1,13 +1,31 @@
 rsvp-invite-summary {
 	display: block;
+	position: relative;
 
 	&.-selected {
 		background: @rsvpColor__fill--selected;
+
+		// Selection triangle
+		&::after {
+			content: "";
+			display: block;
+			width: 0;
+			height: 0;
+			position: absolute;
+			right: -20px;
+			top: 50%;
+			transform: translate3d(0, -50%, 0);
+			border-top: 20px solid transparent;
+			border-bottom: 20px solid transparent;
+			border-left: 20px solid @rsvpColor__border;
+		}
 	}
 }
 
 .rsvpInviteSummary {
-	padding: 20px 40px;
+	padding: 25px 40px;
+	border-right: 2px solid @rsvpColor__border;
+	border-bottom: 2px solid @rsvpColor__border;
 
 	&__title {
 		margin: 0;

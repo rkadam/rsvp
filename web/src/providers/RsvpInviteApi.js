@@ -10,6 +10,22 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 	var _invites = null;
 	var _listeners = {};
 
+	RsvpInviteApi.getInvite = function(inviteId) {
+		var invite = _.find(_invites, 'id', inviteId);
+		return invite;
+	};
+
+	RsvpInviteApi.getNumChosenForInvite = function(inviteId) {
+		if (!_invites) {
+			return 0;
+		}
+		else {
+			var responses = RsvpInviteApi.getInvite(inviteId).responses;
+			var numChosen = _.filter(responses, 'selected', true).length;
+			return numChosen;
+		}
+	};
+
 	RsvpInviteApi.fetchInvites = function() {
 		if (_invites) {
 			// Already cached
@@ -28,7 +44,7 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 
 	RsvpInviteApi.fetchInvite = function(inviteId) {
 		return RsvpInviteApi.fetchInvites().then(function(invites) {
-			var invite = _.find(invites, 'id', inviteId);
+			var invite = RsvpInviteApi.getInvite(inviteId);
 			return invite;
 		});
 	};

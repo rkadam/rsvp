@@ -1,0 +1,46 @@
+rsvp-response {
+	display: inline-block;
+}
+
+.rsvpResponse {
+	@borderSize: 3px;
+
+	margin: 2px;
+	padding: 20px 15px;
+
+	&__imageWrapper {
+		display: block;
+		box-sizing: content-box;
+		width: 75px;
+		height: 75px;
+		margin: 0 auto 5px;
+		border-radius: 50%;
+		border: @borderSize solid transparent;
+
+		.rsvpResponse.-selected & {
+			border-color: @rsvpColor__border--accent;
+		}
+	}
+
+	&__image {
+		display: block;
+		border-radius: 50%;
+		border: @borderSize solid transparent;
+	}
+
+	&__name {
+		display: block;
+		font-size: @rsvpFont__size--S;
+		font-weight: @rsvpFont__weight--bolder;
+		text-align: center;
+		color: @rsvpColor__text;
+	}
+
+	&__dept {
+		display: block;
+		font-size: @rsvpFont__size--S;
+		font-weight: @rsvpFont__weight--bold;
+		text-align: center;
+		color: @rsvpColor__text;
+	}
+}

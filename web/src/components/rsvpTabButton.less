@@ -1,0 +1,17 @@
+.rsvpTabButton {
+	padding-bottom: 8px;
+	font-size: @rsvpFont__size--M;
+	font-weight: @rsvpFont__weight--bold;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: @rsvpColor__text--accent;
+	cursor: pointer;
+
+	&.-active {
+		border-bottom: 8px solid @rsvpColor__border;
+	}
+
+	& ~ & {
+		margin-left: 40px;
+	}
+}
