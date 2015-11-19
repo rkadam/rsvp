@@ -1,10 +1,16 @@
 /* jshint node:true */
 'use strict';
 
+var fs = require('fs');
+var path = require('path');
+
 var config = require('./config');
 var redis = require('redis');
 var ldap = require('./ldap');
 var Q = require('q');
+
+var EmailSender = require('./lib/email/email_sender');
+var configuration = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'lib/email/configuration.json'), 'utf8'));
 
 var inspect = require('util').inspect;
 
@@ -84,13 +90,41 @@ var parseValue = function(value) {
 
 var sendInvitation = function(invitation) {
   var deferred = new Q.defer();
-  deferred.resolve('yay');
+  var client = new EmailSender(configuration);
+  client.connect()
+      .then(function(){
+        client.sendMessage(
+            "rsvp@pandora.com",
+            invitation.title,
+            invitation.invitation_body,
+            invitation.id,
+            invitation.email_to
+        );
+        client.disconnect();
+        deferred.resolve('yay');
+      });
+
   return deferred.promise;
 };
 
 var sendResponses = function(invitation) {
   var deferred = new Q.defer();
-  deferred.resolve('yay');
+  var client = new EmailSender(configuration);
+  client.connect()
+      .then(function(){
+        invitation.responses.forEach(function(response){
+          var message = response.selected ? invitation.accepted_body : invitation.rejected_body;
+          client.sendMessage(
+              "rsvp@pandora.com",
+              invitation.title,
+              message,
+              invitation.id,
+              response.uid + "@pandora.com"
+          )
+        });
+        client.disconnect();
+        deferred.resolve('yay');
+      });
   return deferred.promise;
 };
 
