@@ -49,7 +49,7 @@ public class InvitationListActivity extends BaseActivity implements ApiCallBack<
         mCreateInvitationFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Wire to CreateInvitationActivity
+                startActivity(new Intent(InvitationListActivity.this, CreateInvitationActivity.class));
             }
         });
     }

@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class InvitationResponsesPagerAdapter extends PagerAdapter {
 
+    private boolean hasChosen;
     List<InviteResponse> chosenInviteResponse;
     List<InviteResponse> responsesInviteResponse;
 
@@ -25,18 +26,18 @@ public class InvitationResponsesPagerAdapter extends PagerAdapter {
         this.responsesInviteResponse = new ArrayList<>();
         if (invitation != null) {
             for (InviteResponse response : invitation.responses) {
+                responsesInviteResponse.add(response);
                 if (response.selected) {
                     chosenInviteResponse.add(response);
-                } else {
-                    responsesInviteResponse.add(response);
                 }
             }
         }
+        this.hasChosen = chosenInviteResponse.size() > 0;
     }
 
     @Override
     public int getCount() {
-        return 2;
+        return chosenInviteResponse.size() == 0 ? 1 : 2;
     }
 
     @Override
@@ -44,15 +45,15 @@ public class InvitationResponsesPagerAdapter extends PagerAdapter {
         RecyclerView rv = new RecyclerView(container.getContext());
         rv.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         rv.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
-        rv.setAdapter(new InvitationResponsesListAdapter(position == 0 ? chosenInviteResponse : responsesInviteResponse));
+        rv.setAdapter(new InvitationResponsesListAdapter(hasChosen && position == 0 ? chosenInviteResponse : responsesInviteResponse));
         container.addView(rv);
         return rv;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        String count = String.valueOf(position == 0 ? chosenInviteResponse.size() : responsesInviteResponse.size());
-        return String.format(position == 0 ? "Chosen (%s)" : "Responded (%s)", count);
+        String count = String.valueOf(hasChosen && position == 0 ? chosenInviteResponse.size() : responsesInviteResponse.size());
+        return String.format(hasChosen && position == 0 ? "Chosen (%s)" : "Responded (%s)", count);
     }
 
     @Override

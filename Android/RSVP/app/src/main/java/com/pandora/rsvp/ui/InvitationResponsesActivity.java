@@ -1,40 +1,66 @@
 package com.pandora.rsvp.ui;
 
 import com.pandora.rsvp.R;
+import com.pandora.rsvp.app.dagger.RSVPComponent;
+import com.pandora.rsvp.service.ApiCallBack;
+import com.pandora.rsvp.service.IRSVPApi;
 import com.pandora.rsvp.service.contract.Invitation;
+import com.pandora.rsvp.service.contract.SingeUserInvitationResponse;
 import com.pandora.rsvp.ui.adapter.InvitationResponsesPagerAdapter;
 import com.pandora.rsvp.ui.base.BaseActivity;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 
 /**
  * Copyright (c) 2015 Pandora 2015, Inc
  */
-public class InvitationResponsesActivity extends BaseActivity {
+public class InvitationResponsesActivity extends BaseActivity implements ApiCallBack<SingeUserInvitationResponse> {
     
     public static final String INVITATION_KEY = "InvitationKey";
     
     @Bind(R.id.view_pager)
     ViewPager pager;
-    @Bind(R.id.pager_tab_strip)
-    PagerTabStrip strip;
+    @Bind(R.id.tabs)
+    TabLayout strip;
     @Bind(R.id.responders_action_button)
     Button respondersActionButton;
     @Bind(R.id.rsvp_title)
     TextView invitationTitle;
     @Bind(R.id.rsvp_date)
     TextView invitationDate;
+    @Bind(R.id.rsvp_body)
+    TextView body;
+    @Bind(R.id.rsvp_method)
+    TextView method;
+
+    @Bind(R.id.details_container)
+    LinearLayout container;
+    @Bind(R.id.progress)
+    ProgressBar pbLoading;
+
+    @Inject
+    IRSVPApi api;
+
+    private InvitationResponsesPagerAdapter adapter;
+    private Invitation invitation;
 
     @Override
     protected int getActivityLayoutRes() {
@@ -42,29 +68,43 @@ public class InvitationResponsesActivity extends BaseActivity {
     }
 
     @Override
+    protected void performInjection(RSVPComponent component) {
+        component.inject(this);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            Invitation invitation = bundle.getParcelable(INVITATION_KEY);
-            if (invitation != null) {
-                invitationTitle.setText(invitation.title);
+            invitation = bundle.getParcelable(INVITATION_KEY);
+            if (invitation == null) {
+                finish();
+                return;
             }
-            pager.setAdapter(new InvitationResponsesPagerAdapter(invitation));
+            adapter = new InvitationResponsesPagerAdapter(invitation);
+            pager.setAdapter(adapter);
+            toggleProgress(false);
         } else {
             finish();
         }
-        
+        initLabels();
+        strip.setupWithViewPager(pager);
+        respondersActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submit();
+            }
+        });
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                
+
             }
 
             @Override
             public void onPageSelected(int position) {
-                respondersActionButton.setText(position == 0 ? getResources().getString(R.string.email_chosen_responders) 
-                        : getResources().getString(R.string.add_selected_responders));
+                updateButtonText();
             }
 
             @Override
@@ -72,5 +112,61 @@ public class InvitationResponsesActivity extends BaseActivity {
 
             }
         });
+        updateButtonText();
+    }
+
+    private void initLabels() {
+        invitationTitle.setText(invitation.title);
+        body.setText(invitation.invitation_body);
+        method.setText(invitation.method);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy", Locale.US);
+        StringBuilder builder = new StringBuilder(getResources().getString(R.string.from));
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(invitation.create_time);
+        builder.append(" ")
+                .append(formatter.format(cal.getTime()));
+        cal.setTimeInMillis(invitation.rsvp_by_time);
+        builder.append("- ").append(formatter.format(cal.getTime()));
+        invitationDate.setText(builder.toString());
+
+    }
+
+    public void updateButtonText() {
+        boolean isChosenTab = adapter.getCount() > 1 && pager.getCurrentItem() == 0;
+        respondersActionButton.setText(getResources().getString(isChosenTab ? R.string.email_chosen_responders
+                : R.string.select_winners));
+    }
+
+    private void submit() {
+        int count = adapter.getCount();
+        int currentItem = pager.getCurrentItem();
+        if ((count > 1 && currentItem == 1) || (count == 1)) {
+            toggleProgress(true);
+            api.selectWinners(invitation.id, this);
+        } else {
+            snackMessage("Time to show a popup!");
+        }
+    }
+
+    @Override
+    public void onSuccess(SingeUserInvitationResponse successResponse) {
+        adapter = new InvitationResponsesPagerAdapter(successResponse.data);
+        pager.setAdapter(adapter);
+        strip.setupWithViewPager(pager);
+        toggleProgress(false);
+        snackMessage("Winners have been selected!");
+
+    }
+
+    @Override
+    public void onFailure(Throwable error) {
+        snackMessage(R.string.error_selecting_winners);
+        toggleProgress(false);
+    }
+
+    public void toggleProgress(boolean loading) {
+        pbLoading.setVisibility(loading ? View.VISIBLE : View.INVISIBLE);
+        container.setVisibility(loading ? View.INVISIBLE : View.VISIBLE);
     }
 }

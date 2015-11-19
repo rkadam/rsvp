@@ -1,6 +1,7 @@
 package com.pandora.rsvp.service;
 
 import com.pandora.rsvp.service.contract.AuthResponse;
+import com.pandora.rsvp.service.contract.SingeUserInvitationResponse;
 import com.pandora.rsvp.service.contract.UserInvitationsResponse;
 
 import java.util.List;
@@ -15,6 +16,14 @@ public interface IRSVPApi {
     void logout(ApiCallBack<AuthResponse> authCallBack);
 
     void getInvitations(ApiCallBack<UserInvitationsResponse> invitationCallBack);
+
+    void selectWinners(String invitationId, ApiCallBack<SingeUserInvitationResponse> invitationsResponseApiCallBack);
+
+    void createOffer(String title, int acceptLimit, long rsvpBy, String emailTo, String method, String body, ApiCallBack<SingeUserInvitationResponse> invitationResponseApiCallBack);
+    
+    
+    
+    
     
     
 

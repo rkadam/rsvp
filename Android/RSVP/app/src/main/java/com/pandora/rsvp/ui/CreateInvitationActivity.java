@@ -113,4 +113,10 @@ public class CreateInvitationActivity extends BaseActivity {
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+    
+    
+//TODO: Don't delete for now!!!
+//    api.createOffer("RandomOffer NumSomething", Integer.parseInt(mNumInvitesEdit.getText().toString()), date,
+//            "dist-rsvp-test@pandora.com", "random",
+//            mDescriptionEdit.getText().toString(), this);
 }
