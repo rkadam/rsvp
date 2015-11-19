@@ -14,6 +14,7 @@ import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import butterknife.Bind;
 
@@ -30,6 +31,10 @@ public class InvitationResponsesActivity extends BaseActivity {
     PagerTabStrip strip;
     @Bind(R.id.responders_action_button)
     Button respondersActionButton;
+    @Bind(R.id.rsvp_title)
+    TextView invitationTitle;
+    @Bind(R.id.rsvp_date)
+    TextView invitationDate;
 
     @Override
     protected int getActivityLayoutRes() {
@@ -42,6 +47,9 @@ public class InvitationResponsesActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             Invitation invitation = bundle.getParcelable(INVITATION_KEY);
+            if (invitation != null) {
+                invitationTitle.setText(invitation.title);
+            }
             pager.setAdapter(new InvitationResponsesPagerAdapter(invitation));
         } else {
             finish();
@@ -55,7 +63,8 @@ public class InvitationResponsesActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int position) {
-                respondersActionButton.setText(position == 0 ? "Email Chosen Responders" : "Add Selected Responders");
+                respondersActionButton.setText(position == 0 ? getResources().getString(R.string.email_chosen_responders) 
+                        : getResources().getString(R.string.add_selected_responders));
             }
 
             @Override
