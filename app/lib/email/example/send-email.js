@@ -8,7 +8,7 @@ var client = new EmailSender(configuration);
 
 client.connect()
     .then(function(){
-        return client.sendMessage("someaddress@pandora.com", "test message", "invitation_id", "ivo@pandora.com");
+        return client.sendMessage("someaddress@pandora.com", "test invitation subject", "test message", "invitation_id", "ivo@pandora.com");
     })
     .then(function(){
         client.disconnect();
