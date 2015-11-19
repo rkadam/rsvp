@@ -105,6 +105,10 @@ class RVSPOfferListViewController: UIViewController {
     
     @IBAction func goButtonTapped(sender: AnyObject) {
         // go to the new offer page
+        let storyboard = UIStoryboard(name: "RSVPCreateOfferViewController", bundle: nil)
+        if let viewController: UIViewController = storyboard.instantiateInitialViewController() {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     @IBAction func creatNewOfferButtonTapped(sender: AnyObject) {

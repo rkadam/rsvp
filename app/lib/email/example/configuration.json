@@ -1,0 +1,7 @@
+{
+  "user": "rsvp",
+  "password": "Pandora2015",
+  "host": "smtp.savagebeast.com",
+  "port": 993,
+  "tls": true
+}

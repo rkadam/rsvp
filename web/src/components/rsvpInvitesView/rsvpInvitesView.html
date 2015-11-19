@@ -1,0 +1,7 @@
+<rsvp-invite-summary
+	ng-repeat="invite in ctrl.invites"
+	ui-sref="invites.detail({ inviteId: invite.id })"
+	invite="invite"
+></rsvp-invite-summary>
+
+<ui-view name="detail"></ui-view>
