@@ -1,3 +1,5 @@
+'use strict';
+
 var inspect = require('util').inspect;
 var fs = require('fs');
 
@@ -13,7 +15,7 @@ Promise.config({
     warnings: true
 });
 
-var configuration = JSON.parse(fs.readFileSync('configuration.json', 'utf8'));
+var configuration = JSON.parse(fs.readFileSync('../configuration.json', 'utf8'));
 
 var client = new EmailReader(extend(configuration, {
     //debug: function(){

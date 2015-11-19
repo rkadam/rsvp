@@ -1,3 +1,5 @@
+'use strict';
+
 var inspect = require('util').inspect;
 
 var Imap = require('imap');
@@ -16,8 +18,6 @@ function EmailReader(config){
     this._config = config;
     this._imap = null;
     this._connected = false;
-
-    this.messages = [];
 }
 
 /**
@@ -33,7 +33,7 @@ EmailReader.prototype.connect = function(){
         this._imap = new Imap(this._config);
 
         this._imap.once('ready', function(){
-            this._imap.openBox('INBOX', true, function(){
+            this._imap.openBox('INBOX', false, function(){
                 this._connected = true;
                 resolve(this);
             }.bind(this));
@@ -63,13 +63,21 @@ EmailReader.prototype.getNewMessages = function(){
         }
 
         this._imap.search(['UNSEEN'], function(err, results) {
-            logMessage("got unseen messages");
+            logMessage("===> got unseen messages: " + inspect(results));
             if(err){
                 this._gettingNewMessages = null;
                 reject(err);
                 return;
             }
 
+            if(!results || results.length <= 0){
+                logMessage("resolving with nothing");
+                this._gettingNewMessages = null;
+                resolve([]);
+                return;
+            }
+
+            var messages = [];
             var fetchOp = this._imap.fetch(results, {
                 markSeen: true,
                 bodies: ''
@@ -85,8 +93,8 @@ EmailReader.prototype.getNewMessages = function(){
                     });
                     stream.once('end', function() {
                         logMessage(prefix + 'Parsed header: %s', inspect(Imap.parseHeader(buffer)));
-                        this.messages.push(buffer);
-                    }.bind(this));
+                        messages.push(buffer);
+                    });
                 }.bind(this));
 
                 msg.once('attributes', function(attrs) {
@@ -107,7 +115,7 @@ EmailReader.prototype.getNewMessages = function(){
             fetchOp.on('end', function(){
                 fetchOp.removeAllListeners();
                 this._gettingNewMessages = null;
-                resolve(this.messages);
+                resolve(messages);
             }.bind(this));
         }.bind(this));
     }.bind(this));

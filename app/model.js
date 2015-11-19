@@ -6,6 +6,8 @@ var redis = require('redis');
 var ldap = require('./ldap');
 var Q = require('q');
 
+var inspect = require('util').inspect;
+
 var redisClient = redis.createClient();
 redisClient.on("error", function (e) {
   console.log("Redis error",e);
@@ -195,7 +197,11 @@ var model = {
   },
   createResponse: function(response_data) {
     var time = Date.now();
-    var uid = response_data.email_address.split('@')[0];
+    var parts = response_data.email_address.split('@');
+    var uid = parts[0];
+    if(parts[1] !== 'pandora.com'){
+      return Q.reject("Invalid email: " + response_data.email_address);
+    }
     var response = {};
     return ldap.userSearch(uid)
       .then(function(userObject) {

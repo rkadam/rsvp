@@ -1,3 +1,5 @@
+'use strict';
+
 var MailParser = require("mailparser").MailParser;
 
 var EmailSender = require('./email_sender');
