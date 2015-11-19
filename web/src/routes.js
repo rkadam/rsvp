@@ -7,12 +7,20 @@ angular.module('rsvp').config(function(
 	'use strict';
 
 	$stateProvider
-		.state('home', {
-			url: '/',
-			template: '<rsvp-invite-summary></rsvp-invite-summary>',
+		.state('invites', {
+			url: '/invites',
+			template: '<rsvp-invites-view></rsvp-invites-view>',
+		})
+		.state('invites.detail', {
+			url: '/{inviteId}',
+			views: {
+				detail: {
+					template: '<rsvp-invite-detail-view></rsvp-invite-detail-view>'
+				}
+			}
 		});
 
-	$urlRouterProvider.otherwise('/');
+	// $urlRouterProvider.otherwise('/invites');
 
 	$urlMatcherFactoryProvider.strictMode(false);
 	$locationProvider.html5Mode(true);
