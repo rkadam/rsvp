@@ -13,7 +13,6 @@ redisClient.on("error", function (e) {
 
 var namespace = 'rsvp';
 
-
 var redisCommand = function(command, args) {
   args = setRedisKey(command, args);
   return Q.npost(redisClient, command, args)
@@ -274,12 +273,12 @@ var model = {
     return response;
   },
   close: function() {
-    // ldap.close();
     return redisCommand('quit');
   },
   flush: function() {
     return redisCommand('flushdb');
   }
 };
+redisCommand('select', [config.redis_db_index]);
 
 module.exports = model;
