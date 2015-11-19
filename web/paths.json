@@ -1,30 +1,21 @@
 {
-	"src": {
-		"js": {
-			"vendor": [
-				"node_modules/angular/angular.js",
-				"node_modules/angular-ui-router/release/angular-ui-router.js"
-			],
-			"app": [
-				"src/bootstrap.js",
-				"src/**/*.js"
-			]
-		},
-		"less": {
-			"all": [
-				"node_modules/normalize.css/normalize.css",
-				"src/**/*.less"
-			]
-		}
+	"src": "src/",
+	"dist": "public/dist/",
+	"js": {
+		"vendor": [
+			"node_modules/angular/angular.js",
+			"node_modules/angular-ui-router/release/angular-ui-router.js"
+		],
+		"app": [
+			"src/bootstrap.js",
+			"src/**/*.js"
+		]
 	},
-	"dist": {
-		"root": "public/dist",
-		"js": {
-			"vendor": "public/dist/vendor.js",
-			"app": "public/dist/app.js"
-		},
-		"less": {
-			"all": "public/dist/all.css"
-		}
-	}
+	"less": [
+		"node_modules/normalize.css/normalize.css",
+		"src/**/*.less"
+	],
+	"html": [
+		"src/**/*.html"
+	]
 }
