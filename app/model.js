@@ -160,7 +160,8 @@ var model = {
           department: userObject.department,
           response_time: response_time,
           response_body: response_body,
-          selected: false
+          selected: false,
+          image_url: 'https://ray.savagebeast.com/sbldap/image.cgi?uid='+uid
         };
       return redisCommand('sadd', [invitation_id+':responses', JSON.stringify(response)]);
     }).then(function(res) {
