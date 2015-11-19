@@ -10,7 +10,7 @@ import UIKit
 
 class RSVPOfferDetailViewController: UIViewController {
     
-    var responders = [RSVPResponder](count: 3, repeatedValue:RSVPResponder(networkData: [:]))
+    var responders = [RSVPResponder](count: 6, repeatedValue:RSVPResponder(networkData: [:]))
 
     var offerModel: RSVPOfferModel? = nil {
         didSet {
@@ -46,6 +46,7 @@ extension RSVPOfferDetailViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ResponderDetailCell", forIndexPath: indexPath) as! RSVPResponderCollectionViewCell
         
         // Use the outlet in our custom class to get a reference to the UILabel in the cell
+        cell.responder = responders[indexPath.row]
         
         return cell
     }
