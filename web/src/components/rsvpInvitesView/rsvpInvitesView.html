@@ -1,10 +1,26 @@
-<nav class="rsvpGrid--1/4">
-	<rsvp-invite-summary
-		ng-repeat="invite in ctrl.invites"
-		ui-sref="invites.detail({ inviteId: invite.id })"
-		ui-sref-active="-selected"
-		invite="invite"
-	></rsvp-invite-summary>
-</nav>
+<div class="rsvpInvitesView rsvpGrid">
 
-<ui-view name="detail" class="rsvpGrid--3/4"></ui-view>
+	<button
+		class="rsvpBumperButton rsvpGrid"
+		ui-sref="newInvite"
+	>
+		<rsvp-icon icon="ss-navigateup" size="0.8em"></rsvp-icon>
+		Create new offer
+		<rsvp-icon icon="ss-navigateup" size="0.8em"></rsvp-icon>
+	</button>
+
+	<nav class="rsvpGrid--1/4">
+		<rsvp-invite-summary
+			ng-repeat="invite in ctrl.invites | orderBy:['active','rsvp_by_time']"
+			ui-sref="invites.detail({ inviteId: invite.id })"
+			ui-sref-active="-selected"
+			invite="invite"
+		></rsvp-invite-summary>
+	</nav>
+
+	<ui-view
+		name="detail"
+		class="rsvpInvitesView__detail rsvpGrid--3/4"
+	></ui-view>
+
+</div>

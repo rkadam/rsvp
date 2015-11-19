@@ -1,0 +1,93 @@
+/**
+ * Mixin for positioning an element within its parent.
+ *
+ * Modifers:
+ * --left
+ * --right
+ * --horizCenter
+ * --center
+ * --vertCenter
+ * --auto
+ * --relative
+ *
+ * Notes:
+ * 1. `--right`-positioned elements will appear in reverse source order
+ * 2. `--horizCenter`-positioned elements should be listed last in the HTML
+ * 3. `--vertCenter`-positioned elements should have a container with a non-static position
+ *
+ * @example All possible positions
+```html
+	<div class="rsvpGrid">
+		<div class="rsvpGrid--1/6 rsvpPosition--left"> Leftmost </div>
+		<div class="rsvpGrid--1/6 rsvpPosition--left"> Second from left </div>
+		<div class="rsvpGrid--1/6 rsvpPosition--right"> Rightmost </div>
+		<div class="rsvpGrid--1/6 rsvpPosition--right"> Second from right </div>
+		<div class="rsvpGrid--1/6 rsvpPosition--horizCenter"> Center </div>
+	</div>
+	<div style="position: relative; width: 200px; height: 200px; background: gray;">
+		<div
+			class="rsvpPosition--vertCenter"
+			style="width: 50px; height: 50px; background: red;"
+		>
+			Middle
+		</div>
+	</div>
+```
+ *
+ * @example Center-positioned for views smaller than L, positioned naturally otherwise
+```html
+	<div class="
+		rsvpPosition--horizCenter
+		rsvpPosition--auto@L
+	"> ... </div>
+```
+ */
+
+.rsvpPosition--left {
+	.rsvpView--addBreakpointModifiers({
+		float: left !important;  // !important in order to override any floats set by components such as rsvpGrid
+	});
+}
+
+.rsvpPosition--horizCenter {
+	.rsvpView--addBreakpointModifiers({
+		float: none !important;  // !important in order to override any floats set by components such as rsvpGrid
+		margin: 0 auto;
+	});
+}
+
+.rsvpPosition--vertCenter {
+	.rsvpView--addBreakpointModifiers({
+		position: absolute;
+		top: 50%;
+		transform: translate3d(0, -50%, 0);
+	});
+}
+
+.rsvpPosition--center {
+	.rsvpView--addBreakpointModifiers({
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate3d(-50%, -50%, 0);
+	});
+}
+
+.rsvpPosition--right {
+	.rsvpView--addBreakpointModifiers({
+		float: right !important;  // !important in order to override any floats set by components such as rsvpGrid
+	});
+}
+
+.rsvpPosition--auto {
+	.rsvpView--addBreakpointModifiers({
+		float: none !important;  // !important in order to override any floats set by components such as rsvpGrid
+		margin: 0;
+	});
+}
+
+.rsvpPosition--relative {
+	.rsvpView--addBreakpointModifiers({
+		position: relative;
+	});
+}

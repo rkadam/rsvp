@@ -1,29 +1,41 @@
-Responses ({{ ctrl.invite.responses.length }})
+<div class="rsvpInviteDetailView">
+	<div>
+		<label
+			class="rsvpTabButton"
+			ng-class="{ '-active': ctrl.responseFilter.selected === 'true' }"
+		>
+			<input
+				type="radio"
+				radiogroup="filter"
+				ng-model="ctrl.responseFilter.selected"
+				value="true"
+				class="ng-hide"
+			>
+			Chosen ({{ ctrl.numChosen }})
+		</label>
 
-<label>
-	<input
-		type="radio"
-		radiogroup="filter"
-		ng-model="ctrl.responseFilter.selected"
-		value="true"
-	>
-	Chosen
-</label>
+		<label
+			class="rsvpTabButton"
+			ng-class="{ '-active': ctrl.responseFilter.selected !== 'true' }"
+		>
+			<input
+				type="radio"
+				radiogroup="filter"
+				ng-model="ctrl.responseFilter.selected"
+				value=""
+				class="ng-hide"
+			>
+			Responses ({{ ctrl.invite.responses.length }})
+		</label>
+	</div>
 
-<label>
-	<input
-		type="radio"
-		radiogroup="filter"
-		ng-model="ctrl.responseFilter.selected"
-		value=""
-	>
-	Responses
-</label>
+	<div class="rsvpInviteDetailView__responses">
+		<rsvp-response
+			ng-repeat="response in ctrl.invite.responses | filter:ctrl.responseFilter"
+			ng-click="ctrl.toggleResponse(response)"
+			response="response"
+		></rsvp-response>
+	</div>
 
-<rsvp-response
-	ng-repeat="response in ctrl.invite.responses | filter:ctrl.responseFilter"
-	ng-click="ctrl.toggleResponse(response)"
-	response="response"
-></rsvp-response>
-
-<button>Email all responders</button>
+	<button class="rsvpButton">Email all responders</button>
+</div>

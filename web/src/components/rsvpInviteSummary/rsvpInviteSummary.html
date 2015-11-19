@@ -7,9 +7,15 @@
 		{{ ctrl.invite.rsvp_by_time | date:'longDate' }}
 	</span>
 
-	<rsvp-badge label="{{ ctrl.invite.responses.length }}"></rsvp-badge>
-	Responses
+	<span class="rsvpInviteSummary__counter">
+		<rsvp-badge label="{{ ctrl.invite.responses.length }}"></rsvp-badge>
+		Responses
+	</span>
 
-	<rsvp-badge label="{{ ctrl.numChosen }}"></rsvp-badge>
-	Chosen
+	<span class="rsvpInviteSummary__counter" ng-if="!ctrl.invite.active">
+		<rsvp-badge label="{{ ctrl.numChosen }}"></rsvp-badge>
+		Chosen
+	</span>
+
+	<span class="rsvpButton -sizeS rsvpPosition--right" ng-if="ctrl.invite.active">Live</span>
 </div>

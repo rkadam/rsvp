@@ -1,10 +1,58 @@
 rsvp-invite-summary {
 	display: block;
+	position: relative;
 
 	&.-selected {
-		background: @rsvpColor__selectedFill;
+		background: @rsvpColor__fill--selected;
+
+		// Selection triangle
+		&::after {
+			content: "";
+			display: block;
+			width: 0;
+			height: 0;
+			position: absolute;
+			right: -20px;
+			top: 50%;
+			transform: translate3d(0, -50%, 0);
+			border-top: 20px solid transparent;
+			border-bottom: 20px solid transparent;
+			border-left: 20px solid @rsvpColor__border;
+		}
 	}
 }
 
 .rsvpInviteSummary {
+	padding: 25px 40px;
+	border-right: 2px solid @rsvpColor__border;
+	border-bottom: 2px solid @rsvpColor__border;
+
+	&__title {
+		margin: 0;
+		font-size: @rsvpFont__size--L;
+		font-weight: @rsvpFont__weight--bold;
+		color: @rsvpColor__text--accent;
+	}
+
+	&__date {
+		display: block;
+		margin-bottom: 20px;
+		font-size: @rsvpFont__size--S;
+		font-weight: @rsvpFont__weight--bold;
+		color: @rsvpColor__text--accent;
+	}
+
+	&__counter {
+		font-size: @rsvpFont__size--S;
+		font-weight: @rsvpFont__weight--bold;
+		color: @rsvpColor__text--accent;
+
+		& ~ & {
+			margin-left: 15px;
+		}
+
+		rsvp-badge {
+			margin-right: 5px;
+		}
+	}
 }

@@ -5,9 +5,7 @@ angular.module('rsvp').directive('rsvpInvitesView', function(
 
 	return {
 		restrict: 'E',
-		scope: {
-			userId: '=',
-		},
+		scope: {},
 		templateUrl: 'components/rsvpInvitesView/rsvpInvitesView.html',
 		controllerAs: 'ctrl',
 		bindToController: true,
