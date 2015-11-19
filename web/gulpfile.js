@@ -14,15 +14,15 @@ gulp.task('clean', function(callback) {
 	rimraf(paths.dist, callback);
 });
 
+/**
+ * Build
+ */
+
 gulp.task('build', [
 	'build:js',
 	'build:less',
 	'build:html',
 ]);
-
-/**
- * JS
- */
 
 gulp.task('build:js', [
 	'build:js:vendor',
@@ -43,10 +43,6 @@ function buildJs(srcPaths, distFilename) {
 		.pipe(gulp.dest(paths.dist));
 }
 
-/**
- * Less
- */
-
 gulp.task('build:less', function() {
 	return gulp.src(paths.less)
 		.pipe(less())
@@ -65,12 +61,31 @@ gulp.task('build:less', function() {
 		.pipe(gulp.dest(paths.dist));
 });
 
-/**
- * HTML
- */
-
 gulp.task('build:html', function() {
 	return gulp.src(paths.html)
 		.pipe(templateCache('templates.js', { module: 'rsvp' }))
 		.pipe(gulp.dest(paths.dist));
+});
+
+/**
+ * Watch
+ */
+
+gulp.task('watch', [
+	'watch:js',
+	'watch:less',
+	'watch:html',
+]);
+
+gulp.task('watch:js', ['build:js'], function() {
+	var allJs = [].concat(paths.js.vendor, paths.js.app)
+	return gulp.watch(allJs, ['build:js']);
+});
+
+gulp.task('watch:less', ['build:less'], function() {
+	return gulp.watch(paths.less, ['build:less']);
+});
+
+gulp.task('watch:html', ['build:html'], function() {
+	return gulp.watch(paths.html, ['build:html']);
 });
