@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		98D433E31BFD01840074D9F6 /* RSVPNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98D433E21BFD01840074D9F6 /* RSVPNetworkManager.swift */; };
+		9C449FB51BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C449FB41BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift */; };
 		9CD4CE201BFCFB9800DF41E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */; };
 		9CD4CE221BFCFB9800DF41E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */; };
 		9CD4CE251BFCFB9800DF41E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4CE231BFCFB9800DF41E7 /* Main.storyboard */; };
 		9CD4CE271BFCFB9800DF41E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4CE261BFCFB9800DF41E7 /* Assets.xcassets */; };
 		9CD4CE2A1BFCFB9800DF41E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4CE281BFCFB9800DF41E7 /* LaunchScreen.storyboard */; };
+		9CD4CE321BFD29AE00DF41E7 /* RSVPCreateOfferViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4CE311BFD29AE00DF41E7 /* RSVPCreateOfferViewController.storyboard */; };
 		E7D2B3BCDC6C50AF5212C204 /* Pods_RSVP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C7A327372915C7582372E0 /* Pods_RSVP.framework */; };
 /* End PBXBuildFile section */
 
@@ -21,6 +23,7 @@
 		78C7A327372915C7582372E0 /* Pods_RSVP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RSVP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D412A9A27746F284522E87E /* Pods-RSVP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSVP.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RSVP/Pods-RSVP.debug.xcconfig"; sourceTree = "<group>"; };
 		98D433E21BFD01840074D9F6 /* RSVPNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPNetworkManager.swift; sourceTree = "<group>"; };
+		9C449FB41BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSVPCreateOfferViewController.swift; sourceTree = "<group>"; };
 		9CD4CE1C1BFCFB9800DF41E7 /* RSVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -28,6 +31,7 @@
 		9CD4CE261BFCFB9800DF41E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9CD4CE291BFCFB9800DF41E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9CD4CE2B1BFCFB9800DF41E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9CD4CE311BFD29AE00DF41E7 /* RSVPCreateOfferViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RSVPCreateOfferViewController.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 				98D433DF1BFD01570074D9F6 /* Controllers */,
 				9CD4CE1F1BFCFB9800DF41E7 /* AppDelegate.swift */,
 				9CD4CE211BFCFB9800DF41E7 /* ViewController.swift */,
+				9CD4CE311BFD29AE00DF41E7 /* RSVPCreateOfferViewController.storyboard */,
+				9C449FB41BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift */,
 				9CD4CE231BFCFB9800DF41E7 /* Main.storyboard */,
 				9CD4CE261BFCFB9800DF41E7 /* Assets.xcassets */,
 				9CD4CE281BFCFB9800DF41E7 /* LaunchScreen.storyboard */,
@@ -179,6 +185,7 @@
 				9CD4CE2A1BFCFB9800DF41E7 /* LaunchScreen.storyboard in Resources */,
 				9CD4CE271BFCFB9800DF41E7 /* Assets.xcassets in Resources */,
 				9CD4CE251BFCFB9800DF41E7 /* Main.storyboard in Resources */,
+				9CD4CE321BFD29AE00DF41E7 /* RSVPCreateOfferViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +246,7 @@
 			files = (
 				9CD4CE221BFCFB9800DF41E7 /* ViewController.swift in Sources */,
 				98D433E31BFD01840074D9F6 /* RSVPNetworkManager.swift in Sources */,
+				9C449FB51BFD4C1E009B3BC6 /* RSVPCreateOfferViewController.swift in Sources */,
 				9CD4CE201BFCFB9800DF41E7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
