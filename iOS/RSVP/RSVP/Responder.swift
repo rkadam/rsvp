@@ -30,6 +30,6 @@ class Responder {
     }
     
     func convertDate(dateTimStamp: Double) ->NSDate {
-        return NSDate(timeIntervalSince1970:dateTimStamp)
+        return NSDate(timeIntervalSince1970:dateTimStamp/1000)
     }
 }
