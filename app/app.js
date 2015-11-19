@@ -12,6 +12,9 @@ var express = require('express');
 var config = require('./config');
 var model = require('./model');
 
+var emailPoll = require('./lib/email/new-invitation-response-poll');
+var POLL_INTERVAL_MILLIS = 15000;
+
 // Setup server
 var app = express();
 app.config = config;
@@ -25,6 +28,10 @@ require('./routes')(app);
 server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
+
+//poll for invitation replies
+emailPoll.startPoll(model, POLL_INTERVAL_MILLIS);
+
 
 // Expose app
 exports = module.exports = app;

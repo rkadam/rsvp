@@ -1,3 +1,5 @@
+'use strict';
+
 var SMTPConnection = require('smtp-connection');
 var Promise = require("bluebird");
 
@@ -69,6 +71,7 @@ EmailSender.prototype.sendMessage = function(from, subject, message, invitation_
             EmailSender.INVITATION_HEADER, ": ", invitation_id, "\r\n",
             "On-Behalf-Of: ", from, "\r\n",
             "Sender: rsvp@pandora.com\r\n",
+            "Reply-To: rsvp@pandora.com\r\n",
             message,
             "\r\n"
         ].join('');
