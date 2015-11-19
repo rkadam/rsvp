@@ -1,7 +1,10 @@
-<rsvp-invite-summary
-	ng-repeat="invite in ctrl.invites"
-	ui-sref="invites.detail({ inviteId: invite.id })"
-	invite="invite"
-></rsvp-invite-summary>
+<nav class="rsvpGrid--1/4">
+	<rsvp-invite-summary
+		ng-repeat="invite in ctrl.invites"
+		ui-sref="invites.detail({ inviteId: invite.id })"
+		ui-sref-active="-selected"
+		invite="invite"
+	></rsvp-invite-summary>
+</nav>
 
-<ui-view name="detail"></ui-view>
+<ui-view name="detail" class="rsvpGrid--3/4"></ui-view>

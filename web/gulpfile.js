@@ -83,7 +83,7 @@ gulp.task('watch:js', ['build:js'], function() {
 });
 
 gulp.task('watch:less', ['build:less'], function() {
-	return gulp.watch(paths.less, ['build:less']);
+	return gulp.watch(paths.src + '**/*.less', ['build:less']);
 });
 
 gulp.task('watch:html', ['build:html'], function() {
