@@ -24,7 +24,7 @@ class RSVPLoginViewController: UIViewController {
     }
     @IBOutlet weak var loginButton: UIButton! {
         didSet {
-            loginButton.layer.cornerRadius = 2;
+            loginButton.layer.cornerRadius = 6;
         }
     }
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
@@ -49,11 +49,14 @@ class RSVPLoginViewController: UIViewController {
             RSVPNetworkManager.instance.loginUser(emailField.text!, 🔑: passwordField.text!,
                 😊: { (🍕, 💣) -> Void in
                     self.activityIndicator.stopAnimating()
+                    let alert = UIAlertController(title: "LOGIN YES", message: "YES LOGIN", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "YES", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }) { (🍕, 💣) -> Void in
                     self.loginButton.alpha = 1
                     self.loginButton.enabled = true
                     self.activityIndicator.stopAnimating()
-                    let alert = UIAlertController(title: "Login Error", message: "There was an error logging you in. Please try again later. Error code: \(💣?.code)", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Login Error", message: "There was an error logging you in. Please try again later. Error code: \(💣!.code)", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
             }
