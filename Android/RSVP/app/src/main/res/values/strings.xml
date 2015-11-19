@@ -29,6 +29,12 @@
         <item>Manual Choice</item>
     </string-array>
 
+    <string name="dialog_invitation_preview_to_label">To:</string>
+    <string name="dialog_invitation_preview_from_label">From:</string>
+    <string name="dialog_invitation_preview_subject_label">Subject:</string>
+    <string name="dialog_invitation_preview_send_label">SEND</string>
+    <string name="dialog_invitation_preview_cancel_label">WHOOPS, NOT YET</string>
+    
     <string name="dialog_wrap_up_messages_title">WRAP-UP MESSAGES</string>
     <string name="dialog_wrap_up_messages_message_to_winners">Message to Chosen Winners</string>
     <string name="dialog_wrap_up_messages_message_to_all">Message to All Responses</string>

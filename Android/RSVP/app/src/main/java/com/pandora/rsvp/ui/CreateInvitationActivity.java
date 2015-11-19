@@ -2,7 +2,6 @@ package com.pandora.rsvp.ui;
 
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -18,13 +17,7 @@ import butterknife.BindString;
 import butterknife.OnClick;
 
 public class CreateInvitationActivity extends BaseActivity {
-    public static final String KEY_INVITATION_DESCRIPTION = "key_invitation_description";
-    public static final String KEY_NUM_INVITES = "key_num_invites";
-    public static final String KEY_RSVP_DATE = "key_rsvp_date";
-    public static final String KEY_RSVP_TIME = "key_rsvp_time";
-    public static final String KEY_EMAIL = "key_email";
-    public static final String KEY_METHOD_CHOICE = "key_method_choice";
-
+    
     @BindString(R.string.create_invitation_activity_title)
     String mTitle;
 
@@ -67,7 +60,6 @@ public class CreateInvitationActivity extends BaseActivity {
 
     @OnClick(R.id.create_invitation_activity_preview_email_button)
     public void submit(View view) {
-        Log.e("MSW", "Button !!!");
         if (isBlank(mDescriptionEdit)) { // Validate that invitation description was entered
             Toast.makeText(this, mBlankDesc, Toast.LENGTH_LONG).show();
             mDescriptionEdit.requestFocus();
@@ -80,43 +72,17 @@ public class CreateInvitationActivity extends BaseActivity {
             return;
         }
 
-        Bundle bundle = new Bundle();
-        bundle.putString(KEY_INVITATION_DESCRIPTION, mDescriptionEdit.getText().toString());
-        bundle.putInt(KEY_NUM_INVITES, Integer.parseInt(mNumInvitesEdit.getText().toString()));
-
-        DialogFragment dialog = WrapUpMessageDialog.newInstance(bundle);
-        dialog.show(getSupportFragmentManager(), dialog.getClass().getSimpleName());
+        Long datetime = System.currentTimeMillis(); // TODO
+        String selectionMethod = mSpinnerChoice.getSelectedItem().toString();
+        
+        DialogFragment dialogPreviewEmail = PreviewInvitationDialog.newInstance(
+                mDescriptionEdit.getText().toString(),                  // Invitation Description
+                Integer.parseInt(mNumInvitesEdit.getText().toString()),   // Number of Invitations
+                datetime, mEmailListEdit.getText().toString(), selectionMethod);
+        dialogPreviewEmail.show(getSupportFragmentManager(), dialogPreviewEmail.getClass().getSimpleName());
     }
 
     private boolean isBlank(EditText editText) {
         return (editText != null && editText.getText().toString().trim().length() == 0);
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_create_invitation, menu);
-//        return true;
-//    }
-//    
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-    
-    
-//TODO: Don't delete for now!!!
-//    api.createOffer("RandomOffer NumSomething", Integer.parseInt(mNumInvitesEdit.getText().toString()), date,
-//            "dist-rsvp-test@pandora.com", "random",
-//            mDescriptionEdit.getText().toString(), this);
 }

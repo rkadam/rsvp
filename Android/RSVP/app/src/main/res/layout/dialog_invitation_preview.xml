@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="25dp"
+        >
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        <!-- To: -->
+
+        <TextView
+                android:id="@+id/dialog_invitation_preview_to_label"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:layout_marginRight="@dimen/margin_between_email_header_label_and_value"
+                android:text="@string/dialog_invitation_preview_to_label"
+                style="@style/FieldLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <TextView
+                android:id="@+id/dialog_invitation_preview_to_text"
+                android:layout_toRightOf="@+id/dialog_invitation_preview_to_label"
+                android:layout_alignBaseline="@+id/dialog_invitation_preview_to_label"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <!-- From: -->
+
+        <TextView
+                android:id="@+id/dialog_invitation_preview_from_label"
+                android:layout_below="@+id/dialog_invitation_preview_to_label"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:layout_marginRight="@dimen/margin_between_email_header_label_and_value"
+                android:text="@string/dialog_invitation_preview_from_label"
+                style="@style/FieldLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <TextView
+                android:id="@+id/dialog_invitation_preview_from_text"
+                android:layout_toRightOf="@+id/dialog_invitation_preview_from_label"
+                android:layout_alignBaseline="@+id/dialog_invitation_preview_from_label"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <!-- Subject: -->
+
+        <TextView
+                android:id="@+id/dialog_invitation_preview_subject"
+                android:layout_below="@+id/dialog_invitation_preview_from_label"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:layout_marginRight="@dimen/margin_between_email_header_label_and_value"
+                android:text="@string/dialog_invitation_preview_subject_label"
+                style="@style/FieldLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <TextView
+                android:id="@+id/dialog_invitation_preview_subject_text"
+                android:layout_toRightOf="@+id/dialog_invitation_preview_subject"
+                android:layout_alignBaseline="@+id/dialog_invitation_preview_subject"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+        <!-- Message Body -->
+
+        <TextView
+                android:id="@+id/dialog_invitation_preview_message_body"
+                android:layout_below="@+id/dialog_invitation_preview_subject"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <!-- Cancel and Send button -->
+
+        <Button
+                android:id="@+id/dialog_invitation_preview_cancel_button"
+                android:layout_below="@+id/dialog_invitation_preview_message_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/dialog_invitation_preview_cancel_label"
+                android:textColor="@android:color/black"
+                />
+
+        <Button
+                android:id="@+id/dialog_invitation_preview_send_button"
+                android:layout_below="@+id/dialog_invitation_preview_message_body"
+                android:layout_toRightOf="@+id/dialog_invitation_preview_cancel_button"
+                android:layout_alignBaseline="@+id/dialog_invitation_preview_cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/dialog_wrap_up_messages_send_label"
+                android:textColor="@android:color/white"
+                android:theme="@style/AppTheme"
+                />
+    </RelativeLayout>
+</ScrollView>
