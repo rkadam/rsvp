@@ -14,13 +14,11 @@ class RSVPLoginViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField! {
         didSet {
-            emailField.returnKeyType = UIReturnKeyType.Next
             emailField.tag = emailTextFieldTag
         }
     }
     @IBOutlet weak var passwordField: UITextField! {
         didSet {
-            passwordField.returnKeyType = UIReturnKeyType.Go
             passwordField.tag = passwordTextFieldTag
         }
     }
@@ -42,9 +40,19 @@ class RSVPLoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(sender: UIButton) {
+        self.view.endEditing(true)
         loginButton.alpha = 0.5
         loginButton.enabled = false
         activityIndicator.startAnimating()
+        
+        RSVPNetworkManager.instance.loginUser(emailField.text!, 🔑: passwordField.text!,
+            😊: { (🍕, 💣) -> Void in
+                self.activityIndicator.stopAnimating()
+            }) { (🍕, 💣) -> Void in
+                self.loginButton.alpha = 1
+                self.loginButton.enabled = true
+                self.activityIndicator.stopAnimating()
+        }
     }
 }
 
