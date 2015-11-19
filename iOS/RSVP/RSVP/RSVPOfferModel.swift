@@ -45,8 +45,8 @@ class RSVPOfferModel {
     init(networkData: NSDictionary) {
         uid = networkData["uid"] as? String ?? uid
         title = networkData["title"] as? String ?? title
-        endDate = convertDate(networkData["rsvp_by_time"] as? String ?? "0")
-        createDate = convertDate(networkData["create_time"] as? String ?? "0")
+        endDate = convertDate(networkData["rsvp_by_time"] as? Double ?? 0)
+        createDate = convertDate(networkData["create_time"] as? Double ?? 0)
         numberOfInvitationAvaiable = networkData["response_accept_limit"] as? Int ?? numberOfInvitationAvaiable
         emailDstributionList = networkData["email_to"] as? String ?? emailDstributionList
         invitationBody = networkData["invitation_body"] as? String ?? invitationBody
@@ -59,11 +59,7 @@ class RSVPOfferModel {
         }
     }
     
-    func convertDate(dateString: String) ->NSDate {
-        if let dateTimStamp = Double(dateString) {
-            return NSDate(timeIntervalSince1970:dateTimStamp)
-        } else {
-            return NSDate()
-        }
+    func convertDate(dateTimStamp: Double) ->NSDate {
+        return NSDate(timeIntervalSince1970:dateTimStamp)
     }
 }

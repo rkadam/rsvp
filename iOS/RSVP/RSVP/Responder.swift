@@ -25,15 +25,11 @@ class Responder {
         responseBody = networkData["response_body"] as? String ?? responseBody
         selected = networkData["selected"] as? Bool ?? selected
         uid = networkData["uid"] as? String ?? uid
-        responseDate = convertDate(networkData["reponded"] as? String ?? "0")
+        responseDate = convertDate(networkData["reponded"] as? Double ?? 0)
         years = networkData["years"] as? Int ?? years
     }
     
-    func convertDate(dateString: String) ->NSDate {
-        if let dateTimStamp = Double(dateString) {
-            return NSDate(timeIntervalSince1970:dateTimStamp)
-        } else {
-            return NSDate()
-        }
+    func convertDate(dateTimStamp: Double) ->NSDate {
+        return NSDate(timeIntervalSince1970:dateTimStamp)
     }
 }

@@ -45,6 +45,12 @@ class RSVPOfferListTableViewCell: UITableViewCell {
             responsesCountLabel.text = "\(_offerModel.responsesCount)"
             
             if _offerModel.endDate.compare(NSDate()) == NSComparisonResult.OrderedDescending {
+                if _offerModel.chosenCount >= _offerModel.numberOfInvitationAvaiable {
+                    fullUpLabel.text = "FULL UP"
+                } else {
+                    fullUpLabel.text = "LIVE"
+                }
+                
                 fullUpLabel.alpha = 1
                 chosenCountLabel.alpha = 0
                 chosenLabel.alpha = 0
