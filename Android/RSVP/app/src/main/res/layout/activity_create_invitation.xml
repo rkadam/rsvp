@@ -17,27 +17,30 @@
 
         <!-- +++++ Invitation Details, section Header +++++ -->
 
-        <com.pandora.rsvp.ui.components.SectionHeader
+        <TextView
                 android:id="@+id/create_invitation_activity_invitation_details_header"
                 android:text="@string/create_invitation_activity_invitation_details_header"
+                android:fontFamily="sans-serif-light"
                 style="@style/SectionHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         <View android:id="@+id/create_invitation_activity_invitation_details_underline"
               android:layout_below="@+id/create_invitation_activity_invitation_details_header"
-              android:background="@color/section_underline_color"
-              android:layout_width="fill_parent"
+              android:background="@color/divider_color"
+              android:layout_marginTop="2dp"
+              android:layout_width="match_parent"
               android:layout_height="@dimen/header_underline_width"/>
 
         <!-- Invitation Description -->
 
-        <com.pandora.rsvp.ui.components.FieldLabel
+        <TextView
                 android:id="@+id/create_invitation_activity_invitation_description_label"
                 android:layout_below="@+id/create_invitation_activity_invitation_details_underline"
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_invitation_description"
+                android:fontFamily="sans-serif"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,23 +52,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:lines="5"
-                android:minLines="5"
                 android:gravity="top|left"
-                android:maxLines="5"
                 android:scrollbars="vertical"
-                android:background="@drawable/edit_text_style"
+                android:hint="@string/create_invitation_activity_hint"
                 android:padding="5dp"
                 />
 
         <!-- Number of Invitations Available -->
 
-        <com.pandora.rsvp.ui.components.FieldLabel
+        <TextView
                 android:id="@+id/create_invitation_activity_num_invites_label"
                 android:layout_below="@+id/create_invitation_activity_invitation_description_edit_text"
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_num_invitations_available"
+                android:fontFamily="sans-serif"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,22 +79,21 @@
                 android:layout_height="wrap_content"
                 android:inputType="numberSigned"
                 android:digits="0123456789"
-                android:minEms="2"
-                android:maxEms="2"
-                android:maxLength="2"
+                android:ems="4"
+                android:maxLength="4"
                 android:maxLines="1"
-                android:background="@drawable/edit_text_style"
                 android:padding="5dp"
                 />
 
         <!-- RSVP By -->
 
-        <com.pandora.rsvp.ui.components.FieldLabel
+        <TextView
                 android:id="@+id/create_invitation_activity_rsvp_by"
                 android:layout_below="@+id/create_invitation_activity_num_invites_edit_text"
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_rsvp_by"
+                android:fontFamily="sans-serif"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
                 android:inputType="date"
                 android:text="11/20/2015"
                 android:maxLines="1"
-                android:background="@drawable/edit_text_style"
+                
                 android:padding="@dimen/text_border_padding"
                 />
 
@@ -121,18 +121,19 @@
                 android:inputType="time"
                 android:text="1:00 pm"
                 android:maxLines="1"
-                android:background="@drawable/edit_text_style"
+                
                 android:padding="@dimen/text_border_padding"
                 />
 
         <!-- Email Distribution List -->
 
-        <com.pandora.rsvp.ui.components.FieldLabel
+        <TextView
                 android:id="@+id/create_invitation_activity_email_label"
                 android:layout_below="@+id/create_invitation_activity_rsvp_date"
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_email_dist_list"
+                android:fontFamily="sans-serif"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -143,37 +144,39 @@
                 android:layout_below="@+id/create_invitation_activity_email_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLines="1"
-                android:background="@drawable/edit_text_style"
+                android:inputType="textMultiLine"
                 android:padding="@dimen/text_border_padding"
                 />
+        <!-- ebebeb ebebf1-->
 
         <!-- +++++ Choosing Winner(s), section Header +++++ -->
 
-        <com.pandora.rsvp.ui.components.SectionHeader
+        <TextView
                 android:id="@+id/create_invitation_activity_choosing_winners_header"
                 android:layout_below="@+id/create_invitation_activity_email_edit_text"
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:text="@string/create_invitation_activity_choosing_winners_header"
+                android:fontFamily="sans-serif-light"
                 style="@style/SectionHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         <View android:id="@+id/create_invitation_activity_choosing_winners_underline"
               android:layout_below="@+id/create_invitation_activity_choosing_winners_header"
-              android:background="@color/section_underline_color"
-              android:layout_width="fill_parent"
+              android:background="@color/divider_color"
+              android:layout_marginTop="2dp"
+              android:layout_width="match_parent"
               android:layout_height="@dimen/header_underline_width"/>
 
         <!-- Method of Choice -->
 
-        <com.pandora.rsvp.ui.components.FieldLabel
+        <TextView
                 android:id="@+id/create_invitation_activity_method_of_choice"
                 android:layout_below="@+id/create_invitation_activity_choosing_winners_underline"
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_method_of_choice"
+                android:fontFamily="sans-serif"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -225,7 +228,7 @@
                 android:layout_below="@+id/create_invitation_activity_first_come_first_served"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:text="@string/create_invitation_activity_see_sample_email"
                 android:background="@color/light_blue"
                 android:padding="@dimen/text_border_padding"
