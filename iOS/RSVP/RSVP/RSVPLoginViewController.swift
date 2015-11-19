@@ -24,7 +24,7 @@ class RSVPLoginViewController: UIViewController {
     }
     @IBOutlet weak var loginButton: UIButton! {
         didSet {
-            loginButton.layer.cornerRadius = 2;
+            loginButton.layer.cornerRadius = 4;
         }
     }
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView! {
