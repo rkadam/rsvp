@@ -38,15 +38,37 @@ module.exports = function(model) {
         }, {
           url: 'http://'+req.header('host')+'/api/users/:uid/invitations',
           method: 'POST',
+          post_body: {
+            title: 'Title of invitation',
+            response_accept_limit: '# of responses that will be accpeted (integer)',
+            rsvp_by_time: 'Time event will take place (integer - unix time in ms)',
+            email_to: 'list of email addresses that offer will be sent to (string)',
+            method: 'method of invitation selection: one of ["random", "firstcomefirstserve"]',
+            invitation_body: 'body of email that will be sent',
+          },
           description: "create a new invitation owned by :uid",
           returns: 'invitation object'
         }, {
-          url: 'http://'+req.header('host')+'/api/users/:uid/invitations/:iid',
+          url: 'http://'+req.header('host')+'/api/users/:uid/invitations/:invitation_id',
           method: 'GET',
           description: "return an invitation object",
           returns: 'invitation object'
         }, {
-          url: 'http://'+req.header('host')+'/api/users/:uid/invitations/:iid',
+          url: 'http://'+req.header('host')+'/api/users/:uid/invitations/:invitation_id/selectWinners',
+          method: 'GET',
+          description: "calls response selection method",
+          returns: 'updated invitation object (with response objects populated with selected property (boolean)'
+        }, {
+          url: 'http://'+req.header('host')+'/api/users/:uid/invitations/:invitation_id/closeInvitation',
+          method: 'POST',
+          post_body: {
+            accepted_body: 'Body of email to send to accepected responses',
+            rejected_body: 'Body of email to send to rejected responses',
+          },
+          description: "send inviation",
+          returns: 'updated invitation object',
+        }, {
+          url: 'http://'+req.header('host')+'/api/users/:uid/invitations/:invitation_id',
           method: 'PUT',
           description: "update an invitation object",
           returns: 'invitation object'
@@ -69,7 +91,7 @@ module.exports = function(model) {
     },
     fetchInvitation: function(req, res, next) {
       //FIXME - check req.params.uid
-      model.fetchInvitation(req.params.iid).then(function(invitation) {
+      model.fetchInvitation(req.params.invitation_id).then(function(invitation) {
         res.result = invitation;
         next();
       });
@@ -90,6 +112,20 @@ module.exports = function(model) {
     },
     updateInvitation: function(req, res, next) {
       model.updateInvitation(req.body).then(function(r) {
+        res.result = r;
+        next();
+      });
+    },
+    selectWinners: function(req, res, next) {
+      //FIXME - check req.params.uid
+      model.selectWinners(req.params.invitation_id).then(function(r) {
+        res.result = r;
+        next();
+      });
+    },
+    closeInvitation: function(req, res, next) {
+      //FIXME - check req.params.uid
+      model.closeInvitation(req.params.invitation_id, req.body).then(function(r) {
         res.result = r;
         next();
       });

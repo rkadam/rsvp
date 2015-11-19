@@ -32,10 +32,13 @@ module.exports = function(app) {
   app.route('/api/users/:uid/invitations').post(controllers.createInvitation);
 
   //create a new invitation object belonging to :uid
-  app.route('/api/users/:uid/invitations/:iid').get(controllers.fetchInvitation);
+  app.route('/api/users/:uid/invitations/:invitation_id').get(controllers.fetchInvitation);
 
   //update an invitation object belonging to :uid
-  app.route('/api/users/:uid/invitations/:iid').put(controllers.updateInvitation);
+  app.route('/api/users/:uid/invitations/:invitation_id').put(controllers.updateInvitation);
+  app.route('/api/users/:uid/invitations/:invitation_id').put(controllers.updateInvitation);
+  app.route('/api/users/:uid/invitations/:invitation_id/selectWinners').get(controllers.selectWinners);
+  app.route('/api/users/:uid/invitations/:invitation_id/closeInvitation').post(controllers.closeInvitation);
 
   app.route('/api/*').all(controllers.sendResponse);
 

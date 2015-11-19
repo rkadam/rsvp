@@ -143,9 +143,15 @@ var model = {
         return res;
       });
   },
-  createResponse: function(invitation_id, email_address, response_time, response_body) {
+  selectWinners: function(invitation_id) {
+    return model.fetchInvitation(invitation_id);
+  },
+  closeInvitation: function(invitation_id, data) {
+    return model.fetchInvitation(invitation_id);
+  },
+  createResponse: function(response_data) {
     var time = Date.now();
-    var uid = email_address.split('@')[0];
+    var uid = response_data.email_address.split('@')[0];
     var response = {};
     return ldap.userSearch(uid)
       .then(function(userObject) {
@@ -154,16 +160,16 @@ var model = {
         }
         response = {
           uid: userObject.uid,
-          invitation_id: invitation_id,
+          invitation_id: response_data.invitation_id,
           name: userObject.name,
           years: userObject.years,
           department: userObject.department,
-          response_time: response_time,
-          response_body: response_body,
+          response_time: response_data.response_time,
+          response_body: response_data.response_body,
           selected: false,
           image_url: 'https://ray.savagebeast.com/sbldap/image.cgi?uid='+uid
         };
-      return redisCommand('sadd', [invitation_id+':responses', JSON.stringify(response)]);
+      return redisCommand('sadd', [response_data.invitation_id+':responses', JSON.stringify(response)]);
     }).then(function(res) {
       return response;
     });
