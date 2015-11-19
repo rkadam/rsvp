@@ -82,6 +82,12 @@ var parseValue = function(value) {
   return parsed;
 };
 
+var sendInvitation = function(invitation) {
+  var deferred = new Q.defer();
+  deferred.resolve('yay');
+  return deferred.promise;
+};
+
 var sendResponses = function(invitation) {
   var deferred = new Q.defer();
   deferred.resolve('yay');
@@ -94,17 +100,21 @@ var model = {
     var id = uid + '-' + time;
     invitation.uid = uid;
     invitation.id = id;
+    invitation.create_time = time;
     invitation.sent_time = null;
     invitation.accepted_body = null;
     invitation.rejected_body = null;
     invitation.active = true;
     invitation.responses = [];
-    return redisMulti([
-      ['sadd', [uid, id]],
-      ['set', [id, JSON.stringify(invitation)]],
-    ]).then(function() {
-      return invitation;
-    });
+    return sendInvitation(invitation)
+      .then(function(res) {
+        return redisMulti([
+          ['sadd', [uid, id]],
+          ['set', [id, JSON.stringify(invitation)]],
+        ]);
+      }).then(function() {
+        return invitation;
+      });
   },
   fetchInvitation: function(invitation_id) {
     var invitation = {};
