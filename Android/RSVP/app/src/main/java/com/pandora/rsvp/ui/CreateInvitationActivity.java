@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.pandora.rsvp.R;
 import com.pandora.rsvp.ui.base.BaseActivity;
+import com.pandora.rsvp.utils.ValidationUtils;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -35,6 +36,12 @@ public class CreateInvitationActivity extends BaseActivity {
 
     @Bind(R.id.create_invitation_activity_email_edit_text)
     EditText mEmailListEdit;
+
+    @BindString(R.string.create_invitation_activity_email_blank)
+    String mBlankEmailAddress;
+
+    @BindString(R.string.create_invitation_activity_email_invalid_format)
+    String mInvalidEmailAddress;
 
     @Bind(R.id.create_invitation_activity_spinner_choice)
     Spinner mSpinnerChoice;
@@ -71,6 +78,20 @@ public class CreateInvitationActivity extends BaseActivity {
             mNumInvitesEdit.requestFocus();
             return;
         }
+        
+        String email;
+        if (isBlank(mEmailListEdit)) { // Validate email address
+            Toast.makeText(this, mBlankEmailAddress, Toast.LENGTH_LONG).show();
+            mEmailListEdit.requestFocus();
+            return;
+        } else {
+            email = mEmailListEdit.getText().toString().trim();
+            if (!ValidationUtils.isValidEmail(email)) {
+                mEmailListEdit.requestFocus();
+                Toast.makeText(this, mInvalidEmailAddress, Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
 
         Long datetime = System.currentTimeMillis(); // TODO
         String selectionMethod = mSpinnerChoice.getSelectedItem().toString();
@@ -78,7 +99,7 @@ public class CreateInvitationActivity extends BaseActivity {
         DialogFragment dialogPreviewEmail = PreviewInvitationDialog.newInstance(
                 mDescriptionEdit.getText().toString(),                  // Invitation Description
                 Integer.parseInt(mNumInvitesEdit.getText().toString()),   // Number of Invitations
-                datetime, mEmailListEdit.getText().toString(), selectionMethod);
+                datetime, email, selectionMethod);
         dialogPreviewEmail.show(getSupportFragmentManager(), dialogPreviewEmail.getClass().getSimpleName());
     }
 

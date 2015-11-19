@@ -19,14 +19,18 @@
     <string name="create_invitation_activity_num_invitations_blank">Please enter the number of invitations.</string>
     <string name="create_invitation_activity_rsvp_by">RSVP By</string>
     <string name="create_invitation_activity_email_dist_list">Email Distribution List</string>
+    <string name="create_invitation_activity_email_blank">Please enter an email distribution list.</string>
+    <string name="create_invitation_activity_email_invalid_format">Please enter a single email distribution address, e.g. dist-fyi-oak@pandora.com</string>
     <string name="create_invitation_activity_choosing_winners_header">CHOOSING WINNER(S)</string>
     <string name="create_invitation_activity_method_of_choice">Method:</string>
     <string name="create_invitation_activity_see_preview_email">SEE PREVIEW EMAIL</string>
     <string name="create_invitation_activity_hint">Enter event description.</string>
     <string-array name="choice_array">
         <item>Random Order</item>
+        <!--
         <item>First Come First Served</item>
         <item>Manual Choice</item>
+        -->
     </string-array>
 
     <string name="dialog_invitation_preview_to_label">To:</string>
