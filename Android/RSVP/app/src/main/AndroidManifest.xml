@@ -16,16 +16,19 @@
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+
         </activity>
 
         <activity
             android:name=".ui.CreateInvitationActivity"
             android:label="@string/title_activity_create_invitation"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.InvitationListActivity"
             android:label="@string/title_invitation_list"
@@ -33,6 +36,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
+
             <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>

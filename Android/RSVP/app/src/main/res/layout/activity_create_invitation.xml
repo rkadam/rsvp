@@ -5,8 +5,7 @@
         android:layout_height="match_parent"
         >
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout 
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -20,7 +19,7 @@
         <TextView
                 android:id="@+id/create_invitation_activity_invitation_details_header"
                 android:text="@string/create_invitation_activity_invitation_details_header"
-                android:fontFamily="sans-serif-light"
+               
                 style="@style/SectionHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -40,7 +39,6 @@
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_invitation_description"
-                android:fontFamily="sans-serif"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +50,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
-                android:gravity="top|left"
                 android:scrollbars="vertical"
                 android:hint="@string/create_invitation_activity_hint"
                 android:padding="5dp"
@@ -66,7 +63,6 @@
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_num_invitations_available"
-                android:fontFamily="sans-serif"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,7 +89,6 @@
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_rsvp_by"
-                android:fontFamily="sans-serif"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,7 +102,7 @@
                 android:inputType="date"
                 android:text="11/20/2015"
                 android:maxLines="1"
-                
+
                 android:padding="@dimen/text_border_padding"
                 />
 
@@ -121,7 +116,7 @@
                 android:inputType="time"
                 android:text="1:00 pm"
                 android:maxLines="1"
-                
+
                 android:padding="@dimen/text_border_padding"
                 />
 
@@ -133,7 +128,6 @@
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_email_dist_list"
-                android:fontFamily="sans-serif"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -156,7 +150,6 @@
                 android:layout_below="@+id/create_invitation_activity_email_edit_text"
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:text="@string/create_invitation_activity_choosing_winners_header"
-                android:fontFamily="sans-serif-light"
                 style="@style/SectionHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -176,62 +169,28 @@
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_method_of_choice"
-                android:fontFamily="sans-serif"
                 style="@style/FieldLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
 
-        <TextView
-                android:id="@+id/create_invitation_activity_first_come_first_served"
-                android:layout_below="@+id/create_invitation_activity_method_of_choice"
-                android:text="@string/create_invitation_activity_first_come_first_served"
-                android:gravity="center"
-                android:layout_width="@dimen/choice_button_width"
+        <Spinner 
+                android:id="@+id/create_invitation_activity_spinner_choice"
+                android:layout_below="@+id/create_invitation_activity_choosing_winners_underline"
+                android:layout_toRightOf="@+id/create_invitation_activity_method_of_choice"
+                android:layout_alignBaseline="@+id/create_invitation_activity_method_of_choice"
+                android:layout_width="wrap_content" 
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_style"
-                android:padding="@dimen/text_border_padding"
-                />
+                android:layout_marginLeft="@dimen/space_between_choice_buttons"/>
 
-        <TextView
-                android:id="@+id/create_invitation_activity_first_come_random_order"
-                android:layout_below="@+id/create_invitation_activity_method_of_choice"
-                android:layout_alignBaseline="@+id/create_invitation_activity_first_come_first_served"
-                android:layout_toRightOf="@+id/create_invitation_activity_first_come_first_served"
-                android:layout_marginLeft="@dimen/space_between_choice_buttons"
-                android:layout_marginStart="@dimen/space_between_choice_buttons"
-                android:gravity="center"
-                android:text="@string/create_invitation_activity_random_order"
-                android:layout_width="@dimen/choice_button_width"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_style"
-                android:padding="@dimen/text_border_padding"
-                />
-
-        <TextView
-                android:id="@+id/create_invitation_activity_first_come_manual_choice"
-                android:layout_below="@+id/create_invitation_activity_method_of_choice"
-                android:layout_alignBaseline="@+id/create_invitation_activity_first_come_first_served"
-                android:layout_toRightOf="@+id/create_invitation_activity_first_come_random_order"
-                android:layout_marginLeft="@dimen/space_between_choice_buttons"
-                android:layout_marginStart="@dimen/space_between_choice_buttons"
-                android:gravity="center"
-                android:text="@string/create_invitation_activity_manual_choice"
-                android:layout_width="@dimen/choice_button_width"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_text_style"
-                android:padding="@dimen/text_border_padding"
-                />
-        
         <Button
                 android:id="@+id/create_invitation_activity_preview_email_button"
-                android:layout_below="@+id/create_invitation_activity_first_come_first_served"
+                android:layout_below="@+id/create_invitation_activity_method_of_choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/create_invitation_activity_see_sample_email"
-                android:background="@color/light_blue"
-                android:padding="@dimen/text_border_padding"
+                android:text="@string/create_invitation_activity_see_preview_email"
+                android:textColor="@android:color/white"
                 />
     </RelativeLayout>
 </ScrollView>

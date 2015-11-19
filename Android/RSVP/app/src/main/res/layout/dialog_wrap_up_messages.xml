@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            >
+
+        <!-- WRAP-UP MESSAGES -->
+
+        <TextView
+                android:id="@+id/dialog_email_preview_wrap_up_messages"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:text="@string/dialog_wrap_up_messages_title"
+                style="@style/FieldLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <!-- Message to Chosen Winners -->
+
+        <TextView
+                android:id="@+id/dialog_email_preview_winner_msg"
+                android:layout_below="@+id/dialog_email_preview_wrap_up_messages"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:text="@string/dialog_wrap_up_messages_message_to_winners"
+                style="@style/FieldLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <EditText
+                android:id="@+id/dialog_email_preview_winner_edit_text"
+                android:layout_below="@+id/dialog_email_preview_winner_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:padding="5dp"
+                />
+
+        <!-- Message to All Responses -->
+
+        <TextView
+                android:id="@+id/dialog_email_preview_all_responses_label"
+                android:layout_below="@+id/dialog_email_preview_winner_edit_text"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:text="@string/dialog_wrap_up_messages_message_to_all"
+                style="@style/FieldLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <EditText
+                android:id="@+id/dialog_email_preview_all_responses_edit_text"
+                android:layout_below="@+id/dialog_email_preview_all_responses_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:padding="5dp"
+                />
+
+        <!-- SEND button -->
+
+        <Button
+                android:id="@+id/dialog_wrap_up_send_button"
+                android:layout_below="@+id/dialog_email_preview_all_responses_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/dialog_wrap_up_messages_send_label"
+                android:textColor="@android:color/white"
+                android:padding="@dimen/text_border_padding"
+                android:theme="@style/AppTheme"
+                />
+    </RelativeLayout>
+</ScrollView>
