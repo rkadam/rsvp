@@ -14,7 +14,7 @@
 	},
 	"less": [
 		"node_modules/normalize.css/normalize.css",
-		"src/**/*.less"
+		"src/all.less"
 	],
 	"html": [
 		"src/**/*.html"

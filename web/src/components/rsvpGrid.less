@@ -1,0 +1,257 @@
+/**
+ * Fractional, infinitely nestable grids.
+ *
+ * Grid widths
+ * ---------------------------------------------------------------------------
+ * Grid widths are specified as fractions. The available widths are:
+ *
+ *  - Whole: 1/1
+ *  - Halves: 1/2
+ *  - Thirds: 1/3, 2/3
+ *  - Fourths: 1/4, 2/4, 3/4
+ *  - Fifths: 1/5, 2/5, 3/5, 4/5
+ *
+ *
+ * Specifying grid widths via CSS classes
+ * ---------------------------------------------------------------------------
+ * Widths can be specified as fractions in the form `rsvpGrid--X/Y`, where the
+ * element will be X/Y the width of its parent. For example, `rsvpGrid--2/3`
+ * will make an element be 2/3rds the width of its parent.
+ *
+ * Responsive, viewport-specific grid widths can be set via the `@*`
+ * class suffixes. For instance, `rsvpGrid--1/2@M` will make an
+ * be 1/2 the width of its parent for viewports equal to or larger than M.
+ * See the rsvpView class for more details on its usage.
+ *
+ * @example Equal-size 3-column grid
+```html
+	<div class="rsvpGrid">
+		<div class="rsvpGrid--1/3"> … </div>
+		<div class="rsvpGrid--1/3"> … </div>
+		<div class="rsvpGrid--1/3"> … </div>
+		<div class="rsvpGrid--1/3"> … </div>
+	</div>
+```
+ *
+ * @example 3-column grid with a nested 2-column grid
+```html
+	<div class="rsvpGrid" style="background: rgba(255, 0, 0, 0.1)">
+		<div class="rsvpGrid--1/5" style="background: rgba(255, 0, 0, 0.1)"> … </div>
+		<div class="rsvpGrid--1/5" style="background: rgba(0, 0, 255, 0.1)"> … </div>
+		<div class="rsvpGrid--3/5" style="background: rgba(255, 0, 0, 0.1)">
+			<div class="rsvpGrid--1/2" style="background: rgba(0, 255, 0, 0.1)"> … </div>
+			<div class="rsvpGrid--1/2" style="background: rgba(0,255, 0, 0.1)"> … </div>
+		</div>
+	</div>
+```
+ *
+ * @example 2-column grid by default, 1-column grid when viewport is larger or equal than L
+```html
+	<div class="rsvpGrid">
+		<div class="rsvpGrid--1/1 rsvpGrid--1/2@L"> … </div>
+		<div class="rsvpGrid--1/1 rsvpGrid--1/2@L"> … </div>
+	</div>
+```
+ *
+ * @example Any non-full width grids should be wrapped within an element with a
+ * full-width grid such as `rsvpGrid` or `rsvpGrid--1/1`
+```html
+	// Bad:
+	<div>
+		<div class="rsvpGrid--1/2"> … </div>
+		<div class="rsvpGrid--1/2"> … </div>
+	</div>
+
+	// Good:
+	<div class="rsvpGrid">
+		<div class="rsvpGrid--1/2"> … </div>
+		<div class="rsvpGrid--1/2"> … </div>
+	</div>
+```
+ *
+ * Specifying grid widths via Less mixins
+ * ---------------------------------------------------------------------------
+ * Widths can be specified via the `.rsvpGrid--width()` mixin:
+ *
+ *   .rsvpGrid--width(@columns, @totalColumns, @spacing)
+ *
+ *   @columns: How many columns this grid should span
+ *   @totalColumns: How many total columns there will be
+ *   @spacing (optional): The static spacing between each column (in px, em, etc.)
+ *
+ * `.rsvpGrid--width(X, Y)` is equivalent to the CSS class `rsvpGrid--X/Y`.
+ * For example, `.rsvpGrid--width(2, 3)` is equivalent to `rsvpGrid--2/3`.
+ *
+ * @example A CSS class styled as a 3-column grid
+```less
+	.card {
+		.rsvpGrid--width(1, 3);
+	}
+```
+ *
+ * @example A 3-column grid with 10px spacing between columns
+```less
+	.card {
+		.rsvpGrid--width(1, 3, 10px);
+	}
+```
+ *
+ * @example A 2-column grid by default, 3-column grid for viewports equal to or larger than M
+```less
+	.card {
+		.rsvpGrid--width(1, 2);
+
+		@media @minM {
+			.rsvpGrid--width(1, 3);
+		}
+	}
+```
+ */
+
+/**
+ * Creates a grid.
+ *
+ * @param {Number} @columns - How many columns this grid should span
+ * @param {Number} @totalColumns - How many total columns there will be
+ *
+ * @example Equal 3-column grid
+```less
+	.card {
+		.rsvpGrid--width(1, 3);
+	}
+```
+ */
+.rsvpGrid--width(@columns, @totalColumns) when (@totalColumns = 1) {
+	.rsvpGrid--base();
+	width: 100%;
+	clear: both;
+	float: none;
+}
+.rsvpGrid--width(@columns, @totalColumns) when (default()) {
+	.rsvpGrid--base();
+	width: @columns / @totalColumns * 100%;  // @supports wkhtmltopdf (for PDF generation) which doesn't support calc()
+	width: ~"calc(@{columns} / @{totalColumns} * 100%)";
+	clear: none;
+	float: left;
+}
+
+/**
+ * Creates a grid with static spacing.
+ *
+ * @param {Number} @columns - How many columns this grid should span
+ * @param {Number} @totalColumns - How many total columns there will be
+ * @param {Length} @spacing - Spacing between columns (in px, em, etc.)
+ *
+ * @example Equal 3-column grid with 10px between columns
+```less
+	.card {
+		.rsvpGrid--width(1, 3, 10px);
+	}
+```
+ */
+.rsvpGrid--width(@columns, @totalColumns, @spacing) when (@totalColumns = 1) {
+	.rsvpGrid--base();
+	width: 100%;
+	clear: both;
+	float: none;
+
+	// Sets margin for all items; necessary in order to override any margins
+	// set by .rsvpGrid--width() within different media queries
+	&:nth-child(even),
+	&:nth-child(odd) {
+		margin-left: 0;
+	}
+}
+.rsvpGrid--width(@columns, @totalColumns, @spacing) when (default()) {
+	.rsvpGrid--base();
+
+	// Formula: (fractional width) * (total % space left after subtracting total fixed spacing)
+	width: ~"calc( (@{columns} / @{totalColumns}) * (100% - @{spacing} * (@{totalColumns} - 1)) )";
+	clear: none;
+	float: left;
+
+	// Sets margin for all items; necessary in order to override any margins
+	// set by .rsvpGrid--width() within different media queries
+	&:nth-child(even),
+	&:nth-child(odd) {
+		margin-left: @spacing;
+	}
+
+	// Removes margin for the first item in each row
+	&:nth-child(@{totalColumns}n + 1) {
+		margin-left: 0;
+	}
+}
+
+/* -------------------------------------------------------------------------
+ * Private helpers
+ * ------------------------------------------------------------------------- */
+
+/**
+ * Common grid styles.
+ *
+ * @private
+ */
+.rsvpGrid--base() {
+	box-sizing: border-box;
+	display: block;
+
+	// Clearfix
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+// Default grid (1-column)
+.rsvpGrid {
+	.rsvpGrid--base();
+	.rsvpGrid--width(1, 1);
+}
+
+// 1-column grid
+.rsvpGrid--createGrid(1, 1);
+
+// 2-column grid
+.rsvpGrid--createGrid(1, 2);
+
+// 3-column grid
+.rsvpGrid--createGrid(1, 3);
+.rsvpGrid--createGrid(2, 3);
+
+// 4-column grid
+.rsvpGrid--createGrid(1, 4);
+.rsvpGrid--createGrid(2, 4);
+.rsvpGrid--createGrid(3, 4);
+
+// 5-column grid
+.rsvpGrid--createGrid(1, 5);
+.rsvpGrid--createGrid(2, 5);
+.rsvpGrid--createGrid(3, 5);
+.rsvpGrid--createGrid(4, 5);
+
+// 6-column grid
+.rsvpGrid--createGrid(1, 6);
+.rsvpGrid--createGrid(2, 6);
+.rsvpGrid--createGrid(3, 6);
+.rsvpGrid--createGrid(4, 6);
+.rsvpGrid--createGrid(5, 6);
+
+/**
+ * Creates an `rsvpGrid--X/Y` grid CSS class.
+ *
+ * @private
+ * @param {Number} @columns - How many columns this grid should span
+ * @param {Number} @totalColumns - How many total columns there will be
+ */
+.rsvpGrid--createGrid(@columns, @totalColumns) {
+	.rsvpGrid--@{columns}\/@{totalColumns} {
+		.rsvpView--addBreakpointModifiers({
+			.rsvpGrid--width(@columns, @totalColumns);
+		});
+	}
+}
