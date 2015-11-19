@@ -41,18 +41,36 @@ class RSVPLoginViewController: UIViewController {
     
     @IBAction func loginButtonTapped(sender: UIButton) {
         self.view.endEditing(true)
-        loginButton.alpha = 0.5
-        loginButton.enabled = false
-        activityIndicator.startAnimating()
-        
-        RSVPNetworkManager.instance.loginUser(emailField.text!, 🔑: passwordField.text!,
-            😊: { (🍕, 💣) -> Void in
-                self.activityIndicator.stopAnimating()
-            }) { (🍕, 💣) -> Void in
-                self.loginButton.alpha = 1
-                self.loginButton.enabled = true
-                self.activityIndicator.stopAnimating()
+
+        if isEmailValid(emailField.text!) && self.passwordField.text != "" {
+            loginButton.alpha = 0.5
+            loginButton.enabled = false
+            activityIndicator.startAnimating()
+            RSVPNetworkManager.instance.loginUser(emailField.text!, 🔑: passwordField.text!,
+                😊: { (🍕, 💣) -> Void in
+                    self.activityIndicator.stopAnimating()
+                }) { (🍕, 💣) -> Void in
+                    self.loginButton.alpha = 1
+                    self.loginButton.enabled = true
+                    self.activityIndicator.stopAnimating()
+            }
+        } else {
+            let alert = UIAlertController(title: "Invalid Login", message: "Please enter a valid email and password", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
+        
+    }
+    
+    func isEmailValid(email: String) -> Bool {
+        if email == "" {
+            return false
+        }
+        let regex = try! NSRegularExpression(pattern:"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$",
+            options: [.CaseInsensitive])
+        
+        return regex.firstMatchInString(email, options:[],
+            range: NSMakeRange(0, email.utf16.count)) != nil
     }
 }
 
@@ -75,4 +93,5 @@ extension RSVPLoginViewController: UITextFieldDelegate {
         return false
     }
 }
+
 
