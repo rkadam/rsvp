@@ -1,0 +1,22 @@
+{
+	"src": "src/",
+	"dist": "public/dist/",
+	"js": {
+		"vendor": [
+			"node_modules/angular/angular.js",
+			"node_modules/angular-ui-router/release/angular-ui-router.js",
+			"node_modules/lodash/index.js"
+		],
+		"app": [
+			"src/bootstrap.js",
+			"src/**/*.js"
+		]
+	},
+	"less": [
+		"node_modules/normalize.css/normalize.css",
+		"src/**/*.less"
+	],
+	"html": [
+		"src/**/*.html"
+	]
+}
