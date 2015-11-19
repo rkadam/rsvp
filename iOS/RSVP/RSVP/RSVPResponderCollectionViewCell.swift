@@ -20,8 +20,7 @@ class RSVPResponderCollectionViewCell: UICollectionViewCell {
     
     var responder: RSVPResponder! {
         didSet {
-            let data = NSData(contentsOfURL : NSURL(string: responder.imageURL)!)
-            imageView.image = UIImage(data : data!)
+            imageView.setImageWithURL(NSURL(string: responder.imageURL)!)
             
             userNameLabel.text = responder.name
             userDepartmentLabel.text = responder.department

@@ -11,7 +11,7 @@ import Foundation
 class RSVPResponder {
     var department = "Engineering"
     var invitationId = "invalid_invitation_id"
-    var name = "Oliver"
+    var name = "Oliver Dormody"
     var responseDate = NSDate()
     var responseBody = "Empty Response."
     var selected = false

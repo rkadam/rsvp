@@ -11,11 +11,10 @@ import Charts
 
 class RSVPOfferDetailViewController: UIViewController {
     
-    var responders = [RSVPResponder](count: 6, repeatedValue:RSVPResponder(networkData: [:]))
+    var responders = [RSVPResponder](count: 10, repeatedValue:RSVPResponder(networkData: [:]))
 
     var offerModel: RSVPOfferModel? = nil {
         didSet {
-            // initial the views here
             title = offerModel?.title
         }
     }
@@ -49,13 +48,7 @@ class RSVPOfferDetailViewController: UIViewController {
             yearsAtPandoraChartView.legend.xEntrySpace = 4
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-    }
-    
+
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -86,6 +79,7 @@ class RSVPOfferDetailViewController: UIViewController {
         let data = BarChartData(xVals: keys, dataSets: dataSets)
         yearsAtPandoraChartView.data = data
     }
+
 }
 
 extension RSVPOfferDetailViewController: UICollectionViewDelegate {}
