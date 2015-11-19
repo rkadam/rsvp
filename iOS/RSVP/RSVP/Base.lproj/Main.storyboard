@@ -377,12 +377,15 @@
                                     <segment title="CHOSEN"/>
                                 </segments>
                             </segmentedControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Muy-M3-zHp">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Muy-M3-zHp">
                                 <rect key="frame" x="0.0" y="124" width="600" height="183"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="183" id="5ks-YO-ALY"/>
                                 </constraints>
                             </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="StO-dH-PEv">
+                                <rect key="frame" x="288" y="270" width="23" height="37"/>
+                            </pageControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fn6-Kj-cxK">
                                 <rect key="frame" x="0.0" y="306" width="600" height="294"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="e1w-EU-JbQ">
@@ -407,7 +410,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User's Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5a-HC-ETz">
-                                                    <rect key="frame" x="15" y="60" width="70" height="17"/>
+                                                    <rect key="frame" x="15" y="60" width="70" height="16.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -450,16 +453,21 @@
                             <constraint firstAttribute="trailing" secondItem="Fn6-Kj-cxK" secondAttribute="trailing" id="IS1-gP-6Yo"/>
                             <constraint firstItem="Fn6-Kj-cxK" firstAttribute="leading" secondItem="Nu7-ha-A6w" secondAttribute="leading" id="Mkw-je-MVy"/>
                             <constraint firstItem="rm4-hq-WZ0" firstAttribute="top" secondItem="Fn6-Kj-cxK" secondAttribute="bottom" id="Pno-i7-OYA"/>
+                            <constraint firstItem="StO-dH-PEv" firstAttribute="centerX" secondItem="Muy-M3-zHp" secondAttribute="centerX" id="RC3-7d-mXR"/>
                             <constraint firstItem="Muy-M3-zHp" firstAttribute="leading" secondItem="Nu7-ha-A6w" secondAttribute="leading" id="UcQ-vy-RQV"/>
                             <constraint firstItem="Fn6-Kj-cxK" firstAttribute="top" secondItem="Muy-M3-zHp" secondAttribute="bottom" constant="-1" id="X2X-aA-CqE"/>
                             <constraint firstItem="8tR-rh-dHy" firstAttribute="leading" secondItem="Nu7-ha-A6w" secondAttribute="leading" constant="8" id="Zb3-xu-vLm"/>
                             <constraint firstItem="Muy-M3-zHp" firstAttribute="top" secondItem="8tR-rh-dHy" secondAttribute="bottom" constant="8" id="kHC-Jh-vMp"/>
                             <constraint firstItem="8tR-rh-dHy" firstAttribute="top" secondItem="dw0-Ya-XDT" secondAttribute="bottom" constant="8" id="mPJ-gn-xFa"/>
+                            <constraint firstItem="StO-dH-PEv" firstAttribute="bottom" secondItem="Muy-M3-zHp" secondAttribute="bottom" id="v8K-C6-EKr"/>
                             <constraint firstAttribute="trailing" secondItem="Muy-M3-zHp" secondAttribute="trailing" id="yHP-P5-eVS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="As5-Uy-nMN"/>
+                    <navigationItem key="navigationItem" id="As5-Uy-nMN">
+                        <barButtonItem key="rightBarButtonItem" title="Choose" id="Cmp-WN-J1l"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="chartScrollView" destination="Muy-M3-zHp" id="7RK-mB-Rod"/>
                         <outlet property="segmentedControl" destination="8tR-rh-dHy" id="EsD-Wp-3DR"/>
                     </connections>
                 </viewController>

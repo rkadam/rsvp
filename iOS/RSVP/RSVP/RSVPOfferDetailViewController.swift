@@ -16,6 +16,7 @@ class RSVPOfferDetailViewController: UIViewController {
         didSet {
             // initial the views here
             title = offerModel?.title
+            setUpChart()
         }
     }
     @IBOutlet weak var segmentedControl: UISegmentedControl! {
@@ -23,11 +24,16 @@ class RSVPOfferDetailViewController: UIViewController {
             segmentedControl.tintColor = UIColor(red: 41/255, green: 235/255, blue: 227/255, alpha: 1)
         }
     }
+    @IBOutlet weak var chartScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+    }
+    
+    private func setUpChart() {
+        
     }
 }
 
