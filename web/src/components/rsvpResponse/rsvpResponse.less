@@ -34,6 +34,10 @@ rsvp-response {
 		font-weight: @rsvpFont__weight--bolder;
 		text-align: center;
 		color: @rsvpColor__text;
+
+		.rsvpResponse.-selected & {
+			color: @rsvpColor__text--accent;
+		}
 	}
 
 	&__dept {
