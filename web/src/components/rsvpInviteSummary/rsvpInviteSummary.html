@@ -1,0 +1,15 @@
+<div class="nbsInviteSummary">
+	<h3 class="nbsInviteSummary__title">
+		{{ ctrl.invite.title }}
+	</h3>
+
+	<span class="nbsInviteSummary__date">
+		{{ ctrl.invite.rsvp_by_time | date:'longDate' }}
+	</span>
+
+	<rsvp-badge label="{{ ctrl.invite.responses.length }}"></rsvp-badge>
+	Responses
+
+	<rsvp-badge label="{{ ctrl.numChosen }}"></rsvp-badge>
+	Chosen
+</div>
