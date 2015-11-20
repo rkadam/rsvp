@@ -9,6 +9,12 @@ angular.module('rsvp').directive('rsvpResponse', function() {
 		templateUrl: 'components/rsvpResponse/rsvpResponse.html',
 		controllerAs: 'ctrl',
 		bindToController: true,
-		controller: function() {},
+		controller: function($element) {
+			var image = $element.find('img');
+
+			image.load(function() {
+				image.addClass('-loaded');
+			});
+		},
 	};
 });

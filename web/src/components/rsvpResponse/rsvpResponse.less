@@ -26,9 +26,14 @@ rsvp-response {
 
 	&__image {
 		display: block;
-		background: @rsvpColor__fill--selected;
 		border: @borderSize solid transparent;
 		border-radius: 50%;
+		opacity: 0;
+		transition: 200ms opacity ease;
+
+		&.-loaded {
+			opacity: 1;
+		}
 	}
 
 	&__name {
