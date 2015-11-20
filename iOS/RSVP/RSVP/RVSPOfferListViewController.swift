@@ -80,6 +80,7 @@ class RVSPOfferListViewController: UIViewController {
     private func fetchOrderList() {
         offerList.removeAll()
         tableView.reloadData()
+        
         RSVPNetworkManager.instance.getOfferList("raju") { (response, error) -> Void in
             if let _response = response as? NSDictionary {
                 for offerData in _response["data"] as? Array<NSDictionary> ?? [] {
@@ -93,6 +94,8 @@ class RVSPOfferListViewController: UIViewController {
                 alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
+            
+            self.indicatorView.stopAnimating()
         }
     }
     

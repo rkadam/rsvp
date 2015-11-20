@@ -34,7 +34,12 @@ class RSVPOfferDetailViewController: UIViewController {
             segmentedControl.tintColor = UIColor(red: 41/255, green: 235/255, blue: 227/255, alpha: 1)
         }
     }
-    @IBOutlet weak var chartScrollView: UIScrollView!
+    @IBOutlet weak var chartScrollView: UIScrollView! {
+        didSet {
+            chartScrollView.alpha = 0
+            chartScrollView.delegate = self
+        }
+    }
     @IBOutlet weak var yearsAtPandoraChartView: BarChartView! {
         didSet {
             yearsAtPandoraChartView.userInteractionEnabled = false
@@ -63,13 +68,37 @@ class RSVPOfferDetailViewController: UIViewController {
             yearsAtPandoraChartView.legend.xEntrySpace = 0
         }
     }
-
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        setUpChart()
+    @IBOutlet weak var departmentChartView: PieChartView! {
+        didSet {
+            departmentChartView.userInteractionEnabled = false
+            departmentChartView.usePercentValuesEnabled = false
+            departmentChartView.holeTransparent = true
+            departmentChartView.holeRadiusPercent = 0.58
+            departmentChartView.transparentCircleRadiusPercent = 0.61
+            departmentChartView.descriptionText = ""
+            departmentChartView.setExtraOffsets(left: 5, top: 10, right: 5, bottom: 5)
+            
+            departmentChartView.drawCenterTextEnabled = false
+            
+            departmentChartView.drawHoleEnabled = true
+            departmentChartView.rotationAngle = 0.0
+            departmentChartView.rotationEnabled = true
+            departmentChartView.highlightPerTapEnabled = true
+            
+            let legend = departmentChartView.legend
+            legend.position = .LeftOfChart
+            legend.xEntrySpace = 7
+            legend.yEntrySpace = 0
+            legend.yOffset = 0
+        }
     }
+    @IBOutlet weak var pageControl: UIPageControl! {
+        didSet {
+            pageControl.pageIndicatorTintColor = UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 1)
+            pageControl.alpha = 0
+        }
+    }
+
     @IBAction func valueChangedForSegmentedControl(sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex
         {
@@ -85,7 +114,20 @@ class RSVPOfferDetailViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        chartScrollView.contentSize = CGSizeMake(chartScrollView.bounds.width*2, chartScrollView.bounds.height)
+        setUpChart()
+    }
+    
     private func setUpChart() {
+        // bar chart
         var yearDictionary = Dictionary<String, Int>()
         for responser in offerModel?.responses ?? [] {
             if yearDictionary[String(responser.years)] != nil {
@@ -95,23 +137,65 @@ class RSVPOfferDetailViewController: UIViewController {
             }
         }
         
-        var yVals = [BarChartDataEntry]()
+        var barChartYVals = [BarChartDataEntry]()
         
         var index = 0
         for (_, value) in yearDictionary {
-            yVals.append(BarChartDataEntry(value: Double(value), xIndex: index))
+            barChartYVals.append(BarChartDataEntry(value: Double(value), xIndex: index))
             index++
         }
         
-        let chartDataSet = BarChartDataSet(yVals: yVals, label: "YEARS AT PANDORA")
-        chartDataSet.barSpace = 0.35
+        let barChartDataSet = BarChartDataSet(yVals: barChartYVals, label: "YEARS AT PANDORA")
+        barChartDataSet.barSpace = 0.35
         
-        let dataSets = [chartDataSet]
-        let keys = Array(yearDictionary.keys)
-        let data = BarChartData(xVals: keys, dataSets: dataSets)
-        yearsAtPandoraChartView.data = data
+        yearsAtPandoraChartView.data = BarChartData(xVals: Array(yearDictionary.keys), dataSets: [barChartDataSet])
+        
+        // pie chart
+        var departmentDictionary = Dictionary<String, Int>()
+        for responser in offerModel?.responses ?? [] {
+            if departmentDictionary[responser.department] != nil {
+                departmentDictionary[responser.department]!++
+            } else {
+                departmentDictionary[responser.department] = 1
+            }
+        }
+        
+        var pieChartYVals = [BarChartDataEntry]()
+        
+        index = 0
+        for (_, value) in departmentDictionary {
+            pieChartYVals.append(BarChartDataEntry(value: Double(value), xIndex: index))
+            index++
+        }
+        
+        let pieChartDataSet = PieChartDataSet(yVals: pieChartYVals, label: "DEPARTMENTS")
+        pieChartDataSet.sliceSpace = 2.0
+        pieChartDataSet.colors = [UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 1),
+            UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 0.8),
+            UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 0.6),
+            UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 0.4),
+            UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 0.2),
+            UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 0.1)]
+        
+        let pieChartData = BarChartData(xVals: Array(departmentDictionary.keys), dataSets: [pieChartDataSet])
+        departmentChartView.data = pieChartData
+        departmentChartView.animate(xAxisDuration: 1.0)
+        
+        UIView.animateWithDuration(0.33) { () -> Void in
+            self.chartScrollView.alpha = 1
+            self.pageControl.alpha = 1
+        }
     }
+}
 
+extension RSVPOfferDetailViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView.contentOffset.x >= scrollView.contentSize.width {
+            pageControl.currentPage = 1
+        } else {
+            pageControl.currentPage = 0
+        }
+    }
 }
 
 extension RSVPOfferDetailViewController: UICollectionViewDelegate {}
