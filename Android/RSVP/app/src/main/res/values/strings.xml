@@ -78,4 +78,5 @@
     <string name="years_data">Years</string>
     <string name="dept_data">Department</string>
     <string name="full_up">Full Up</string>
+    <string name="dud">this is a dud</string>
 </resources>

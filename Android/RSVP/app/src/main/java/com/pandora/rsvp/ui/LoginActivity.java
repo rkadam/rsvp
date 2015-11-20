@@ -7,7 +7,6 @@ import com.pandora.rsvp.service.ApiCallBack;
 import com.pandora.rsvp.service.IRSVPApi;
 import com.pandora.rsvp.service.contract.SimpleResponse;
 import com.pandora.rsvp.ui.base.BaseActivity;
-import com.pandora.rsvp.utils.ValidationUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,6 +52,7 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<SimpleRes
         email.addTextChangedListener(validationWatcher);
         password.addTextChangedListener(validationWatcher);
         email.setText(mIUserDataManager.getUserName());
+        password.setText(R.string.dud);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +62,7 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<SimpleRes
     }
 
     private void submit() {
-        mIRSVPApi.authenticate(email.getText().toString(), password.getText().toString(), this);
+        mIRSVPApi.authenticate(email.getText().toString(), "dud", this);
         toggleProgress(true);
     }
 
@@ -89,9 +89,8 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<SimpleRes
     };
 
     private void toggleButton() {
-        String pass = password.getText().toString();
         String userName = email.getText().toString();
-        boolean valid = !userName.isEmpty() && !pass.isEmpty();
+        boolean valid = !userName.isEmpty();
         submit.setEnabled(valid);
         submit.setAlpha(submit.isEnabled() ? 1f : 0.5f);
     }
@@ -126,7 +125,5 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<SimpleRes
         submit.setAlpha(submit.isEnabled() ? 1f : 0.5f);
         email.setEnabled(!loading);
         email.setAlpha(email.isEnabled() ? 1f : 0.5f);
-        password.setEnabled(!loading);
-        password.setAlpha(password.isEnabled() ? 1f : 0.5f);
     }
 }
