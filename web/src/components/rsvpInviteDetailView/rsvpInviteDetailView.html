@@ -107,39 +107,4 @@
 
 </div>
 
-<rsvp-dialog name="wrapup">
-	<form name="form" class="rsvpGrid">
-
-		<h2 class="rsvpTextHeading -level2 rsvpText -alignCenter">Wrap-up messages</h2>
-
-		<p>
-			<label class="rsvpInputLabel">Message to Chosen Winners</label>
-			<textarea ng-model="form.acceptedBody" class="rsvpInput rsvpGrid" rows="6" required></textarea>
-		</p>
-		<p>
-			<label class="rsvpInputLabel">Message to Everyone Else</label>
-			<textarea ng-model="form.rejectedBody" class="rsvpInput rsvpGrid" rows="6" required></textarea>
-		</p>
-
-		<span class="rsvpPad--rightXS rsvpGrid--1/2">
-			<button
-				type="button"
-				class="rsvpButton -typeSecondary rsvpGrid"
-				ng-click="$root.RsvpDialog.close('wrapup')"
-			>
-				Whoops, Not Yet
-			</button>
-		</span>
-
-		<span class="rsvpPad--leftXS rsvpGrid--1/2">
-			<button
-				type="submit"
-				class="rsvpButton -typePrimary rsvpGrid"
-				ng-click="form.$valid && ctrl.sendWrapUp(form.acceptedBody, form.rejectedBody)"
-			>
-				{{ ctrl.invite.sent_time ? 'Sending…' : 'Send' }}
-			</button>
-		</span>
-
-	</form>
-</rsvp-dialog>
+<ng-include src="'components/rsvpEmailWrapUpDialog.html'"></ng-include>

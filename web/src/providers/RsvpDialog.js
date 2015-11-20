@@ -1,4 +1,6 @@
-angular.module('rsvp').service('RsvpDialog', function() {
+angular.module('rsvp').service('RsvpDialog', function(
+	$document
+) {
 	'use strict';
 
 	var RsvpDialog = this;
@@ -14,9 +16,11 @@ angular.module('rsvp').service('RsvpDialog', function() {
 
 	RsvpDialog.open = function(dialogName) {
 		_dialogs[dialogName] = true;
+		angular.element('html').css('overflow', 'hidden');
 	};
 
 	RsvpDialog.close = function(dialogName) {
 		_dialogs[dialogName] = false;
+		angular.element('html').css('overflow', '');
 	};
 });

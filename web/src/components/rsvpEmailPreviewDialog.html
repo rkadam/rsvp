@@ -1,0 +1,41 @@
+<rsvp-dialog name="preview">
+	<form name="form" class="rsvpGrid">
+
+		<pre class="rsvpCreateInviteView__preview rsvpGrid">
+<b>To:</b> {{ ctrl.invite.email_to }}
+<b>From:</b> {{ ctrl.userId }}@pandora.com
+<b>Subject:</b> {{ ctrl.invite.title }}
+
+{{ ctrl.invite.invitation_body }}
+		</pre>
+
+		<p class="rsvpGrid">
+			<span class="rsvpPad--rightXS rsvpGrid--1/2">
+				<button
+					type="button"
+					class="rsvpButton -typeSecondary rsvpGrid"
+					ng-click="$root.RsvpDialog.close('preview')"
+				>
+					Whoops, Not Yet
+				</button>
+			</span>
+
+			<span class="rsvpPad--leftXS rsvpGrid--1/2">
+				<button
+					type="submit"
+					class="rsvpButton -typePrimary rsvpGrid"
+					ng-click="form.$valid && ctrl.createInvite(ctrl.invite)"
+					ng-disabled="ctrl.isSending"
+				>
+					{{ ctrl.isSending ? 'Sending...' : 'Send invitation' }}
+				</button>
+			</span>
+		</p>
+
+		<p ng-if="ctrl.hasSendError" class="rsvpText -warn">
+			<rsvp-icon icon="ss-alert"></rsvp-icon>
+			An error occurred, please try again.
+		</p>
+
+	</form>
+</rsvp-dialog>
