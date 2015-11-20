@@ -21,6 +21,7 @@ import java.util.List;
  */
 public class InvitationResponsesPagerAdapter extends PagerAdapter {
 
+    private boolean hasResponses;
     private boolean hasChosen;
     List<InviteResponse> chosenInviteResponse;
     List<InviteResponse> responsesInviteResponse;
@@ -36,19 +37,25 @@ public class InvitationResponsesPagerAdapter extends PagerAdapter {
                 }
             }
         }
+        this.hasResponses = responsesInviteResponse.size() > 0;
         this.hasChosen = chosenInviteResponse.size() > 0;
     }
 
     @Override
     public int getCount() {
-        return chosenInviteResponse.size() == 0 ? 1 : 2;
+        return chosenInviteResponse.size() == 0 ? 1 + (hasResponses ? 1 : 0) : 3;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         boolean chosen = hasChosen && position == 0;
         int size = chosen ? chosenInviteResponse.size() : responsesInviteResponse.size();
-        if (size > 0) {
+        if ((hasChosen && position == 2) || (!hasChosen && position == 1)) {
+            YearsChartView chartView = new YearsChartView(container.getContext());
+            container.addView(chartView);
+            chartView.setInvitationData(responsesInviteResponse);
+            return chartView;
+        } else if (size > 0) {
             RecyclerView rv = new RecyclerView(container.getContext());
             rv.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             rv.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
@@ -61,9 +68,6 @@ public class InvitationResponsesPagerAdapter extends PagerAdapter {
             textView.setTextColor(ContextCompat.getColor(container.getContext(), android.R.color.darker_gray));
             textView.setPadding(30, 30, 30, 0);
             container.addView(textView);
-
-//            YearsChartView chartView = new YearsChartView(container.getContext());
-//            container.addView(chartView);
             return textView;
         } 
     }
@@ -71,7 +75,8 @@ public class InvitationResponsesPagerAdapter extends PagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         String count = String.valueOf(hasChosen && position == 0 ? chosenInviteResponse.size() : responsesInviteResponse.size());
-        return String.format(hasChosen && position == 0 ? "Chosen (%s)" : "Responded (%s)", count);
+        boolean isChart = (hasChosen && position == 2) || (!hasChosen && position == 1);
+        return isChart ? "Stats" : String.format(hasChosen && position == 0 ? "Chosen (%s)" : "Responded (%s)", count);
     }
 
     @Override

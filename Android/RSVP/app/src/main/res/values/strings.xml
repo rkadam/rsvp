@@ -68,4 +68,5 @@
     <string name="no_resp">No one has responded yet.</string>
     <string name="action_refresh">Refresh</string>
     <string name="years_dist">Year at Pandora</string>
+    <string name="dept_dist">Departments</string>
 </resources>
