@@ -68,6 +68,10 @@ class RSVPLoginViewController: UIViewController {
         
     }
     
+    @IBAction func cancelButtonTapped(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: {});
+    }
+    
     func isEmailValid(email: String) -> Bool {
         if email == "" {
             return false

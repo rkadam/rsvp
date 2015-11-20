@@ -91,9 +91,22 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="vIk-hz-DZ3">
                                 <rect key="frame" x="372" y="167" width="20" height="20"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4P-Mt-hHY">
+                                <rect key="frame" x="265" y="200" width="70" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="GI8-XZ-5zk"/>
+                                </constraints>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.1333333333" green="0.25098039220000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="bLj-H9-rBP" eventType="touchUpInside" id="AAr-3u-mCJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="y4P-Mt-hHY" firstAttribute="top" secondItem="21t-a0-F32" secondAttribute="bottom" constant="8" id="Bb4-ta-m7p"/>
                             <constraint firstItem="vIk-hz-DZ3" firstAttribute="centerY" secondItem="21t-a0-F32" secondAttribute="centerY" id="BpW-0r-imy"/>
                             <constraint firstItem="21t-a0-F32" firstAttribute="centerX" secondItem="ZRE-nw-j9X" secondAttribute="centerX" id="JIj-jf-8b8"/>
                             <constraint firstItem="21t-a0-F32" firstAttribute="top" secondItem="AfM-dk-jYK" secondAttribute="bottom" constant="8" id="Lfz-jw-2bN"/>
@@ -102,6 +115,7 @@
                             <constraint firstItem="gbk-e4-I9h" firstAttribute="top" secondItem="ZtR-ro-cpk" secondAttribute="bottom" constant="8" id="ZuL-zh-onD"/>
                             <constraint firstItem="ZtR-ro-cpk" firstAttribute="centerX" secondItem="ZRE-nw-j9X" secondAttribute="centerX" id="i54-ra-GZV"/>
                             <constraint firstItem="gbk-e4-I9h" firstAttribute="centerX" secondItem="ZRE-nw-j9X" secondAttribute="centerX" id="jzT-6r-Tan"/>
+                            <constraint firstItem="y4P-Mt-hHY" firstAttribute="centerX" secondItem="ZRE-nw-j9X" secondAttribute="centerX" id="kZw-be-eBP"/>
                             <constraint firstItem="AfM-dk-jYK" firstAttribute="top" secondItem="gbk-e4-I9h" secondAttribute="bottom" constant="8" id="nDz-RJ-j1q"/>
                             <constraint firstItem="vIk-hz-DZ3" firstAttribute="trailing" secondItem="21t-a0-F32" secondAttribute="trailing" constant="-8" id="rFr-i4-HSG"/>
                         </constraints>
@@ -326,7 +340,14 @@
                             <constraint firstItem="Sbf-0W-zaH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="oSW-H0-bHm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Offers" id="SiP-9f-ySu"/>
+                    <navigationItem key="navigationItem" title="Offers" id="SiP-9f-ySu">
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="b52-hA-xrN">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="bLj-H9-rBP" kind="showDetail" id="tZK-LA-ljz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="createNewOfferButton" destination="oKQ-FE-dLs" id="i3u-os-fff"/>
                         <outlet property="createNewOfferGoButton" destination="6yo-dK-vAg" id="rdL-sj-LpX"/>
@@ -720,13 +741,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User's Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5a-HC-ETz">
                                                     <rect key="frame" x="15" y="60" width="70" height="16.5"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Dept" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUm-AG-ecm">
                                                     <rect key="frame" x="8" y="76" width="84" height="36"/>
                                                     <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
