@@ -15,6 +15,7 @@ EmailSender.prototype.connect = function(){
     return new Promise(function(resolve, reject){
         if(this._connection){
             reject("Connection already open");
+            return null;
         }
 
         this._connection = new SMTPConnection({

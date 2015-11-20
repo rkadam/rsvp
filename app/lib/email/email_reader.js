@@ -28,7 +28,7 @@ EmailReader.prototype.connect = function(){
     return new Promise(function(resolve, reject){
         if(this._imap){
             reject("Connection already open");
-            return;
+            return null;
         }
         this._imap = new Imap(this._config);
 
@@ -59,7 +59,8 @@ EmailReader.prototype.getNewMessages = function(){
 
     this._gettingNewMessages = new Promise(function(resolve, reject){
         if(!this._imap || !this._connected){
-            throw new Error("Connection NOT open");
+            reject("Connection NOT open");
+            return null;
         }
 
         this._imap.search(['UNSEEN'], function(err, results) {
@@ -67,7 +68,7 @@ EmailReader.prototype.getNewMessages = function(){
             if(err){
                 this._gettingNewMessages = null;
                 reject(err);
-                return;
+                return null;
             }
 
             if(!results || results.length <= 0){
