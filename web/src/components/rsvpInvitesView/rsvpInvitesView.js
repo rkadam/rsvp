@@ -1,4 +1,6 @@
 angular.module('rsvp').directive('rsvpInvitesView', function(
+	$state,
+	_,
 	RsvpInviteApi
 ) {
 	'use strict';
@@ -13,7 +15,8 @@ angular.module('rsvp').directive('rsvpInvitesView', function(
 			var ctrl = this;
 
 			RsvpInviteApi.fetchInvites().then(function(invites) {
-				ctrl.invites = invites;
+				ctrl.invites = _.sortByOrder(invites, ['active', 'desc'], ['rsvp_by_time', 'asc']);
+				$state.go('invites.detail', { inviteId: ctrl.invites[0].id });
 			});
 		},
 	};

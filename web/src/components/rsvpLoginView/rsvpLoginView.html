@@ -1,0 +1,46 @@
+<div class="rsvpLoginView">
+	<div class="rsvpLoginView__background"></div>
+
+	<form name="form" class="rsvpLoginView__form">
+
+		<h2 class="rsvpLoginView__formTitle">
+			Welcome!<br>
+			Please log in:
+		</h2>
+
+		<p>
+			<label class="rsvpInputLabel">Username</label>
+			<input
+				type="text"
+				ng-model="form.userId"
+				class="rsvpInput rsvpGrid"
+				required
+			>
+		</p>
+
+		<p>
+			<label class="rsvpInputLabel">Password</label>
+			<input
+				type="password"
+				ng-model="form.password"
+				class="rsvpInput rsvpGrid"
+				required
+			>
+		</p>
+
+		<button
+			type="submit"
+			class="rsvpButton -typePrimary rsvpGrid"
+			ng-click="form.$valid && ctrl.login(form.userId, form.password)"
+			ng-disabled="ctrl.isLoggingIn"
+		>
+			{{ ctrl.isLoggingIn ? 'Logging in...' : 'Good to go' }}
+		</button>
+
+		<p ng-if="ctrl.hasLoginError">
+			<rsvp-icon icon="ss-alert"></rsvp-icon>
+			An error occurred, please try again.
+		</p>
+
+	</form>
+</div>
