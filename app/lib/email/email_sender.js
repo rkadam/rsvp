@@ -66,15 +66,15 @@ EmailSender.prototype.sendMessage = function(from, subject, message, invitation_
 
         var envelope = {
             to: recipient,
-            from: "rsvp@pandora.com"
+            from: EmailSender.INVITATION_FROM
         };
         subject = subject + " (Ref:" + invitation_id + ")";
         message = [
             "Subject: ", subject, "\r\n",
             EmailSender.INVITATION_HEADER, ": ", invitation_id, "\r\n",
-            "On-Behalf-Of: ", "rsvp@pandora.com", "\r\n",
+            "On-Behalf-Of: ", EmailSender.INVITATION_FROM, "\r\n",
             "Sender: ", from, "\r\n",
-            "Reply-To: rsvp@pandora.com\r\n",
+            "Reply-To: ", EmailSender.INVITATION_FROM, "\r\n",
             message,
             "\r\n"
         ].join('');
@@ -99,5 +99,6 @@ EmailSender.prototype.disconnect = function(){
 };
 
 EmailSender.INVITATION_HEADER = "X-Invitation-Id";
+EmailSender.INVITATION_FROM = "rsvp@pandora.com";
 
 module.exports = EmailSender;

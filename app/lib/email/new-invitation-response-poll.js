@@ -32,7 +32,7 @@ var client = new EmailReader(extend(configuration, {
  * @returns {bluebird} Promise
  */
 function saveAcceptedInvites(storage, emails){
-    //console.log("******> about to save accepted emails: " + inspect(emails));
+    console.log("******> about to save accepted emails: " + inspect(emails));
     return Promise.map(emails, function(email){
         return Promise.resolve(storage.createResponse({
             invitation_id: email.invitation_id,

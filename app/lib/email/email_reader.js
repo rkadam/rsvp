@@ -64,7 +64,7 @@ EmailReader.prototype.getNewMessages = function(){
         }
 
         this._imap.search(['UNSEEN'], function(err, results) {
-            logMessage("===> got unseen messages: " + inspect(results));
+            console.log("===> got unseen messages: " + inspect(results));
             if(err){
                 this._gettingNewMessages = null;
                 reject(err);
@@ -79,7 +79,7 @@ EmailReader.prototype.getNewMessages = function(){
             }
 
             var messages = [];
-            var fetchOp = this._imap.fetch(results, {
+            var fetchOp = this._imap.fetch(results.slice(0, 4), {
                 markSeen: true,
                 bodies: ''
             });
