@@ -1,6 +1,7 @@
 package com.pandora.rsvp.ui.custom;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -13,7 +14,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -119,6 +119,7 @@ public class YearsChartView extends RelativeLayout {
         });
         data.setValueTextSize(12);
         chart.setData(data);
+        chart.getLegend().setWordWrapEnabled(true);
         chart.invalidate();
         chart.notifyDataSetChanged();
     }
@@ -134,7 +135,7 @@ public class YearsChartView extends RelativeLayout {
         float luminance = 0.9f;
 
         for (int i = 0; i < count; i++) {
-            float saturation = (random.nextInt(2000) + 1000) / 10000f;
+            float saturation = ((1000 * i) + 1000) / 10000f;
             colors[i] = Color.HSVToColor(new float[]{hue, saturation, luminance});
         }
         return colors;

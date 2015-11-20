@@ -5,6 +5,7 @@ import com.pandora.rsvp.service.contract.Invitation;
 import com.pandora.rsvp.service.contract.InviteResponse;
 import com.pandora.rsvp.service.contract.UserInvitationsResponse;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +77,9 @@ public class InvitationListAdapter extends RecyclerView.Adapter<InvitationListAd
                 }
             }
         });
-        holder.liveStatus.setVisibility(invitation.active ? View.VISIBLE : View.INVISIBLE);
+        holder.liveStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(),
+                invitation.active ? R.color.colorAccentSecondary : android.R.color.holo_red_dark));
+        holder.liveStatus.setText(invitation.active ? R.string.live : R.string.full_up);
     }
 
     @Override

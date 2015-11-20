@@ -125,14 +125,11 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
         method.setText(invitation.method);
         emailTo.setText(String.format(getResources().getString(R.string.email_to), invitation.email_to));
 
-        SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy", Locale.US);
-        StringBuilder builder = new StringBuilder(getResources().getString(R.string.from));
+        SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy h:m a", Locale.US);
+        StringBuilder builder = new StringBuilder(getResources().getString(R.string.from)).append(": ");
         Calendar cal = Calendar.getInstance();
+        builder.append(formatter.format(cal.getTime()));
         cal.setTimeInMillis(invitation.create_time);
-        builder.append(" ")
-                .append(formatter.format(cal.getTime()));
-        cal.setTimeInMillis(invitation.rsvp_by_time);
-        builder.append("- ").append(formatter.format(cal.getTime()));
         invitationDate.setText(builder.toString());
 
     }
