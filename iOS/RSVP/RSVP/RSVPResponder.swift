@@ -16,7 +16,7 @@ class RSVPResponder {
     var responseBody = "Empty Response."
     var selected = false
     var uid = "invalid_id"
-    var years = 0
+    var years: Double = 0
     var imageURL = "https://ray.savagebeast.com/sbldap/image.cgi?uid=odormody"
     
     init(networkData: NSDictionary) {
@@ -27,7 +27,10 @@ class RSVPResponder {
         selected = networkData["selected"] as? Bool ?? selected
         uid = networkData["uid"] as? String ?? uid
         responseDate = convertDate(networkData["reponded"] as? Double ?? 0)
-        years = networkData["years"] as? Int ?? years
+        if let yearString = networkData["years"] as? String {
+            years = Double(round(Double(yearString)!)) ?? years
+        }
+        //years = networkData["years"] as? Double ?? years
         imageURL = networkData["image_url"] as? String ?? imageURL
     }
     

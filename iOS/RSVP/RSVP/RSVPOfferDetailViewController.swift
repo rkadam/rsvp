@@ -172,18 +172,24 @@ class RSVPOfferDetailViewController: UIViewController {
         
         var barChartYVals = [BarChartDataEntry]()
         
+        var allKeys = Array(yearDictionary.keys)
+        allKeys = allKeys.sort {
+            return $0 < $1
+        }
+        
         var index = 0
         for (_, value) in yearDictionary {
             barChartYVals.append(BarChartDataEntry(value: Double(value), xIndex: index))
             index++
         }
         
+        
         let barChartDataSet = BarChartDataSet(yVals: barChartYVals, label: "YEARS AT PANDORA")
         barChartDataSet.barSpace = 0.35
         barChartDataSet.valueFormatter = NSNumberFormatter()
         barChartDataSet.valueFormatter?.minimumFractionDigits = 0
         
-        yearsAtPandoraChartView.data = BarChartData(xVals: Array(yearDictionary.keys), dataSets: [barChartDataSet])
+        yearsAtPandoraChartView.data = BarChartData(xVals: allKeys, dataSets: [barChartDataSet])
         
         // pie chart
         var departmentDictionary = Dictionary<String, Int>()
