@@ -34,12 +34,12 @@ var client = new EmailReader(extend(configuration, {
 function saveAcceptedInvites(storage, emails){
     //console.log("******> about to save accepted emails: " + inspect(emails));
     return Promise.map(emails, function(email){
-        return Promise.resolve(storage.createResponse(
-            email.invitation_id,
-            email.email,
-            email.timestamp,
-            email.body
-        ));
+        return Promise.resolve(storage.createResponse({
+            invitation_id: email.invitation_id,
+            email_address: email.email,
+            response_time: email.timestamp,
+            response_body: email.body
+        }));
     });
 }
 
