@@ -37,6 +37,10 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
     public static final String INVITATION_KEY = "InvitationKey";
     public static final String KEY_INVITATION_DESCRIPTION = "key_invitation_description";
     public static final String KEY_NUM_INVITES = "key_num_invites";
+    private static final String API_PROP_RANDOM = "random";
+    private static final String API_PROP_FIRST_COME = "firstcomefirstserve";
+    private static final String METHOD_RANDOM = "Random";
+    private static final String METHOD_FIRST_COME = "First Come, First Serve";
     
     @Bind(R.id.view_pager)
     ViewPager pager;
@@ -125,10 +129,18 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
     private void initLabels() {
         invitationTitle.setText(invitation.title);
         body.setText(invitation.invitation_body);
-        method.setText(invitation.method);
+        String frontEndFormattedLabel = "";
+        if (invitation.method != null) {
+            if (invitation.method.equals(API_PROP_RANDOM)) {
+                frontEndFormattedLabel = METHOD_RANDOM;
+            } else if (invitation.method.equals(API_PROP_FIRST_COME)) {
+                frontEndFormattedLabel = METHOD_FIRST_COME;
+            }
+        }
+        method.setText(frontEndFormattedLabel);
         emailTo.setText(String.format(getResources().getString(R.string.email_to), invitation.email_to));
 
-        SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy h:m a", Locale.US);
+        SimpleDateFormat formatter = new SimpleDateFormat(CreateInvitationActivity.DATE_TIME_FORMAT, Locale.US);
         StringBuilder builder = new StringBuilder(getResources().getString(R.string.from)).append(": ");
         Calendar cal = Calendar.getInstance();
         builder.append(formatter.format(cal.getTime()));
