@@ -19,7 +19,7 @@ angular.module('rsvp').directive('rsvpInviteDetailView', function(
 				RsvpInviteApi.updateInvite(ctrl.invite);
 			};
 
-			ctrl.numChosen = 0;
+			ctrl.numChosen = RsvpInviteApi.getNumChosenForInvite(inviteId);
 
 			RsvpInviteApi.onUpdateInvite(function(invite) {
 				ctrl.numChosen = RsvpInviteApi.getNumChosenForInvite(inviteId);
