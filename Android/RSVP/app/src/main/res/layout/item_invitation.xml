@@ -28,10 +28,13 @@
                 android:layout_toStartOf="@+id/live_status"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_vertical"
-                android:textColor="@color/colorPrimaryDark"
                 android:textSize="24sp" />
 
             <TextView
+                android:paddingBottom="2dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="2dp"
                 android:id="@+id/live_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +43,7 @@
                 android:layout_centerVertical="true"
                 android:gravity="center_vertical"
                 android:text="@string/live"
-                android:textColor="@color/colorAccentSecondary" />
+                android:textColor="@android:color/white" />
 
         </RelativeLayout>
 

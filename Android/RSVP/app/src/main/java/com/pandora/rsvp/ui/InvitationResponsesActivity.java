@@ -11,6 +11,7 @@ import com.pandora.rsvp.ui.base.BaseActivity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,6 +54,8 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
     TextView body;
     @Bind(R.id.rsvp_method)
     TextView method;
+    @Bind(R.id.live_status)
+    TextView liveStatus;
 
     @Bind(R.id.details_container)
     LinearLayout container;
@@ -142,6 +145,11 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
                 R.string.email_chosen_responders : R.string.select_winners);
         respondersActionButton.setEnabled(enabled);
         respondersActionButton.setAlpha(enabled ? 1f : 0.5f);
+        respondersActionButton.setVisibility(invitation.active ? View.VISIBLE : View.GONE);
+
+        liveStatus.setBackgroundColor(ContextCompat.getColor(this,
+                invitation.active ? R.color.colorAccentSecondary : android.R.color.holo_red_dark));
+        liveStatus.setText(invitation.active ? R.string.live : R.string.full_up);
     }
 
     @Override
