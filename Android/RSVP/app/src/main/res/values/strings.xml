@@ -31,8 +31,8 @@
     
     <string-array name="choice_array">
         <item>Random Order</item>
-        <!--
         <item>First Come First Served</item>
+        <!--
         <item>Manual Choice</item>
         -->
     </string-array>

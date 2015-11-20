@@ -1,7 +1,6 @@
 package com.pandora.rsvp.ui;
 
 import android.content.Intent;
-import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,8 +9,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
+import com.doomonafireball.betterpickers.radialtimepicker.RadialTimePickerDialog;
 import com.pandora.rsvp.R;
 import com.pandora.rsvp.app.dagger.RSVPComponent;
 import com.pandora.rsvp.persistence.IUserDataManager;
@@ -21,7 +22,9 @@ import com.pandora.rsvp.service.contract.SingeUserInvitationResponse;
 import com.pandora.rsvp.ui.base.BaseActivity;
 import com.pandora.rsvp.utils.ValidationUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -59,6 +62,10 @@ public class CreateInvitationActivity extends BaseActivity {
     RelativeLayout fieldsLayout;
     @Bind(R.id.progress)
     ProgressBar pbLoading;
+    @Bind(R.id.create_invitation_activity_datetime_picker)
+    Button mDateTimeButton;
+    @Bind(R.id.create_invitation_activity_rsvp_date)
+    TextView mRSVPDate;
 
     @Inject
     IUserDataManager mIUserDataManager;
@@ -86,6 +93,18 @@ public class CreateInvitationActivity extends BaseActivity {
         mSpinnerChoice.setAdapter(adapter);
         mEmailListEdit.setText("dist-rsvp-test@pandora.com");
         toggleProgress(false);
+
+        mDateTimeButton.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View v) {
+                                                   Calendar now = Calendar.getInstance();
+                                                   CalendarDatePickerDialog dialog = CalendarDatePickerDialog.newInstance(dateCallBack,
+                                                           now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+                                                   dialog.show(getSupportFragmentManager(), "DATE_DIALOG");
+                                               }
+                                           }
+
+        );
     }
 
     @OnClick(R.id.create_invitation_activity_preview_email_button)
@@ -168,4 +187,32 @@ public class CreateInvitationActivity extends BaseActivity {
         return (editText != null && editText.getText().toString().trim().length() == 0);
     }
 
+    private Calendar pickedTime;
+    private boolean timeSet;
+    private static final String DATE_TIME_FORMAT = "MM/dd/yyyy HH:mm Z";
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.US);
+    
+    private CalendarDatePickerDialog.OnDateSetListener dateCallBack = new CalendarDatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog,int year,int monthOfYear,int dayOfMonth){
+            pickedTime=Calendar.getInstance();
+            pickedTime.set(Calendar.YEAR,year);
+            pickedTime.set(Calendar.MONTH,monthOfYear);
+            pickedTime.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+            RadialTimePickerDialog dialog=RadialTimePickerDialog.newInstance(onTimeSetListener,pickedTime.get(Calendar.HOUR_OF_DAY),
+                    pickedTime.get(Calendar.MINUTE),false);
+            dialog.show(getSupportFragmentManager(), "TIME_DIALOG");
+        }
+    };
+    
+    private RadialTimePickerDialog.OnTimeSetListener onTimeSetListener = new RadialTimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(RadialTimePickerDialog radialTimePickerDialog,int hourOfDay,int minute){
+            timeSet=true;
+            pickedTime.set(Calendar.HOUR_OF_DAY,hourOfDay);
+            pickedTime.set(Calendar.MINUTE,minute);
+            mRSVPDate.setText(simpleDateFormat.format(pickedTime.getTime()));
+        }
+    };
+    
 }

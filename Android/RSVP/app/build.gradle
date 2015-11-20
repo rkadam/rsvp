@@ -46,5 +46,8 @@ dependencies {
     //Circle Image View
     compile 'de.hdodenhof:circleimageview:2.0.0'
 
-
+    //Calendar date/time picker - https://github.com/code-troopers/android-betterpickers
+    compile ("com.doomonafireball.betterpickers:library:1.5.5") {
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
 }
