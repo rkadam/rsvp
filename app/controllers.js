@@ -12,7 +12,7 @@ module.exports = function(model) {
     sendResponse: function(req,res,next) {
       var response = {
         success: res.error ? false : true,
-        message: res.error || "Success",
+        message: JSON.stringify(res.error) || "Success",
         updated: res.time,
         data: res.result || {}
       };
