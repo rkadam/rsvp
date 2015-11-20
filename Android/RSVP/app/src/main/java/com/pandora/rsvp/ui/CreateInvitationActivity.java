@@ -22,6 +22,7 @@ import com.pandora.rsvp.service.contract.SingeUserInvitationResponse;
 import com.pandora.rsvp.ui.base.BaseActivity;
 import com.pandora.rsvp.utils.ValidationUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -152,19 +153,25 @@ public class CreateInvitationActivity extends BaseActivity {
             }
         }
 
-        final Long datetime = System.currentTimeMillis(); // 
+        long datetime;
+        try {
+            datetime = simpleDateFormat.parse(mRSVPDate.getText().toString()).getTime();
+        } catch (ParseException e) {
+            datetime = Calendar.getInstance().getTimeInMillis();
+        }
         String selectionMethod = mSpinnerChoice.getSelectedItem().toString();
         final boolean random = selectionMethod.equalsIgnoreCase("Random Order");
         PreviewInvitationDialog dialogPreviewEmail = PreviewInvitationDialog.newInstance(
                 mDescriptionEdit.getText().toString(),                  // Invitation Description
                 Integer.parseInt(mNumInvitesEdit.getText().toString()),   // Number of Invitations
                 datetime, emailTo, mIUserDataManager.getUserName(), mNameEdit.getText().toString(), selectionMethod);
+        final long finalDatetime = datetime;
         dialogPreviewEmail.setCreateInviteListener(new PreviewInvitationDialog.CreateInviteListener() {
             @Override
             public void create() {
                 toggleProgress(true);
                 mIRSVPApi.createOffer(mNameEdit.getText().toString(), Integer.valueOf(mNumInvitesEdit.getText().toString()),
-                        datetime, emailTo, random, mDescriptionEdit.getText().toString(), new ApiCallBack<SingeUserInvitationResponse>() {
+                        finalDatetime, emailTo, random, mDescriptionEdit.getText().toString(), new ApiCallBack<SingeUserInvitationResponse>() {
                             @Override
                             public void onSuccess(SingeUserInvitationResponse successResponse) {
                                 if (successResponse != null && successResponse.data != null) {
