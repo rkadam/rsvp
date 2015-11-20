@@ -26,9 +26,15 @@ public class CreateInvitationActivity extends BaseActivity {
     @BindString(R.string.create_invitation_activity_title)
     String mTitle;
 
+    @BindString(R.string.create_invitation_activity_invitation_name_blank)
+    String mBlankName;
+
     @BindString(R.string.create_invitation_activity_invitation_description_blank)
     String mBlankDesc;
 
+    @Bind(R.id.create_invitation_activity_invitation_name_edit_text)
+    EditText mNameEdit;
+    
     @Bind(R.id.create_invitation_activity_invitation_description_edit_text)
     EditText mDescriptionEdit;
 
@@ -71,6 +77,13 @@ public class CreateInvitationActivity extends BaseActivity {
 
     @OnClick(R.id.create_invitation_activity_preview_email_button)
     public void submit(View view) {
+        
+        if (isBlank(mNameEdit)) { // Validate that the invitation name exists
+            Toast.makeText(this, mBlankName, Toast.LENGTH_LONG).show();
+            mNameEdit.requestFocus();
+            return;
+        }
+        
         if (isBlank(mDescriptionEdit)) { // Validate that invitation description was entered
             Toast.makeText(this, mBlankDesc, Toast.LENGTH_LONG).show();
             mDescriptionEdit.requestFocus();
@@ -83,14 +96,14 @@ public class CreateInvitationActivity extends BaseActivity {
             return;
         }
         
-        String email;
-        if (isBlank(mEmailListEdit)) { // Validate email address
+        String emailTo;
+        if (isBlank(mEmailListEdit)) { // Validate emailTo address
             Toast.makeText(this, mBlankEmailAddress, Toast.LENGTH_LONG).show();
             mEmailListEdit.requestFocus();
             return;
         } else {
-            email = mEmailListEdit.getText().toString().trim();
-            if (!ValidationUtils.isValidEmail(email)) {
+            emailTo = mEmailListEdit.getText().toString().trim();
+            if (!ValidationUtils.isValidEmail(emailTo)) {
                 mEmailListEdit.requestFocus();
                 Toast.makeText(this, mInvalidEmailAddress, Toast.LENGTH_LONG).show();
                 return;
@@ -103,7 +116,7 @@ public class CreateInvitationActivity extends BaseActivity {
         DialogFragment dialogPreviewEmail = PreviewInvitationDialog.newInstance(
                 mDescriptionEdit.getText().toString(),                  // Invitation Description
                 Integer.parseInt(mNumInvitesEdit.getText().toString()),   // Number of Invitations
-                datetime, email, selectionMethod);
+                datetime, emailTo, mNameEdit.getText().toString(), selectionMethod);
         dialogPreviewEmail.show(getSupportFragmentManager(), dialogPreviewEmail.getClass().getSimpleName());
     }
 

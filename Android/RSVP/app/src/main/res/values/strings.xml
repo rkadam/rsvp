@@ -13,6 +13,8 @@
 
     <string name="create_invitation_activity_title">Creating Invitation</string>
     <string name="create_invitation_activity_invitation_details_header">INVITATION DETAILS</string>
+    <string name="create_invitation_activity_invitation_name">Invitation Name</string>
+    <string name="create_invitation_activity_invitation_name_blank">Please enter an invitation name.</string>
     <string name="create_invitation_activity_invitation_description">Invitation Description</string>
     <string name="create_invitation_activity_invitation_description_blank">Please enter an invitation description.</string>
     <string name="create_invitation_activity_num_invitations_available">Number of Invitations Available</string>
@@ -24,7 +26,9 @@
     <string name="create_invitation_activity_choosing_winners_header">CHOOSING WINNER(S)</string>
     <string name="create_invitation_activity_method_of_choice">Method:</string>
     <string name="create_invitation_activity_see_preview_email">SEE PREVIEW EMAIL</string>
-    <string name="create_invitation_activity_hint">Enter event description.</string>
+    <string name="create_invitation_activity_name_hint">Enter event name.</string>
+    <string name="create_invitation_activity_desc_hint">Enter event description.</string>
+    
     <string-array name="choice_array">
         <item>Random Order</item>
         <!--

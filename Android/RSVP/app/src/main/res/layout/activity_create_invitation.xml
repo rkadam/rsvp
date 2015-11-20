@@ -30,12 +30,36 @@
               android:layout_marginTop="2dp"
               android:layout_width="match_parent"
               android:layout_height="@dimen/header_underline_width"/>
+        
+        <!-- Invitation Name -->
 
+        <TextView
+                android:id="@+id/create_invitation_activity_invitation_name_label"
+                android:layout_below="@+id/create_invitation_activity_invitation_details_header"
+                android:layout_marginTop="@dimen/field_label_margin_top"
+                android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
+                android:text="@string/create_invitation_activity_invitation_name"
+                style="@style/FieldLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        <EditText
+                android:id="@+id/create_invitation_activity_invitation_name_edit_text"
+                android:layout_below="@+id/create_invitation_activity_invitation_name_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:hint="@string/create_invitation_activity_name_hint"
+                android:padding="5dp"
+                />
+        
         <!-- Invitation Description -->
 
         <TextView
                 android:id="@+id/create_invitation_activity_invitation_description_label"
-                android:layout_below="@+id/create_invitation_activity_invitation_details_underline"
+                android:layout_below="@+id/create_invitation_activity_invitation_name_edit_text"
                 android:layout_marginTop="@dimen/field_label_margin_top"
                 android:layout_marginBottom="@dimen/margin_between_label_and_edit_text"
                 android:text="@string/create_invitation_activity_invitation_description"
@@ -51,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:scrollbars="vertical"
-                android:hint="@string/create_invitation_activity_hint"
+                android:hint="@string/create_invitation_activity_desc_hint"
                 android:padding="5dp"
                 />
 
@@ -188,7 +212,7 @@
                 android:layout_below="@+id/create_invitation_activity_method_of_choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/create_invitation_activity_see_preview_email"
                 android:textColor="@android:color/white"
                 />
