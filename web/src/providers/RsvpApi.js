@@ -14,6 +14,8 @@ angular.module('rsvp').service('RsvpApi', function(
 	RsvpApi.delete = _.partial(makeRequest, 'DELETE');
 
 	function makeRequest(method, path, options) {
+		options = options || {};
+
 		var defer = $q.defer();
 		var url = '/api' + path;
 
