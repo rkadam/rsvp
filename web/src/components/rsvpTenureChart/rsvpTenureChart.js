@@ -4,6 +4,7 @@ angular.module('rsvp').directive('rsvpTenureChart', function() {
     restrict: 'E',
     scope: {
       invite:'=',
+      selected: '=',
     },
     templateUrl: 'components/rsvpTenureChart/rsvpTenureChart.html',
     link: function(scope, iElement, attrs) {
@@ -24,7 +25,7 @@ angular.module('rsvp').directive('rsvpTenureChart', function() {
               return parseInt(d);
           },
           color: function(d, i) {
-            var color = d3.rgb('#224099').brighter(i*0.5);
+            var color = d3.rgb('#224099').brighter(i*0.7);
             return color;
           },
           duration: 500,
@@ -37,12 +38,19 @@ angular.module('rsvp').directive('rsvpTenureChart', function() {
         }
       };
 
-      scope.data = [];
+      scope.data = [{
+         key: "Years at Pandora",
+         values: []
+      }];
       var updateData = function() {
         if (! scope.invite) { return; }
         var years = {};
+        scope.data[0].values.length = 0;
         scope.invite.responses.forEach(function(response) {
           var year = Math.floor(response.years);
+          if( scope.selected && ! response.selected) {
+            return;
+          }
           if (! years[year]) {
             years[year] = 0;
           }
@@ -51,15 +59,11 @@ angular.module('rsvp').directive('rsvpTenureChart', function() {
         var values = Object.keys(years).map(function(year) {
           return {label: year, value: years[year]};
         });
-        scope.data = [{
-           key: "Years at Pandora",
-           values: values
-        }];
-
-        console.log(scope.data);
+        scope.data[0].values = values;
       };
 
       scope.$watch('invite.responses', updateData);
+      scope.$watch('selected', updateData);
 
     }
   };

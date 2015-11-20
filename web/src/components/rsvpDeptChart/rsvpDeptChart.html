@@ -1,4 +1,4 @@
-<div class="rsvpDeptChart">
+<div class="rsvpDeptChart" ng-if='data.length'>
   <h4>Departments</h4>
-  <nvd3 ng-if='data && data.length' options="options" data="data"></nvd3>
+  <nvd3 options="options" data="data" config='{deepWatchData: true}'></nvd3>
 </div>

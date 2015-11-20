@@ -37,8 +37,8 @@
 		></rsvp-response>
 	</div>
 	<div class='rsvpCharts' ng-if='ctrl.invite.responses.length'>
-		<rsvp-tenure-chart invite="ctrl.invite"></rsvp-tenure-chart>
-		<rsvp-dept-chart invite="ctrl.invite"></rsvp-dept-chart>
+		<rsvp-tenure-chart invite="ctrl.invite" selected='ctrl.responseFilter.selected'></rsvp-tenure-chart>
+		<rsvp-dept-chart invite="ctrl.invite" selected='ctrl.responseFilter.selected'></rsvp-dept-chart>
 	</div>
 	<button class="rsvpButton -typePrimary">Email all responders</button>
 </div>

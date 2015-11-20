@@ -4,6 +4,7 @@ angular.module('rsvp').directive('rsvpDeptChart', function() {
     restrict: 'E',
     scope: {
       invite:'=',
+      selected: '=',
     },
     templateUrl: 'components/rsvpDeptChart/rsvpDeptChart.html',
     link: function(scope, iElement, attrs) {
@@ -43,8 +44,12 @@ angular.module('rsvp').directive('rsvpDeptChart', function() {
       scope.data = [];
       var updateData = function() {
         if (! scope.invite) { return; }
+        scope.data.length = 0;
         var departments = {};
         scope.invite.responses.forEach(function(response) {
+          if( scope.selected && ! response.selected) {
+            return;
+          }
           var dept = response.department;
           if (! departments[dept]) {
             departments[dept] = 0;
@@ -55,12 +60,10 @@ angular.module('rsvp').directive('rsvpDeptChart', function() {
           return {label: dept, value: departments[dept]};
         });
         scope.data = values;
-
-        console.log(scope.data);
       };
 
       scope.$watch('invite.responses', updateData);
-
+      scope.$watch('selected', updateData);
     }
   };
 });
