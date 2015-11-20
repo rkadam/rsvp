@@ -88,8 +88,11 @@ var parseValue = function(value) {
   return parsed;
 };
 
+var no_email = false;
+
 var sendInvitation = function(invitation) {
   var deferred = new Q.defer();
+  if (no_email) { deferred.resolve(); return deferred.promise;}
 
   if (!invitation.title
       || !invitation.invitation_body
@@ -121,6 +124,8 @@ var sendInvitation = function(invitation) {
 
 var sendResponses = function(invitation) {
   var deferred = new Q.defer();
+  if (no_email) { deferred.resolve(); return deferred.promise;}
+
   var client = new EmailSender(configuration);
   client.connect()
       .then(function(){
@@ -225,9 +230,12 @@ var model = {
         } else {
           var limit = invitation.response_accept_limit;
           var selected_count = 0;
+          var selected_departments = [];
           invitation.responses.sort(sortMethod).forEach(function(response) {
-            if (limit > selected_count) {
+            var timcheck = invitation.uid != 'tim' || (response.years > 1 && selected_departments.indexOf(response.department) < 0);
+            if (limit > selected_count && timcheck) {
               selected_count++;
+              selected_departments.push(response.department);
               response.selected = true;
             } else {
               response.selected = false;
