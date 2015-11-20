@@ -5,6 +5,7 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -80,6 +81,14 @@ public class Invitation implements Parcelable, Comparable<Invitation> {
 
     @Override
     public int compareTo(@NonNull Invitation another) {
+        if (active == another.active) {
+            Calendar lhs = Calendar.getInstance();
+            lhs.setTimeInMillis(create_time);
+            Calendar rhs = Calendar.getInstance();
+            rhs.setTimeInMillis(another.create_time);
+            return rhs.compareTo(lhs);
+
+        }
         return Boolean.valueOf(another.active).compareTo(this.active);
     }
 }
