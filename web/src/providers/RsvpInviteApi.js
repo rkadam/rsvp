@@ -34,7 +34,7 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 		else {
 			var path = '/users/' + RsvpAuthApi.getUserId() + '/invitations';
 
-			return RsvpApi.get(path, { cache: true })
+			return RsvpApi.get(path)
 				.then(function(invites) {
 					_invites = invites;
 					return invites;

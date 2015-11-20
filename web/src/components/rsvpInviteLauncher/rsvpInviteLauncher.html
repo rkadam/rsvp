@@ -1,0 +1,29 @@
+<div class="rsvpInviteLauncher">
+
+	<div
+		ng-if="!ctrl.showInput"
+		class="rsvpInviteLauncher__text"
+		ng-click="ctrl.showInput = true"
+	>
+		<rsvp-badge label="+"></rsvp-badge>
+		<span>Create new invite</span>
+	</div>
+
+	<form name="form" class="rsvpInviteLauncher__form" ng-if="ctrl.showInput">
+		<input
+			type="text"
+			class="rsvpInviteLauncher__formInput"
+			ng-model="form.invite.title"
+			placeholder="Lunch with Tim"
+			required
+		>
+		<button
+			type="submit"
+			class="rsvpInviteLauncher__formSubmit rsvpButton -typePrimary"
+			ui-sref="create({ title: form.invite.title })"
+		>
+			Go
+		</button>
+	</form>
+
+</div>

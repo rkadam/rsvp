@@ -18,24 +18,24 @@
 			<span class="rsvpDivider"></span>
 			<p class="rsvpGrid">
 				<label class="rsvpInputLabel">Invite Title</label>
-				<input type="text" ng-model="form.invite.title" class="rsvpInput rsvpGrid--1/2" required></textarea>
+				<input type="text" ng-model="ctrl.invite.title" class="rsvpInput rsvpGrid--1/2" required></textarea>
 			</p>
 			<p>
 				<label class="rsvpInputLabel">Invite Description</label>
-				<textarea ng-model="form.invite.invitation_body" class="rsvpInput rsvpGrid" rows="8" required></textarea>
+				<textarea ng-model="ctrl.invite.invitation_body" class="rsvpInput rsvpGrid" rows="8" required></textarea>
 			</p>
 			<p>
 				<label class="rsvpInputLabel">Number of invitations available</label>
-				<input type="number" ng-model="form.invite.response_accept_limit" class="rsvpInput" required>
+				<input type="number" ng-model="ctrl.invite.response_accept_limit" min="1" class="rsvpInput" required>
 			</p>
 			<p>
 				<label class="rsvpInputLabel">RSVP By</label>
-				<input type="date" ng-model="form.invite.rsvp_by_date" class="rsvpInput -inline" required>
-				<input type="time" ng-model="form.invite.rsvp_by_time" class="rsvpInput -inline" required>
+				<input type="date" ng-model="ctrl.invite.rsvp_by_date" class="rsvpInput -inline" required>
+				<input type="time" ng-model="ctrl.invite.rsvp_by_time" class="rsvpInput -inline">
 			</p>
 			<p>
 				<label class="rsvpInputLabel">Email Distribution List</label>
-				<input type="email" ng-model="form.invite.email_to" class="rsvpInput" required>
+				<input type="email" ng-model="ctrl.invite.email_to" class="rsvpInput" required>
 			</p>
 		</fieldset>
 
@@ -55,8 +55,8 @@
 				<button
 					type="button"
 					class="rsvpButton -sizeS"
-					ng-class="{ '-selected': form.invite.method === 'firstcomefirstserve' }"
-					ng-click="form.invite.method = 'firstcomefirstserve'"
+					ng-class="{ '-selected': ctrl.invite.method === 'firstcomefirstserve' }"
+					ng-click="ctrl.invite.method = 'firstcomefirstserve'"
 				>
 					First Come First Served
 				</button>
@@ -64,8 +64,8 @@
 				<button
 					type="button"
 					class="rsvpButton -sizeS"
-					ng-class="{ '-selected': form.invite.method === 'random' }"
-					ng-click="form.invite.method = 'random'"
+					ng-class="{ '-selected': ctrl.invite.method === 'random' }"
+					ng-click="ctrl.invite.method = 'random'"
 				>
 					Random
 				</button>
@@ -75,7 +75,7 @@
 		<button
 			type="submit"
 			class="rsvpButton -typePrimary"
-			ng-click="form.$valid && ctrl.createInvite(form.invite)"
+			ng-click="form.$valid && ctrl.createInvite(ctrl.invite)"
 			ng-disabled="ctrl.isSending"
 		>
 			{{ ctrl.isSending ? 'Sending...' : 'Send invitation' }}

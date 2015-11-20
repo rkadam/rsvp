@@ -1,0 +1,51 @@
+rsvp-invite-launcher {
+	display: block;
+	width: 100%;
+}
+
+.rsvpInviteLauncher {
+	@height: 80px;
+
+	display: block;
+	min-height: @height;
+	padding: 20px;
+	background: @rsvpColor__fill;
+	box-shadow: 0 0 80px rgba(0, 0, 0, 0.15);
+
+	&__text {
+		font-size: @rsvpFont__size--L;
+
+		> * {
+			margin: 0 5px;
+			vertical-align: middle;
+		}
+	}
+
+	&__form,
+	&__formInput {
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	&__formInput {
+		padding: 0 4em 0 1em;
+		font-size: @rsvpFont__size--L;
+		font-weight: @rsvpFont__weight--bold;
+		color: @rsvpColor__text;
+		border: none;
+	}
+
+	&__formSubmit {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 5em;
+		height: 100%;
+		padding: 0;
+		line-height: @height;
+	}
+}
