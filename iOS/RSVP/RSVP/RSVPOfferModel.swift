@@ -72,3 +72,25 @@ class RSVPOfferModel {
         return NSDate(timeIntervalSince1970:dateTimStamp/1000)
     }
 }
+
+class RSVPPostOfferModel {
+    class func parameters(title: String, responseAcceptLimit: Int, rsvpByTime: NSDate, emailTo: String, method: String, invitationBody: String) -> [String: AnyObject] {
+        let parameter: [String : AnyObject] = [
+            "title": title,
+            "response_accept_limit": responseAcceptLimit,
+            "rsvp_by_time": RSVPPostOfferModel.convertDate(rsvpByTime),
+            "email_to": emailTo,
+            "method": method,
+            "invitation_body": invitationBody
+        ]
+        return parameter
+    }
+    
+    /*
+"post_body":{"title":"Title of invitation","response_accept_limit":"# of responses that will be accpeted (integer)","rsvp_by_time":"Time event will take place (integer - unix time in ms)","email_to":"list of email addresses that offer will be sent to (string)","method":"method of invitation selection: one of [\"random\", \"firstcomefirstserve\"]","invitation_body":"body of email that will be sent"}
+*/
+    
+    class func convertDate(date: NSDate) -> Int {
+        return Int(date.timeIntervalSince1970 * 1000)
+    }
+}

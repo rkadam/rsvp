@@ -102,7 +102,71 @@ class RSVPCreateOfferViewController: UIViewController {
     }
     
     func sendInvitation() {
+        guard
+            let title = self.navigationItem.title,
+            let responseAcceptLimit = Int(self.invitationTextField.text!),
+            let emailTo = self.distributionListTextField.text,
+            let invitationBody = self.descriptionTextView.text
+            else {
+            // show the error message
+            let alertController = UIAlertController(title: "Error", message: "Please complete the missing fields", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+                return;
+        }
+        let postBody = RSVPPostOfferModel.parameters(title, responseAcceptLimit: responseAcceptLimit, rsvpByTime: self.rsvpDatePicker.date, emailTo: emailTo, method: "random", invitationBody: invitationBody)
+        NSLog("\(postBody)")
         
+        RSVPNetworkManager.instance.postOffer("raju", 🍺: postBody) { (response, error) in
+            if let _response = response as? NSDictionary {
+                NSLog("\(_response)")
+                self.navigationController?.popViewControllerAnimated(true)
+            } else {
+                // show the error message
+                let alertController = UIAlertController(title: "Error", message: "Can't create invitation.", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    @IBAction func previewEmail() {
+            self.sendInvitation()
+//        let viewController = UIViewController()
+//        viewController.view.backgroundColor = UIColor.blackColor()
+//        
+//        self.presentViewController(viewController, animated: true) { () -> Void in
+//            
+//        }
+    }
+}
+
+class PresentationController: UIPresentationController {
+    override func frameOfPresentedViewInContainerView() -> CGRect {
+        return CGRectMake(25.0, 25.0, self.containerView!.frame.width - 50.0, self.containerView!.frame.height - 50.0);
+    }
+    
+    override func presentationTransitionWillBegin() {
+        let dimmerBackgroundView = UIView(frame: (self.containerView?.bounds)!)
+        dimmerBackgroundView.alpha = 0.0
+        self.containerView?.addSubview(dimmerBackgroundView)
+        
+        self.presentingViewController.transitionCoordinator()?.animateAlongsideTransition({ (context) in
+            dimmerBackgroundView.alpha = 1.0
+            }, completion: { (context) in
+                dimmerBackgroundView.removeFromSuperview()
+        })
+    }
+    
+    override func presentationTransitionDidEnd(completed: Bool) {
+        
+    }
+}
+
+//MARK: UIViewControllerTransitionDelegate
+extension RSVPCreateOfferViewController: UIViewControllerTransitioningDelegate {
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+        return PresentationController(presentedViewController: UIViewController(), presentingViewController: self)
     }
 }
 
