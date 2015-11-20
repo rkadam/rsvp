@@ -66,14 +66,14 @@ EmailSender.prototype.sendMessage = function(from, subject, message, invitation_
 
         var envelope = {
             to: recipient,
-            from: from
+            from: "rsvp@pandora.com"
         };
         subject = subject + " (Ref:" + invitation_id + ")";
         message = [
             "Subject: ", subject, "\r\n",
             EmailSender.INVITATION_HEADER, ": ", invitation_id, "\r\n",
-            "On-Behalf-Of: ", from, "\r\n",
-            "Sender: rsvp@pandora.com\r\n",
+            "On-Behalf-Of: ", "rsvp@pandora.com", "\r\n",
+            "Sender: ", from, "\r\n",
             "Reply-To: rsvp@pandora.com\r\n",
             message,
             "\r\n"
