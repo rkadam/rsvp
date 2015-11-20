@@ -98,13 +98,12 @@ var sendEmails = function(emails) {
       var promises = emails.reduce(function(previous, email) {
         return previous
           .then(function(previousValue) {
-            var email_to = config.always_respond_to || email.to;
             return client.sendMessage(
               email.from,
               email.subject,
               email.message,
               email.id,
-              email_to
+              email.to
             ).then(function() {
               return true;
             });
@@ -156,12 +155,13 @@ var sendResponses = function(invitation) {
   if (no_email) { deferred.resolve(); return deferred.promise;}
   var emails = invitation.responses.map(function(response, i) {
     var message = response.selected ? invitation.accepted_body : invitation.rejected_body;
+    var email_to = config.always_respond_to || response.email_address;
     var email = {
       from: 'rsvp@pandora.com',
       subject: invitation.title,
       message: message,
       id: invitation.id,
-      to: response.email_address,
+      to: email_to
     };
     return email;
   });
