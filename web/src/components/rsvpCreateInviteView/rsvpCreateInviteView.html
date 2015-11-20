@@ -72,19 +72,21 @@
 			</p>
 		</fieldset>
 
-		<button
-			type="submit"
-			class="rsvpButton -typePrimary"
-			ng-click="form.$valid && ctrl.createInvite(ctrl.invite)"
-			ng-disabled="ctrl.isSending"
-		>
-			{{ ctrl.isSending ? 'Sending...' : 'Send invitation' }}
-		</button>
+		<fieldset class="rsvpCreateInviteView__formFieldset">
+			<button
+				type="submit"
+				class="rsvpButton -typePrimary"
+				ng-click="form.$valid && ctrl.createInvite(ctrl.invite)"
+				ng-disabled="ctrl.isSending"
+			>
+				{{ ctrl.isSending ? 'Sending...' : 'Send invitation' }}
+			</button>
 
-		<p ng-if="ctrl.hasSendError">
-			<rsvp-icon icon="ss-alert"></rsvp-icon>
-			An error occurred, please try again.
-		</p>
+			<span ng-if="ctrl.hasSendError" class="rsvpCreateInviteView__formSubmitMessage rsvpText -warn">
+				<rsvp-icon icon="ss-alert"></rsvp-icon>
+				An error occurred, please try again.
+			</span>
+		</fieldset>
 
 	</form>
 
