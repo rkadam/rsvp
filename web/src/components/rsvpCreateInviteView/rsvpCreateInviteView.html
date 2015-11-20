@@ -1,0 +1,88 @@
+<div class="rsvpCreateInviteView">
+
+	<div class="rsvpSlab">
+		<span class="rsvpTextCaption">Create a new invite</span>
+	</div>
+
+	<form name="form" class="rsvpCreateInviteView__form">
+
+		<!--
+			Details
+		-->
+
+		<fieldset class="rsvpCreateInviteView__formFieldset">
+			<h2 class="rsvpTextHeading -level2">
+				<rsvp-badge label="1"></rsvp-badge>
+				<span>Invite details</span>
+			</h2>
+			<span class="rsvpDivider"></span>
+			<p class="rsvpGrid">
+				<label class="rsvpInputLabel">Invite Title</label>
+				<input type="text" ng-model="ctrl.invite.title" class="rsvpInput rsvpGrid--1/2" required></textarea>
+			</p>
+			<p>
+				<label class="rsvpInputLabel">Invite Description</label>
+				<textarea ng-model="ctrl.invite.invitation_body" class="rsvpInput rsvpGrid" rows="8" required></textarea>
+			</p>
+			<p>
+				<label class="rsvpInputLabel">Number of invitations available</label>
+				<input type="number" ng-model="ctrl.invite.response_accept_limit" class="rsvpInput" required>
+			</p>
+			<p>
+				<label class="rsvpInputLabel">RSVP By</label>
+				<input type="date" ng-model="ctrl.rsvp_by_date" class="rsvpInput" required>
+				<input type="time" ng-model="ctrl.rsvp_by_time" class="rsvpInput" required>
+			</p>
+			<p>
+				<label class="rsvpInputLabel">Email Distribution List</label>
+				<input type="email" ng-model="ctrl.invite.email_to" class="rsvpInput" required>
+			</p>
+		</fieldset>
+
+		<!--
+			Winner selection
+		-->
+
+		<fieldset class="rsvpCreateInviteView__formFieldset">
+			<h2 class="rsvpTextHeading -level2">
+				<rsvp-badge label="2"></rsvp-badge>
+				<span>Choosing winner(s)</span>
+			</h2>
+			<span class="rsvpDivider"></span>
+			<p>
+				<label class="rsvpInputLabel">Method of Choice</label>
+
+				<button
+					type="button"
+					ng-model="ctrl.invite.method"
+					value="first"
+					class="rsvpButton -sizeS"
+				>
+					First Come First Served
+				</button>
+
+				<button
+					type="button"
+					ng-model="ctrl.invite.method"
+					value="random"
+					class="rsvpButton -sizeS"
+				>
+					Random
+				</button>
+
+				<button
+					type="button"
+					ng-model="ctrl.invite.method"
+					value="manual"
+					class="rsvpButton -sizeS"
+				>
+					Manual
+				</button>
+			</p>
+		</fieldset>
+
+		<button class="rsvpButton -typePrimary" type="submit">Send invitation</button>
+
+	</form>
+
+</div>

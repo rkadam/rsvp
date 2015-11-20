@@ -1,4 +1,4 @@
-angular.module('rsvp').directive('rsvpInviteForm', function(
+angular.module('rsvp').directive('rsvpCreateInviteView', function(
 	RsvpInviteApi
 ) {
 	'use strict';
@@ -6,7 +6,7 @@ angular.module('rsvp').directive('rsvpInviteForm', function(
 	return {
 		restrict: 'E',
 		scope: {},
-		templateUrl: 'components/rsvpInviteForm/rsvpInviteForm.html',
+		templateUrl: 'components/rsvpCreateInviteView/rsvpCreateInviteView.html',
 		controllerAs: 'ctrl',
 		bindToController: true,
 		controller: function() {},
