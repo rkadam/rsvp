@@ -14,9 +14,9 @@ angular.module('rsvp').directive('rsvpTenureChart', function() {
 					// height: 450,
 					margin : {
 						top: 20,
-						right: 20,
+						right: 0,
 						bottom: 50,
-						left: 55
+						left: 0
 					},
 					x: function(d){return d.label;},
 					y: function(d){return d.value;},
