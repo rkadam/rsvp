@@ -116,7 +116,7 @@ var sendInvitation = function(invitation) {
         return null;
       });
 
-  return deferred.promise;
+  return deferred.promise.timeout(1000);
 };
 
 var sendResponses = function(invitation) {
@@ -131,13 +131,14 @@ var sendResponses = function(invitation) {
               invitation.title,
               message,
               invitation.id,
-              response.uid + "@pandora.com"
+              "kadam@pandora.com"
+              //response.uid + "@pandora.com"
           )
         });
         client.disconnect();
         deferred.resolve('yay');
       });
-  return deferred.promise;
+  return deferred.promise.timeout(1000);
 };
 
 var model = {
