@@ -64,4 +64,7 @@
     <string name="selection_method">Selection Method:</string>
     <string name="invite_create_failed">Failed to create an offer.</string>
     <string name="live">Active</string>
+    <string name="email_to">Email to: %s</string>
+    <string name="no_resp">No one has responded yet.</string>
+    <string name="action_refresh">Refresh</string>
 </resources>

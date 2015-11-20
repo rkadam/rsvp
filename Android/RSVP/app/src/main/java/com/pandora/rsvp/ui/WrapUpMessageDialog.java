@@ -1,8 +1,6 @@
 package com.pandora.rsvp.ui;
 
 import com.pandora.rsvp.R;
-import com.pandora.rsvp.app.RSVPApp;
-import com.pandora.rsvp.service.IRSVPApi;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -13,8 +11,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import javax.inject.Inject;
 
 /*
         DialogFragment dialog = WrapUpMessageDialog.newInstance(bundle);
@@ -43,8 +39,8 @@ public class WrapUpMessageDialog extends DialogFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mWinnerMsgEdit = (EditText)view.findViewById(R.id.dialog_email_preview_winner_edit_text);
-        mAllResponsesEdit = (EditText)view.findViewById(R.id.dialog_email_preview_all_responses_edit_text);
+        mWinnerMsgEdit = (EditText)view.findViewById(R.id.dialog_preview_winner_edit_text);
+        mAllResponsesEdit = (EditText)view.findViewById(R.id.dialog_preview_all_responses_edit_text);
         Button sendButton = (Button) view.findViewById(R.id.dialog_wrap_up_send_button);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override

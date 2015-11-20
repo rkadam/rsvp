@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -63,6 +65,21 @@ public class InvitationListActivity extends BaseActivity implements ApiCallBack<
     private void getInvitations() {
         mIRSVPApi.getInvitations(this);
         toggleProgress(true);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.refresh_invite, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_refresh) {
+            getInvitations();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void toggleProgress(boolean loading) {

@@ -1,13 +1,16 @@
 package com.pandora.rsvp.ui.adapter;
 
+import com.pandora.rsvp.R;
 import com.pandora.rsvp.service.contract.Invitation;
 import com.pandora.rsvp.service.contract.InviteResponse;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +45,23 @@ public class InvitationResponsesPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        RecyclerView rv = new RecyclerView(container.getContext());
-        rv.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        rv.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
-        rv.setAdapter(new InvitationResponsesListAdapter(hasChosen && position == 0 ? chosenInviteResponse : responsesInviteResponse));
-        container.addView(rv);
-        return rv;
+        boolean chosen = hasChosen && position == 0;
+        int size = chosen ? chosenInviteResponse.size() : responsesInviteResponse.size();
+        if (size > 0) {
+            RecyclerView rv = new RecyclerView(container.getContext());
+            rv.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            rv.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
+            rv.setAdapter(new InvitationResponsesListAdapter(chosen ? chosenInviteResponse : responsesInviteResponse));
+            container.addView(rv);
+            return rv;
+        } else {
+            TextView textView = new TextView(container.getContext());
+            textView.setText(R.string.no_resp);
+            textView.setTextColor(ContextCompat.getColor(container.getContext(), android.R.color.darker_gray));
+            textView.setPadding(30, 30, 30, 0);
+            container.addView(textView);
+            return textView;
+        } 
     }
 
     @Override

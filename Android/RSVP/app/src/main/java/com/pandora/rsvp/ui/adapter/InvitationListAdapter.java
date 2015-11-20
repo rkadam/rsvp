@@ -2,6 +2,7 @@ package com.pandora.rsvp.ui.adapter;
 
 import com.pandora.rsvp.R;
 import com.pandora.rsvp.service.contract.Invitation;
+import com.pandora.rsvp.service.contract.InviteResponse;
 import com.pandora.rsvp.service.contract.UserInvitationsResponse;
 
 import android.support.v7.widget.RecyclerView;
@@ -59,7 +60,15 @@ public class InvitationListAdapter extends RecyclerView.Adapter<InvitationListAd
         calendar.setTimeInMillis(invitation.create_time);
         holder.date.setText(mSimpleDateFormat.format(calendar.getTime()));
         holder.responseCount.setText(String.valueOf(invitation.responses != null ? invitation.responses.size() : 0));
-        holder.numChosen.setText(String.valueOf(1));
+        int chosen = 0;
+        if (invitation.responses != null) {
+            for (InviteResponse response : invitation.responses) {
+                if (response.selected) {
+                    chosen++;
+                }
+            }
+        }
+        holder.numChosen.setText(String.valueOf(chosen));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

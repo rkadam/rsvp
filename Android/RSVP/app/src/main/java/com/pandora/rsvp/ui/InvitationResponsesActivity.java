@@ -12,6 +12,8 @@ import com.pandora.rsvp.ui.base.BaseActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -41,6 +43,8 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
     TabLayout strip;
     @Bind(R.id.responders_action_button)
     Button respondersActionButton;
+    @Bind(R.id.rsvp_sent_to)
+    TextView emailTo;
     @Bind(R.id.rsvp_title)
     TextView invitationTitle;
     @Bind(R.id.rsvp_date)
@@ -118,6 +122,7 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
         invitationTitle.setText(invitation.title);
         body.setText(invitation.invitation_body);
         method.setText(invitation.method);
+        emailTo.setText(String.format(getResources().getString(R.string.email_to), invitation.email_to));
 
         SimpleDateFormat formatter = new SimpleDateFormat("MMM d yyyy", Locale.US);
         StringBuilder builder = new StringBuilder(getResources().getString(R.string.from));
@@ -138,6 +143,22 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
         boolean enabled = (isChosenTab || invitation.responses.size() > 0) && invitation.active;
         respondersActionButton.setEnabled(enabled);
         respondersActionButton.setAlpha(enabled ? 1f : 0.5f);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.refresh_invite, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_refresh) {
+            api.getInvitation(invitation.id, this);
+            toggleProgress(true);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void submit() {

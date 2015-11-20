@@ -25,6 +25,18 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/rsvp_sent_to"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
+
+        <TextView
             android:id="@+id/rsvp_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

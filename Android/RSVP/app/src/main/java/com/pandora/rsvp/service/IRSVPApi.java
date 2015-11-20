@@ -15,6 +15,8 @@ public interface IRSVPApi {
 
     void getInvitations(ApiCallBack<UserInvitationsResponse> invitationCallBack);
 
+    void getInvitation(String invitationId, ApiCallBack<SingeUserInvitationResponse> invitationResponseApiCallBack);
+
     void selectWinners(String invitationId, ApiCallBack<SingeUserInvitationResponse> invitationsResponseApiCallBack);
 
     void submitWrapUp(String invitationId, String winnerMsg, String globalMsg, ApiCallBack<SingeUserInvitationResponse> invitationResponseApiCallBack);

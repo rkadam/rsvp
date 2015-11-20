@@ -34,7 +34,7 @@ public class RSVPApi implements IRSVPApi {
     IUserDataManager mIUserDataManager;
     
     private final RetrofitRSVPApi api;
-    private static final String API_ENDPOINT = "http://rsvp.savagebeast.com:80";
+    private static final String API_ENDPOINT = "http://rsvp.savagebeast.com";
 
     public RSVPApi() {
         RSVPApp.getComponent().inject(this);
@@ -57,6 +57,9 @@ public class RSVPApi implements IRSVPApi {
 
         @GET("api/users/{uid}/invitations")
         Call<UserInvitationsResponse> getInvitations(@Path("uid") String uid);
+
+        @GET("api/users/{uid}/invitations/{invitation_id}")
+        Call<SingeUserInvitationResponse> getInvitation(@Path("uid") String uid, @Path("invitation_id") String invitationId);
 
         @GET("api/users/{uid}/invitations/{invitation_id}/selectWinners")
         Call<SingeUserInvitationResponse> selectWinners(@Path("uid") String uid, @Path("invitation_id") String invitationId);
@@ -87,6 +90,11 @@ public class RSVPApi implements IRSVPApi {
     @Override
     public void getInvitations(ApiCallBack<UserInvitationsResponse> invitationCallBack) {
         executeApiCall(api.getInvitations(mIUserDataManager.getUserName()), invitationCallBack);
+    }
+
+    @Override
+    public void getInvitation(String invitationId, ApiCallBack<SingeUserInvitationResponse> invitationResponseApiCallBack) {
+        executeApiCall(api.getInvitation(mIUserDataManager.getUserName(), invitationId), invitationResponseApiCallBack);
     }
 
     @Override
