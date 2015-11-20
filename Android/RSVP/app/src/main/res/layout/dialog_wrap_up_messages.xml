@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialog_preview_winner_msg"
             android:inputType="textMultiLine"
-            android:padding="5dp"
             android:scrollbars="vertical"
             android:theme="@style/AppTheme" />
 
@@ -61,7 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialog_preview_all_responses_label"
             android:inputType="textMultiLine"
-            android:padding="5dp"
             android:scrollbars="vertical"
             android:theme="@style/AppTheme" />
 
@@ -73,7 +71,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialog_preview_all_responses_edit_text"
             android:layout_marginTop="15dp"
-            android:padding="@dimen/text_border_padding"
             android:text="@string/dialog_wrap_up_messages_send_label"
             android:textColor="@android:color/white"
             android:theme="@style/AppTheme" />
