@@ -75,7 +75,7 @@ EmailReader.prototype.getNewMessages = function(){
                 logMessage("resolving with nothing");
                 this._gettingNewMessages = null;
                 resolve([]);
-                return;
+                return null;
             }
 
             var messages = [];
@@ -128,14 +128,12 @@ EmailReader.prototype.getNewMessages = function(){
  * Disconnects from the email server
  */
 EmailReader.prototype.disconnect = function(){
-    this._imap.once('end', function() {
-        this._imap.removeAllListeners();
-        this._imap.destroy();
-        this._imap = null;
-        this._connected = false;
-        logMessage("Connection closed.");
-    }.bind(this));
+    /* close connection & trust that it will get closed */
     this._imap.end();
+    this._imap.removeAllListeners();
+    this._imap = null;
+    this._connected = false;
+    logMessage("Connection closed.");
 };
 
 module.exports = EmailReader;
