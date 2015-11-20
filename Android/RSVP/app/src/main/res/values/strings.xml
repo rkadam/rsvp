@@ -29,6 +29,7 @@
     <string name="create_invitation_activity_see_preview_email">SEE PREVIEW EMAIL</string>
     <string name="create_invitation_activity_name_hint">Enter event name.</string>
     <string name="create_invitation_activity_desc_hint">Enter event description.</string>
+    <string name="create_invitation_activity_pick_date_label">Pick Date</string>
     
     <string-array name="choice_array">
         <item>Random Order</item>
