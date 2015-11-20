@@ -77,7 +77,7 @@ public class InvitationListAdapter extends RecyclerView.Adapter<InvitationListAd
                 }
             }
         });
-        holder.liveStatus.setTextColor(ContextCompat.getColor(holder.itemView.getContext(),
+        holder.liveStatus.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(),
                 invitation.active ? R.color.colorAccentSecondary : android.R.color.holo_red_dark));
         holder.liveStatus.setText(invitation.active ? R.string.live : R.string.full_up);
     }

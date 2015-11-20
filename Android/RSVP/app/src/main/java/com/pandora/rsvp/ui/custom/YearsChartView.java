@@ -87,6 +87,9 @@ public class YearsChartView extends RelativeLayout {
         HashMap<String, Integer> valuesMapping = new HashMap<>();
         for (InviteResponse response : invitationData) {
             String key = isDept ? response.department : String.valueOf(Math.round(response.years)) + " Year(s)";
+            if (key == null) {
+                key = "Unknown";
+            }
             if (valuesMapping.containsKey(key)) {
                 valuesMapping.put(key, valuesMapping.get(key) + 1);
             } else {
