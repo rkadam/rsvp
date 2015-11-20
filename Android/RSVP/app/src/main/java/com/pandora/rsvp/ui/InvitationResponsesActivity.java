@@ -13,6 +13,10 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -139,15 +143,22 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
                 frontEndFormattedLabel = invitation.method;
             }
         }
+        int accentColor = ContextCompat.getColor(this, R.color.colorAccent);
         method.setText(frontEndFormattedLabel);
-        emailTo.setText(String.format(getResources().getString(R.string.email_to), invitation.email_to));
-
+        String emailToPrefix = getResources().getString(R.string.email_to) + " ";
+        Spannable emailSpan = new SpannableString(emailToPrefix + invitation.email_to);
+        emailSpan.setSpan(new ForegroundColorSpan(accentColor),
+                0, emailToPrefix.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        emailTo.setText(emailSpan);
         SimpleDateFormat formatter = new SimpleDateFormat(CreateInvitationActivity.DATE_TIME_FORMAT, Locale.US);
-        StringBuilder builder = new StringBuilder(getResources().getString(R.string.from)).append(": ");
+        String fromPrefix = getResources().getString(R.string.from) + " ";
+        StringBuilder builder = new StringBuilder(fromPrefix);
         Calendar cal = Calendar.getInstance();
-        builder.append(formatter.format(cal.getTime()));
         cal.setTimeInMillis(invitation.create_time);
-        invitationDate.setText(builder.toString());
+        builder.append(formatter.format(cal.getTime()));
+        Spannable timeSpan = new SpannableString(builder.toString());
+        timeSpan.setSpan(new ForegroundColorSpan(accentColor), 0, fromPrefix.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        invitationDate.setText(timeSpan);
 
     }
 

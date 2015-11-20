@@ -64,12 +64,12 @@
     <string name="email_chosen_responders">Send Final Email</string>
     <string name="select_winners">Pick Winners</string>
     <string name="error_selecting_winners">An error occurred.</string>
-    <string name="from">Scheduled for</string>
+    <string name="from">Scheduled for:</string>
     <string name="invite_desc">Description:</string>
     <string name="selection_method">Selection Method:</string>
     <string name="invite_create_failed">Failed to create an offer.</string>
     <string name="live">Live</string>
-    <string name="email_to">Email to: %s</string>
+    <string name="email_to">Email to:</string>
     <string name="no_resp">No one has responded yet.</string>
     <string name="action_refresh">Refresh</string>
     <string name="years_dist">Years</string>
