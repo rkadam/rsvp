@@ -46,25 +46,29 @@
             android:textSize="12sp"
             android:textStyle="italic|bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/selection_method"
-            android:textSize="12sp"
-            android:textStyle="italic" />
+        <LinearLayout 
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:text="@string/selection_method"
+                android:textSize="12sp"
+                android:textStyle="italic"/>
 
-        <TextView
-            android:id="@+id/rsvp_method"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="12sp" />
-
+            <TextView
+                android:id="@+id/rsvp_method"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="12sp"/>
+        </LinearLayout>
+        
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
