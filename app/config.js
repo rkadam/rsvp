@@ -12,6 +12,7 @@ var config = {
   ip: '127.0.0.1',
   redis_db_index: 0,
   department_refresh_seconds: 10,
+  poll_email_interval_millis: 15000,
 };
 
 if (config.env !== 'production') {

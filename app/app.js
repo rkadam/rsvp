@@ -29,9 +29,10 @@ server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
 });
 
-//poll for invitation replies
-emailPoll.startPoll(model, POLL_INTERVAL_MILLIS);
-
+if (config.poll_email) {
+  //poll for invitation replies
+  emailPoll.startPoll(model, config.poll_email_interval_millis);
+}
 
 // Expose app
 exports = module.exports = app;
