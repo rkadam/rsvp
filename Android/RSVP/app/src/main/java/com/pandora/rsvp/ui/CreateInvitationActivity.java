@@ -33,7 +33,7 @@ import butterknife.BindString;
 import butterknife.OnClick;
 
 public class CreateInvitationActivity extends BaseActivity {
-    public static final String DATE_TIME_FORMAT = "MM/dd/yyyy, h:mm aa";
+    public static final String DATE_TIME_FORMAT = "MMM dd, yyyy - h:mm aa";
 
     private Calendar pickedTime;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.US);
