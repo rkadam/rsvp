@@ -2,6 +2,7 @@ var model = require('./model');
 var Q = require('q');
 
 var users = ['gmichalec', 'raju', 'ccong', 'ivo', 'mpetrovich'];
+var response_users = ['cfanning','djacobs','gwhite','jwolfson','lmiller','mbranch','mbruno','emoody','jcampbell','mmetanat','adrath','ahern','achu','azandi','cbaker','tweston','bwest','cmehr','gbackus','dburns','abosillo','itorres','jpotts','rpedroni','tthurber','gpulido','awinck','aryan','abrough','btrevino','bleap','cbento','ccooke','acamera','dfolkman','jmason','jcohen','elee2','mwest','rhiro','awu','bwood','bcoffman','bschembri','bbeal','cirwin','cnewman','cphillips','ckang','glongo'];
 var titles = ['Join me for lunch!', 'Cousin! Let\'s go bowling!', 'BASE jump from 2100 Franklin!'];
 
 var randomBetween = function(min, max) {
@@ -21,12 +22,13 @@ model.flush().then(function() {
               title: title,
               response_accept_limit: limit,
               rsvp_by_time: rsvp_time,
-              email_to: 'dist-rsvp-test@pandora.com',
+              //email_to: 'dist-rsvp-test@pandora.com',
+              email_to: 'greg@primate.net',
               method: 'random',
               invitation_body: 'This is the invitation body. Participate in this offer!'
             }).then(function(invite) {
               console.log('created invite '+invite.id);
-              return Q.all(users.map(function(uid, index) {
+              return Q.all(response_users.map(function(uid, index) {
                 var response_time = Date.now() + (index * 60 * 60 *1000);
                 return model.createResponse({
                     invitation_id: invite.id,
