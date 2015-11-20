@@ -36,7 +36,7 @@
 			response="response"
 		></rsvp-response>
 	</div>
-	<div class='rsvpCharts'>
+	<div class='rsvpCharts' ng-if='ctrl.invite.responses.length'>
 		<rsvp-tenure-chart invite="ctrl.invite"></rsvp-tenure-chart>
 		<rsvp-dept-chart invite="ctrl.invite"></rsvp-dept-chart>
 	</div>
