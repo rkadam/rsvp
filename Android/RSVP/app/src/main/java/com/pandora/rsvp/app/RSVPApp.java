@@ -26,7 +26,6 @@ public class RSVPApp extends Application {
     public void onCreate() {
         super.onCreate();
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath(getString(R.string.font_avenir_pro))
                         .setFontAttrId(R.attr.fontPath)
                         .build()
         );

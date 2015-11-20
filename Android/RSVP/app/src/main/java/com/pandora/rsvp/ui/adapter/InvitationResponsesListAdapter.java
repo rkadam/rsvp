@@ -41,6 +41,7 @@ public class InvitationResponsesListAdapter extends RecyclerView.Adapter<Invitat
         InviteResponse response = mInviteResponses.get(position);
         holder.name.setText(response.name);
         holder.title.setText(response.department);
+        holder.body.setText(response.response_body);
         String imageUrl = String.format("https://ray.savagebeast.com/sbldap/image.cgi?uid=%s", response.uid);//Todo: Extract this for reuse.
         mPicasso.load(imageUrl).into(holder.profilePic);
     }
@@ -53,6 +54,7 @@ public class InvitationResponsesListAdapter extends RecyclerView.Adapter<Invitat
     static class InvitationResponseItemViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView title;
+        TextView body;
         CircleImageView profilePic;
 
         public InvitationResponseItemViewHolder(View itemView) {
@@ -60,6 +62,7 @@ public class InvitationResponsesListAdapter extends RecyclerView.Adapter<Invitat
             name = (TextView) itemView.findViewById(R.id.user_name);
             title = (TextView) itemView.findViewById(R.id.user_title);
             profilePic = (CircleImageView) itemView.findViewById(R.id.profile_image);
+            body = (TextView) itemView.findViewById(R.id.user_response);
 
         }
     }
