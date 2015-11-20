@@ -3,31 +3,33 @@
 		{{ ctrl.invite.title }}
 	</h3>
 
-	<span class="rsvpInviteSummary__date">
-		{{ ctrl.invite.rsvp_by_time | date:'longDate' }}
-	</span>
+	<div>
+		<span
+			ng-if="ctrl.invite.active && !ctrl.invite.selected_count"
+			class="rsvpButton -typePrimaryAlt -sizeXS rsvpPosition--right"
+		>
+			Live
+		</span>
+
+		<span
+			ng-if="ctrl.invite.active && ctrl.invite.selected_count > 0"
+			class="rsvpButton -typePrimary -sizeXS rsvpPosition--right"
+		>
+			Full up
+		</span>
+
+		<span class="rsvpInviteSummary__date">
+			{{ ctrl.invite.rsvp_by_time | date:'longDate' }}
+		</span>
+	</div>
 
 	<span class="rsvpInviteSummary__counter">
 		<rsvp-badge label="{{ ctrl.invite.responses.length }}"></rsvp-badge>
 		<span>Responses</span>
 	</span>
 
-	<span class="rsvpInviteSummary__counter" ng-if="!ctrl.invite.active">
+	<span class="rsvpInviteSummary__counter">
 		<rsvp-badge label="{{ ctrl.numChosen }}"></rsvp-badge>
 		<span>Chosen</span>
-	</span>
-
-	<span
-		ng-if="ctrl.invite.active && ctrl.invite.responses.length < ctrl.invite.response_accept_limit"
-		class="rsvpButton -typePrimaryAlt -sizeS rsvpPosition--right"
-	>
-		Live
-	</span>
-
-	<span
-		ng-if="ctrl.invite.active && ctrl.invite.responses.length >= ctrl.invite.response_accept_limit"
-		class="rsvpButton -typePrimaryAlt -sizeS rsvpPosition--right"
-	>
-		Full up
 	</span>
 </div>
