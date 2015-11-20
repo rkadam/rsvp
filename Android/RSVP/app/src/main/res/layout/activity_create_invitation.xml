@@ -143,8 +143,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/create_invitation_activity_method_of_choice"
                     android:layout_below="@+id/til_dist_list"
-                    android:layout_marginLeft="@dimen/space_between_choice_buttons"
-                    android:layout_marginStart="@dimen/space_between_choice_buttons"
                     android:layout_toEndOf="@+id/create_invitation_activity_method_of_choice"
                     android:layout_toRightOf="@+id/create_invitation_activity_method_of_choice"/>
 
