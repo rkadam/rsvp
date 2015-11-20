@@ -20,6 +20,7 @@
     <string name="create_invitation_activity_num_invitations_available">Number of Invitations Available</string>
     <string name="create_invitation_activity_num_invitations_blank">Please enter the number of invitations.</string>
     <string name="create_invitation_activity_rsvp_by">RSVP By</string>
+    <string name="create_invitation_activity_rsvp_date_blank">Please press the \'Pick Date\' button a select the RSVP By date.</string>
     <string name="create_invitation_activity_email_dist_list">Email Distribution List</string>
     <string name="create_invitation_activity_email_blank">Please enter an email distribution list.</string>
     <string name="create_invitation_activity_email_invalid_format">Please enter a single email distribution address, e.g. dist-fyi-oak@pandora.com</string>

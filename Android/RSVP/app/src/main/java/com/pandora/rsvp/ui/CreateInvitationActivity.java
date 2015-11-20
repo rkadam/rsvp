@@ -33,6 +33,10 @@ import butterknife.BindString;
 import butterknife.OnClick;
 
 public class CreateInvitationActivity extends BaseActivity {
+    private static final String DATE_TIME_FORMAT = "MM/dd/yyyy, h:mm aa";
+
+    private Calendar pickedTime;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.US);
 
     @BindString(R.string.create_invitation_activity_title)
     String mTitle;
@@ -66,6 +70,8 @@ public class CreateInvitationActivity extends BaseActivity {
     Button mDateTimeButton;
     @Bind(R.id.create_invitation_activity_rsvp_date)
     TextView mRSVPDate;
+    @BindString(R.string.create_invitation_activity_rsvp_date_blank)
+    String mBlankRSVPDate;
 
     @Inject
     IUserDataManager mIUserDataManager;
@@ -124,6 +130,12 @@ public class CreateInvitationActivity extends BaseActivity {
             snackMessage(mBlankNumInvites);
             mNumInvitesEdit.requestFocus();
             return;
+        }
+        
+        if (isBlank(mRSVPDate)) {
+            snackMessage(mBlankRSVPDate);
+            mDateTimeButton.requestFocus();
+            return;   
         }
 
         final String emailTo;
@@ -185,10 +197,9 @@ public class CreateInvitationActivity extends BaseActivity {
         return (editText != null && editText.getText().toString().trim().length() == 0);
     }
 
-    private Calendar pickedTime;
-    private boolean timeSet;
-    private static final String DATE_TIME_FORMAT = "MM/dd/yyyy HH:mm Z";
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.US);
+    private boolean isBlank(TextView textView) {
+        return (textView != null && textView.getText().toString().trim().length() == 0);
+    }
 
     private CalendarDatePickerDialog.OnDateSetListener dateCallBack = new CalendarDatePickerDialog.OnDateSetListener() {
         @Override
@@ -206,7 +217,6 @@ public class CreateInvitationActivity extends BaseActivity {
     private RadialTimePickerDialog.OnTimeSetListener onTimeSetListener = new RadialTimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(RadialTimePickerDialog radialTimePickerDialog, int hourOfDay, int minute) {
-            timeSet = true;
             pickedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
             pickedTime.set(Calendar.MINUTE, minute);
             mRSVPDate.setText(simpleDateFormat.format(pickedTime.getTime()));
