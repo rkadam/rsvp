@@ -9,13 +9,13 @@
 
 	<span class="rsvpInviteSummary__counter">
 		<rsvp-badge label="{{ ctrl.invite.responses.length }}"></rsvp-badge>
-		Responses
+		<span>Responses</span>
 	</span>
 
 	<span class="rsvpInviteSummary__counter" ng-if="!ctrl.invite.active">
 		<rsvp-badge label="{{ ctrl.numChosen }}"></rsvp-badge>
-		Chosen
+		<span>Chosen</span>
 	</span>
 
-	<span class="rsvpButton -sizeS rsvpPosition--right" ng-if="ctrl.invite.active">Live</span>
+	<span class="rsvpButton -typePrimary -sizeS rsvpPosition--right" ng-if="ctrl.invite.active">Live</span>
 </div>

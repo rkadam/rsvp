@@ -1,17 +1,23 @@
 rsvp-badge {
 	display: inline-block;
+	vertical-align: middle;
+
+	+ * {
+		vertical-align: middle;
+	}
 }
 
 .rsvpBadge {
-	@radius: 1em;
+	@radius: 1.1em;
 
 	display: block;
 	width: @radius * 2;
 	height: @radius * 2;
+	margin: 0 8px;
 	font-size: @rsvpFont__size--M;
 	font-weight: @rsvpFont__weight--bold;
 	text-align: center;
-	line-height: (@radius * 2) + 0.2em;
+	line-height: (@radius * 2) + 0.1em;
 	color: @rsvpColor__text--invert;
 	background: @rsvpColor__fill--accent;
 	border-radius: 50%;
