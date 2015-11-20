@@ -26,14 +26,15 @@ rsvp-response {
 
 	&__image {
 		display: block;
-		border-radius: 50%;
+		background: @rsvpColor__fill--selected;
 		border: @borderSize solid transparent;
+		border-radius: 50%;
 	}
 
 	&__name {
 		display: block;
 		font-size: @rsvpFont__size--S;
-		font-weight: @rsvpFont__weight--bolder;
+		font-weight: @rsvpFont__weight--bold;
 		text-align: center;
 		color: @rsvpColor__text;
 
@@ -45,7 +46,7 @@ rsvp-response {
 	&__dept {
 		display: block;
 		font-size: @rsvpFont__size--S;
-		font-weight: @rsvpFont__weight--bold;
+		font-weight: @rsvpFont__weight--medium;
 		text-align: center;
 		color: @rsvpColor__text;
 	}
