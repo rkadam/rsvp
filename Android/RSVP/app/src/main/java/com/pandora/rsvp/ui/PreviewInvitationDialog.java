@@ -28,12 +28,13 @@ public class PreviewInvitationDialog extends DialogFragment {
     private Button mSendButton;
     
     public static PreviewInvitationDialog newInstance(String description, int numInvitations,
-                                                      long datetime, String email, String selectionMethod) {
+                                                      long datetime, String emailTo, String emailSubject, String selectionMethod) {
         Bundle bundle = new Bundle();
         bundle.putString(KEY_INVITATION_DESCRIPTION, description);
         bundle.putInt(KEY_NUM_INVITES, numInvitations);
         bundle.putLong(KEY_RSVP_DATE, datetime);
-        bundle.putString(KEY_EMAIL_TO, email);
+        bundle.putString(KEY_EMAIL_TO, emailTo);
+        bundle.putString(KEY_EMAIL_SUBJECT, emailSubject);
         bundle.putString(KEY_METHOD_CHOICE, selectionMethod);
         // TODO - need to pass in from and subject
                 
@@ -50,10 +51,10 @@ public class PreviewInvitationDialog extends DialogFragment {
         to.setText(getArguments().getString(KEY_EMAIL_TO));
         
         TextView from = (TextView)view.findViewById(R.id.dialog_invitation_preview_from_text);
-//        from.setText(getArguments().getString(KEY_EMAIL_FROM));
+//        from.setText(getArguments().getString(KEY_EMAIL_FROM)); // TODO - get from userPrefs
         
         TextView subject = (TextView)view.findViewById(R.id.dialog_invitation_preview_subject_text);
-//        subject.setText(getArguments().getString(KEY_EMAIL_SUBJECT));
+        subject.setText(getArguments().getString(KEY_EMAIL_SUBJECT));
 
         TextView emailBody = (TextView)view.findViewById(R.id.dialog_invitation_preview_message_body);
         emailBody.setText(getArguments().getString(KEY_INVITATION_DESCRIPTION));
@@ -69,7 +70,7 @@ public class PreviewInvitationDialog extends DialogFragment {
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO - API cal here
+                // TODO - API call here
             }
         });
     }

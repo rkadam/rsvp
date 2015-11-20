@@ -1,5 +1,7 @@
 package com.pandora.rsvp.app.dagger;
 
+import com.pandora.rsvp.persistence.impl.UserDataManager;
+import com.pandora.rsvp.service.impl.RSVPApi;
 import com.pandora.rsvp.ui.CreateInvitationActivity;
 import com.pandora.rsvp.ui.InvitationListActivity;
 import com.pandora.rsvp.ui.InvitationResponsesActivity;
@@ -26,4 +28,8 @@ public interface RSVPComponent {
     void inject(InvitationResponsesActivity invitationResponsesActivity);
 
     void inject(CreateInvitationActivity createInvitationActivity);
+
+    void inject(UserDataManager userDataManager);
+
+    void inject(RSVPApi rsvpApi);
 }
