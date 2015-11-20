@@ -2,6 +2,7 @@ angular.module('rsvp').directive('rsvpCreateInviteView', function(
 	$state,
 	$stateParams,
 	moment,
+	RsvpAuthApi,
 	RsvpInviteApi
 ) {
 	'use strict';
@@ -18,6 +19,8 @@ angular.module('rsvp').directive('rsvpCreateInviteView', function(
 				.add(4, 'hours')
 				.set({ second: 0, millisecond: 0 })
 				.toDate();
+
+			ctrl.userId = RsvpAuthApi.getUserId();
 
 			// Defaults
 			ctrl.invite = {};
