@@ -16,11 +16,11 @@ angular.module('rsvp').directive('rsvpInviteSummary', function(
 			var ctrl = this;
 
 			$scope.$watch('ctrl.invite.responses', function() {
-				ctrl.numChosen = RsvpInviteApi.getNumChosenForInvite(ctrl.invite.id);
+				ctrl.numChosen = RsvpInviteApi.getNumResponsesChosen(ctrl.invite);
 			}, true);
 
 			RsvpInviteApi.onUpdateInvite(function(invite) {
-				ctrl.numChosen = RsvpInviteApi.getNumChosenForInvite(ctrl.invite.id);
+				ctrl.numChosen = RsvpInviteApi.getNumResponsesChosen(ctrl.invite);
 			});
 		},
 	};

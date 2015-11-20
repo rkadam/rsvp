@@ -13,7 +13,7 @@
 
 	<nav class="rsvpGrid--1/4">
 		<rsvp-invite-summary
-			ng-repeat="invite in ctrl.invites | orderBy:'create_time':true"
+			ng-repeat="invite in ctrl.invites"
 			ui-sref="invites.detail({ inviteId: invite.id })"
 			ui-sref-active="-selected"
 			invite="invite"

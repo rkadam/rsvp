@@ -17,7 +17,7 @@ angular.module('rsvp').directive('rsvpInviteDetailView', function(
 			var ctrl = this;
 			var inviteId = $stateParams.inviteId;
 
-			ctrl.numChosen = RsvpInviteApi.getNumChosenForInvite(inviteId);
+			ctrl.numChosen = '-';
 
 			ctrl.toggleResponse = function(response) {
 				response.selected = !response.selected;
@@ -42,11 +42,12 @@ angular.module('rsvp').directive('rsvpInviteDetailView', function(
 			};
 
 			RsvpInviteApi.onUpdateInvite(function(invite) {
-				ctrl.numChosen = RsvpInviteApi.getNumChosenForInvite(inviteId);
-			});
+				ctrl.numChosen = RsvpInviteApi.getNumResponsesChosen(invite);
+			}, inviteId);
 
 			RsvpInviteApi.fetchInvite(inviteId).then(function(invite) {
 				ctrl.invite = invite;
+				ctrl.numChosen = RsvpInviteApi.getNumResponsesChosen(invite);
 			});
 		},
 	};

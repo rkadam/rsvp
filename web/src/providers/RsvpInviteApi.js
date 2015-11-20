@@ -10,24 +10,17 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 	var _invites = null;
 	var _listeners = {};
 
-	RsvpInviteApi.getInvite = function(inviteId) {
-		var invite = _.find(_invites, 'id', inviteId);
-		return invite;
-	};
-
-	RsvpInviteApi.getNumChosenForInvite = function(inviteId) {
-		if (!_invites) {
+	RsvpInviteApi.getNumResponsesChosen = function(invite) {
+		if (!invite) {
 			return 0;
 		}
-		else {
-			var responses = RsvpInviteApi.getInvite(inviteId).responses;
-			var numChosen = _.filter(responses, 'selected', true).length;
-			return numChosen;
-		}
+
+		var numChosen = _.filter(invite.responses, 'selected', true).length;
+		return numChosen;
 	};
 
-	RsvpInviteApi.fetchInvites = function() {
-		if (_invites) {
+	RsvpInviteApi.fetchInvites = function(ignoreCache) {
+		if (_invites && !ignoreCache) {
 			// Already cached
 			return $q.resolve(_invites);
 		}
@@ -46,13 +39,18 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 		return RsvpInviteApi
 			.fetchInvites()
 			.then(function(invites) {
-				var invite = RsvpInviteApi.getInvite(inviteId);
+				var invite = getInvite(inviteId);
 				return invite;
 			});
 	};
 
 	RsvpInviteApi.createInvite = function(invite) {
-		return RsvpApi.post('/users/' + RsvpAuthApi.getUserId() + '/invitations', { data: invite });
+		return RsvpApi
+			.post('/users/' + RsvpAuthApi.getUserId() + '/invitations', { data: invite })
+			.then(function(invite) {
+				RsvpInviteApi.fetchInvites(true);
+				return invite;
+			});
 	};
 
 	RsvpInviteApi.updateInvite = function(invite) {
@@ -89,8 +87,12 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 		notifyListeners('onUpdateInvites', invites);
 	};
 
-	RsvpInviteApi.onUpdateInvite = function(listener) {
-		addListener('onUpdateInvite', listener);
+	RsvpInviteApi.onUpdateInvite = function(listener, inviteId) {
+		addListener('onUpdateInvite', function(invite) {
+			if (invite.id === inviteId) {
+				listener(invite);
+			}
+		});
 	};
 
 	RsvpInviteApi.notifyUpdateInvite = function(invite) {
@@ -106,5 +108,10 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 		_.each(_listeners[methodName], function(listener) {
 			listener(data);
 		});
+	}
+
+	function getInvite(inviteId) {
+		var invite = _.find(_invites, 'id', inviteId);
+		return invite;
 	}
 });
