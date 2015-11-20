@@ -1,6 +1,7 @@
 angular.module('rsvp').directive('rsvpCreateInviteView', function(
 	$state,
 	$stateParams,
+	moment,
 	RsvpInviteApi
 ) {
 	'use strict';
@@ -13,10 +14,16 @@ angular.module('rsvp').directive('rsvpCreateInviteView', function(
 		bindToController: true,
 		controller: function() {
 			var ctrl = this;
+			var rsvpDatetime = moment()
+				.add(4, 'hours')
+				.set({ second: 0, millisecond: 0 })
+				.toDate();
 
 			ctrl.invite = {};
 			ctrl.invite.title = $stateParams.title;
 			ctrl.invite.method = 'random';
+			ctrl.invite.rsvp_by_date = rsvpDatetime;
+			ctrl.invite.rsvp_by_time = rsvpDatetime;
 
 			ctrl.createInvite = function(invite) {
 				ctrl.isSending = true;

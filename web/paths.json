@@ -7,6 +7,7 @@
 			"node_modules/angular-cookies/angular-cookies.js",
 			"node_modules/angular-ui-router/release/angular-ui-router.js",
 			"node_modules/lodash/index.js",
+			"node_modules/moment/moment.js",
 			"node_modules/d3/d3.js",
 			"node_modules/nvd3/build/nv.d3.js",
 			"node_modules/angular-nvd3/dist/angular-nvd3.js"

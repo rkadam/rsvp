@@ -54,7 +54,7 @@ angular.module('rsvp').service('RsvpAuthApi', function(
 			return;
 		}
 
-		var oneWeekFromNow = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+		var oneWeekFromNow = moment().add(7, 'days').toDate();
 		$cookies.put(RsvpAuthApi.USER_ID_COOKIE, userId, { expires: oneWeekFromNow });
 	}
 
