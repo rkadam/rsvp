@@ -19,9 +19,12 @@ angular.module('rsvp').directive('rsvpCreateInviteView', function(
 				.set({ second: 0, millisecond: 0 })
 				.toDate();
 
+			// Defaults
 			ctrl.invite = {};
 			ctrl.invite.title = $stateParams.title;
 			ctrl.invite.method = 'random';
+			ctrl.invite.response_accept_limit = 1;
+			ctrl.invite.email_to = 'rsvp@pandora.com';
 			ctrl.invite.rsvp_by_date = rsvpDatetime;
 			ctrl.invite.rsvp_by_time = rsvpDatetime;
 
