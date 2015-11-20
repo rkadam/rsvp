@@ -55,7 +55,6 @@ class RSVPOfferDetailViewController: UIViewController {
             yearsAtPandoraChartView.drawGridBackgroundEnabled = false
             
             yearsAtPandoraChartView.xAxis.labelPosition = .Bottom
-            //yearsAtPandoraChartView.xAxis.labelFont = UIFont()
             yearsAtPandoraChartView.xAxis.drawAxisLineEnabled = false
             yearsAtPandoraChartView.xAxis.spaceBetweenLabels = 2
             
@@ -64,6 +63,7 @@ class RSVPOfferDetailViewController: UIViewController {
             yearsAtPandoraChartView.leftAxis.spaceTop = 0.15
             
             yearsAtPandoraChartView.rightAxis.labelCount = 0
+            yearsAtPandoraChartView.rightAxis
             
             yearsAtPandoraChartView.legend.position = .BelowChartLeft
             yearsAtPandoraChartView.legend.form = .Square
@@ -82,6 +82,7 @@ class RSVPOfferDetailViewController: UIViewController {
             departmentChartView.setExtraOffsets(left: 5, top: 10, right: 5, bottom: 5)
             
             departmentChartView.drawCenterTextEnabled = false
+            departmentChartView.drawSliceTextEnabled = false
             
             departmentChartView.drawHoleEnabled = true
             departmentChartView.rotationAngle = 0.0
@@ -114,7 +115,6 @@ class RSVPOfferDetailViewController: UIViewController {
                 collectionView.reloadData()
             default:
                 break;
-            
         }
     }
     
@@ -180,6 +180,8 @@ class RSVPOfferDetailViewController: UIViewController {
         
         let barChartDataSet = BarChartDataSet(yVals: barChartYVals, label: "YEARS AT PANDORA")
         barChartDataSet.barSpace = 0.35
+        barChartDataSet.valueFormatter = NSNumberFormatter()
+        barChartDataSet.valueFormatter?.minimumFractionDigits = 0
         
         yearsAtPandoraChartView.data = BarChartData(xVals: Array(yearDictionary.keys), dataSets: [barChartDataSet])
         
