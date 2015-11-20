@@ -154,7 +154,7 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
         String fromPrefix = getResources().getString(R.string.from) + " ";
         StringBuilder builder = new StringBuilder(fromPrefix);
         Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(invitation.create_time);
+        cal.setTimeInMillis(invitation.rsvp_by_time);
         builder.append(formatter.format(cal.getTime()));
         Spannable timeSpan = new SpannableString(builder.toString());
         timeSpan.setSpan(new ForegroundColorSpan(accentColor), 0, fromPrefix.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
