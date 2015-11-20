@@ -3,6 +3,7 @@ angular.module('rsvp').directive('rsvpCreateInviteView', function(
 	$stateParams,
 	moment,
 	RsvpAuthApi,
+	RsvpDialog,
 	RsvpInviteApi
 ) {
 	'use strict';
@@ -49,6 +50,7 @@ angular.module('rsvp').directive('rsvpCreateInviteView', function(
 						method: invite.method || 'random',
 					})
 					.then(function(invite) {
+						RsvpDialog.close('preview');
 						$state.go('invites.detail', { inviteId: invite.id });
 					})
 					.catch(function() {
