@@ -90,7 +90,7 @@ function poll(storage, interval){
 
     getEmail()
         .then(saveAcceptedInvites.bind(null, storage))
-        .then(function(){
+        .finally(function(){
             timeoutHandle = setTimeout(function(){
                 poll(storage, interval);
             }, interval);
