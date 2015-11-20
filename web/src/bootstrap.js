@@ -1,6 +1,7 @@
 angular.module('rsvp', [
 	'ngCookies',
 	'ui.router',
+  'nvd3'
 ]);
 
 angular.module('rsvp').run(function(
