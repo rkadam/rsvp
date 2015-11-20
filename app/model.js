@@ -10,7 +10,7 @@ var ldap = require('./ldap');
 var Q = require('q');
 
 var EmailSender = require('./lib/email/email_sender');
-var configuration = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'lib/email/configuration.json'), 'utf8'));
+var configuration = require('./lib/email/email_configuration').getConfig();
 
 var inspect = require('util').inspect;
 

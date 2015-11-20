@@ -16,7 +16,7 @@ Promise.config({
     warnings: true
 });
 
-var configuration = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'configuration.json'), 'utf8'));
+var configuration = require('./email_configuration').getConfig();
 
 var client = new EmailReader(extend(configuration, {
     //debug: function(){

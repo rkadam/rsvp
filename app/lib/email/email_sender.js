@@ -3,6 +3,8 @@
 var SMTPConnection = require('smtp-connection');
 var Promise = require("bluebird");
 
+var configuration = require('./email_configuration').getConfig();
+
 function EmailSender(options){
     this._options = options;
     this._connection = false;
@@ -99,6 +101,6 @@ EmailSender.prototype.disconnect = function(){
 };
 
 EmailSender.INVITATION_HEADER = "X-Invitation-Id";
-EmailSender.INVITATION_FROM = "rsvp@pandora.com";
+EmailSender.INVITATION_FROM = configuration.user + "@pandora.com";
 
 module.exports = EmailSender;

@@ -4,7 +4,7 @@ var fs = require('fs');
 
 var EmailSender = require('../email_sender');
 
-var configuration = JSON.parse(fs.readFileSync('../configuration.json', 'utf8'));
+var configuration = require('../email_configuration').getConfig();
 
 var client = new EmailSender(configuration);
 

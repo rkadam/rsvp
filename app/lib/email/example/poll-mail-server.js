@@ -15,7 +15,7 @@ Promise.config({
     warnings: true
 });
 
-var configuration = JSON.parse(fs.readFileSync('../configuration.json', 'utf8'));
+var configuration = require('../email_configuration').getConfig();
 
 var client = new EmailReader(extend(configuration, {
     //debug: function(){
@@ -34,6 +34,7 @@ client.connect()
     .then(function(){
         console.log('about to disconnect: %s', inspect(arguments));
         client.disconnect();
+        process.exit(0);
     })
     .catch(function(error){
         throw new Error("Unable to retrieve & parse emails: " + JSON.stringify(error));
