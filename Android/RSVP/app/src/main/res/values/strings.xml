@@ -37,6 +37,10 @@
         <item>Manual Choice</item>
         -->
     </string-array>
+    
+    <string name="font_avenir">fonts/AvenirLTStd-light.ttf</string>
+    <string name="font_avenir_pro">fonts/AvenirNextLTPro-Regular.otf</string>
+    <string name="font_oswald">fonts/Oswald-Stencbab.ttf</string>
 
     <string name="dialog_invitation_preview_to_label">To:</string>
     <string name="dialog_invitation_preview_from_label">From:</string>

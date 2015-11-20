@@ -4,6 +4,7 @@ import com.pandora.rsvp.R;
 import com.pandora.rsvp.app.RSVPApp;
 import com.pandora.rsvp.app.dagger.RSVPComponent;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Copyright (c) 2015 Pandora 2015, Inc
@@ -20,6 +22,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private View activityContainer;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
