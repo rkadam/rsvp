@@ -249,6 +249,9 @@ var model = {
     };
     return model.fetchInvitation(invitation_id)
       .then(function(invitation) {
+        if (invitation.selected_count) {
+          return Q.resolve(invitation);
+        }
         var sortMethod = sortMethods[invitation.method];
         if (! sortMethod) {
           return Q.reject("unknown selection method: "+invitation.method);
