@@ -268,7 +268,7 @@ var model = {
           invitation_id: response_data.invitation_id,
           name: userObject.name,
           years: userObject.years,
-          department: userObject.department,
+          department: userObject.department || 'Unknown',
           response_time: response_data.response_time,
           response_body: response_data.response_body,
           selected: false,
