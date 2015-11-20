@@ -16,7 +16,13 @@ angular.module('rsvp').directive('rsvpInvitesView', function(
 
 			RsvpInviteApi.fetchInvites().then(function(invites) {
 				ctrl.invites = _.sortByOrder(invites, ['active', 'desc'], ['rsvp_by_time', 'asc']);
-				$state.go('invites.detail', { inviteId: ctrl.invites[0].id });
+
+				if (_.isEmpty(ctrl.invites)) {
+					$state.go('start');
+				}
+				else {
+					$state.go('invites.detail', { inviteId: ctrl.invites[0].id });
+				}
 			});
 		},
 	};

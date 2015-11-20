@@ -1,0 +1,16 @@
+<div class="rsvpStartView">
+	<div class="rsvpStartView__background"></div>
+
+	<rsvp-invite-launcher class="rsvpStartView__inviteLauncher"></rsvp-invite-launcher>
+
+	<div class="rsvpSlab -fixToBottom" ng-if="ctrl.invites.length">
+		<a ui-sref="invites" class="rsvpText -invert">
+			<rsvp-icon icon="ss-navigatedown"></rsvp-icon>
+			&nbsp;
+			<span class="rsvpTextCaption">See all invites</span>
+			&nbsp;
+			<rsvp-icon icon="ss-navigatedown"></rsvp-icon>
+		</a>
+		<a ui-sref="logout" class="rsvpText -invert rsvpPosition--right">Log out</a>
+	</div>
+</div>
