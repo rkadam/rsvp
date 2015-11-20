@@ -4,6 +4,7 @@ import com.pandora.rsvp.ui.CreateInvitationActivity;
 import com.pandora.rsvp.ui.InvitationListActivity;
 import com.pandora.rsvp.ui.InvitationResponsesActivity;
 import com.pandora.rsvp.ui.LoginActivity;
+import com.pandora.rsvp.ui.WrapUpMessageDialog;
 import com.pandora.rsvp.ui.adapter.InvitationResponsesListAdapter;
 
 import javax.inject.Singleton;

@@ -2,11 +2,12 @@ package com.pandora.rsvp.service.impl;
 
 import com.pandora.rsvp.service.ApiCallBack;
 import com.pandora.rsvp.service.IRSVPApi;
-import com.pandora.rsvp.service.contract.AuthResponse;
+import com.pandora.rsvp.service.contract.SimpleResponse;
 import com.pandora.rsvp.service.contract.AuthenticationPayload;
 import com.pandora.rsvp.service.contract.CreateOfferPayload;
 import com.pandora.rsvp.service.contract.SingeUserInvitationResponse;
 import com.pandora.rsvp.service.contract.UserInvitationsResponse;
+import com.pandora.rsvp.service.contract.WrapUpOfferPayload;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
@@ -44,7 +45,7 @@ public class RSVPApi implements IRSVPApi {
     private interface RetrofitRSVPApi {
 
         @POST("api/login")
-        Call<AuthResponse> authenticate(@Body AuthenticationPayload payload);
+        Call<SimpleResponse> authenticate(@Body AuthenticationPayload payload);
 
         @GET("api/users/{uid}/invitations")
         Call<UserInvitationsResponse> getInvitations(@Path("uid") String uid);
@@ -55,12 +56,15 @@ public class RSVPApi implements IRSVPApi {
         @POST("api/users/{uid}/invitations")
         Call<SingeUserInvitationResponse> createOffer(@Path("uid") String uid, @Body CreateOfferPayload payload);
 
+        @POST("api/users/{uid}/invitations/{invitation_id}/closeInvitation")
+        Call<SingeUserInvitationResponse> closeOffer(@Path("uid") String uid, @Path("invitation_id") String invitationId,
+                                                     @Body WrapUpOfferPayload wrapUpOfferPayload);
 
 
     }
 
     @Override
-    public void authenticate(String email, String password, ApiCallBack<AuthResponse> authCallback) {
+    public void authenticate(String email, String password, ApiCallBack<SimpleResponse> authCallback) {
         AuthenticationPayload payload = new AuthenticationPayload();
         payload.uid = email;
         payload.password = password;
@@ -68,7 +72,7 @@ public class RSVPApi implements IRSVPApi {
     }
 
     @Override
-    public void logout(ApiCallBack<AuthResponse> authCallBack) {
+    public void logout(ApiCallBack<SimpleResponse> authCallBack) {
 
     }
 
@@ -80,6 +84,14 @@ public class RSVPApi implements IRSVPApi {
     @Override
     public void selectWinners(String invitationId, ApiCallBack<SingeUserInvitationResponse> invitationsResponseApiCallBack) {
         executeApiCall(api.selectWinners("gmichalec", invitationId), invitationsResponseApiCallBack);
+    }
+
+    @Override
+    public void submitWrapUp(String invitationId, String winnerMsg, String globalMsg, ApiCallBack<SingeUserInvitationResponse> invitationResponseApiCallBack) {
+        WrapUpOfferPayload payload = new WrapUpOfferPayload();
+        payload.accepted_body = winnerMsg;
+        payload.rejected_body = globalMsg;
+        executeApiCall(api.closeOffer("gmichalec", invitationId, payload), invitationResponseApiCallBack);
     }
 
     @Override

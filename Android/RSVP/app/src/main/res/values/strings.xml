@@ -53,8 +53,8 @@
     <string name="invite_failure">Failed to load invites :(</string>
     <string name="invitation_details">Invitation Details</string>
     <string name="email_chosen_responders">Email Chosen Responders</string>
-    <string name="select_winners">Pick Responders.</string>
-    <string name="error_selecting_winners">An error occured while selecting the winners.</string>
+    <string name="select_winners">Pick Responders</string>
+    <string name="error_selecting_winners">An error occurred.</string>
     <string name="from">Scheduled for</string>
     <string name="invite_desc">Description:</string>
     <string name="selection_method">Selection Method:</string>

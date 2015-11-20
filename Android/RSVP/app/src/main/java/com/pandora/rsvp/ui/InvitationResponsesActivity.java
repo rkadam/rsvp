@@ -11,10 +11,7 @@ import com.pandora.rsvp.ui.base.BaseActivity;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,9 +29,11 @@ import butterknife.Bind;
 /**
  * Copyright (c) 2015 Pandora 2015, Inc
  */
-public class InvitationResponsesActivity extends BaseActivity implements ApiCallBack<SingeUserInvitationResponse> {
+public class InvitationResponsesActivity extends BaseActivity implements ApiCallBack<SingeUserInvitationResponse>, WrapUpMessageDialog.SubmitWrapUpmListener {
     
     public static final String INVITATION_KEY = "InvitationKey";
+    public static final String KEY_INVITATION_DESCRIPTION = "key_invitation_description";
+    public static final String KEY_NUM_INVITES = "key_num_invites";
     
     @Bind(R.id.view_pager)
     ViewPager pager;
@@ -104,7 +103,7 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
 
             @Override
             public void onPageSelected(int position) {
-                updateButtonText();
+                updateButton();
             }
 
             @Override
@@ -112,7 +111,7 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
 
             }
         });
-        updateButtonText();
+        updateButton();
     }
 
     private void initLabels() {
@@ -132,10 +131,13 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
 
     }
 
-    public void updateButtonText() {
+    public void updateButton() {
         boolean isChosenTab = adapter.getCount() > 1 && pager.getCurrentItem() == 0;
         respondersActionButton.setText(getResources().getString(isChosenTab ? R.string.email_chosen_responders
                 : R.string.select_winners));
+        boolean enabled = (isChosenTab || invitation.responses.size() > 0) && invitation.active;
+        respondersActionButton.setEnabled(enabled);
+        respondersActionButton.setAlpha(enabled ? 1f : 0.5f);
     }
 
     private void submit() {
@@ -145,17 +147,23 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
             toggleProgress(true);
             api.selectWinners(invitation.id, this);
         } else {
-            snackMessage("Time to show a popup!");
+            WrapUpMessageDialog dialog = WrapUpMessageDialog.newInstance();
+            dialog.setSubmitWrapUpmListener(this);
+            dialog.show(getSupportFragmentManager(), dialog.getClass().getSimpleName());
         }
     }
 
     @Override
     public void onSuccess(SingeUserInvitationResponse successResponse) {
-        adapter = new InvitationResponsesPagerAdapter(successResponse.data);
+        if (successResponse == null || successResponse.data == null) {
+            return;
+        }
+        invitation = successResponse.data;
+        adapter = new InvitationResponsesPagerAdapter(invitation);
         pager.setAdapter(adapter);
         strip.setupWithViewPager(pager);
         toggleProgress(false);
-        snackMessage("Winners have been selected!");
+        updateButton();
 
     }
 
@@ -168,5 +176,11 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
     public void toggleProgress(boolean loading) {
         pbLoading.setVisibility(loading ? View.VISIBLE : View.INVISIBLE);
         container.setVisibility(loading ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    @Override
+    public void submitWrapUp(String winnerMg, String msg) {
+        api.submitWrapUp(invitation.id, winnerMg, msg, this);
+        toggleProgress(true);
     }
 }

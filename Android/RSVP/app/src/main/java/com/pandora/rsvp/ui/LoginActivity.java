@@ -4,7 +4,7 @@ import com.pandora.rsvp.R;
 import com.pandora.rsvp.app.dagger.RSVPComponent;
 import com.pandora.rsvp.service.ApiCallBack;
 import com.pandora.rsvp.service.IRSVPApi;
-import com.pandora.rsvp.service.contract.AuthResponse;
+import com.pandora.rsvp.service.contract.SimpleResponse;
 import com.pandora.rsvp.ui.base.BaseActivity;
 import com.pandora.rsvp.utils.ValidationUtils;
 
@@ -22,7 +22,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 
-public class LoginActivity extends BaseActivity implements ApiCallBack<AuthResponse> {
+public class LoginActivity extends BaseActivity implements ApiCallBack<SimpleResponse> {
 
     @Bind(R.id.email)
     EditText email;
@@ -97,7 +97,7 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<AuthRespo
     }
 
     @Override
-    public void onSuccess(AuthResponse successResponse) {
+    public void onSuccess(SimpleResponse successResponse) {
         toggleProgress(false);
         if (successResponse != null && successResponse.success) {
             startActivity(new Intent(LoginActivity.this, InvitationListActivity.class));

@@ -13,6 +13,8 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,14 +41,14 @@ public class InvitationListAdapter extends RecyclerView.Adapter<InvitationListAd
         if (successResponse != null && successResponse.data != null) {
             invitationList = successResponse.data;
         }
+        Collections.sort(invitationList);
     }
 
     @Override
     public InvitationItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         final View view = inflater.inflate(R.layout.item_invitation, parent, false);
-        final InvitationItemViewHolder invitationItemViewHolder = new InvitationItemViewHolder(view);
-        return invitationItemViewHolder;
+        return new InvitationItemViewHolder(view);
     }
 
     @Override

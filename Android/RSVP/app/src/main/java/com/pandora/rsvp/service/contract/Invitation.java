@@ -2,6 +2,7 @@ package com.pandora.rsvp.service.contract;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Copyright (c) 2015 Pandora 2015, Inc
  */
-public class Invitation implements Parcelable {
+public class Invitation implements Parcelable, Comparable<Invitation> {
     public String id;
     public String uid;
     public String title;
@@ -76,4 +77,9 @@ public class Invitation implements Parcelable {
             return new Invitation[size];
         }
     };
+
+    @Override
+    public int compareTo(@NonNull Invitation another) {
+        return Boolean.valueOf(this.active).compareTo(another.active);
+    }
 }
