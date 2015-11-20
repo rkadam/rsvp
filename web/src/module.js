@@ -1,15 +1,18 @@
 angular.module('rsvp', [
 	'ngCookies',
 	'ui.router',
-  'nvd3'
+	'nvd3',
 ]);
 
 angular.module('rsvp').run(function(
 	$rootScope,
 	$state,
 	_,
-	RsvpAuthApi
+	RsvpAuthApi,
+	RsvpDialog
 ) {
+	$rootScope.RsvpDialog = RsvpDialog;
+
 	// Login enforcement
 	$rootScope.$on('$stateChangeStart', function(event, toState) {
 		if (_.get(toState, 'data.requiresLogin') && !RsvpAuthApi.isLoggedIn()) {

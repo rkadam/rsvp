@@ -16,6 +16,7 @@ angular.module('rsvp').directive('rsvpCreateInviteView', function(
 
 			ctrl.invite = {};
 			ctrl.invite.title = $stateParams.title;
+			ctrl.invite.method = 'random';
 
 			ctrl.createInvite = function(invite) {
 				ctrl.isSending = true;

@@ -12,7 +12,7 @@
 			"node_modules/angular-nvd3/dist/angular-nvd3.js"
 		],
 		"app": [
-			"src/bootstrap.js",
+			"src/module.js",
 			"src/**/*.js"
 		]
 	},

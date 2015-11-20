@@ -1,85 +1,145 @@
 <div class="rsvpInviteDetailView rsvpGrid">
 
-	<!--
-		Tabs
-	-->
+	<div class="rsvpGrid--1/2">
 
-	<div class="rsvpGrid--1/2 rsvpPad--leftL rsvpPad--rightXL">
-		<label
-			ng-if="!ctrl.invite.active"
-			class="rsvpTabButton"
-			ng-class="{ '-active': ctrl.responseFilter.selected === 'true' }"
-		>
-			<input
-				type="radio"
-				radiogroup="filter"
-				ng-model="ctrl.responseFilter.selected"
-				value="true"
-				class="ng-hide"
+		<!--
+			Tabs
+		-->
+
+		<div class="rsvpPad--leftL rsvpPad--rightXL">
+
+			<label
+				class="rsvpTabButton"
+				ng-class="{ '-active': ctrl.responseFilter.selected !== 'true' }"
 			>
-			Chosen ({{ ctrl.numChosen }})
-		</label>
+				<input
+					type="radio"
+					radiogroup="filter"
+					ng-model="ctrl.responseFilter.selected"
+					value=""
+					class="ng-hide"
+				>
+				Responses ({{ ctrl.invite.responses.length }})
+			</label>
 
-		<label
-			class="rsvpTabButton"
-			ng-class="{ '-active': ctrl.responseFilter.selected !== 'true' }"
-		>
-			<input
-				type="radio"
-				radiogroup="filter"
-				ng-model="ctrl.responseFilter.selected"
-				value=""
-				class="ng-hide"
+			<label
+				ng-if="!ctrl.invite.active"
+				class="rsvpTabButton"
+				ng-class="{ '-active': ctrl.responseFilter.selected === 'true' }"
 			>
-			Responses ({{ ctrl.invite.responses.length }})
-		</label>
+				<input
+					type="radio"
+					radiogroup="filter"
+					ng-model="ctrl.responseFilter.selected"
+					value="true"
+					class="ng-hide"
+				>
+				Chosen ({{ ctrl.numChosen }})
+			</label>
 
-		<button
-			ng-if="ctrl.invite.active && ctrl.invite.responses.length"
-			class="rsvpButton -typePrimary -sizeS rsvpPosition--right"
-		>
-			Choose winners
-		</button>
-	</div>
+			<button
+				ng-if="ctrl.invite.active && ctrl.invite.responses.length"
+				class="rsvpButton -typePrimary -sizeS rsvpPosition--right"
+				ng-click="ctrl.selectWinners()"
+			>
+				Choose winners
+			</button>
 
-	<!--
-		Responses
-	-->
+		</div>
 
-	<div class="rsvpGrid">
-		<div class="rsvpInviteDetailView__responses rsvpGrid--1/2">
+		<!--
+			Responses
+		-->
+
+		<div class="rsvpInviteDetailView__responses">
 			<rsvp-response
 				ng-repeat="response in ctrl.invite.responses | filter:ctrl.responseFilter | orderBy:'name'"
 				ng-click="ctrl.invite.method === 'manual' && ctrl.toggleResponse(response)"
 				response="response"
 			></rsvp-response>
 		</div>
-		<div class="rsvpGrid--1/2" ng-if="ctrl.invite.responses.length">
-			<rsvp-tenure-chart invite="ctrl.invite" selected="ctrl.responseFilter.selected"></rsvp-tenure-chart>
-			<rsvp-dept-chart invite="ctrl.invite" selected="ctrl.responseFilter.selected"></rsvp-dept-chart>
+
+		<!--
+			Actions
+		-->
+
+		<div class="rsvpGrid">
+
+			<button
+				ng-if="ctrl.invite.active && ctrl.invite.responses.length"
+				class="rsvpButton -typePrimary"
+				ng-click="ctrl.selectWinners()"
+			>
+				Choose winners
+			</button>
+
+			<button
+				ng-if="!ctrl.invite.active && ctrl.invite.responses.length && !ctrl.invite.sent_time"
+				class="rsvpButton -typePrimary"
+				ng-click="$root.RsvpDialog.open('wrapup')"
+			>
+				Email all responders
+			</button>
+
+			<button
+				ng-if="!ctrl.invite.active && ctrl.invite.responses.length && ctrl.invite.sent_time"
+				class="rsvpButton -typeSecondaryAlt"
+			>
+				Wrap-up email sent
+			</button>
+
+			<div ng-if="!ctrl.invite.responses.length" class="rsvpPad--leftL">
+				Looks like no one has responded yet. Sad face.
+			</div>
+
 		</div>
+
 	</div>
 
 	<!--
-		Actions
+		Charts
 	-->
 
-	<button
-		ng-if="ctrl.invite.active && ctrl.invite.responses.length"
-		class="rsvpButton -typePrimary"
-	>
-		Choose winners
-	</button>
-
-	<button
-		ng-if="!ctrl.invite.active && ctrl.invite.responses.length"
-		class="rsvpButton -typePrimary"
-	>
-		Email all responders
-	</button>
-
-	<div ng-if="!ctrl.invite.responses.length" class="rsvpPad--leftL">
-		Looks like no one has responded yet. Sad face.
+	<div class="rsvpGrid--1/2" ng-if="ctrl.invite.responses.length">
+		<rsvp-tenure-chart invite="ctrl.invite" selected="ctrl.responseFilter.selected"></rsvp-tenure-chart>
+		<rsvp-dept-chart invite="ctrl.invite" selected="ctrl.responseFilter.selected"></rsvp-dept-chart>
 	</div>
 
 </div>
+
+<rsvp-dialog name="wrapup">
+	<form name="form" class="rsvpGrid">
+
+		<h2 class="rsvpTextHeading -level2 rsvpText -alignCenter">Wrap-up messages</h2>
+
+		<p>
+			<label class="rsvpInputLabel">Message to Chosen Winners</label>
+			<textarea ng-model="form.acceptedBody" class="rsvpInput rsvpGrid" rows="6" required></textarea>
+		</p>
+		<p>
+			<label class="rsvpInputLabel">Message to Everyone Else</label>
+			<textarea ng-model="form.rejectedBody" class="rsvpInput rsvpGrid" rows="6" required></textarea>
+		</p>
+
+		<span class="rsvpPad--rightXS rsvpGrid--1/2">
+			<button
+				type="button"
+				class="rsvpButton -typeSecondary rsvpGrid"
+				ng-click="$root.RsvpDialog.close('wrapup')"
+			>
+				Whoops, Not Yet
+			</button>
+		</span>
+
+		<span class="rsvpPad--leftXS rsvpGrid--1/2">
+			<button
+				type="submit"
+				class="rsvpButton -typePrimary rsvpGrid"
+				ng-click="form.$valid && ctrl.sendWrapUp(form.acceptedBody, form.rejectedBody)"
+			>
+				{{ ctrl.invite.sent_time ? 'Sending…' : 'Send' }}
+			</button>
+		</span>
+
+	</form>
+</rsvp-dialog>

@@ -14,7 +14,7 @@ angular.module('rsvp').directive('rsvpInvitesView', function(
 		controller: function() {
 			var ctrl = this;
 
-			RsvpInviteApi.fetchInvites().then(function(invites) {
+			function setInvites(invites) {
 				ctrl.invites = _.sortByOrder(invites, ['active', 'desc'], ['rsvp_by_time', 'asc']);
 
 				if (_.isEmpty(ctrl.invites)) {
@@ -23,7 +23,10 @@ angular.module('rsvp').directive('rsvpInvitesView', function(
 				else {
 					$state.go('invites.detail', { inviteId: ctrl.invites[0].id });
 				}
-			});
+			}
+
+			RsvpInviteApi.onUpdateInvites(setInvites);
+			RsvpInviteApi.fetchInvites().then(setInvites);
 		},
 	};
 });
