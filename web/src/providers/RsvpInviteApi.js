@@ -7,19 +7,19 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 	'use strict';
 
 	var RsvpInviteApi = this;
-	var _invites = null;
+	var _invitesByUser = {};
 	var _listeners = {};
 
 	RsvpInviteApi.fetchInvites = function(ignoreCache) {
-		if (_invites && !ignoreCache) {
+		if (getInvites() && !ignoreCache) {
 			// Already cached
-			return $q.resolve(_invites);
+			return $q.resolve(getInvites());
 		}
 		else {
 			return RsvpApi
 				.get('/users/' + RsvpAuthApi.getUserId() + '/invitations')
 				.then(function(invites) {
-					_invites = invites;
+					setInvites(invites);
 					RsvpInviteApi.notifyUpdateInvites(invites);
 					return invites;
 				});
@@ -101,8 +101,17 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 		});
 	}
 
+	function getInvites() {
+		var invites = _invitesByUser[RsvpAuthApi.getUserId()];
+		return invites;
+	}
+
+	function setInvites(invites) {
+		_invitesByUser[RsvpAuthApi.getUserId()] = invites;
+	}
+
 	function getInvite(inviteId) {
-		var invite = _.find(_invites, 'id', inviteId);
+		var invite = _.find(getInvites(), 'id', inviteId);
 		return invite;
 	}
 });
