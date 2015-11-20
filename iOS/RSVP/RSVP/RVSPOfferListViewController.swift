@@ -84,6 +84,7 @@ class RVSPOfferListViewController: UIViewController {
         RSVPNetworkManager.instance.getOfferList(RSVP🎅🏽Model.instance.userId) { (response, error) -> Void in
             if let _response = response as? NSDictionary {
                 for offerData in _response["data"] as? Array<NSDictionary> ?? [] {
+                    NSLog("\(offerData)")
                     self.offerList.append(RSVPOfferModel(networkData: offerData))
                 }
                 
@@ -113,6 +114,10 @@ class RVSPOfferListViewController: UIViewController {
             guard let _targetOfferIndex = targetOfferIndex else { return }
             if let offerDetailVieController = segue.destinationViewController as? RSVPOfferDetailViewController {
                 offerDetailVieController.offerModel = offerList[_targetOfferIndex]
+            }
+        } else if segue.identifier == "CreateOfferViewSegue" {
+            if let createOfferVC = segue.destinationViewController as? RSVPCreateOfferViewController {
+                createOfferVC.navigationItem.title = self.createNewOfferTextField.text
             }
         }
     }

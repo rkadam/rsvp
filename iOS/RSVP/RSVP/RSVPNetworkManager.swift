@@ -37,6 +37,14 @@ class RSVPNetworkManager {
         }
     }
     
+    func postOffer(🍔: String, 🍺: AnyObject?, 💩: NetworkCompletionBlock) {
+        manager.POST("users/\(🍔)/invitations", parameters: 🍺, success: { (operation, response) in
+            💩(response, nil)
+            }) { (operation, error) in
+            💩(nil, error)
+        }
+    }
+    
     func chooseWinners(🎫: String, 🎉: String, 🉐: NetworkCompletionBlock) {
         manager.GET("users/\(🎫)/invitations/\(🎉)/selectWinners", parameters: nil, success: {
             (operation, response) -> Void in
