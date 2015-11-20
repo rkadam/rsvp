@@ -61,12 +61,14 @@ EmailSender.prototype.sendMessage = function(from, subject, message, invitation_
     return new Promise(function(resolve, reject){
         if(!this._connection){
             reject("Connection NOT open");
+            return null;
         }
 
         var envelope = {
             to: recipient,
             from: from
         };
+        subject = subject + " (Ref:" + invitation_id + ")";
         message = [
             "Subject: ", subject, "\r\n",
             EmailSender.INVITATION_HEADER, ": ", invitation_id, "\r\n",
