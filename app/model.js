@@ -102,6 +102,7 @@ var sendInvitation = function(invitation) {
         );
         client.disconnect();
         deferred.resolve('yay');
+        return null;
       });
 
   return deferred.promise;
