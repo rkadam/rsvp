@@ -63,4 +63,5 @@
     <string name="invite_desc">Description:</string>
     <string name="selection_method">Selection Method:</string>
     <string name="invite_create_failed">Failed to create an offer.</string>
+    <string name="live">Active</string>
 </resources>

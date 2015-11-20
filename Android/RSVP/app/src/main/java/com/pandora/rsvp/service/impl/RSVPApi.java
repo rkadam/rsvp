@@ -34,7 +34,7 @@ public class RSVPApi implements IRSVPApi {
     IUserDataManager mIUserDataManager;
     
     private final RetrofitRSVPApi api;
-    private static final String API_ENDPOINT = "http://aai.savagebeast.com:9000";
+    private static final String API_ENDPOINT = "http://rsvp.savagebeast.com:80";
 
     public RSVPApi() {
         RSVPApp.getComponent().inject(this);

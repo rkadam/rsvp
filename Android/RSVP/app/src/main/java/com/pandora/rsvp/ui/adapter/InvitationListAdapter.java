@@ -68,6 +68,7 @@ public class InvitationListAdapter extends RecyclerView.Adapter<InvitationListAd
                 }
             }
         });
+        holder.liveStatus.setVisibility(invitation.active ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -84,6 +85,8 @@ public class InvitationListAdapter extends RecyclerView.Adapter<InvitationListAd
         TextView responseCount;
         @Bind(R.id.num_chosen)
         TextView numChosen;
+        @Bind(R.id.live_status)
+        TextView liveStatus;
         
         public InvitationItemViewHolder(View itemView) {
             super(itemView);

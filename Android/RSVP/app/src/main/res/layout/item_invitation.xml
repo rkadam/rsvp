@@ -3,38 +3,61 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    card_view:cardUseCompatPadding="true"
-    android:clickable="true">
+    card_view:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/invitation_title"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/colorPrimaryDark" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/invitation_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/live_status"
+                android:layout_toStartOf="@+id/live_status"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/live_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:text="@string/live"
+                android:textColor="@color/colorAccentSecondary" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/invitation_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:textSize="15sp"
-            android:textColor="@android:color/darker_gray" />
+            android:textColor="@android:color/darker_gray"
+            android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:orientation="horizontal"
-            android:baselineAligned="false">
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -46,19 +69,19 @@
                     android:id="@+id/num_responses"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_marginRight="12dp"
                     android:layout_marginEnd="12dp"
-                    android:gravity="center"
+                    android:layout_marginRight="12dp"
                     android:background="@drawable/circular_primary_bg"
+                    android:gravity="center"
                     android:textColor="@color/light_gray" />
-                
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15sp"
                     android:gravity="center"
-                    android:text="@string/responses" />
+                    android:text="@string/responses"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -71,19 +94,19 @@
                     android:id="@+id/num_chosen"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_marginRight="12dp"
                     android:layout_marginEnd="12dp"
-                    android:gravity="center"
+                    android:layout_marginRight="12dp"
                     android:background="@drawable/circular_primary_bg"
+                    android:gravity="center"
                     android:textColor="@color/light_gray" />
-                
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="15sp"
                     android:gravity="center"
-                    android:text="@string/chosen" />
+                    android:text="@string/chosen"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -23,5 +23,6 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_add_white"
         app:rippleColor="@color/white_50"
+        app:backgroundTint="@color/colorAccentSecondary"
         android:clickable="true" />
 </FrameLayout>
