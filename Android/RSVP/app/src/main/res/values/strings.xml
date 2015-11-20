@@ -24,7 +24,7 @@
     <string name="create_invitation_activity_email_blank">Please enter an email distribution list.</string>
     <string name="create_invitation_activity_email_invalid_format">Please enter a single email distribution address, e.g. dist-fyi-oak@pandora.com</string>
     <string name="create_invitation_activity_choosing_winners_header">CHOOSING WINNER(S)</string>
-    <string name="create_invitation_activity_method_of_choice">Method:</string>
+    <string name="create_invitation_activity_method_of_choice">Selection Method:</string>
     <string name="create_invitation_activity_see_preview_email">SEE PREVIEW EMAIL</string>
     <string name="create_invitation_activity_name_hint">Enter event name.</string>
     <string name="create_invitation_activity_desc_hint">Enter event description.</string>
