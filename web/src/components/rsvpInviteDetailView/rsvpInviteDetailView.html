@@ -1,6 +1,12 @@
-<div class="rsvpInviteDetailView">
-	<div>
+<div class="rsvpInviteDetailView rsvpGrid">
+
+	<!--
+		Tabs
+	-->
+
+	<div class="rsvpGrid--1/2 rsvpPad--leftL rsvpPad--rightXL">
 		<label
+			ng-if="!ctrl.invite.active"
 			class="rsvpTabButton"
 			ng-class="{ '-active': ctrl.responseFilter.selected === 'true' }"
 		>
@@ -27,18 +33,53 @@
 			>
 			Responses ({{ ctrl.invite.responses.length }})
 		</label>
+
+		<button
+			ng-if="ctrl.invite.active && ctrl.invite.responses.length"
+			class="rsvpButton -typePrimary -sizeS rsvpPosition--right"
+		>
+			Choose winners
+		</button>
 	</div>
 
-	<div class="rsvpInviteDetailView__responses">
-		<rsvp-response
-			ng-repeat="response in ctrl.invite.responses | filter:ctrl.responseFilter | orderBy:'name'"
-			ng-click="ctrl.toggleResponse(response)"
-			response="response"
-		></rsvp-response>
+	<!--
+		Responses
+	-->
+
+	<div class="rsvpGrid">
+		<div class="rsvpInviteDetailView__responses rsvpGrid--1/2">
+			<rsvp-response
+				ng-repeat="response in ctrl.invite.responses | filter:ctrl.responseFilter | orderBy:'name'"
+				ng-click="ctrl.invite.method === 'manual' && ctrl.toggleResponse(response)"
+				response="response"
+			></rsvp-response>
+		</div>
+		<div class="rsvpGrid--1/2" ng-if="ctrl.invite.responses.length">
+			<rsvp-tenure-chart invite="ctrl.invite" selected="ctrl.responseFilter.selected"></rsvp-tenure-chart>
+			<rsvp-dept-chart invite="ctrl.invite" selected="ctrl.responseFilter.selected"></rsvp-dept-chart>
+		</div>
 	</div>
-	<div class='rsvpCharts' ng-if='ctrl.invite.responses.length'>
-		<rsvp-tenure-chart invite="ctrl.invite" selected='ctrl.responseFilter.selected'></rsvp-tenure-chart>
-		<rsvp-dept-chart invite="ctrl.invite" selected='ctrl.responseFilter.selected'></rsvp-dept-chart>
+
+	<!--
+		Actions
+	-->
+
+	<button
+		ng-if="ctrl.invite.active && ctrl.invite.responses.length"
+		class="rsvpButton -typePrimary"
+	>
+		Choose winners
+	</button>
+
+	<button
+		ng-if="!ctrl.invite.active && ctrl.invite.responses.length"
+		class="rsvpButton -typePrimary"
+	>
+		Email all responders
+	</button>
+
+	<div ng-if="!ctrl.invite.responses.length" class="rsvpPad--leftL">
+		Looks like no one has responded yet. Sad face.
 	</div>
-	<button class="rsvpButton -typePrimary">Email all responders</button>
+
 </div>

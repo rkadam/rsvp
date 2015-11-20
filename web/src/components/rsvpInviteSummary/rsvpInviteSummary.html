@@ -17,5 +17,17 @@
 		<span>Chosen</span>
 	</span>
 
-	<span class="rsvpButton -typePrimary -sizeS rsvpPosition--right" ng-if="ctrl.invite.active">Live</span>
+	<span
+		ng-if="ctrl.invite.active && ctrl.invite.responses.length < ctrl.invite.response_accept_limit"
+		class="rsvpButton -typeSecondary -sizeS rsvpPosition--right"
+	>
+		Live
+	</span>
+
+	<span
+		ng-if="ctrl.invite.active && ctrl.invite.responses.length >= ctrl.invite.response_accept_limit"
+		class="rsvpButton -typeSecondary -sizeS rsvpPosition--right"
+	>
+		Full up
+	</span>
 </div>

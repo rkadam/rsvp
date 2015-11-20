@@ -1,11 +1,14 @@
 .rsvpTabButton {
 	.rsvpTextHeading.-level2;
 
-	margin: 0 20px;
 	padding-bottom: 8px;
 	cursor: pointer;
 
 	&.-active {
 		border-bottom: 8px solid @rsvpColor__border;
+	}
+
+	& + & {
+		margin-left: 40px;
 	}
 }

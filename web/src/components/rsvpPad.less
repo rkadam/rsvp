@@ -1,0 +1,100 @@
+/**
+ * @pattern rsvpPad
+ *
+ * @meta category Layout
+ * @meta module rsvp.app
+ *
+ * @description Mixin for inner padding.
+ *
+ * Padding is applied inwards and does not affect its element's outer width.
+ *
+ * Modifiers:
+ * --{left|right|top|bottom|horiz|vert}{None|XS|S|M|L|XL}
+ *
+ * @example Small padding on all sides
+```html
+	<div class="rsvpPad--S"> ... </div>
+```
+ *
+ * @example Medium padding on the left, large padding on the top
+```html
+	<div class="rsvpPad--leftM rsvpPad--topL"> ... </div>
+```
+ *
+ * @example Extra large padding on all sides except the bottom
+```html
+	<div class="rsvpPad--L rsvpPad--bottomNone"> ... </div>
+```
+ *
+ * @example Large padding on all sides, but small padding on the bottom
+```html
+	<div class="rsvpPad--L rsvpPad--bottomS"> ... </div>
+```
+ *
+ * @example Small padding on the left and right
+```html
+	<div class="rsvpPad--horizS"> ... </div>
+```
+ *
+ * @example Medium padding on the top and bottom
+```html
+	<div class="rsvpPad--vertM"> ... </div>
+```
+ *
+ * @example Large padding on the top for views smaller than L, small otherwise
+```html
+	<div class="rsvpPad--topL rsvpPad--topS@L"> ... </div>
+```
+ */
+
+// Padding sizes
+.rsvpPad--addSize(~"None", 0);
+.rsvpPad--addSize(~"XS", 5px);
+.rsvpPad--addSize(~"S", 10px);
+.rsvpPad--addSize(~"M", 20px);
+.rsvpPad--addSize(~"L", 30px);
+.rsvpPad--addSize(~"XL", 40px);
+
+.rsvpPad--addSize(@label, @value) {
+	.rsvpPad--addSizeForSide(~"all", @label, @value);
+	.rsvpPad--addSizeForSide(~"horiz", @label, @value);
+	.rsvpPad--addSizeForSide(~"vert", @label, @value);
+	.rsvpPad--addSizeForSide(~"left", @label, @value);
+	.rsvpPad--addSizeForSide(~"right", @label, @value);
+	.rsvpPad--addSizeForSide(~"top", @label, @value);
+	.rsvpPad--addSizeForSide(~"bottom", @label, @value);
+}
+
+.rsvpPad--addSizeForSide(@side, @label, @value) when (@side = ~"all") {
+	.rsvpPad--@{label} {
+		.rsvpView--addBreakpointModifiers({
+			.rsvpPad--side(@side, @value);
+		});
+	}
+}
+
+.rsvpPad--addSizeForSide(@side, @label, @value) when (default()) {
+	.rsvpPad--@{side}@{label} {
+		.rsvpView--addBreakpointModifiers({
+			.rsvpPad--side(@side, @value);
+		});
+	}
+}
+
+.rsvpPad--side(@side, @value) when (@side = ~"all") {
+	padding: @value;
+}
+
+.rsvpPad--side(@side, @value) when (@side = ~"horiz") {
+	padding-left: @value;
+	padding-right: @value;
+}
+
+.rsvpPad--side(@side, @value) when (@side = ~"vert") {
+	padding-top: @value;
+	padding-bottom: @value;
+}
+
+.rsvpPad--side(@side, @value) when (default()) {
+	padding-@{side}: @value;
+}
