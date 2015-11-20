@@ -21,6 +21,6 @@ angular.module('rsvp').service('RsvpDialog', function(
 
 	RsvpDialog.close = function(dialogName) {
 		_dialogs[dialogName] = false;
-		angular.element('html').css('overflow', '');
+		angular.element('html').css('overflow', 'auto');
 	};
 });

@@ -23,7 +23,7 @@
 			</label>
 
 			<label
-				ng-if="!ctrl.invite.active"
+				ng-if="ctrl.invite.selected_count"
 				class="rsvpTabButton"
 				ng-class="{ '-active': ctrl.responseFilter.selected === 'true' }"
 			>
@@ -34,11 +34,11 @@
 					value="true"
 					class="ng-hide"
 				>
-				Chosen ({{ ctrl.numChosen }})
+				Chosen ({{ ctrl.invite.selected_count }})
 			</label>
 
 			<button
-				ng-if="ctrl.invite.active && ctrl.invite.responses.length"
+				ng-if="ctrl.invite.active && !ctrl.invite.selected_count && ctrl.invite.responses.length"
 				class="rsvpButton -typePrimary -sizeS rsvpPosition--right"
 				ng-click="ctrl.selectWinners()"
 			>
@@ -66,7 +66,7 @@
 		<div class="rsvpGrid">
 
 			<button
-				ng-if="ctrl.invite.active && ctrl.invite.responses.length"
+				ng-if="ctrl.invite.active && !ctrl.invite.selected_count && ctrl.invite.responses.length"
 				class="rsvpButton -typePrimary"
 				ng-click="ctrl.selectWinners()"
 			>
@@ -74,18 +74,11 @@
 			</button>
 
 			<button
-				ng-if="!ctrl.invite.active && ctrl.invite.responses.length && !ctrl.invite.sent_time"
+				ng-if="ctrl.invite.active && ctrl.invite.selected_count && !ctrl.invite.sent_time"
 				class="rsvpButton -typePrimary"
 				ng-click="$root.RsvpDialog.open('wrapup')"
 			>
 				Email all responders
-			</button>
-
-			<button
-				ng-if="!ctrl.invite.active && ctrl.invite.responses.length && ctrl.invite.sent_time"
-				class="rsvpButton -typeSecondaryAlt"
-			>
-				Email sent
 			</button>
 
 			<div ng-if="!ctrl.invite.responses.length" class="rsvpPad--leftL">

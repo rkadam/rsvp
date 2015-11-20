@@ -28,7 +28,11 @@ angular.module('rsvp').directive('rsvpInviteDetailView', function(
 				ctrl.invite.active = false;
 				RsvpInviteApi.notifyUpdateInvite(ctrl.invite);
 
-				RsvpInviteApi.selectWinners(ctrl.invite.id);
+				RsvpInviteApi
+					.selectWinners(ctrl.invite.id)
+					.then(function(invite) {
+						ctrl.invite = invite;
+					});
 			};
 
 			ctrl.sendWrapUp = function(acceptedBody, rejectedBody) {
