@@ -14,7 +14,7 @@ typealias NetworkCompletionBlock = (Any?, NSError?)->Void
 class RSVPNetworkManager {
     static let instance = RSVPNetworkManager()
     private let manager = AFHTTPRequestOperationManager(baseURL: NSURL(string: "http://rsvp.savagebeast.com:80/api/"))
-
+    
     func loginUser(🎅🏽: String, 🔑: String, 😊: NetworkCompletionBlock, 😞: NetworkCompletionBlock) -> Bool {
         var 🎉 = false
         manager.POST("login", parameters: ["uid":🎅🏽, "password":🔑], success: {(📡, 🍕) -> Void in
@@ -38,7 +38,11 @@ class RSVPNetworkManager {
     }
     
     func postOffer(🍔: String, 🍺: AnyObject?, 💩: NetworkCompletionBlock) {
+        manager.requestSerializer = AFJSONRequestSerializer()
         manager.POST("users/\(🍔)/invitations", parameters: 🍺, success: { (operation, response) in
+            NSLog("\(operation.request.HTTPMethod)")
+            NSLog("\(operation.request.allHTTPHeaderFields)")
+            NSLog("\(operation.responseString)")
             💩(response, nil)
             }) { (operation, error) in
             💩(nil, error)

@@ -117,7 +117,7 @@ class RSVPCreateOfferViewController: UIViewController {
         let postBody = RSVPPostOfferModel.parameters(title, responseAcceptLimit: responseAcceptLimit, rsvpByTime: self.rsvpDatePicker.date, emailTo: emailTo, method: "random", invitationBody: invitationBody)
         NSLog("\(postBody)")
         
-        RSVPNetworkManager.instance.postOffer("raju", 🍺: postBody) { (response, error) in
+        RSVPNetworkManager.instance.postOffer(RSVP🎅🏽Model.instance.userId, 🍺: postBody) { (response, error) in
             if let _response = response as? NSDictionary {
                 NSLog("\(_response)")
                 self.navigationController?.popViewControllerAnimated(true)

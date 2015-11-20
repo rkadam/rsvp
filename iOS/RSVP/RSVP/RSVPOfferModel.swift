@@ -74,7 +74,14 @@ class RSVPOfferModel {
 }
 
 class RSVPPostOfferModel {
-    class func parameters(title: String, responseAcceptLimit: Int, rsvpByTime: NSDate, emailTo: String, method: String, invitationBody: String) -> [String: AnyObject] {
+//    var title: String
+//    var response_accept_limit: Int
+//    var rsvp_by_time: Int
+//    var email_to: String
+//    var method: String
+//    var invitation_body: String
+    
+    class func parameters(title: String, responseAcceptLimit: Int, rsvpByTime: NSDate, emailTo: String, method: String, invitationBody: String) -> AnyObject {
         let parameter: [String : AnyObject] = [
             "title": title,
             "response_accept_limit": responseAcceptLimit,
