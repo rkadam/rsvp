@@ -7,14 +7,17 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.pandora.rsvp.R;
-import com.pandora.rsvp.service.contract.Invitation;
 import com.pandora.rsvp.service.contract.InviteResponse;
 
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +30,11 @@ import java.util.Random;
 public class YearsChartView extends RelativeLayout {
 
     private PieChart chart;
+    private TextView switchText;
+
+    private boolean isDept;
+    private List<InviteResponse> invitationData;
+    private Switch pieSwitch;
 
     public YearsChartView(Context context) {
         super(context);
@@ -46,23 +54,47 @@ public class YearsChartView extends RelativeLayout {
     private void init() {
         inflate(getContext(), R.layout.frag_charts, this);
         chart = (PieChart) findViewById(R.id.chart);
+        pieSwitch = (Switch) findViewById(R.id.pie_switch);
+        switchText = (TextView) findViewById(R.id.switch_text);
+        pieSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                toggleCheck(isChecked);
+            }
+        });
+        toggleCheck(false);
     }
 
+
+    private void toggleCheck(boolean isChecked) {
+        switchText.setText(isChecked ? R.string.years_data : R.string.dept_data);
+        isDept = !isChecked;
+        buildData();
+    }
+
+
     public void setInvitationData(List<InviteResponse> invitationData) {
+        this.invitationData = invitationData;
+        pieSwitch.setChecked(false);
+        toggleCheck(false);
+    }
+
+    public void buildData() {
         if (invitationData == null || invitationData.isEmpty()) {
             return;
         }
 
         HashMap<String, Integer> valuesMapping = new HashMap<>();
         for (InviteResponse response : invitationData) {
-            if (valuesMapping.containsKey(response.department)) {
-                valuesMapping.put(response.department, valuesMapping.get(response.department) + 1);
+            String key = isDept ? response.department : String.valueOf(Math.round(response.years)) + " Year(s)";
+            if (valuesMapping.containsKey(key)) {
+                valuesMapping.put(key, valuesMapping.get(key) + 1);
             } else {
-                valuesMapping.put(response.department, 1);
+                valuesMapping.put(key, 1);
             }
         }
 
-        chart.setCenterText(getContext().getResources().getString(R.string.dept_dist));
+        chart.setCenterText(getContext().getResources().getString(isDept ? R.string.dept_dist : R.string.years_dist));
         chart.setDescription("");
         chart.setDrawSliceText(false);
 
@@ -87,6 +119,8 @@ public class YearsChartView extends RelativeLayout {
         });
         data.setValueTextSize(12);
         chart.setData(data);
+        chart.invalidate();
+        chart.notifyDataSetChanged();
     }
 
 

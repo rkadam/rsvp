@@ -65,6 +65,7 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
     private InvitationResponsesPagerAdapter adapter;
     private Invitation invitation;
 
+
     @Override
     protected int getActivityLayoutRes() {
         return R.layout.activity_invitation_responses_activity;
@@ -137,10 +138,11 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
     }
 
     public void updateButton() {
-        boolean isChosenTab = adapter.getCount() > 1 && pager.getCurrentItem() == 0;
-        respondersActionButton.setText(getResources().getString(isChosenTab ? R.string.email_chosen_responders
-                : R.string.select_winners));
-        boolean enabled = (isChosenTab || invitation.responses.size() > 0) && invitation.active;
+        InvitationResponsesPagerAdapter.CurrentSelection selection = adapter.getCurrentSelection(pager.getCurrentItem());
+        boolean enabled = (selection == InvitationResponsesPagerAdapter.CurrentSelection.CHOSEN
+                || invitation.responses.size() > 0) && invitation.active;
+        respondersActionButton.setText(selection == InvitationResponsesPagerAdapter.CurrentSelection.CHOSEN ?
+                R.string.email_chosen_responders : R.string.select_winners);
         respondersActionButton.setEnabled(enabled);
         respondersActionButton.setAlpha(enabled ? 1f : 0.5f);
     }
@@ -162,12 +164,14 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
     }
 
     private void submit() {
-        int count = adapter.getCount();
-        int currentItem = pager.getCurrentItem();
-        if ((count > 1 && currentItem == 1) || (count == 1)) {
+        boolean hasRespondents = adapter.getRespondentCount() > 0;
+        InvitationResponsesPagerAdapter.CurrentSelection selection = adapter.getCurrentSelection(pager.getCurrentItem());
+        if ((selection == InvitationResponsesPagerAdapter.CurrentSelection.RESPONDENT
+                || selection == InvitationResponsesPagerAdapter.CurrentSelection.CHART)
+                && hasRespondents) {
             toggleProgress(true);
             api.selectWinners(invitation.id, this);
-        } else {
+        } else if (selection == InvitationResponsesPagerAdapter.CurrentSelection.CHOSEN) {
             WrapUpMessageDialog dialog = WrapUpMessageDialog.newInstance();
             dialog.setSubmitWrapUpmListener(this);
             dialog.show(getSupportFragmentManager(), dialog.getClass().getSimpleName());
@@ -204,4 +208,6 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
         api.submitWrapUp(invitation.id, winnerMg, msg, this);
         toggleProgress(true);
     }
+
+
 }

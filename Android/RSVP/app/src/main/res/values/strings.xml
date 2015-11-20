@@ -57,7 +57,7 @@
     <string name="responses">Responses</string>
     <string name="invite_failure">Failed to load invites :(</string>
     <string name="invitation_details">Invitation Details</string>
-    <string name="email_chosen_responders">Email Chosen Responders</string>
+    <string name="email_chosen_responders">Send Final Email</string>
     <string name="select_winners">Pick Winners</string>
     <string name="error_selecting_winners">An error occurred.</string>
     <string name="from">Scheduled for</string>
@@ -68,6 +68,8 @@
     <string name="email_to">Email to: %s</string>
     <string name="no_resp">No one has responded yet.</string>
     <string name="action_refresh">Refresh</string>
-    <string name="years_dist">Year at Pandora</string>
+    <string name="years_dist">Years</string>
     <string name="dept_dist">Departments</string>
+    <string name="years_data">Years</string>
+    <string name="dept_data">Department</string>
 </resources>

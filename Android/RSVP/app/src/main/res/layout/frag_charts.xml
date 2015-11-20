@@ -5,9 +5,37 @@
     android:orientation="vertical">
 
     <com.github.mikephil.charting.charts.PieChart
+        android:layout_height="match_parent"
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_centerInParent="true" />
+
+    <Switch
+        android:id="@+id/pie_switch"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:checked="false"
+        android:textOff="@string/dept_data"
+        android:textOn="@string/years_data"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/switch_text"
+        android:layout_width="wrap_content"
+        android:minWidth="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/pie_switch"
+        android:gravity="center_horizontal"
+        android:paddingEnd="4dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingStart="4dp"
+        android:textColor="@color/colorAccent" />
 
 </RelativeLayout>

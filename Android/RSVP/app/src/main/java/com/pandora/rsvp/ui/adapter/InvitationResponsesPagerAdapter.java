@@ -3,6 +3,7 @@ package com.pandora.rsvp.ui.adapter;
 import com.pandora.rsvp.R;
 import com.pandora.rsvp.service.contract.Invitation;
 import com.pandora.rsvp.service.contract.InviteResponse;
+import com.pandora.rsvp.ui.InvitationResponsesActivity;
 import com.pandora.rsvp.ui.custom.YearsChartView;
 
 import android.support.v4.content.ContextCompat;
@@ -26,6 +27,17 @@ public class InvitationResponsesPagerAdapter extends PagerAdapter {
     List<InviteResponse> chosenInviteResponse;
     List<InviteResponse> responsesInviteResponse;
 
+    public int getRespondentCount() {
+        return responsesInviteResponse.size();
+    }
+
+    public enum CurrentSelection {
+        CHOSEN,
+        RESPONDENT,
+        CHART,
+        EMPTY
+    }
+
     public InvitationResponsesPagerAdapter(Invitation invitation) {
         this.chosenInviteResponse = new ArrayList<>();
         this.responsesInviteResponse = new ArrayList<>();
@@ -48,28 +60,30 @@ public class InvitationResponsesPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        boolean chosen = hasChosen && position == 0;
-        int size = chosen ? chosenInviteResponse.size() : responsesInviteResponse.size();
-        if ((hasChosen && position == 2) || (!hasChosen && position == 1)) {
-            YearsChartView chartView = new YearsChartView(container.getContext());
-            container.addView(chartView);
-            chartView.setInvitationData(responsesInviteResponse);
-            return chartView;
-        } else if (size > 0) {
-            RecyclerView rv = new RecyclerView(container.getContext());
-            rv.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            rv.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
-            rv.setAdapter(new InvitationResponsesListAdapter(chosen ? chosenInviteResponse : responsesInviteResponse));
-            container.addView(rv);
-            return rv;
-        } else {
-            TextView textView = new TextView(container.getContext());
-            textView.setText(R.string.no_resp);
-            textView.setTextColor(ContextCompat.getColor(container.getContext(), android.R.color.darker_gray));
-            textView.setPadding(30, 30, 30, 0);
-            container.addView(textView);
-            return textView;
-        } 
+
+        CurrentSelection selection = getCurrentSelection(position);
+        switch (selection) {
+            case CHART:
+                YearsChartView chartView = new YearsChartView(container.getContext());
+                container.addView(chartView);
+                chartView.setInvitationData(responsesInviteResponse);
+                return chartView;
+            case CHOSEN:
+            case RESPONDENT:
+                RecyclerView rv = new RecyclerView(container.getContext());
+                rv.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                rv.setLayoutManager(new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false));
+                rv.setAdapter(new InvitationResponsesListAdapter(selection == CurrentSelection.CHOSEN ? chosenInviteResponse : responsesInviteResponse));
+                container.addView(rv);
+                return rv;
+            default:
+                TextView textView = new TextView(container.getContext());
+                textView.setText(R.string.no_resp);
+                textView.setTextColor(ContextCompat.getColor(container.getContext(), android.R.color.darker_gray));
+                textView.setPadding(30, 30, 30, 0);
+                container.addView(textView);
+                return textView;
+        }
     }
 
     @Override
@@ -87,5 +101,17 @@ public class InvitationResponsesPagerAdapter extends PagerAdapter {
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
+    }
+
+    public CurrentSelection getCurrentSelection(int position) {
+        boolean chosen = hasChosen && position == 0;
+        int size = chosen ? chosenInviteResponse.size() : responsesInviteResponse.size();
+        if ((hasChosen && position == 2) || (!hasChosen && position == 1)) {
+            return CurrentSelection.CHART;
+        } else if (size > 0) {
+            return chosen ? CurrentSelection.CHOSEN : CurrentSelection.RESPONDENT;
+        } else {
+            return CurrentSelection.EMPTY;
+        }
     }
 }
