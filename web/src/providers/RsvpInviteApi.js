@@ -10,15 +10,6 @@ angular.module('rsvp').service('RsvpInviteApi', function(
 	var _invites = null;
 	var _listeners = {};
 
-	RsvpInviteApi.getNumResponsesChosen = function(invite) {
-		if (!invite) {
-			return 0;
-		}
-
-		var numChosen = _.filter(invite.responses, 'selected', true).length;
-		return numChosen;
-	};
-
 	RsvpInviteApi.fetchInvites = function(ignoreCache) {
 		if (_invites && !ignoreCache) {
 			// Already cached

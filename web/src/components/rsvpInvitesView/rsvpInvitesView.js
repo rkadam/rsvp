@@ -1,5 +1,6 @@
 angular.module('rsvp').directive('rsvpInvitesView', function(
 	$state,
+	$stateParams,
 	_,
 	RsvpInviteApi
 ) {
@@ -21,7 +22,7 @@ angular.module('rsvp').directive('rsvpInvitesView', function(
 					$state.go('start');
 				}
 				else {
-					$state.go('invites.detail', { inviteId: ctrl.invites[0].id });
+					$state.go('invites.detail', { inviteId: $stateParams.inviteId || ctrl.invites[0].id });
 				}
 			}
 

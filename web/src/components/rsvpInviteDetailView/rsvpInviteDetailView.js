@@ -25,9 +25,6 @@ angular.module('rsvp').directive('rsvpInviteDetailView', function(
 			};
 
 			ctrl.selectWinners = function() {
-				ctrl.invite.active = false;
-				RsvpInviteApi.notifyUpdateInvite(ctrl.invite);
-
 				RsvpInviteApi
 					.selectWinners(ctrl.invite.id)
 					.then(function(invite) {
@@ -45,13 +42,8 @@ angular.module('rsvp').directive('rsvpInviteDetailView', function(
 				}, 750);
 			};
 
-			RsvpInviteApi.onUpdateInvite(function(invite) {
-				ctrl.numChosen = RsvpInviteApi.getNumResponsesChosen(invite);
-			}, inviteId);
-
 			RsvpInviteApi.fetchInvite(inviteId).then(function(invite) {
 				ctrl.invite = invite;
-				ctrl.numChosen = RsvpInviteApi.getNumResponsesChosen(invite);
 			});
 		},
 	};
