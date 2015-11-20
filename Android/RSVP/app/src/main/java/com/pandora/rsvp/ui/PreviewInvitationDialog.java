@@ -23,20 +23,27 @@ public class PreviewInvitationDialog extends DialogFragment {
     public static final String KEY_EMAIL_SUBJECT = "key_email_subject";
 
     public static final String KEY_METHOD_CHOICE = "key_method_choice";
-    
-    private Button mCancelButton;
-    private Button mSendButton;
-    
+
+    public interface CreateInviteListener {
+        void create();
+    }
+
+    public void setCreateInviteListener(CreateInviteListener createInviteListener) {
+        mCreateInviteListener = createInviteListener;
+    }
+
+    private CreateInviteListener mCreateInviteListener;
+
     public static PreviewInvitationDialog newInstance(String description, int numInvitations,
-                                                      long datetime, String emailTo, String emailSubject, String selectionMethod) {
+                                                      long datetime, String emailTo, String emailFrom, String emailSubject, String selectionMethod) {
         Bundle bundle = new Bundle();
         bundle.putString(KEY_INVITATION_DESCRIPTION, description);
         bundle.putInt(KEY_NUM_INVITES, numInvitations);
         bundle.putLong(KEY_RSVP_DATE, datetime);
         bundle.putString(KEY_EMAIL_TO, emailTo);
+        bundle.putString(KEY_EMAIL_FROM, emailFrom);
         bundle.putString(KEY_EMAIL_SUBJECT, emailSubject);
         bundle.putString(KEY_METHOD_CHOICE, selectionMethod);
-        // TODO - need to pass in from and subject
                 
         PreviewInvitationDialog emailPreviewDialog = new PreviewInvitationDialog();
         emailPreviewDialog.setArguments(bundle);
@@ -51,7 +58,7 @@ public class PreviewInvitationDialog extends DialogFragment {
         to.setText(getArguments().getString(KEY_EMAIL_TO));
         
         TextView from = (TextView)view.findViewById(R.id.dialog_invitation_preview_from_text);
-//        from.setText(getArguments().getString(KEY_EMAIL_FROM)); // TODO - get from userPrefs
+        from.setText(getArguments().getString(KEY_EMAIL_FROM));
         
         TextView subject = (TextView)view.findViewById(R.id.dialog_invitation_preview_subject_text);
         subject.setText(getArguments().getString(KEY_EMAIL_SUBJECT));
@@ -59,18 +66,21 @@ public class PreviewInvitationDialog extends DialogFragment {
         TextView emailBody = (TextView)view.findViewById(R.id.dialog_invitation_preview_message_body);
         emailBody.setText(getArguments().getString(KEY_INVITATION_DESCRIPTION));
 
-        mCancelButton = (Button)view.findViewById(R.id.dialog_invitation_preview_cancel_button);
-        mCancelButton.setOnClickListener(new View.OnClickListener() {
+        Button cancelButton = (Button) view.findViewById(R.id.dialog_invitation_preview_cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
         });
-        mSendButton = (Button)view.findViewById(R.id.dialog_invitation_preview_send_button);
-        mSendButton.setOnClickListener(new View.OnClickListener() {
+        Button sendButton = (Button) view.findViewById(R.id.dialog_invitation_preview_send_button);
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO - API call here
+                if (mCreateInviteListener != null) {
+                    dismiss();
+                    mCreateInviteListener.create();
+                }
             }
         });
     }

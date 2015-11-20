@@ -90,7 +90,8 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<SimpleRes
 
     private void toggleButton() {
         String pass = password.getText().toString();
-        boolean valid = ValidationUtils.isValidEmail(email.getText()) && !pass.isEmpty();
+        String userName = email.getText().toString();
+        boolean valid = !userName.isEmpty() && !pass.isEmpty();
         submit.setEnabled(valid);
         submit.setAlpha(submit.isEnabled() ? 1f : 0.5f);
     }

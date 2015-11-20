@@ -80,6 +80,6 @@ public class Invitation implements Parcelable, Comparable<Invitation> {
 
     @Override
     public int compareTo(@NonNull Invitation another) {
-        return Boolean.valueOf(this.active).compareTo(another.active);
+        return Boolean.valueOf(another.active).compareTo(this.active);
     }
 }

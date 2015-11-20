@@ -21,7 +21,7 @@
             android:layout_marginTop="8dp"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <TextView

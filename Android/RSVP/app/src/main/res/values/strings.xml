@@ -4,7 +4,7 @@
     <string name="pandora_logo">Pandora Logo Desc</string>
     <string name="submit">Log In</string>
     <string name="password_hint">Password</string>
-    <string name="email">Email</string>
+    <string name="usename_hint">Username</string>
     <string name="RVSP">RSVP</string>
     <string name="at">\@</string>
     <string name="pandora">PANDORA</string>
@@ -57,9 +57,10 @@
     <string name="invite_failure">Failed to load invites :(</string>
     <string name="invitation_details">Invitation Details</string>
     <string name="email_chosen_responders">Email Chosen Responders</string>
-    <string name="select_winners">Pick Responders</string>
+    <string name="select_winners">Pick Winners</string>
     <string name="error_selecting_winners">An error occurred.</string>
     <string name="from">Scheduled for</string>
     <string name="invite_desc">Description:</string>
     <string name="selection_method">Selection Method:</string>
+    <string name="invite_create_failed">Failed to create an offer.</string>
 </resources>
