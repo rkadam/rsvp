@@ -1,15 +1,15 @@
 <div class="rsvpInvitesView rsvpGrid">
 
-	<a
-		class="rsvpSlab"
-		ui-sref="createInvite"
-	>
-		<rsvp-icon icon="ss-navigateup"></rsvp-icon>
-		&nbsp;
-		<span class="rsvpTextCaption">Create new invite</span>
-		&nbsp;
-		<rsvp-icon icon="ss-navigateup"></rsvp-icon>
-	</a>
+	<div class="rsvpSlab">
+		<a ui-sref="createInvite" class="rsvpText -invert">
+			<rsvp-icon icon="ss-navigateup"></rsvp-icon>
+			&nbsp;
+			<span class="rsvpTextCaption">Create new invite</span>
+			&nbsp;
+			<rsvp-icon icon="ss-navigateup"></rsvp-icon>
+		</a>
+		<a ui-sref="logout" class="rsvpText -invert rsvpPosition--right">Log out</a>
+	</div>
 
 	<nav class="rsvpGrid--1/4">
 		<rsvp-invite-summary

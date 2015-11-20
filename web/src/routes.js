@@ -14,6 +14,7 @@ angular.module('rsvp').config(function(
 		.state('logout', {
 			url: '/logout',
 			template: '<rsvp-logout-view></rsvp-logout-view>',
+			data: { requiresLogin: true },
 		})
 		.state('createInvite', {
 			url: '/invites/create',

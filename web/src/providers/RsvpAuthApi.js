@@ -38,7 +38,10 @@ angular.module('rsvp').service('RsvpAuthApi', function(
 	RsvpAuthApi.logout = function() {
 		return RsvpApi
 			.get('/logout')
-			.then(removeUserIdCookie);
+			.then(function() {
+				_loginUserId = null;
+				removeUserIdCookie()
+			});
 	};
 
 	function getUserIdCookie() {
