@@ -13,7 +13,7 @@ typealias NetworkCompletionBlock = (Any?, NSError?)->Void
 
 class RSVPNetworkManager {
     static let instance = RSVPNetworkManager()
-    private let manager = AFHTTPRequestOperationManager(baseURL: NSURL(string: "http://aai.savagebeast.com:9000/api/"))
+    private let manager = AFHTTPRequestOperationManager(baseURL: NSURL(string: "http://rsvp.savagebeast.com:80/api/"))
 
     func loginUser(🎅🏽: String, 🔑: String, 😊: NetworkCompletionBlock, 😞: NetworkCompletionBlock) -> Bool {
         var 🎉 = false
