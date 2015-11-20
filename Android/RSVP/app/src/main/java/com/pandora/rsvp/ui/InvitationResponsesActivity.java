@@ -135,6 +135,8 @@ public class InvitationResponsesActivity extends BaseActivity implements ApiCall
                 frontEndFormattedLabel = METHOD_RANDOM;
             } else if (invitation.method.equals(API_PROP_FIRST_COME)) {
                 frontEndFormattedLabel = METHOD_FIRST_COME;
+            } else {
+                frontEndFormattedLabel = invitation.method;
             }
         }
         method.setText(frontEndFormattedLabel);
