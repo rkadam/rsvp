@@ -16,10 +16,22 @@ class RSVPCreateOfferViewController: UIViewController {
     //MARK: Properties
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleCircle: UIView!
-    @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var invitationTextField: UITextField!
+    @IBOutlet weak var descriptionTextView: UITextView! {
+        didSet {
+            descriptionTextView.layer.cornerRadius = 4
+        }
+    }
+    @IBOutlet weak var invitationTextField: UITextField! {
+        didSet {
+            invitationTextField.layer.cornerRadius = 4
+        }
+    }
     @IBOutlet weak var rsvpDatePicker: UIDatePicker!
-    @IBOutlet weak var distributionListTextField: UITextField!
+    @IBOutlet weak var distributionListTextField: UITextField! {
+        didSet {
+            distributionListTextField.layer.cornerRadius = 4
+        }
+    }
     @IBOutlet weak var methodOfChoicePicker: UIPickerView!
     @IBOutlet weak var previewOfferButton: UIButton!
 
