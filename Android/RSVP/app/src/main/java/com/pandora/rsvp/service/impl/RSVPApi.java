@@ -1,5 +1,7 @@
 package com.pandora.rsvp.service.impl;
 
+import com.pandora.rsvp.app.RSVPApp;
+import com.pandora.rsvp.persistence.IUserDataManager;
 import com.pandora.rsvp.service.ApiCallBack;
 import com.pandora.rsvp.service.IRSVPApi;
 import com.pandora.rsvp.service.contract.SimpleResponse;
@@ -10,6 +12,8 @@ import com.pandora.rsvp.service.contract.UserInvitationsResponse;
 import com.pandora.rsvp.service.contract.WrapUpOfferPayload;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+
+import javax.inject.Inject;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -26,10 +30,14 @@ import retrofit.http.Path;
  */
 public class RSVPApi implements IRSVPApi {
 
+    @Inject
+    IUserDataManager mIUserDataManager;
+    
     private final RetrofitRSVPApi api;
     private static final String API_ENDPOINT = "http://aai.savagebeast.com:9000";
 
     public RSVPApi() {
+        RSVPApp.getComponent().inject(this);
         OkHttpClient client =new OkHttpClient();
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -78,12 +86,12 @@ public class RSVPApi implements IRSVPApi {
 
     @Override
     public void getInvitations(ApiCallBack<UserInvitationsResponse> invitationCallBack) {
-        executeApiCall(api.getInvitations("gmichalec"), invitationCallBack);
+        executeApiCall(api.getInvitations(mIUserDataManager.getUserName()), invitationCallBack);
     }
 
     @Override
     public void selectWinners(String invitationId, ApiCallBack<SingeUserInvitationResponse> invitationsResponseApiCallBack) {
-        executeApiCall(api.selectWinners("gmichalec", invitationId), invitationsResponseApiCallBack);
+        executeApiCall(api.selectWinners(mIUserDataManager.getUserName(), invitationId), invitationsResponseApiCallBack);
     }
 
     @Override
@@ -91,7 +99,7 @@ public class RSVPApi implements IRSVPApi {
         WrapUpOfferPayload payload = new WrapUpOfferPayload();
         payload.accepted_body = winnerMsg;
         payload.rejected_body = globalMsg;
-        executeApiCall(api.closeOffer("gmichalec", invitationId, payload), invitationResponseApiCallBack);
+        executeApiCall(api.closeOffer(mIUserDataManager.getUserName(), invitationId, payload), invitationResponseApiCallBack);
     }
 
     @Override
@@ -103,7 +111,7 @@ public class RSVPApi implements IRSVPApi {
         payload.email_to = emailTo;
         payload.method = method;
         payload.invitation_body = body;
-        executeApiCall(api.createOffer("gmichalec", payload), invitationResponseApiCallBack);
+        executeApiCall(api.createOffer(mIUserDataManager.getUserName(), payload), invitationResponseApiCallBack);
     }
 
     private <T> void executeApiCall(Call<T> retrofitCall, final ApiCallBack<T> clientCallBack) {

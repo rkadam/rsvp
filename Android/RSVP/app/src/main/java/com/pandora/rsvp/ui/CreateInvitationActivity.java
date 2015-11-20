@@ -10,8 +10,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.pandora.rsvp.R;
+import com.pandora.rsvp.service.ApiCallBack;
+import com.pandora.rsvp.service.contract.SingeUserInvitationResponse;
 import com.pandora.rsvp.ui.base.BaseActivity;
 import com.pandora.rsvp.utils.ValidationUtils;
+
+import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -106,4 +110,19 @@ public class CreateInvitationActivity extends BaseActivity {
     private boolean isBlank(EditText editText) {
         return (editText != null && editText.getText().toString().trim().length() == 0);
     }
+
+    //Todo: DONT DELETE
+//    api.createOffer("Random Title", Integer.valueOf(mNumInvitesEdit.getText().toString()),
+//            Calendar.getInstance().getTimeInMillis(), "dist-rsvp-test@pandora.com", "random",
+//            mDescriptionEdit.getText().toString(), new ApiCallBack<SingeUserInvitationResponse>() {
+//        @Override
+//        public void onSuccess(SingeUserInvitationResponse successResponse) {
+//            finish();
+//        }
+//
+//        @Override
+//        public void onFailure(Throwable error) {
+//            snackMessage("FAILURE!");
+//        }
+//    });
 }

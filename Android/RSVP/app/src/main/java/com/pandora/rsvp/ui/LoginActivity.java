@@ -2,6 +2,7 @@ package com.pandora.rsvp.ui;
 
 import com.pandora.rsvp.R;
 import com.pandora.rsvp.app.dagger.RSVPComponent;
+import com.pandora.rsvp.persistence.IUserDataManager;
 import com.pandora.rsvp.service.ApiCallBack;
 import com.pandora.rsvp.service.IRSVPApi;
 import com.pandora.rsvp.service.contract.SimpleResponse;
@@ -37,6 +38,8 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<SimpleRes
 
     @Inject
     IRSVPApi mIRSVPApi;
+    @Inject
+    IUserDataManager mIUserDataManager;
 
     @Override
     protected int getActivityLayoutRes() {
@@ -49,6 +52,7 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<SimpleRes
         toggleButton();
         email.addTextChangedListener(validationWatcher);
         password.addTextChangedListener(validationWatcher);
+        email.setText(mIUserDataManager.getUserName());
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +104,7 @@ public class LoginActivity extends BaseActivity implements ApiCallBack<SimpleRes
     public void onSuccess(SimpleResponse successResponse) {
         toggleProgress(false);
         if (successResponse != null && successResponse.success) {
+            mIUserDataManager.setUserName(email.getText().toString());
             startActivity(new Intent(LoginActivity.this, InvitationListActivity.class));
         } else {
             onFailure(null);
