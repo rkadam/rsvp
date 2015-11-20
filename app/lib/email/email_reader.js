@@ -75,7 +75,7 @@ EmailReader.prototype.getNewMessages = function(){
                 logMessage("resolving with nothing");
                 this._gettingNewMessages = null;
                 resolve([]);
-                return;
+                return null;
             }
 
             var messages = [];

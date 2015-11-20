@@ -85,12 +85,7 @@ function startPoll(storage, interval){
  * @param {model} storage - API for saving data
  * @param {Number} interval - poll for new email every @interval millis
  */
-var called = 0;
 function poll(storage, interval){
-    called++;
-    if(called >= 10){
-        return;
-    }
     polling = true;
 
     getEmail()
@@ -99,6 +94,7 @@ function poll(storage, interval){
             timeoutHandle = setTimeout(function(){
                 poll(storage, interval);
             }, interval);
+            return null;
         });
 }
 
