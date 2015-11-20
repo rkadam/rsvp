@@ -31,7 +31,7 @@
 
 	<div class="rsvpInviteDetailView__responses">
 		<rsvp-response
-			ng-repeat="response in ctrl.invite.responses | filter:ctrl.responseFilter"
+			ng-repeat="response in ctrl.invite.responses | filter:ctrl.responseFilter | orderBy:'name'"
 			ng-click="ctrl.toggleResponse(response)"
 			response="response"
 		></rsvp-response>
