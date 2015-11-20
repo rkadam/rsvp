@@ -90,6 +90,16 @@ var parseValue = function(value) {
 
 var sendInvitation = function(invitation) {
   var deferred = new Q.defer();
+
+  if (!invitation.title
+      || !invitation.invitation_body
+      || !invitation.id
+      || !invitation.email_to) {
+    console.warn("Incomplete data. Unable to send email.");
+    deferred.resolve('boo');
+    return deferred.promise;
+  }
+
   var client = new EmailSender(configuration);
   client.connect()
       .then(function(){
@@ -99,9 +109,10 @@ var sendInvitation = function(invitation) {
             invitation.invitation_body,
             invitation.id,
             invitation.email_to
-        );
-        client.disconnect();
-        deferred.resolve('yay');
+        ).then(function(){
+          client.disconnect();
+          deferred.resolve('yay');
+        });
         return null;
       });
 
