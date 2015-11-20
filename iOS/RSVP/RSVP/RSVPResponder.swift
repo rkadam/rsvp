@@ -28,6 +28,7 @@ class RSVPResponder {
         uid = networkData["uid"] as? String ?? uid
         responseDate = convertDate(networkData["reponded"] as? Double ?? 0)
         years = networkData["years"] as? Int ?? years
+        imageURL = networkData["image_url"] as? String ?? imageURL
     }
     
     func convertDate(dateTimStamp: Double) ->NSDate {
