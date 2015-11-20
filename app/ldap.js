@@ -2,8 +2,9 @@
 'use strict';
 var ldap = require('ldapjs');
 var Q = require('q');
+var config = require('./config');
 
-var depts = {};
+var departments = {};
 
 var search = function(base, opts) {
   var client = ldap.createClient({
@@ -63,10 +64,10 @@ var userSearch = function(uid) {
         uid: res.uid,
         name: res.displayName,
         years: ((Date.now() - Date.parse(res.pandoraStartDate)) / (1000 * 60 * 60 * 24 * 365)).toPrecision(3),
-        department: res.ou,
+        department: departments[res.ou],
       };
     } else {
-      return Q.reject("uid "+uid+" not found")
+      return Q.reject("uid "+uid+" not found");
     }
 
   }).fail(function(err) {
@@ -76,34 +77,32 @@ var userSearch = function(uid) {
 
 var updateDepartments = function() {
   var opts = {
-
+    scope: 'sub',
+    filter: '(cn=departments)'
   };
+  var base = 'ou=sbldap,dc=savagebeast,dc=com';
+  return search(base, opts).then(function(res) {
+    if (res && res.pandoraListMember) {
+      res.pandoraListMember.forEach(function(d) {
+        var parts = d.split(',');
+        if (parts[0] && parts[1]) {
+          departments[parts[1]] = parts[0];
+        }
+      });
+    }
+  }).then(function() {
+    return Q.delay(config.department_refresh_seconds*1000)
+      .then(function() {
+        updateDepartments().done();
+      });
+  });
 };
+updateDepartments().done();
 
 // userSearch('gmichalec')
 //   .then(function(res) {
 //     console.log(res);
 //   }).done();
-
-//   userSearch('gregm')
-//     .then(function(res) {
-//       console.log(res);
-//     }).done();
-//     userSearch('gmichalec')
-//       .then(function(res) {
-//         console.log(res);
-//       }).done();
-
-
-
-// search('dc=savagebeast,dc=com', opts);
-// var opts = {
-//   // filter: "(ou=1205)",
-//   // filter: '(cn=departments)',
-//   filter: '(pandoraListMember=*1205)',
-//   scope: 'sub',
-// };
-// search('ou=sbldap,dc=savagebeast,dc=com', opts);
 
 module.exports = {
   userSearch: userSearch,

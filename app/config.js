@@ -11,6 +11,7 @@ var config = {
   root: rootDir,
   ip: '127.0.0.1',
   redis_db_index: 0,
+  department_refresh_seconds: 10,
 };
 
 if (config.env !== 'production') {
