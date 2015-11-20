@@ -33,7 +33,7 @@ import butterknife.BindString;
 import butterknife.OnClick;
 
 public class CreateInvitationActivity extends BaseActivity {
-    
+
     @BindString(R.string.create_invitation_activity_title)
     String mTitle;
     @BindString(R.string.create_invitation_activity_invitation_name_blank)
@@ -91,20 +91,18 @@ public class CreateInvitationActivity extends BaseActivity {
                 R.array.choice_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinnerChoice.setAdapter(adapter);
-        mEmailListEdit.setText("dist-rsvp-test@pandora.com");
+        mEmailListEdit.setText("rsvp-test@pandora.com");
         toggleProgress(false);
 
         mDateTimeButton.setOnClickListener(new View.OnClickListener() {
-                                               @Override
-                                               public void onClick(View v) {
-                                                   Calendar now = Calendar.getInstance();
-                                                   CalendarDatePickerDialog dialog = CalendarDatePickerDialog.newInstance(dateCallBack,
-                                                           now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
-                                                   dialog.show(getSupportFragmentManager(), "DATE_DIALOG");
-                                               }
-                                           }
-
-        );
+            @Override
+            public void onClick(View v) {
+                Calendar now = Calendar.getInstance();
+                CalendarDatePickerDialog dialog = CalendarDatePickerDialog.newInstance(dateCallBack,
+                        now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
+                dialog.show(getSupportFragmentManager(), "DATE_DIALOG");
+            }
+        });
     }
 
     @OnClick(R.id.create_invitation_activity_preview_email_button)
@@ -143,8 +141,8 @@ public class CreateInvitationActivity extends BaseActivity {
         }
 
         final Long datetime = System.currentTimeMillis(); // 
-        final String selectionMethod = mSpinnerChoice.getSelectedItem().toString();
-
+        String selectionMethod = mSpinnerChoice.getSelectedItem().toString();
+        final boolean random = selectionMethod.equalsIgnoreCase("Random Order");
         PreviewInvitationDialog dialogPreviewEmail = PreviewInvitationDialog.newInstance(
                 mDescriptionEdit.getText().toString(),                  // Invitation Description
                 Integer.parseInt(mNumInvitesEdit.getText().toString()),   // Number of Invitations
@@ -154,7 +152,7 @@ public class CreateInvitationActivity extends BaseActivity {
             public void create() {
                 toggleProgress(true);
                 mIRSVPApi.createOffer(mNameEdit.getText().toString(), Integer.valueOf(mNumInvitesEdit.getText().toString()),
-                        datetime, emailTo, selectionMethod, mDescriptionEdit.getText().toString(), new ApiCallBack<SingeUserInvitationResponse>() {
+                        datetime, emailTo, random, mDescriptionEdit.getText().toString(), new ApiCallBack<SingeUserInvitationResponse>() {
                             @Override
                             public void onSuccess(SingeUserInvitationResponse successResponse) {
                                 if (successResponse != null && successResponse.data != null) {
@@ -191,28 +189,28 @@ public class CreateInvitationActivity extends BaseActivity {
     private boolean timeSet;
     private static final String DATE_TIME_FORMAT = "MM/dd/yyyy HH:mm Z";
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.US);
-    
+
     private CalendarDatePickerDialog.OnDateSetListener dateCallBack = new CalendarDatePickerDialog.OnDateSetListener() {
         @Override
-        public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog,int year,int monthOfYear,int dayOfMonth){
-            pickedTime=Calendar.getInstance();
-            pickedTime.set(Calendar.YEAR,year);
-            pickedTime.set(Calendar.MONTH,monthOfYear);
-            pickedTime.set(Calendar.DAY_OF_MONTH,dayOfMonth);
-            RadialTimePickerDialog dialog=RadialTimePickerDialog.newInstance(onTimeSetListener,pickedTime.get(Calendar.HOUR_OF_DAY),
-                    pickedTime.get(Calendar.MINUTE),false);
+        public void onDateSet(CalendarDatePickerDialog calendarDatePickerDialog, int year, int monthOfYear, int dayOfMonth) {
+            pickedTime = Calendar.getInstance();
+            pickedTime.set(Calendar.YEAR, year);
+            pickedTime.set(Calendar.MONTH, monthOfYear);
+            pickedTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            RadialTimePickerDialog dialog = RadialTimePickerDialog.newInstance(onTimeSetListener, pickedTime.get(Calendar.HOUR_OF_DAY),
+                    pickedTime.get(Calendar.MINUTE), false);
             dialog.show(getSupportFragmentManager(), "TIME_DIALOG");
         }
     };
-    
+
     private RadialTimePickerDialog.OnTimeSetListener onTimeSetListener = new RadialTimePickerDialog.OnTimeSetListener() {
         @Override
-        public void onTimeSet(RadialTimePickerDialog radialTimePickerDialog,int hourOfDay,int minute){
-            timeSet=true;
-            pickedTime.set(Calendar.HOUR_OF_DAY,hourOfDay);
-            pickedTime.set(Calendar.MINUTE,minute);
+        public void onTimeSet(RadialTimePickerDialog radialTimePickerDialog, int hourOfDay, int minute) {
+            timeSet = true;
+            pickedTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            pickedTime.set(Calendar.MINUTE, minute);
             mRSVPDate.setText(simpleDateFormat.format(pickedTime.getTime()));
         }
     };
-    
+
 }

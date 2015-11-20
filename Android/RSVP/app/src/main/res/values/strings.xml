@@ -67,4 +67,5 @@
     <string name="email_to">Email to: %s</string>
     <string name="no_resp">No one has responded yet.</string>
     <string name="action_refresh">Refresh</string>
+    <string name="years_dist">Year at Pandora</string>
 </resources>

@@ -21,7 +21,7 @@ public interface IRSVPApi {
 
     void submitWrapUp(String invitationId, String winnerMsg, String globalMsg, ApiCallBack<SingeUserInvitationResponse> invitationResponseApiCallBack);
 
-    void createOffer(String title, int acceptLimit, long rsvpBy, String emailTo, String method, String body, ApiCallBack<SingeUserInvitationResponse> invitationResponseApiCallBack);
+    void createOffer(String title, int acceptLimit, long rsvpBy, String emailTo, boolean random, String body, ApiCallBack<SingeUserInvitationResponse> invitationResponseApiCallBack);
 
 
 }

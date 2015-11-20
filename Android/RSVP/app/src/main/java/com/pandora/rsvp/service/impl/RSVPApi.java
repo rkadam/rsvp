@@ -111,13 +111,13 @@ public class RSVPApi implements IRSVPApi {
     }
 
     @Override
-    public void createOffer(String title, int acceptLimit, long rsvpBy, String emailTo, String method, String body, ApiCallBack<SingeUserInvitationResponse> invitationResponseApiCallBack) {
+    public void createOffer(String title, int acceptLimit, long rsvpBy, String emailTo, boolean random, String body, ApiCallBack<SingeUserInvitationResponse> invitationResponseApiCallBack) {
         CreateOfferPayload payload = new CreateOfferPayload();
         payload.title = title;
         payload.response_accept_limit = acceptLimit;
         payload.rsvp_by_time = rsvpBy;
         payload.email_to = emailTo;
-        payload.method = method;
+        payload.method = random ? "random" : "firstcomefirstserve";
         payload.invitation_body = body;
         executeApiCall(api.createOffer(mIUserDataManager.getUserName(), payload), invitationResponseApiCallBack);
     }

@@ -3,6 +3,7 @@ package com.pandora.rsvp.ui.adapter;
 import com.pandora.rsvp.R;
 import com.pandora.rsvp.service.contract.Invitation;
 import com.pandora.rsvp.service.contract.InviteResponse;
+import com.pandora.rsvp.ui.custom.YearsChartView;
 
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -60,6 +61,9 @@ public class InvitationResponsesPagerAdapter extends PagerAdapter {
             textView.setTextColor(ContextCompat.getColor(container.getContext(), android.R.color.darker_gray));
             textView.setPadding(30, 30, 30, 0);
             container.addView(textView);
+
+//            YearsChartView chartView = new YearsChartView(container.getContext());
+//            container.addView(chartView);
             return textView;
         } 
     }
