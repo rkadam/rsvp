@@ -91,15 +91,14 @@ var parseValue = function(value) {
 var no_email = false;
 
 var sendEmails = function(emails) {
-      console.log(emails)
+  var deferred = new Q.defer();
   var client = new EmailSender(configuration);
-  return client.connect()
+  client.connect()
     .then(function() {
       var promises = emails.reduce(function(previous, email) {
         return previous
           .then(function(previousValue) {
             var email_to = config.always_respond_to || email.to;
-            console.log(email, email_to)
             return client.sendMessage(
               email.from,
               email.subject,
@@ -117,8 +116,13 @@ var sendEmails = function(emails) {
         client.disconnect();
       }).fail(function(err) {
         console.log('EMAIL ERROR', err);
-      });
+      }).done();
+  }).then(function(res) {
+    deferred.resolve('ok');
+  }).error(function(err) {
+    deferred.reject(err);
   });
+  return deferred.promise;
 };
 
 var sendInvitation = function(invitation) {
