@@ -12,7 +12,7 @@ var EmailSender = require('./email_sender');
  */
 function parseInvitationId(subject){
     var matches = subject.match(/\(Ref:.*\)/);
-    if(!matches && matches.length === 0){
+    if(!matches || matches.length === 0){
         return '';
     }
     return matches[0].replace('(Ref:', '').replace(')', '');
