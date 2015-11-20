@@ -81,7 +81,7 @@ class RVSPOfferListViewController: UIViewController {
         offerList.removeAll()
         tableView.reloadData()
         
-        RSVPNetworkManager.instance.getOfferList("raju") { (response, error) -> Void in
+        RSVPNetworkManager.instance.getOfferList(RSVP🎅🏽Model.instance.userId) { (response, error) -> Void in
             if let _response = response as? NSDictionary {
                 for offerData in _response["data"] as? Array<NSDictionary> ?? [] {
                     self.offerList.append(RSVPOfferModel(networkData: offerData))

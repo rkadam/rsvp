@@ -707,7 +707,7 @@
                                 </constraints>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="8uP-vM-X9v">
-                                <rect key="frame" x="289" y="278" width="23" height="37"/>
+                                <rect key="frame" x="549" y="278" width="23" height="37"/>
                                 <color key="tintColor" red="0.14117647059999999" green="0.25098039220000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6jv-hE-1Jh">
@@ -778,6 +778,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="8uP-vM-X9v" secondAttribute="trailing" constant="8" id="03Z-7x-q3h"/>
                             <constraint firstItem="6jv-hE-1Jh" firstAttribute="leading" secondItem="Nu7-ha-A6w" secondAttribute="leading" id="4sg-os-whB"/>
                             <constraint firstAttribute="trailing" secondItem="8tR-rh-dHy" secondAttribute="trailing" constant="8" id="7M9-ea-WEg"/>
                             <constraint firstItem="xyV-Xd-fGj" firstAttribute="top" secondItem="8tR-rh-dHy" secondAttribute="bottom" constant="6" id="8hx-WE-ukA"/>
@@ -799,8 +800,19 @@
                             <constraint firstItem="8uP-vM-X9v" firstAttribute="centerX" secondItem="Nu7-ha-A6w" secondAttribute="centerX" id="xDG-aO-Uba"/>
                             <constraint firstAttribute="trailing" secondItem="Muy-M3-zHp" secondAttribute="trailing" id="yHP-P5-eVS"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="xDG-aO-Uba"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="As5-Uy-nMN"/>
+                    <navigationItem key="navigationItem" id="As5-Uy-nMN">
+                        <barButtonItem key="rightBarButtonItem" title="Winners!" id="cSw-fj-t1P">
+                            <connections>
+                                <action selector="winnerButtonTapped:" destination="ddK-ET-KcK" id="aPM-rF-gng"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="chartScrollView" destination="Muy-M3-zHp" id="7RK-mB-Rod"/>
                         <outlet property="collectionView" destination="Fn6-Kj-cxK" id="c4E-Xh-d6U"/>

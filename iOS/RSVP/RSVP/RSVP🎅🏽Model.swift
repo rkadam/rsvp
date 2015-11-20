@@ -9,5 +9,7 @@
 import Foundation
 
 class RSVP🎅🏽Model {
+    static let instance = RSVP🎅🏽Model()
     
+    var userId = "raju"
 }

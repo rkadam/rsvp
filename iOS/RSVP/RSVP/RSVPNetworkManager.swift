@@ -36,4 +36,13 @@ class RSVPNetworkManager {
             🉐(nil, error)
         }
     }
+    
+    func chooseWinners(🎫: String, 🎉: String, 🉐: NetworkCompletionBlock) {
+        manager.GET("users/\(🎫)/invitations/\(🎉)/selectWinners", parameters: nil, success: {
+            (operation, response) -> Void in
+            🉐(response, nil)
+            }) { (operation, error) -> Void in
+                🉐(nil, error)
+        }
+    }
 }

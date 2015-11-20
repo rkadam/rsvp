@@ -15,6 +15,7 @@ enum RSVPOfferChoiceMethod: String {
 }
 
 class RSVPOfferModel {
+    var id: String = "invalid_id"
     var uid: String = "invalid_id"
     var title: String = "Offer Title"
     var createDate: NSDate = NSDate()
@@ -43,6 +44,7 @@ class RSVPOfferModel {
     }
     
     init(networkData: NSDictionary) {
+        id = networkData["id"] as? String ?? id
         uid = networkData["uid"] as? String ?? uid
         title = networkData["title"] as? String ?? title
         endDate = convertDate(networkData["rsvp_by_time"] as? Double ?? 0)
@@ -55,6 +57,13 @@ class RSVPOfferModel {
         
         responses.removeAll()
         for response in networkData["responses"] as? Array<NSDictionary> ?? [] {
+            responses.append(RSVPResponder(networkData: response))
+        }
+    }
+    
+    func refreshTheResponses(networkData: Array<NSDictionary>) {
+        responses.removeAll()
+        for response in networkData {
             responses.append(RSVPResponder(networkData: response))
         }
     }

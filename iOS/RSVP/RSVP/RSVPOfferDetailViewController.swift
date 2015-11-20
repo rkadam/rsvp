@@ -14,18 +14,21 @@ class RSVPOfferDetailViewController: UIViewController {
 //    var allResponders = [RSVPResponder](count: 10, repeatedValue:RSVPResponder(networkData: [:]))
 //    var chosenResponders = [RSVPResponder](count: 3, repeatedValue:RSVPResponder(networkData: [:]))
     
-    var allResponders: [RSVPResponder] =  []
-    var chosenResponders: [RSVPResponder] =  []
+    var allResponders: [RSVPResponder] {
+        return offerModel!.responses
+    }
+    var chosenResponders: [RSVPResponder] {
+        var result = [RSVPResponder]()
+        for (_, value) in allResponders.enumerate() {
+            if value.selected {
+                result.append(value)
+            }
+        }
+        return result
+    }
     var offerModel: RSVPOfferModel? = nil {
         didSet {
             title = offerModel?.title
-            allResponders = offerModel!.responses
-
-            for (_, value) in allResponders.enumerate() {
-                if value.selected {
-                    chosenResponders.append(value)
-                }
-            }
         }
     }
     var shouldDisplayChosen: Bool = false
@@ -94,6 +97,7 @@ class RSVPOfferDetailViewController: UIViewController {
     }
     @IBOutlet weak var pageControl: UIPageControl! {
         didSet {
+            pageControl.currentPage = 1
             pageControl.pageIndicatorTintColor = UIColor(red: 34/255, green: 64/255, blue: 153/255, alpha: 1)
             pageControl.alpha = 0
         }
@@ -124,6 +128,35 @@ class RSVPOfferDetailViewController: UIViewController {
         
         chartScrollView.contentSize = CGSizeMake(chartScrollView.bounds.width*2, chartScrollView.bounds.height)
         setUpChart()
+    }
+    
+    @IBAction func winnerButtonTapped(sender: AnyObject) {
+        guard let offerId = offerModel?.id else { return }
+        
+        RSVPNetworkManager.instance.chooseWinners(RSVP🎅🏽Model.instance.userId, 🎉: offerId) {
+            (response, error) -> Void in
+            guard let success = (response as? NSDictionary)?["success"] as? Bool else {
+                let alertController = UIAlertController(title: "Error", message: "Can't choose winners, ", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                return
+            }
+            
+            if success {
+                let alertController = UIAlertController(title: "Success", message: "Winners are ready!", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                // refresh the response
+                print(response)
+                self.offerModel?.refreshTheResponses((response as? NSDictionary)?["data"]?["responses"] as? Array<NSDictionary> ?? [])
+                self.collectionView.reloadData()
+            } else {
+                let alertController = UIAlertController(title: "Error", message: "Can't choose winners twice..", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: nil)
+            }
+        }
     }
     
     private func setUpChart() {
@@ -190,10 +223,10 @@ class RSVPOfferDetailViewController: UIViewController {
 
 extension RSVPOfferDetailViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.x >= scrollView.contentSize.width {
-            pageControl.currentPage = 1
-        } else {
+        if scrollView.contentOffset.x >= scrollView.bounds.size.width {
             pageControl.currentPage = 0
+        } else {
+            pageControl.currentPage = 1
         }
     }
 }
