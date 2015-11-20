@@ -13,6 +13,7 @@ var config = {
   redis_db_index: 0,
   department_refresh_seconds: 10,
   poll_email_interval_millis: 15000,
+  always_respond_to: 'gmichalec@pandora.com'
 };
 
 if (config.env !== 'production') {

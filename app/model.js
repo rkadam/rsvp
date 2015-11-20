@@ -90,60 +90,81 @@ var parseValue = function(value) {
 
 var no_email = false;
 
+var sendEmails = function(emails) {
+      console.log(emails)
+  var client = new EmailSender(configuration);
+  return client.connect()
+    .then(function() {
+      var promises = emails.reduce(function(previous, email) {
+        return previous
+          .then(function(previousValue) {
+            var email_to = config.always_respond_to || email.to;
+            console.log(email, email_to)
+            return client.sendMessage(
+              email.from,
+              email.subject,
+              email.message,
+              email.id,
+              email_to
+            ).then(function() {
+              return true;
+            });
+        });
+      }, Q.resolve());
+
+    promises
+      .then(function(res) {
+        client.disconnect();
+      }).fail(function(err) {
+        console.log('EMAIL ERROR', err);
+      });
+  });
+};
+
 var sendInvitation = function(invitation) {
   var deferred = new Q.defer();
   if (no_email) { deferred.resolve(); return deferred.promise;}
 
-  if (!invitation.title
-      || !invitation.invitation_body
-      || !invitation.id
-      || !invitation.email_to) {
+  if (!invitation.title ||
+      !invitation.invitation_body ||
+      !invitation.id ||
+      !invitation.email_to) {
     console.warn("Incomplete data. Unable to send email.");
-    deferred.resolve('boo');
+    deferred.reject('Incomplete data. Unable to send email.');
     return deferred.promise;
   }
 
-  var client = new EmailSender(configuration);
-  client.connect()
-      .then(function(){
-        client.sendMessage(
-            "rsvp@pandora.com",
-            invitation.title,
-            invitation.invitation_body,
-            invitation.id,
-            invitation.email_to
-        ).then(function(){
-          client.disconnect();
-          deferred.resolve('yay');
-        });
-        return null;
-      });
-
-  return deferred.promise.timeout(1000);
+  var email = {
+    from: "rsvp@pandora.com",
+    subject: invitation.title,
+    message: invitation.invitation_body,
+    id: invitation.id,
+    to: invitation.email_to
+  };
+  return sendEmails([email])
+    .then(function() {
+      return deferred.resolve();
+    }).timeout(3000);
 };
 
 var sendResponses = function(invitation) {
   var deferred = new Q.defer();
   if (no_email) { deferred.resolve(); return deferred.promise;}
-
-  var client = new EmailSender(configuration);
-  client.connect()
-      .then(function(){
-        invitation.responses.forEach(function(response){
-          var message = response.selected ? invitation.accepted_body : invitation.rejected_body;
-          client.sendMessage(
-              "rsvp@pandora.com",
-              invitation.title,
-              message,
-              invitation.id,
-              "kadam@pandora.com"
-              //response.uid + "@pandora.com"
-          )
-        });
-        client.disconnect();
-        deferred.resolve('yay');
-      });
-  return deferred.promise.timeout(1000);
+  var emails = invitation.responses.map(function(response, i) {
+    var message = response.selected ? invitation.accepted_body : invitation.rejected_body;
+    var email = {
+      from: 'rsvp@pandora.com',
+      subject: invitation.title,
+      message: message,
+      id: invitation.id,
+      to: response.email_address,
+    };
+    return email;
+  });
+  return sendEmails(emails)
+    .then(function() {
+      return deferred.resolve();
+    }).timeout(3000);
 };
 
 var model = {
@@ -281,7 +302,8 @@ var model = {
           response_time: response_data.response_time,
           response_body: response_data.response_body,
           selected: false,
-          image_url: 'https://ray.savagebeast.com/sbldap/image.cgi?uid='+uid
+          image_url: 'https://ray.savagebeast.com/sbldap/image.cgi?uid='+uid,
+          email_address: response_data.email_address
         };
 
       // return redisMulti([
