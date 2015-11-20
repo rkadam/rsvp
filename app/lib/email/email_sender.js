@@ -21,8 +21,9 @@ EmailSender.prototype.connect = function(){
         }
 
         this._connection = new SMTPConnection({
-            host: this._options.host
-            ,debug: true
+            host: this._options.host,
+            secure: true,
+            debug: true
         });
 
         this._connection.on('error', function(err){
