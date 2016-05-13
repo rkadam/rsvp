@@ -36,7 +36,6 @@ module.exports = function(app) {
 
   //update an invitation object belonging to :uid
   app.route('/api/users/:uid/invitations/:invitation_id').put(controllers.updateInvitation);
-  app.route('/api/users/:uid/invitations/:invitation_id').put(controllers.updateInvitation);
   app.route('/api/users/:uid/invitations/:invitation_id/selectWinners').get(controllers.selectWinners);
   app.route('/api/users/:uid/invitations/:invitation_id/closeInvitation').post(controllers.closeInvitation);
 

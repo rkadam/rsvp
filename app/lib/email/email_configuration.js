@@ -2,8 +2,9 @@ var fs = require('fs');
 var path = require('path');
 
 var extend = require('util-extend');
+var config = require('../../config');
 
-var configuration = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'configuration.json'), 'utf8'));
+var configuration = config.email;
 
 try {
     var local = path.resolve(__dirname, 'configuration.local.json');

@@ -13,7 +13,25 @@ var config = {
   redis_db_index: 0,
   department_refresh_seconds: 10,
   poll_email_interval_millis: 15000,
-  always_respond_to: 'gmichalec@pandora.com'
+  image_server:'http://images.server.com/?uid=',
+  email: {
+    user: "smtp user",
+    password: "password",
+    host: "smtp.server.com",
+    port: 993,
+    tls: true,
+    always_respond_to: 'email@server.com',
+    from: 'from@server.com',
+    test_email: 'test-list@server.com',
+    email_domain: 'server.com'
+  },
+  ldap: {
+    url: 'ldaps://ldap.server.com',
+    timeout: 2000,
+    base: 'dc=xx,dc=com',
+    group_base: 'ou=xx,dc=xx,dc=com',
+    start_date_field: 'startDate'
+  }
 };
 
 if (config.env !== 'production') {

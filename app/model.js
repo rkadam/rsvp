@@ -138,7 +138,7 @@ var sendInvitation = function(invitation) {
   }
 
   var email = {
-    from: "rsvp@pandora.com",
+    from: config.email.from,
     subject: invitation.title,
     message: invitation.invitation_body,
     id: invitation.id,
@@ -155,9 +155,9 @@ var sendResponses = function(invitation) {
   if (no_email) { deferred.resolve(); return deferred.promise;}
   var emails = invitation.responses.map(function(response, i) {
     var message = response.selected ? invitation.accepted_body : invitation.rejected_body;
-    var email_to = config.always_respond_to || response.email_address;
+    var email_to = config.email.always_respond_to || response.email_address;
     var email = {
-      from: 'rsvp@pandora.com',
+      from: config.emai.from,
       subject: invitation.title,
       message: message,
       id: invitation.id,
@@ -291,7 +291,7 @@ var model = {
     var time = Date.now();
     var parts = response_data.email_address.split('@');
     var uid = parts[0];
-    if(parts[1] !== 'pandora.com'){
+    if(parts[1] !== config.email.domain){
       return Q.reject("Invalid email: " + response_data.email_address);
     }
     var response = {};
@@ -309,7 +309,7 @@ var model = {
           response_time: response_data.response_time,
           response_body: response_data.response_body,
           selected: false,
-          image_url: 'https://ray.savagebeast.com/sbldap/image.cgi?uid='+uid,
+          image_url: config.image_server+uid,
           email_address: response_data.email_address
         };
 
@@ -344,7 +344,7 @@ var model = {
       create_time: time,
       rsvp_by_time: time + 60*60*1000,
       sent_time: null,
-      email_to: 'dist-rsvp-test@pandora.com',
+      email_to: config.email.test_email,
       method: 'random',
       invitation_body: "Come to the best lunch evar!",
       accepted_body: "You are a winner!",

@@ -102,6 +102,6 @@ EmailSender.prototype.disconnect = function(){
 };
 
 EmailSender.INVITATION_HEADER = "X-Invitation-Id";
-EmailSender.INVITATION_FROM = configuration.user + "@pandora.com";
+EmailSender.INVITATION_FROM = configuration.from;
 
 module.exports = EmailSender;

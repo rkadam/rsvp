@@ -8,10 +8,8 @@ var departments = {};
 
 var search = function(base, opts) {
   var client = ldap.createClient({
-    url: 'ldaps://guess.savagebeast.com:636',
-    // url: 'ldaps://ldap.savagebeast.com:636',
-    // timeout : 10000,
-    timeout : 2000,
+    url: config.ldap.url,
+    timeout : config.ldap.timeout || 2000,
     maxConnections : 100,
     reconnect: true,
   });
@@ -54,10 +52,10 @@ var search = function(base, opts) {
 var userSearch = function(uid) {
   var opts = {
     filter: "(|(uid="+uid+")(RFC822MailMember="+uid+"))",
-    attributes: ['uid', 'pandoraStartDate', 'ou', 'displayName'],
+    attributes: ['uid', config.ldap.start_date_field, 'ou', 'displayName'],
     scope: 'sub'
   };
-  var base = 'dc=savagebeast,dc=com';
+  var base = config.ldap.base;
   return search(base, opts).then(function(res) {
     if (res) {
       return {
@@ -80,7 +78,7 @@ var updateDepartments = function() {
     scope: 'sub',
     filter: '(cn=departments)'
   };
-  var base = 'ou=sbldap,dc=savagebeast,dc=com';
+  var base = config.ldap.group_base;
   return search(base, opts).then(function(res) {
     if (res && res.pandoraListMember) {
       res.pandoraListMember.forEach(function(d) {
